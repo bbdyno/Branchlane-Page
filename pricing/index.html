@@ -4,41 +4,38 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pricing - Branchlane</title>
-  <meta name="description" content="Branchlane pricing: everyday Git is free, and monthly or yearly Branchlane Pro adds the advanced tools, with a 14-day trial for eligible new subscribers.">
-  <meta name="theme-color" content="#080b10">
+  <meta name="description" content="Branchlane pricing: everyday Git is free, and monthly or yearly Branchlane Pro adds the advanced tools. Eligible new subscribers get a 14-day free trial.">
+  <meta name="theme-color" content="#090c11">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Simple App Store pricing - Branchlane">
-  <meta property="og:description" content="Everyday Git is free. Pro adds the advanced tools.">
+  <meta property="og:title" content="Pricing - Branchlane">
+  <meta property="og:description" content="Branchlane pricing: everyday Git is free, and monthly or yearly Branchlane Pro adds the advanced tools. Eligible new subscribers get a 14-day free trial.">
+  <meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
   <meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/pricing/">
   <link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/pricing/">
   <link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/pricing/">
   <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/pricing/">
   <link rel="icon" href="../assets/app-icon.png">
-  <link rel="stylesheet" href="../assets/legal.css">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <div class="site-header-inner">
+  <header class="top">
+    <div class="wrap top-in">
       <a class="brand" href="../" aria-label="Branchlane home">
-        <img class="brand-icon" src="../assets/app-icon.png" width="34" height="34" alt="">
+        <img src="../assets/app-icon.png" width="30" height="30" alt="">
         <span>Branchlane</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
-        <a href="../#features">Features</a>
-        <a href="./" aria-current="page">Pricing</a>
-        <a href="../privacy/">Privacy</a>
-        <a class="language-link" href="../ko/pricing/" lang="ko">한국어</a>
-        <a class="nav-cta" href="https://apps.apple.com/app/id6785129372">Download free</a>
+        <a href="../#features">Features</a><a href="../#privacy">Privacy</a><a href="../pricing/" aria-current=page>Pricing</a>
+        <a href="../ko/pricing/" lang="ko">한국어</a>
+        <a class="btn primary" href="https://apps.apple.com/app/id6785129372">Download free</a>
       </nav>
-      <details class="mobile-nav">
+      <details class="menu">
         <summary aria-label="Open navigation"></summary>
-        <nav class="mobile-nav-panel" aria-label="Mobile navigation">
-          <a href="../">Home</a>
-          <a href="../#features">Features</a>
-          <a href="./" aria-current="page">Pricing</a>
-          <a href="../privacy/">Privacy</a>
+        <nav class="menu-panel" aria-label="Mobile navigation">
+          <a href="../#features">Features</a><a href="../#privacy">Privacy</a><a href="../pricing/" aria-current=page>Pricing</a>
           <a href="../terms/">Terms</a>
           <a href="../ko/pricing/" lang="ko">한국어</a>
           <a href="https://apps.apple.com/app/id6785129372">Download free</a>
@@ -47,180 +44,117 @@
     </div>
   </header>
 
-  <main id="main" class="pricing-main">
-    <section class="pricing-hero container">
-      <p class="eyebrow">Simple App Store pricing</p>
-      <h1>Everyday Git is free.<br><span class="gradient-text">Pro adds the advanced tools.</span></h1>
-      <p class="subtitle">No Branchlane account, license key, cloud service, or team seat. Branchlane is sold only on the App Store. Subscribe there only when you want the advanced tools.</p>
-      <span class="trial-pill">✓ 14 days free for eligible new Pro subscribers</span>
-    </section>
-
-    <section class="container" aria-label="Branchlane plans">
-      <div class="pricing-grid">
-        <article class="price-card">
-          <h2>Free</h2>
-          <p class="plan-description">Everyday Git, with no subscription.</p>
-          <p class="plan-price"><strong>$0</strong> <span>forever</span></p>
-          <span class="local-price">₩0 in Korea</span>
-          <span class="renewal-price">No trial or payment required.</span>
-          <ul>
-            <li>Commit graph with search</li>
-            <li>Stage files, hunks, and lines</li>
-            <li>Commit, amend, branch, merge, plain rebase, cherry-pick, revert, and reset</li>
-            <li>Fetch, pull, push, and clone over SSH and HTTPS</li>
-            <li>Undo and redo</li>
-            <li>Diff views, file history, and blame</li>
-            <li>Stashes, tags, submodules, and LFS status</li>
-            <li>Command palette</li>
-            <li>Up to 3 repository tabs</li>
-          </ul>
-          <a class="button secondary" href="https://apps.apple.com/app/id6785129372">Download free</a>
-        </article>
-
-        <article class="price-card">
-          <h2>Pro Monthly</h2>
-          <p class="plan-description">Every Pro tool, billed monthly.</p>
-          <p class="plan-price"><strong>$3.99</strong> <span>/ month</span></p>
-          <span class="local-price">₩4,900 / month in Korea</span>
-          <span class="renewal-price">14-day trial, then billed monthly until canceled.</span>
-          <ul>
-            <li>Everything in Free</li>
-            <li>Visual interactive rebase</li>
-            <li>Three-way conflict editor</li>
-            <li>Conflict warnings before merging</li>
-            <li>Compare branches and commits</li>
-            <li>Worktrees</li>
-            <li>Git Flow</li>
-            <li>Shareable patches</li>
-            <li>Pull requests and issues on GitHub and GitLab with your own token</li>
-            <li>AI with your own local model, API key, or Apple's on-device model</li>
-            <li>Unlimited tabs</li>
-          </ul>
-          <a class="button secondary" href="https://apps.apple.com/app/id6785129372">Start 14-day free trial</a>
-        </article>
-
-        <article class="price-card featured">
-          <span class="popular-label">Best value</span>
-          <h2>Pro Yearly</h2>
-          <p class="plan-description">Every Pro tool for one year at the launch price.</p>
-          <p class="plan-price"><strong>$19.99</strong> <span>/ first year</span></p>
-          <span class="local-price">₩29,000 for the first year in Korea</span>
-          <span class="renewal-price">14-day trial, then renews at $29.99 / ₩39,000 per year until canceled.</span>
-          <ul>
-            <li>Everything in Free</li>
-            <li>Visual interactive rebase</li>
-            <li>Three-way conflict editor</li>
-            <li>Conflict warnings before merging</li>
-            <li>Compare branches and commits</li>
-            <li>Worktrees</li>
-            <li>Git Flow</li>
-            <li>Shareable patches</li>
-            <li>Pull requests and issues on GitHub and GitLab with your own token</li>
-            <li>AI with your own local model, API key, or Apple's on-device model</li>
-            <li>Unlimited tabs</li>
-            <li>Save 33% at the first-year launch price</li>
-          </ul>
-          <a class="button primary" href="https://apps.apple.com/app/id6785129372">Start 14-day free trial</a>
-        </article>
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap">
+        <span class="ref " style="--c:var(--teal)">14 days free for eligible new Pro subscribers</span>
+        <h1>Everyday Git is free.<br>Pro adds the advanced tools.</h1>
+        <p class="lede">No Branchlane account, license key, cloud service, or team seat. Branchlane is sold only on the App Store. Subscribe there only when you want the advanced tools.</p>
       </div>
-
-      <p class="comparison-note">Prices shown are the intended U.S. and Korea storefront prices. Eligibility, taxes, currency conversion, and the final price are confirmed by the App Store before purchase. The launch offer is available for a limited time.</p>
     </section>
 
-    <section class="container pricing-detail">
-      <div class="pricing-detail-grid">
-        <div>
-          <p class="eyebrow">Included with Pro</p>
+    <section aria-label="Branchlane plans">
+      <div class="wrap pricing-switch">
+        <div class="billing" role="radiogroup" aria-label="Billing period">
+          <input type="radio" name="billing" id="b-yearly" checked><label for="b-yearly">Yearly</label>
+          <input type="radio" name="billing" id="b-monthly"><label for="b-monthly">Monthly</label>
+        </div>
+        <div class="plans">
+          <article class="plan">
+            <div class="plan-top"><h2 style="font-size:1.28rem;letter-spacing:-.018em">Free</h2></div>
+            <p class="amount"><strong>$0</strong><span>forever</span></p>
+            <p class="sub">Everyday Git, with no subscription. ₩0 in Korea. No trial or payment required.</p>
+            <a class="btn ghost" href="https://apps.apple.com/app/id6785129372">Download free</a>
+            <ul class="checks">
+              <li>Commit graph with search</li>
+              <li>Stage files, hunks, and lines</li>
+              <li>Branch, merge, plain rebase, and remote sync</li>
+              <li>Undo and redo</li>
+              <li>Up to 3 repository tabs</li>
+            </ul>
+          </article>
+          <article class="plan best">
+            <div class="plan-top"><h2 style="font-size:1.28rem;letter-spacing:-.018em">Pro</h2><span class="show-yearly"><span class="ref solid" style="--c:var(--teal)">Best value</span></span></div>
+            <p class="amount show-yearly"><strong>$19.99</strong><span>/ first year</span></p>
+            <p class="amount show-monthly"><strong>$3.99</strong><span>/ month</span></p>
+            <p class="sub show-yearly">₩29,000 for the first year in Korea. 14-day trial, then renews at $29.99 / ₩39,000 per year until canceled. Save 33% at the first-year launch price.</p>
+            <p class="sub show-monthly">₩4,900 / month in Korea. 14-day trial, then billed monthly until canceled.</p>
+            <a class="btn primary" href="https://apps.apple.com/app/id6785129372">Start 14-day free trial</a>
+            <ul class="checks">
+              <li class="all">Everything in Free</li>
+              <li>Visual interactive rebase</li>
+              <li>Three-way conflict editor and conflict warnings</li>
+              <li>Compare, worktrees, Git Flow, and patches</li>
+              <li>Pull requests, issues, and AI</li>
+              <li>Unlimited tabs</li>
+            </ul>
+          </article>
+        </div>
+        <p class="fine">Prices shown are the intended U.S. and Korea storefront prices. Eligibility, taxes, currency conversion, and the final price are confirmed by the App Store before purchase. The launch offer is available for a limited time.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="compare">
+      <div class="wrap">
+        <header class="head">
           <h2>One subscription.<br>All the advanced tools.</h2>
-          <p>Monthly and yearly plans unlock the same features. Choose only how often you want to be billed.</p>
-        </div>
-        <div class="included-grid">
-          <div class="included-item"><strong>Interactive rebase</strong><span>Reorder, reword, squash, and drop visually</span></div>
-          <div class="included-item"><strong>Three-way conflict editor</strong><span>Choose change by change</span></div>
-          <div class="included-item"><strong>Conflict warnings</strong><span>See conflicts before merging</span></div>
-          <div class="included-item"><strong>Compare</strong><span>Any two branches or commits</span></div>
-          <div class="included-item"><strong>Worktrees</strong><span>Several worktrees side by side</span></div>
-          <div class="included-item"><strong>Git Flow</strong><span>Guided starts and finishes</span></div>
-          <div class="included-item"><strong>Patches</strong><span>Create and apply shareable patch files</span></div>
-          <div class="included-item"><strong>Pull requests and issues</strong><span>GitHub and GitLab, with your own token</span></div>
-          <div class="included-item"><strong>AI</strong><span>Your own local model, API key, or Apple's on-device model</span></div>
-          <div class="included-item"><strong>Unlimited tabs</strong><span>No limit on repository tabs</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <header class="section-heading centered">
-          <p class="eyebrow">Questions, answered</p>
-          <h2>Before you start.</h2>
-          <p class="section-lede">Everything important about the free plan, trial, billing, privacy, and the App Sandbox.</p>
+          <p class="lede">Monthly and yearly plans unlock the same features. Choose only how often you want to be billed.</p>
         </header>
-
-        <div class="faq-grid">
-          <article class="faq-item">
-            <h3>When does the free trial start?</h3>
-            <p>Downloading Branchlane does not start the trial. It starts only after an eligible new subscriber selects a Pro plan and confirms the offer in the app.</p>
-          </article>
-          <article class="faq-item">
-            <h3>Is Free time-limited?</h3>
-            <p>No. Everyday Git stays free with no time limit: staging, committing, branching, merging, plain rebase, remote sync, undo, history, and blame, with up to 3 repository tabs.</p>
-          </article>
-          <article class="faq-item">
-            <h3>Do Monthly and Yearly differ?</h3>
-            <p>No. Both unlock the same Pro features. The only differences are billing frequency and price.</p>
-          </article>
-          <article class="faq-item">
-            <h3>How do I cancel or restore?</h3>
-            <p>Manage or cancel through your App Store account settings. Existing purchases can be restored inside Branchlane.</p>
-          </article>
-          <article class="faq-item">
-            <h3>Who decides trial eligibility?</h3>
-            <p>The App Store determines eligibility for introductory offers. Branchlane shows the available offer before you confirm.</p>
-          </article>
-          <article class="faq-item">
-            <h3>Does a subscription upload my code?</h3>
-            <p>No. StoreKit handles subscription state, and there is no Branchlane server. Repository data leaves your Mac only when you ask: to a Git remote you chose, to GitHub or GitLab with your own token, or to the AI provider you configured.</p>
-          </article>
-          <article class="faq-item">
-            <h3>Why do some scripts and hooks need a Terminal command?</h3>
-            <p>macOS quarantines files written by App Store apps. Scripts and Git hooks that arrive through a clone, pull, or checkout in Branchlane need one Terminal command before they can run: <code>xattr -dr com.apple.quarantine &lt;repo&gt;</code>. Branchlane shows the command when this blocks a Git operation. Files Branchlane writes later need it again. Hooks already on disk run normally.</p>
-          </article>
+        <div class="table-wrap">
+          <table class="compare">
+            <thead><tr><th scope="col">Feature</th><th scope="col">Free</th><th scope="col">Pro</th></tr></thead>
+            <tbody><tr class="group"><th colspan="3" scope="colgroup">Everyday Git</th></tr><tr><th scope="row">Commit graph with search</th><td><span class="yes" role="img" aria-label="Included"></span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Stage files, hunks, and lines</th><td><span class="yes" role="img" aria-label="Included"></span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Commit, amend, branch, merge, plain rebase, cherry-pick, revert, and reset</th><td><span class="yes" role="img" aria-label="Included"></span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Fetch, pull, push, and clone over SSH and HTTPS</th><td><span class="yes" role="img" aria-label="Included"></span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Undo and redo</th><td><span class="yes" role="img" aria-label="Included"></span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Diff views, file history, and blame</th><td><span class="yes" role="img" aria-label="Included"></span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Stashes, tags, submodules, and LFS status</th><td><span class="yes" role="img" aria-label="Included"></span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Command palette</th><td><span class="yes" role="img" aria-label="Included"></span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Repository tabs</th><td>Up to 3</td><td>Unlimited</td></tr><tr class="group"><th colspan="3" scope="colgroup">Advanced tools</th></tr><tr><th scope="row">Visual interactive rebase<small>Reorder, reword, squash, and drop</small></th><td><span class="no" aria-label="Not included">-</span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Three-way conflict editor<small>Choose change by change</small></th><td><span class="no" aria-label="Not included">-</span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Conflict warnings<small>See conflicts before merging</small></th><td><span class="no" aria-label="Not included">-</span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Compare branches and commits</th><td><span class="no" aria-label="Not included">-</span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Worktrees<small>Several checkouts side by side</small></th><td><span class="no" aria-label="Not included">-</span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Git Flow<small>Guided start and finish</small></th><td><span class="no" aria-label="Not included">-</span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Shareable patches<small>Create and apply patch files</small></th><td><span class="no" aria-label="Not included">-</span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">Pull requests and issues<small>GitHub and GitLab with your own token</small></th><td><span class="no" aria-label="Not included">-</span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr><tr><th scope="row">AI<small>Your own local model, API key, or Apple's on-device model</small></th><td><span class="no" aria-label="Not included">-</span></td><td><span class="yes" role="img" aria-label="Included"></span></td></tr></tbody>
+          </table>
         </div>
       </div>
     </section>
 
-    <section class="section cta-section">
-      <div class="container cta-panel">
-        <p class="eyebrow">Ready when you are</p>
-        <h2>Start free.<br>Go Pro for the advanced tools.</h2>
-        <p>Download Branchlane for free. Eligible new subscribers can try every Pro feature for 14 days.</p>
-        <div class="hero-actions">
-          <a class="button primary button-arrow" href="https://apps.apple.com/app/id6785129372">Download free</a>
-          <a class="button secondary" href="../">Back to Branchlane</a>
+    <section class="sec" id="faq" style="padding-top:0">
+      <div class="wrap">
+        <header class="head">
+          <h2>Before you start.</h2>
+          <p class="lede">Everything important about the free plan, trial, billing, privacy, and the App Sandbox.</p>
+        </header>
+        <div class="faq">
+          <details open><summary>When does the free trial start?</summary><p>Downloading Branchlane does not start the trial. It starts only after an eligible new subscriber selects a Pro plan and confirms the offer in the app.</p></details>
+          <details><summary>Is Free time-limited?</summary><p>No. Everyday Git stays free with no time limit: staging, committing, branching, merging, plain rebase, remote sync, undo, history, and blame, with up to 3 repository tabs.</p></details>
+          <details><summary>Do Monthly and Yearly differ?</summary><p>No. Both unlock the same Pro features. The only differences are billing frequency and price.</p></details>
+          <details><summary>How do I cancel or restore?</summary><p>Manage or cancel through your App Store account settings. Existing purchases can be restored inside Branchlane.</p></details>
+          <details><summary>Who decides trial eligibility?</summary><p>The App Store determines eligibility for introductory offers. Branchlane shows the available offer before you confirm.</p></details>
+          <details><summary>Does a subscription upload my code?</summary><p>No. StoreKit handles subscription state, and there is no Branchlane server. Repository data leaves your Mac only when you ask: to a Git remote you chose, to GitHub or GitLab with your own token, or to the AI provider you configured.</p></details>
+          <details><summary>Why do some scripts and hooks need a Terminal command?</summary><p>macOS quarantines files written by App Store apps. Scripts and Git hooks that arrive through a clone, pull, or checkout in Branchlane need one Terminal command before they can run: <code>xattr -dr com.apple.quarantine &lt;repo&gt;</code>. Branchlane shows the command when this blocks a Git operation. Files Branchlane writes later need it again. Hooks already on disk run normally.</p></details>
         </div>
+      </div>
+    </section>
+
+    <section class="end">
+      <div class="wrap">
+        <img class="end-icon" src="../assets/app-icon.png" width="96" height="96" alt="">
+        <h2>Start free.<br>Add Pro when you need it.</h2>
+        <div class="actions"><a class="badge-link" href="https://apps.apple.com/app/id6785129372" aria-label="Download on the Mac App Store"><img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-mac-app-store/black/en-us?releaseDate=1782777600" height="48" alt="Download on the Mac App Store"></a><a class="btn ghost" href="../">Branchlane home</a></div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="site-footer-inner">
-      <div class="footer-brand">
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <div>
         <a class="brand" href="../">
-          <img class="brand-icon" src="../assets/app-icon.png" width="34" height="34" alt="">
+          <img src="../assets/app-icon.png" width="30" height="30" alt="">
           <span>Branchlane</span>
         </a>
-        <p>Private, native Git for Mac.</p>
-        <p class="footer-legal">Apple, App Store, and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p>
+        <p>Apple, the Apple logo, App Store, Mac, and Mac App Store are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p>
       </div>
-      <nav class="footer-links" aria-label="Footer navigation">
-        <a href="./">Pricing</a>
+      <nav aria-label="Footer navigation">
+        <a href="../pricing/">Pricing</a>
         <a href="../privacy/">Privacy Policy</a>
         <a href="../terms/">Terms of Use</a>
         <a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a>
+        <a href="https://apps.apple.com/app/id6785129372">App Store</a>
         <a href="../ko/pricing/" lang="ko">한국어</a>
       </nav>
     </div>
   </footer>
+  <script src="../assets/site.js" defer></script>
 </body>
 </html>
