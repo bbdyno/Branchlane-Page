@@ -1,6 +1,6 @@
 # Branchlane Page
 
-Public landing, pricing, privacy, and EULA reference pages for Branchlane 1.1.
+Public landing, pricing, privacy, and EULA reference pages for Branchlane 2.0.
 
 - Landing Page: `https://bbdyno.github.io/Branchlane-Page/`
 - Korean Landing Page: `https://bbdyno.github.io/Branchlane-Page/ko/`

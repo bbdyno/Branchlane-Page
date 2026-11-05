@@ -44,10 +44,10 @@
       <p class="kicker">Privacy Policy</p>
       <h1>Branchlane Privacy Policy</h1>
       <p class="subtitle">Branchlane is designed as a private, native Git client for Mac. It does not require a Branchlane account, does not use a Branchlane-operated backend, and does not upload your repositories to a Branchlane server.</p>
-      <p class="updated">Last updated: June 28, 2026</p>
+      <p class="updated">Last updated: November 5, 2026</p>
 
       <div class="callout">
-        <p><strong>Summary:</strong> Branchlane keeps repository data on your Mac. The app uses local Git, local preferences, macOS security-scoped bookmarks, StoreKit for App Store subscriptions, and direct connections from your Mac to services you choose, such as Git remotes and Gravatar.</p>
+        <p><strong>Summary:</strong> Branchlane keeps repository data on your Mac. The app uses local Git, local preferences, macOS security-scoped bookmarks, StoreKit for App Store subscriptions, and direct connections from your Mac to services you choose, such as Git remotes, GitHub or GitLab, and an AI provider you configured.</p>
       </div>
 
       <h2>1. Who We Are</h2>
@@ -62,11 +62,13 @@
       <ul>
         <li>Repository paths, recently opened repositories, selected tabs, and restore-on-launch state.</li>
         <li>App preferences such as appearance, date and time formatting, safety confirmations, and default clone folder.</li>
+        <li>Settings for AI providers and Git hosts, such as server addresses and model names. API keys and tokens are kept in macOS Keychain, not in these settings.</li>
+        <li>The app's own known hosts file and Git config, kept in its App Sandbox container.</li>
         <li>macOS security-scoped bookmarks that allow the app to reopen folders you selected.</li>
         <li>Git metadata read from repositories, such as commit messages, branch names, tags, author names, author email addresses, file names, diffs, and working tree status.</li>
         <li>Local subscription entitlement state provided by Apple's StoreKit APIs.</li>
       </ul>
-      <p>This information stays on your Mac unless you take an action that sends it elsewhere, such as pushing to a Git remote, cloning from a remote URL, fetching, pulling, or using a third-party service directly from your Mac.</p>
+      <p>This information stays on your Mac unless you take an action that sends it elsewhere, such as pushing to a Git remote, cloning from a remote URL, fetching, pulling, invoking an AI action, or using GitHub or GitLab features directly from your Mac.</p>
 
       <h2>4. Repository Data And Git Operations</h2>
       <p>Branchlane runs Git operations locally through the Git executable on your Mac. When you interact with a Git remote, your Mac connects directly to that remote service using the remote URL and credentials configured for your repository or system. Examples include GitHub, GitLab, Bitbucket, a self-hosted Git server, or another Git remote you choose.</p>
@@ -76,29 +78,35 @@
       <p>Branchlane Pro subscriptions are handled through Apple's StoreKit and the App Store. Apple processes purchases, renewals, cancellations, refunds, payment information, and subscription management. Branchlane does not receive your full payment card details.</p>
       <p>Branchlane uses StoreKit to load available subscription products, start purchases, restore purchases, and check whether an active entitlement exists on your Mac.</p>
 
-      <h2>6. Third-Party Services</h2>
+      <h2>6. Optional AI</h2>
+      <p>AI features are optional. Repository content, such as diffs and commit data, is sent only when you invoke an AI action, and only to the provider you configured: a local server, Anthropic, OpenAI or a compatible service, or Apple's on-device model.</p>
+      <p>Requests go directly from your Mac to that provider, and Apple's on-device model runs on your Mac. No Branchlane server is involved. Before the first send to a non-local provider, Branchlane asks you to confirm. A provider that receives your content handles it under its own terms and policies.</p>
+      <p>API keys stay in macOS Keychain.</p>
+
+      <h2>7. GitHub And GitLab</h2>
+      <p>Pull request and issue features connect to GitHub or GitLab only if you add a token. Requests go directly from your Mac to that host, using your own token stored in macOS Keychain. No Branchlane server is involved. The host receives those requests according to its own policies.</p>
+
+      <h2>8. Third-Party Services</h2>
       <h3>Git remotes</h3>
       <p>When you clone, fetch, pull, push, or publish branches, your Mac connects directly to the Git remote configured for that repository. The remote service may receive repository data, credentials, network information, and Git metadata according to that service's own policies.</p>
-
-      <h3>Gravatar</h3>
-      <p>Branchlane may request avatar images from Gravatar for commit authors. To do this, the app computes an MD5 hash of the author's email address locally and requests an image from <code>www.gravatar.com</code>. Gravatar may receive the hashed email value, your IP address, and request metadata. If no Gravatar image is available, Branchlane displays a local initials avatar.</p>
 
       <h3>Apple</h3>
       <p>Apple may process purchase, subscription, diagnostic, crash, and App Store analytics information according to Apple's own policies and the settings you have chosen for your Apple ID, device, and App Store account.</p>
 
-      <h2>7. Credentials</h2>
-      <p>Branchlane relies on Git and macOS mechanisms for repository authentication. External-service credentials should be stored in macOS Keychain or the credential system you choose. Branchlane does not operate a Branchlane credential server.</p>
+      <h2>9. Credentials And Local Git Files</h2>
+      <p>Branchlane relies on Git and macOS mechanisms for repository authentication. HTTPS tokens, GitHub and GitLab tokens, and AI API keys are stored in macOS Keychain. Branchlane does not operate a Branchlane credential server.</p>
+      <p>Branchlane runs in the App Sandbox and keeps its own known hosts file and Git config in its container. It can access your <code>~/.gitconfig</code> and <code>~/.ssh</code> only if you explicitly grant access in the app.</p>
 
-      <h2>8. Data Retention And Deletion</h2>
+      <h2>10. Data Retention And Deletion</h2>
       <p>Local app data remains on your Mac until you remove it, reset app preferences, remove repository entries, or uninstall the app and delete its local container data. Repository data remains wherever you store your repositories and wherever you send it through Git operations.</p>
 
-      <h2>9. Children</h2>
+      <h2>11. Children</h2>
       <p>Branchlane is a developer tool and is not directed to children. Branchlane does not knowingly collect personal information from children through a Branchlane-operated service.</p>
 
-      <h2>10. Changes To This Policy</h2>
+      <h2>12. Changes To This Policy</h2>
       <p>We may update this Privacy Policy as Branchlane changes. The updated version will be posted on this page with a new "Last updated" date.</p>
 
-      <h2>11. Contact</h2>
+      <h2>13. Contact</h2>
       <p>For questions about this Privacy Policy, contact us through <a href="https://github.com/bbdyno/Branchlane-Page/issues">the Branchlane support page</a>.</p>
     </article>
   </main>
