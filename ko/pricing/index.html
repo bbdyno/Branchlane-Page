@@ -49,7 +49,7 @@
       <div class="wrap">
         <span class="ref " style="--c:var(--teal)">대상 Pro 신규 구독자는 14일 무료 체험</span>
         <h1>일상적인 Git은 무료.<br>고급 도구는 Pro.</h1>
-        <p class="lede">Branchlane 계정, 라이선스 키, 클라우드 서비스, 팀 좌석은 없습니다. Branchlane은 App Store에서만 판매합니다. 고급 도구가 필요할 때만 App Store에서 구독하세요.</p>
+        <p class="lede">Branchlane 계정, 라이선스 키, 클라우드 서비스는 없습니다. Branchlane은 App Store에서만 판매합니다. 고급 도구가 필요할 때만 App Store에서 구독하세요.</p>
       </div>
     </section>
 
@@ -121,6 +121,7 @@
           <details><summary>월간과 연간 기능이 다른가요?</summary><p>아닙니다. 두 요금제 모두 같은 Pro 기능을 제공합니다. 결제 주기와 가격만 다릅니다.</p></details>
           <details><summary>구독 취소와 복원은 어디서 하나요?</summary><p>App Store 계정 설정에서 관리하거나 취소할 수 있습니다. 기존 구입 내역은 Branchlane 앱 안에서 복원할 수 있습니다.</p></details>
           <details><summary>무료 체험 자격은 누가 결정하나요?</summary><p>App Store가 신규 구독자의 도입 프로모션 자격을 판단합니다. Branchlane은 결제 확인 전에 이용 가능한 조건을 보여 줍니다.</p></details>
+          <details><summary>회사에서 팀용으로 살 수 있나요?</summary><p>네. 회사는 Apple Business Manager에서, 학교는 Apple School Manager에서 Branchlane Pro를 인원수만큼 사서 구성원에게 배정할 수 있습니다. 좌석마다 개인 구독과 같은 가격, 같은 Pro 기능이며 Branchlane 계정이나 라이선스 키는 필요 없습니다.</p></details>
           <details><summary>구독하면 코드가 업로드되나요?</summary><p>아닙니다. StoreKit은 구독 상태를 처리하며 Branchlane 서버는 없습니다. 저장소 데이터는 사용자가 요청할 때만 Mac 밖으로 나갑니다. 전송 대상은 사용자가 선택한 Git 원격, 내 토큰으로 쓰는 GitHub 또는 GitLab, 사용자가 설정한 AI 제공자입니다.</p></details>
           <details><summary>일부 스크립트와 훅에 터미널 명령이 필요한 이유는 무엇인가요?</summary><p>macOS는 App Store 앱이 쓴 파일을 격리합니다. Branchlane에서 클론, 풀, 체크아웃으로 받은 스크립트와 Git 훅은 실행 전에 터미널 명령을 한 번 실행해야 합니다: <code>xattr -dr com.apple.quarantine &lt;repo&gt;</code>. 이 때문에 Git 작업이 막히면 Branchlane이 명령을 안내합니다. 이후 Branchlane이 새로 쓴 파일에는 다시 실행해야 합니다. 이미 디스크에 있던 훅은 그대로 실행됩니다.</p></details>
         </div>
