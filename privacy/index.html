@@ -47,10 +47,10 @@
       <p class="kicker">Privacy Policy</p>
       <h1>Branchlane Privacy Policy</h1>
       <p class="subtitle">Branchlane is designed as a private, native Git client for Mac. It does not require a Branchlane account, does not use a Branchlane-operated backend, and does not upload your repositories to a Branchlane server.</p>
-      <p class="updated">Last updated: November 5, 2026</p>
+      <p class="updated">Last updated: November 10, 2026</p>
 
       <div class="callout">
-        <p><strong>Summary:</strong> Branchlane keeps repository data on your Mac. The app uses local Git, local preferences, macOS security-scoped bookmarks, StoreKit for App Store subscriptions, and direct connections from your Mac to services you choose, such as Git remotes, GitHub or GitLab, and an AI provider you configured.</p>
+        <p><strong>Summary:</strong> Branchlane keeps repository data on your Mac. The app uses local Git, local preferences, macOS security-scoped bookmarks, StoreKit for App Store subscriptions, and direct connections from your Mac to services you choose, such as Git remotes, GitHub or GitLab, an AI provider you configured, MCP servers you connect, and Gravatar for profile pictures, which you can turn off.</p>
       </div>
 
       <h2>1. Who We Are</h2>
@@ -64,8 +64,9 @@
       <p>Branchlane stores certain information locally so the app can work as expected. This may include:</p>
       <ul>
         <li>Repository paths, recently opened repositories, selected tabs, and restore-on-launch state.</li>
-        <li>App preferences such as appearance, date and time formatting, safety confirmations, and default clone folder.</li>
-        <li>Settings for AI providers and Git hosts, such as server addresses and model names. API keys and tokens are kept in macOS Keychain, not in these settings.</li>
+        <li>App preferences such as the theme, themes you made, date and time formatting, safety confirmations, and default clone folder.</li>
+        <li>Settings for AI providers, Git hosts and MCP servers, such as server addresses and model names. API keys and tokens are kept in macOS Keychain, not in these settings.</li>
+        <li>Profile pictures of commit authors, cached for up to a week in the app's cache folder.</li>
         <li>The app's own known hosts file and Git config, kept in its App Sandbox container.</li>
         <li>macOS security-scoped bookmarks that allow the app to reopen folders you selected.</li>
         <li>Git metadata read from repositories, such as commit messages, branch names, tags, author names, author email addresses, file names, diffs, and working tree status.</li>
@@ -85,13 +86,22 @@
       <p>AI features are optional. Repository content, such as diffs and commit data, is sent only when you invoke an AI action, and only to the provider you configured: a local server, Anthropic, OpenAI or a compatible service, or Apple's on-device model.</p>
       <p>Requests go directly from your Mac to that provider, and Apple's on-device model runs on your Mac. No Branchlane server is involved. Before the first send to a non-local provider, Branchlane asks you to confirm. A provider that receives your content handles it under its own terms and policies.</p>
       <p>API keys stay in macOS Keychain.</p>
+      <p>The assistant, part of Branchlane Pro, uses the same provider. When you send it a message, it sends your message, a short description of what is selected in the app, and what it reads from the open repository, such as status, history, diffs and file contents, to that provider so it can answer. It reads only the open repository. Anything that would change the repository waits until you run it. Conversations are kept in memory and are not saved when you quit.</p>
+      <p>MCP servers are optional and connected by you, over HTTP. When the assistant uses a tool from one of them, the tool's arguments, which the model writes and may include repository details, go directly from your Mac to that server. Tools that the server does not mark as read-only ask you first. Tokens for MCP servers stay in macOS Keychain.</p>
 
-      <h2>7. GitHub And GitLab</h2>
+      <h2>7. GitHub, GitLab And Profile Pictures</h2>
       <p>Pull request and issue features connect to GitHub or GitLab only if you add a token. Requests go directly from your Mac to that host, using your own token stored in macOS Keychain. No Branchlane server is involved. The host receives those requests according to its own policies.</p>
+      <p>To show commit authors' profile pictures, Branchlane asks the repository's GitHub or GitLab host which account a commit's author email belongs to, when you added a token for that host, and otherwise asks Gravatar. Gravatar receives only a SHA-256 hash of the email address, never the address itself. GitHub no-reply addresses name their account, so their pictures load from GitHub directly. You can turn profile pictures off in Settings &gt; General.</p>
 
       <h2>8. Third-Party Services</h2>
       <h3>Git remotes</h3>
       <p>When you clone, fetch, pull, push, or publish branches, your Mac connects directly to the Git remote configured for that repository. The remote service may receive repository data, credentials, network information, and Git metadata according to that service's own policies.</p>
+
+      <h3>Gravatar</h3>
+      <p>When profile pictures are on, Gravatar receives hashed email addresses of commit authors and your network information, according to its own policies.</p>
+
+      <h3>MCP servers</h3>
+      <p>MCP servers you connect receive the tool calls the assistant makes, according to the policies of whoever runs them.</p>
 
       <h3>Apple</h3>
       <p>Apple may process purchase, subscription, diagnostic, crash, and App Store analytics information according to Apple's own policies and the settings you have chosen for your Apple ID, device, and App Store account.</p>

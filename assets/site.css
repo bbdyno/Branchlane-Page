@@ -110,6 +110,7 @@ h3 { font-family: var(--display); font-size: 1.32rem; font-weight: 650; line-hei
 .ref.solid { background: var(--c, var(--blue)); border-color: transparent; color: #06121f; font-weight: 600; }
 .ref.pro { --c: var(--amber); }
 .ref.free { --c: var(--green); }
+.ref + .ref { margin-left: 6px; }
 
 /* Buttons */
 

@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Branchlane - Private, Native Git for Mac</title>
-  <meta name="description" content="Branchlane is a private, native Git client for Mac. Everyday Git is free, and Branchlane Pro adds the advanced tools, from interactive rebase to pull requests and AI.">
+  <meta name="description" content="Branchlane is a private, native Git client for Mac. Everyday Git is free, and Branchlane Pro adds an assistant that reads your repository, themes, interactive rebase and more.">
   <meta name="theme-color" content="#090c11">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Branchlane - Private, Native Git for Mac">
-  <meta property="og:description" content="Branchlane is a private, native Git client for Mac. Everyday Git is free, and Branchlane Pro adds the advanced tools, from interactive rebase to pull requests and AI.">
+  <meta property="og:description" content="Branchlane is a private, native Git client for Mac. Everyday Git is free, and Branchlane Pro adds an assistant that reads your repository, themes, interactive rebase and more.">
   <meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
   <meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/">
   <link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/">
@@ -60,7 +60,7 @@
         <g class="pill" style="--d:1.25s"><rect x="530" y="397" width="148" height="26" rx="7" fill="color-mix(in srgb, #f5a93a 14%, #090c11)" stroke="#f5a93a" stroke-opacity=".5"/><text x="604.0" y="414.5" text-anchor="middle" fill="color-mix(in srgb, #f5a93a 72%, white)">feature/settings</text></g>
         <g class="pill" style="--d:1.35s"><rect x="186" y="449" width="124" height="26" rx="7" fill="color-mix(in srgb, #4c9ff6 14%, #090c11)" stroke="#4c9ff6" stroke-opacity=".5"/><text x="248.0" y="466.5" text-anchor="middle" fill="color-mix(in srgb, #4c9ff6 72%, white)">origin/main</text></g>
       </svg>
-        <p class="hero-tag"><span class="ref solid code" style="--c:var(--teal)">v2.0.0</span> <span>A complete rewrite, for Mac</span></p>
+        <p class="hero-tag"><span class="ref solid code" style="--c:var(--teal)">v2.1.0</span> <span>A new look, themes and an assistant</span></p>
         <h1>Git work stays<br>on your Mac.</h1>
         <p class="lede">A native Git client with a commit graph you can actually read, staging down to the line, and undo for when a move goes wrong.</p>
         <div class="actions">
@@ -93,8 +93,20 @@
           <article class="chapter node on" style="--c:var(--blue)">
             <span class="ref free">Free</span>
             <h3>See the whole repository at once.</h3>
-            <p>Lanes keep each branch straight, so history stays readable. Search it, manage the columns, and hide or solo branches. Drag one ref onto another to merge or rebase.</p>
+            <p>Lanes keep each branch straight, so history stays readable, and each commit shows its author's picture from GitHub, GitLab or Gravatar. Search it, manage the columns, and hide or solo branches. Drag one ref onto another to merge or rebase.</p>
             <div class="shot"><img src="screenshots/en/graph.webp" width="2400" height="1500" loading="lazy" alt="Commit graph with branches, tags, and local changes"></div>
+          </article>
+          <article class="chapter node" style="--c:var(--violet)">
+            <span class="ref pro">Pro</span>
+            <h3>Ask the assistant, then decide.</h3>
+            <p>It reads the repository on its own: history, changes, branches and files, plus the MCP servers you connect. Anything that would change the repository, from a branch to a push, waits on a card until you run it, and lands in Undo.</p>
+            <div class="shot"><img src="screenshots/en/assistant.webp" width="2400" height="1500" loading="lazy" alt="Assistant panel with a commit waiting on a card"></div>
+          </article>
+          <article class="chapter node" style="--c:var(--teal)">
+            <span class="ref free">Free</span><span class="ref pro">Pro</span>
+            <h3>Make it yours.</h3>
+            <p>White and Black are free. Try conference stage looks, Dracula, Nord, Solarized and more on the whole window before you apply them, or make your own theme with Pro.</p>
+            <div class="shot"><img src="screenshots/en/themes.webp" width="2400" height="1500" loading="lazy" alt="Theme gallery with a theme being previewed"></div>
           </article>
           <article class="chapter node" style="--c:var(--green)">
             <span class="ref free">Free</span>
@@ -124,6 +136,8 @@
             <div class="stage" aria-hidden="true">
               <div class="stage-frame">
             <div class="shot on"><img src="screenshots/en/graph.webp" width="2400" height="1500" loading="eager" alt=""></div>
+            <div class="shot"><img src="screenshots/en/assistant.webp" width="2400" height="1500" loading="lazy" alt=""></div>
+            <div class="shot"><img src="screenshots/en/themes.webp" width="2400" height="1500" loading="lazy" alt=""></div>
             <div class="shot"><img src="screenshots/en/diff.webp" width="2400" height="1500" loading="lazy" alt=""></div>
             <div class="shot"><img src="screenshots/en/palette.webp" width="2400" height="1500" loading="lazy" alt=""></div>
             <div class="shot"><img src="screenshots/en/rebase.webp" width="2400" height="1500" loading="lazy" alt=""></div>
@@ -252,12 +266,12 @@
             <article class="card rv wide" style="--s:7;--rd:.08s">
               <div class="viz">
                 <div class="ai-field" aria-hidden="true">
-                  <div class="label"><span>Commit message</span><span class="spark">✦ Draft</span></div>
-                  Pin notes to the top of the list<span class="caret"></span>
+                  <div class="label"><span>Assistant</span><span class="spark">✦</span></div>
+                  Commit my staged changes with a good message<span class="caret"></span>
                 </div>
-                <div class="ai-field" aria-hidden="true">
-                  <div class="label"><span>Explain this change</span><span class="spark">✦</span></div>
-                  Adds pinning, so a pinned note stays at the top after every sort.
+                <div class="ui" aria-hidden="true">
+                  <div class="row"><span class="t dim">Read the changes</span></div>
+                  <div class="row"><span class="t">Commit 3 staged files</span><span class="chipbtn go" style="margin-left:auto">Run</span></div>
                 </div>
                 <div class="providers" aria-label="Supported AI providers">
                   <span>Your local model</span>
@@ -268,8 +282,8 @@
               </div>
               <div class="copy">
                 <span class="ref pro">Pro</span>
-                <h3>AI you bring yourself.</h3>
-                <p>Draft commit messages and explain changes with your own local model, API key, or Apple's on-device model. Nothing is sent unless you ask.</p>
+                <h3>An assistant you bring yourself.</h3>
+                <p>Ask from the right panel, the command palette, a commit, a diff or a conflict, with your own local model or API key. It reads on its own and asks before it changes anything. Commit message drafts and explanations work with Apple's on-device model too.</p>
               </div>
             </article>
             <article class="card pro rv wide" style="--s:12">
@@ -281,6 +295,8 @@
                   <li>Git Flow<span>Guided start and finish</span></li>
                   <li>Patches<span>Create and apply patch files</span></li>
                   <li>Unlimited tabs<span>Free includes up to 3</span></li>
+                  <li>Themes<span>16 more, and your own</span></li>
+                  <li>MCP servers<span>Connect your tools over HTTP</span></li>
                 </ul>
               </div>
               <div class="copy">
@@ -308,7 +324,9 @@
             <div class="dests">
               <div class="dest" style="--c:var(--blue)"><div><b>Your Git remote</b><small>When you clone, fetch, pull, or push</small></div></div>
               <div class="dest" style="--c:var(--green)"><div><b>GitHub or GitLab</b><small>Only if you add your own token</small></div></div>
-              <div class="dest" style="--c:var(--amber)"><div><b>The AI provider you set up</b><small>Only when you run an AI action. Local and on-device models stay on your machine.</small></div></div>
+              <div class="dest" style="--c:var(--amber)"><div><b>The AI provider you set up</b><small>Only when you run an AI action or ask the assistant. Local and on-device models stay on your machine.</small></div></div>
+              <div class="dest" style="--c:var(--violet)"><div><b>MCP servers you connect</b><small>Only the tool calls the assistant makes, and you approve them.</small></div></div>
+              <div class="dest" style="--c:var(--teal)"><div><b>Gravatar</b><small>A hash of a commit author's email, to find a profile picture. You can turn it off.</small></div></div>
               <div class="dest none"><div><b>Branchlane server</b><small>Does not exist. No account, cloud sync, or analytics backend either.</small></div></div>
             </div>
           </div>
@@ -318,15 +336,15 @@
       <section class="sec" id="whats-new">
         <div class="wrap log-grid">
           <header class="head node rv" style="--c:var(--violet)">
-            <span class="ref code" style="--c:var(--violet)">tag: v2.0.0</span>
-            <h2>Rewritten from the ground up.</h2>
-            <p class="lede">Branchlane 2.0 has a new Git engine and a new interface.</p>
+            <span class="ref code" style="--c:var(--violet)">tag: v2.1.0</span>
+            <h2>A new look, themes and an assistant.</h2>
+            <p class="lede">Branchlane 2.1 builds on the 2.0 engine with a calmer window and a way to ask about your repository.</p>
           </header>
           <ul class="log rv">
-            <li style="--c:var(--green)"><span class="ref free">Free</span><h3>Everyday Git is now free</h3><p>Staging, committing, branching, merging, syncing, and undo and redo work without a subscription.</p></li>
-            <li><span class="ref free">Free</span><h3>A new commit graph</h3><p>Lanes that keep a branch straight, column management, search, and hide or solo for branches.</p></li>
-            <li style="--c:var(--amber)"><span class="ref pro">Pro</span><h3>Interactive rebase and conflict tools</h3><p>A visual interactive rebase and a three-way conflict editor, plus conflict warnings before you merge.</p></li>
-            <li style="--c:var(--amber)"><span class="ref pro">Pro</span><h3>Pull requests and optional AI</h3><p>Pull requests and issues on GitHub and GitLab with your own token, and AI with the model you pick.</p></li>
+            <li style="--c:var(--green)"><span class="ref free">Free</span><h3>A new look</h3><p>A button rail, the branch list beside it, the graph in a card and a floating commit panel. Settings open inside the window.</p></li>
+            <li><span class="ref free">Free</span><h3>Profile pictures</h3><p>Commit authors show their GitHub, GitLab or Gravatar picture, with initials when there is none.</p></li>
+            <li style="--c:var(--teal)"><span class="ref free">Free</span><span class="ref pro">Pro</span><h3>Themes</h3><p>White and Black are free. Preview 16 more on the whole window, then apply them or make your own with Pro.</p></li>
+            <li style="--c:var(--amber)"><span class="ref pro">Pro</span><h3>The assistant and MCP</h3><p>Ask about the repository and let it use the MCP servers you connect. Every change waits for you to run it.</p></li>
           </ul>
         </div>
       </section>
@@ -347,6 +365,7 @@
               <ul class="checks">
                 <li>Commit graph, staging, commits, branches, merges, plain rebase</li>
                 <li>Remote sync, undo and redo, file history, blame</li>
+                <li>White and Black themes, profile pictures</li>
                 <li>Up to 3 repository tabs</li>
               </ul>
             </article>
@@ -358,8 +377,9 @@
               <ul class="checks">
                 <li class="all">Everything in Free</li>
                 <li>Interactive rebase, three-way conflict editor, conflict warnings</li>
-                <li>Compare, worktrees, Git Flow, patches, pull requests, AI</li>
-                <li>Unlimited tabs</li>
+                <li>The assistant with MCP servers, AI drafts and explanations</li>
+                <li>Compare, worktrees, Git Flow, patches, pull requests</li>
+                <li>16 more themes and your own, unlimited tabs</li>
               </ul>
             </article>
           </div>
