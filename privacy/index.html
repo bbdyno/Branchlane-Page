@@ -47,7 +47,7 @@
       <p class="kicker">Privacy Policy</p>
       <h1>Branchlane Privacy Policy</h1>
       <p class="subtitle">Branchlane is designed as a private, native Git client for Mac. It does not require a Branchlane account, does not use a Branchlane-operated backend, and does not upload your repositories to a Branchlane server.</p>
-      <p class="updated">Last updated: November 10, 2026</p>
+      <p class="updated">Last updated: November 11, 2026</p>
 
       <div class="callout">
         <p><strong>Summary:</strong> Branchlane keeps repository data on your Mac. The app uses local Git, local preferences, macOS security-scoped bookmarks, StoreKit for App Store subscriptions, and direct connections from your Mac to services you choose, such as Git remotes, GitHub or GitLab, an AI provider you configured, MCP servers you connect, and Gravatar for profile pictures, which you can turn off.</p>
@@ -68,6 +68,7 @@
         <li>Settings for AI providers, Git hosts and MCP servers, such as server addresses and model names. API keys and tokens are kept in macOS Keychain, not in these settings.</li>
         <li>Profile pictures of commit authors, cached for up to a week in the app's cache folder.</li>
         <li>The app's own known hosts file and Git config, kept in its App Sandbox container.</li>
+        <li>Usernames and tokens or passwords you enter when a Git remote asks to sign in. They are saved in macOS Keychain only if you choose to remember them, and otherwise kept in memory until you quit. SSH key passphrases are never saved, and are kept in memory only until you quit.</li>
         <li>macOS security-scoped bookmarks that allow the app to reopen folders you selected.</li>
         <li>Git metadata read from repositories, such as commit messages, branch names, tags, author names, author email addresses, file names, diffs, and working tree status.</li>
         <li>Local subscription entitlement state provided by Apple's StoreKit APIs.</li>
@@ -77,6 +78,7 @@
       <h2>4. Repository Data And Git Operations</h2>
       <p>Branchlane runs Git operations locally through the Git executable on your Mac. When you interact with a Git remote, your Mac connects directly to that remote service using the remote URL and credentials configured for your repository or system. Examples include GitHub, GitLab, Bitbucket, a self-hosted Git server, or another Git remote you choose.</p>
       <p>Branchlane does not proxy these Git operations through a Branchlane server.</p>
+      <p>When you create a new repository and pick a .gitignore or license template, Branchlane loads the list of templates and the one you picked from GitHub's public API, without an account or token. Nothing about you or your repository is sent with these requests.</p>
 
       <h2>5. App Store Subscriptions</h2>
       <p>Branchlane Pro subscriptions are handled through Apple's StoreKit and the App Store. Apple processes purchases, renewals, cancellations, refunds, payment information, and subscription management. Branchlane does not receive your full payment card details.</p>
@@ -90,7 +92,7 @@
       <p>MCP servers are optional and connected by you, over HTTP. When the assistant uses a tool from one of them, the tool's arguments, which the model writes and may include repository details, go directly from your Mac to that server. Tools that the server does not mark as read-only ask you first. Tokens for MCP servers stay in macOS Keychain.</p>
 
       <h2>7. GitHub, GitLab And Profile Pictures</h2>
-      <p>Pull request and issue features connect to GitHub or GitLab only if you add a token. Requests go directly from your Mac to that host, using your own token stored in macOS Keychain. No Branchlane server is involved. The host receives those requests according to its own policies.</p>
+      <p>Pull request, issue and fork features connect to GitHub or GitLab only if you add a token. Requests go directly from your Mac to that host, using your own token stored in macOS Keychain. No Branchlane server is involved. The host receives those requests according to its own policies.</p>
       <p>To show commit authors' profile pictures, Branchlane asks the repository's GitHub or GitLab host which account a commit's author email belongs to, when you added a token for that host, and otherwise asks Gravatar. Gravatar receives only a SHA-256 hash of the email address, never the address itself. GitHub no-reply addresses name their account, so their pictures load from GitHub directly. You can turn profile pictures off in Settings &gt; General.</p>
 
       <h2>8. Third-Party Services</h2>
