@@ -47,7 +47,7 @@
       <p class="kicker">Privacy Policy</p>
       <h1>Branchlane Privacy Policy</h1>
       <p class="subtitle">Branchlane is designed as a private, native Git client for Mac. It does not require a Branchlane account, does not use a Branchlane-operated backend, and does not upload your repositories to a Branchlane server.</p>
-      <p class="updated">Last updated: November 11, 2026</p>
+      <p class="updated">Last updated: November 19, 2026</p>
 
       <div class="callout">
         <p><strong>Summary:</strong> Branchlane keeps repository data on your Mac. The app uses local Git, local preferences, macOS security-scoped bookmarks, StoreKit for App Store subscriptions, and direct connections from your Mac to services you choose, such as Git remotes, GitHub or GitLab, an AI provider you configured, MCP servers you connect, and Gravatar for profile pictures, which you can turn off.</p>
@@ -72,6 +72,7 @@
         <li>macOS security-scoped bookmarks that allow the app to reopen folders you selected.</li>
         <li>Git metadata read from repositories, such as commit messages, branch names, tags, author names, author email addresses, file names, diffs, and working tree status.</li>
         <li>Local subscription entitlement state provided by Apple's StoreKit APIs.</li>
+        <li>A usage summary, by day: how long the graph and lane screens were in front, the most lanes open at once, and which features opened the subscription screen. It holds no repository names, paths, branches or code, keeps the last 90 days, and can be turned off or cleared in Settings &gt; General.</li>
       </ul>
       <p>This information stays on your Mac unless you take an action that sends it elsewhere, such as pushing to a Git remote, cloning from a remote URL, fetching, pulling, invoking an AI action, or using GitHub or GitLab features directly from your Mac.</p>
 
@@ -95,7 +96,12 @@
       <p>Pull request, issue and fork features connect to GitHub or GitLab only if you add a token. Requests go directly from your Mac to that host, using your own token stored in macOS Keychain. No Branchlane server is involved. The host receives those requests according to its own policies.</p>
       <p>To show commit authors' profile pictures, Branchlane asks the repository's GitHub or GitLab host which account a commit's author email belongs to, when you added a token for that host, and otherwise asks Gravatar. Gravatar receives only a SHA-256 hash of the email address, never the address itself. GitHub no-reply addresses name their account, so their pictures load from GitHub directly. You can turn profile pictures off in Settings &gt; General.</p>
 
-      <h2>8. Third-Party Services</h2>
+      <h2>8. Coding Agents And Lanes</h2>
+      <p>Agent lanes, part of Branchlane Pro, let coding agents that run on your Mac, such as Claude Code or Codex, record their work and ask for review. They connect to a server inside Branchlane that is off until you turn it on in Settings &gt; Agents. It listens only on your Mac (127.0.0.1), accepts only requests that carry the token shown on that page, and refuses requests from web pages. Nothing outside your Mac can connect to it, and it sends nothing anywhere.</p>
+      <p>What agents record, such as the lane's intent, checkpoints, test commands with their exit codes and the end of their output, proposals and your review decisions, is stored in the repository's own Git data under <code>refs/branchlane/</code>. Known secret formats in command output are masked before they are stored. Which lines an AI agent wrote is stored as Agent Trace records in <code>refs/notes/agent-trace</code>. These stay in your repository and are sent to a Git remote only when you share a lane record or push those refs yourself.</p>
+      <p>The usage summary described in section 3 stays on your Mac. Branchlane never sends it; it leaves your Mac only if you copy it and share it yourself.</p>
+
+      <h2>9. Third-Party Services</h2>
       <h3>Git remotes</h3>
       <p>When you clone, fetch, pull, push, or publish branches, your Mac connects directly to the Git remote configured for that repository. The remote service may receive repository data, credentials, network information, and Git metadata according to that service's own policies.</p>
 
@@ -108,20 +114,20 @@
       <h3>Apple</h3>
       <p>Apple may process purchase, subscription, diagnostic, crash, and App Store analytics information according to Apple's own policies and the settings you have chosen for your Apple ID, device, and App Store account.</p>
 
-      <h2>9. Credentials And Local Git Files</h2>
+      <h2>10. Credentials And Local Git Files</h2>
       <p>Branchlane relies on Git and macOS mechanisms for repository authentication. HTTPS tokens, GitHub and GitLab tokens, and AI API keys are stored in macOS Keychain. Branchlane does not operate a Branchlane credential server.</p>
       <p>Branchlane runs in the App Sandbox and keeps its own known hosts file and Git config in its container. It can access your <code>~/.gitconfig</code> and <code>~/.ssh</code> only if you explicitly grant access in the app.</p>
 
-      <h2>10. Data Retention And Deletion</h2>
+      <h2>11. Data Retention And Deletion</h2>
       <p>Local app data remains on your Mac until you remove it, reset app preferences, remove repository entries, or uninstall the app and delete its local container data. Repository data remains wherever you store your repositories and wherever you send it through Git operations.</p>
 
-      <h2>11. Children</h2>
+      <h2>12. Children</h2>
       <p>Branchlane is a developer tool and is not directed to children. Branchlane does not knowingly collect personal information from children through a Branchlane-operated service.</p>
 
-      <h2>12. Changes To This Policy</h2>
+      <h2>13. Changes To This Policy</h2>
       <p>We may update this Privacy Policy as Branchlane changes. The updated version will be posted on this page with a new "Last updated" date.</p>
 
-      <h2>13. Contact</h2>
+      <h2>14. Contact</h2>
       <p>For questions about this Privacy Policy, contact us through <a href="https://github.com/bbdyno/Branchlane-Page/issues">the Branchlane support page</a>.</p>
     </article>
   </main>

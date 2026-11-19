@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Branchlane - Private, Native Git for Mac</title>
-  <meta name="description" content="Branchlane is a private, native Git client for Mac. Everyday Git is free, and Branchlane Pro adds an assistant that reads your repository, themes, interactive rebase and more.">
+  <meta name="description" content="Branchlane is a private, native Git client for Mac. Everyday Git is free, and Branchlane Pro adds agent lanes to review AI agents' work, an assistant that reads your repository, themes, interactive rebase and more.">
   <meta name="theme-color" content="#090c11">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Branchlane - Private, Native Git for Mac">
-  <meta property="og:description" content="Branchlane is a private, native Git client for Mac. Everyday Git is free, and Branchlane Pro adds an assistant that reads your repository, themes, interactive rebase and more.">
+  <meta property="og:description" content="Branchlane is a private, native Git client for Mac. Everyday Git is free, and Branchlane Pro adds agent lanes to review AI agents' work, an assistant that reads your repository, themes, interactive rebase and more.">
   <meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
   <meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/">
   <link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/">
@@ -60,7 +60,7 @@
         <g class="pill" style="--d:1.25s"><rect x="530" y="397" width="148" height="26" rx="7" fill="color-mix(in srgb, #f5a93a 14%, #090c11)" stroke="#f5a93a" stroke-opacity=".5"/><text x="604.0" y="414.5" text-anchor="middle" fill="color-mix(in srgb, #f5a93a 72%, white)">feature/settings</text></g>
         <g class="pill" style="--d:1.35s"><rect x="186" y="449" width="124" height="26" rx="7" fill="color-mix(in srgb, #4c9ff6 14%, #090c11)" stroke="#4c9ff6" stroke-opacity=".5"/><text x="248.0" y="466.5" text-anchor="middle" fill="color-mix(in srgb, #4c9ff6 72%, white)">origin/main</text></g>
       </svg>
-        <p class="hero-tag"><span class="ref solid code" style="--c:var(--teal)">v2.1.0</span> <span>A new look, themes and an assistant</span></p>
+        <p class="hero-tag"><span class="ref solid code" style="--c:var(--teal)">v2.2.0</span> <span>Review what your AI agents did</span></p>
         <h1>Git work stays<br>on your Mac.</h1>
         <p class="lede">A native Git client with a commit graph you can actually read, staging down to the line, and undo for when a move goes wrong.</p>
         <div class="actions">
@@ -95,6 +95,12 @@
             <h3>See the whole repository at once.</h3>
             <p>Lanes keep each branch straight, so history stays readable, and each commit shows its author's picture from GitHub, GitLab or Gravatar. Search it, manage the columns, and hide or solo branches. Drag one ref onto another to merge or rebase.</p>
             <div class="shot"><img src="screenshots/en/graph.webp" width="2400" height="1500" loading="lazy" alt="Commit graph with branches, tags, and local changes"></div>
+          </article>
+          <article class="chapter node" style="--c:var(--green)">
+            <span class="ref pro">Pro</span>
+            <h3>Review your agents' work in one place.</h3>
+            <p>Give Claude Code, Codex and other agents a branch and worktree each. See where their uncommitted work collides, whether the tests ran on the code in front of you, and the riskiest files first. Take the work file by file or hunk by hunk, or send it back with your reasons. Commits made by agents and the lines AI wrote are marked for free.</p>
+            <div class="shot"><img src="screenshots/en/lanes.webp" width="2400" height="1500" loading="lazy" alt="Agent lane under review with evidence, risky files and a hunk left out"></div>
           </article>
           <article class="chapter node" style="--c:var(--violet)">
             <span class="ref pro">Pro</span>
@@ -136,6 +142,7 @@
             <div class="stage" aria-hidden="true">
               <div class="stage-frame">
             <div class="shot on"><img src="screenshots/en/graph.webp" width="2400" height="1500" loading="eager" alt=""></div>
+            <div class="shot"><img src="screenshots/en/lanes.webp" width="2400" height="1500" loading="lazy" alt=""></div>
             <div class="shot"><img src="screenshots/en/assistant.webp" width="2400" height="1500" loading="lazy" alt=""></div>
             <div class="shot"><img src="screenshots/en/themes.webp" width="2400" height="1500" loading="lazy" alt=""></div>
             <div class="shot"><img src="screenshots/en/diff.webp" width="2400" height="1500" loading="lazy" alt=""></div>
@@ -327,6 +334,7 @@
               <div class="dest" style="--c:var(--amber)"><div><b>The AI provider you set up</b><small>Only when you run an AI action or ask the assistant. Local and on-device models stay on your machine.</small></div></div>
               <div class="dest" style="--c:var(--violet)"><div><b>MCP servers you connect</b><small>Only the tool calls the assistant makes, and you approve them.</small></div></div>
               <div class="dest" style="--c:var(--teal)"><div><b>Gravatar</b><small>A hash of a commit author's email, to find a profile picture. You can turn it off.</small></div></div>
+              <div class="dest" style="--c:var(--green)"><div><b>Coding agents on this Mac</b><small>Connect to a server that only programs on this Mac can reach, with a token. Nothing outside your Mac can.</small></div></div>
               <div class="dest none"><div><b>Branchlane server</b><small>Does not exist. No account, cloud sync, or analytics backend either.</small></div></div>
             </div>
           </div>
@@ -336,20 +344,19 @@
       <section class="sec" id="whats-new">
         <div class="wrap log-grid">
           <header class="head node rv" style="--c:var(--violet)">
-            <span class="ref code" style="--c:var(--violet)">tag: v2.1.0</span>
-            <h2>A new look, themes, an assistant, and Git that keeps going.</h2>
-            <p class="lede">Branchlane 2.1 builds on the 2.0 engine with a calmer window, a way to ask about your repository, and Git work that no longer stops halfway.</p>
+            <span class="ref code" style="--c:var(--violet)">tag: v2.2.0</span>
+            <h2>Several AI agents, one place to review them.</h2>
+            <p class="lede">Branchlane 2.2 gives each coding agent a lane of its own and keeps you in charge of what lands, without a server and without leaving Git.</p>
           </header>
           <ul class="log rv">
-            <li style="--c:var(--green)"><span class="ref free">Free</span><h3>A new look</h3><p>A button rail, the branch list beside it, the graph in a card and a floating commit panel. Settings open inside the window.</p></li>
-            <li><span class="ref free">Free</span><h3>Profile pictures</h3><p>Commit authors show their GitHub, GitLab or Gravatar picture, with initials when there is none.</p></li>
-            <li style="--c:var(--teal)"><span class="ref free">Free</span><span class="ref pro">Pro</span><h3>Themes</h3><p>White and Black are free. Preview 16 more on the whole window, then apply them or make your own with Pro.</p></li>
-            <li style="--c:var(--amber)"><span class="ref pro">Pro</span><h3>The assistant and MCP</h3><p>Ask about the repository and let it use the MCP servers you connect. Every change waits for you to run it.</p></li>
-            <li style="--c:var(--blue)"><span class="ref free">Free</span><h3>Sign in when Git asks</h3><p>Enter a username and token for an HTTPS remote, or the passphrase of an SSH key, right where it failed, then retry. Submodules follow checkout, pull, merge and rebase.</p></li>
-            <li style="--c:var(--green)"><span class="ref free">Free</span><h3>Branches, your way</h3><p>Select several branches or stashes at once, hide whole sections, remotes or stashes from the graph, and let Smart Branch Visibility show only what your branch relates to.</p></li>
-            <li style="--c:var(--violet)"><span class="ref free">Free</span><span class="ref pro">Pro</span><h3>More ways to move commits</h3><p>Revert one hunk of a commit, stash only what is staged, and use sparse checkout. With Pro, plan a multi-commit cherry-pick, fork a remote, and add a pull request's fork as a remote.</p></li>
-            <li style="--c:var(--teal)"><span class="ref free">Free</span><span class="ref pro">Pro</span><h3>Repositories and submodules</h3><p>Start a repository from a .gitignore and license template, open a submodule in its parent's tab and close it to go back. With Pro, choose where a Git Flow branch starts and edit its settings.</p></li>
-            <li><span class="ref free">Free</span><h3>Failures you can act on</h3><p>A failure says what happened in a short notice, with the fix one click away. A stale index lock is cleared for you.</p></li>
+            <li style="--c:var(--green)"><span class="ref pro">Pro</span><h3>Agent lanes</h3><p>Give Claude Code, Codex and other agents their own branch and worktree, and review and integrate their work in the app. They connect through a server only programs on this Mac can reach.</p></li>
+            <li style="--c:var(--blue)"><span class="ref pro">Pro</span><h3>Evidence that knows its code</h3><p>Test results count only for the code they ran on. Change a file after the tests and the lane says so, with protected and sensitive files shown first.</p></li>
+            <li style="--c:var(--teal)"><span class="ref pro">Pro</span><h3>Take part of the work</h3><p>Leave out a file or a single hunk, and send the lane back with your reasons. The agent reads them from its own tools.</p></li>
+            <li style="--c:var(--amber)"><span class="ref pro">Pro</span><h3>Integrate and undo safely</h3><p>When the target moved and the work no longer fits, nothing changes. An integrated lane comes back out with one commit.</p></li>
+            <li style="--c:var(--violet)"><span class="ref pro">Pro</span><h3>Collisions before the merge</h3><p>Worktrees are compared with each other, uncommitted changes included, so you see where agents step on each other early.</p></li>
+            <li style="--c:var(--red)"><span class="ref pro">Pro</span><h3>Rules for agents</h3><p>Protected branches and paths, actions that need your approval, and a confirmation before anything risky.</p></li>
+            <li style="--c:var(--green)"><span class="ref free">Free</span><h3>Who wrote which line</h3><p>Commits made by agents are marked in the graph and blame, and Agent Trace records show the lines AI wrote.</p></li>
+            <li><span class="ref free">Free</span><h3>A usage summary that stays put</h3><p>Settings shows a summary of how you use lanes. It stays on your Mac and leaves only when you copy it.</p></li>
           </ul>
         </div>
       </section>
@@ -372,6 +379,7 @@
                 <li>Remote sync, undo and redo, file history, blame</li>
                 <li>White and Black themes, profile pictures</li>
                 <li>Up to 3 repository tabs</li>
+                <li>Agent commits and AI-written lines marked</li>
               </ul>
             </article>
             <article class="plan best">
@@ -381,6 +389,7 @@
               <a class="btn primary" href="https://apps.apple.com/app/id6785129372">Start 14-day free trial</a>
               <ul class="checks">
                 <li class="all">Everything in Free</li>
+                <li>Agent lanes to review and integrate AI agents' work</li>
                 <li>Interactive rebase, three-way conflict editor, conflict warnings</li>
                 <li>The assistant with MCP servers, AI drafts and explanations</li>
                 <li>Compare, worktrees, Git Flow, patches, pull requests</li>
