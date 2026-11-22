@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://bbdyno.github.io/Branchlane-Page/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/"/>
+  </url>
+  <url>
+    <loc>https://bbdyno.github.io/Branchlane-Page/ko/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/"/>
+  </url>
+  <url>
+    <loc>https://bbdyno.github.io/Branchlane-Page/pricing/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/pricing/"/>
+  </url>
+  <url>
+    <loc>https://bbdyno.github.io/Branchlane-Page/ko/pricing/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/pricing/"/>
+  </url>
+  <url>
+    <loc>https://bbdyno.github.io/Branchlane-Page/privacy/</loc>
+  </url>
+  <url>
+    <loc>https://bbdyno.github.io/Branchlane-Page/terms/</loc>
+  </url>
+</urlset>

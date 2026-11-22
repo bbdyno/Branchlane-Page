@@ -10,6 +10,7 @@ Public landing, pricing, privacy, and EULA reference pages for Branchlane 2.2.
 - Privacy Policy: `https://bbdyno.github.io/Branchlane-Page/privacy/`
 - Terms of Use (EULA): `https://www.apple.com/legal/internet-services/itunes/dev/stdeula/`
 - EULA Reference Page: `https://bbdyno.github.io/Branchlane-Page/terms/`
+- Sitemap: `https://bbdyno.github.io/Branchlane-Page/sitemap.xml` (submit it in Google Search Console under the `https://bbdyno.github.io/` property; add new pages here when you add them)
 
 GitHub Pages is served from the `main` branch root.
 
