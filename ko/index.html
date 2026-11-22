@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Branchlane - Mac에서 끝나는 프라이빗 Git 클라이언트</title>
-  <meta name="description" content="Branchlane은 Mac을 위한 프라이빗 네이티브 Git 클라이언트입니다. 일상적인 Git은 무료이고, AI 에이전트의 작업을 검토하는 에이전트 Lane, 저장소를 읽는 비서, 테마, 인터랙티브 리베이스 등은 Branchlane Pro로 제공합니다.">
+  <meta name="description" content="Branchlane은 Mac용 무료 네이티브 Git 클라이언트(깃 GUI)입니다. 읽기 쉬운 커밋 그래프, 줄 단위 스테이징, 실행 취소를 계정과 클라우드 없이 씁니다. Pro는 Claude Code와 Codex의 작업을 검토하는 에이전트 Lane, 인터랙티브 리베이스, 충돌 편집기를 더합니다.">
   <meta name="theme-color" content="#090c11">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Branchlane - Mac에서 끝나는 프라이빗 Git 클라이언트">
-  <meta property="og:description" content="Branchlane은 Mac을 위한 프라이빗 네이티브 Git 클라이언트입니다. 일상적인 Git은 무료이고, AI 에이전트의 작업을 검토하는 에이전트 Lane, 저장소를 읽는 비서, 테마, 인터랙티브 리베이스 등은 Branchlane Pro로 제공합니다.">
+  <meta property="og:description" content="Branchlane은 Mac용 무료 네이티브 Git 클라이언트(깃 GUI)입니다. 읽기 쉬운 커밋 그래프, 줄 단위 스테이징, 실행 취소를 계정과 클라우드 없이 씁니다. Pro는 Claude Code와 Codex의 작업을 검토하는 에이전트 Lane, 인터랙티브 리베이스, 충돌 편집기를 더합니다.">
   <meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
   <meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/ko/">
   <meta name="twitter:card" content="summary_large_image">
@@ -40,6 +40,62 @@
     },
     "sameAs": [
       "https://apps.apple.com/app/id6785129372"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Branchlane은 무료 Git 클라이언트인가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "네. 일상적인 Git은 기간 제한 없이 무료입니다. 커밋 그래프, 파일·헝크·줄 단위 스테이징, 커밋, 브랜치, 병합, 일반 리베이스, 스태시, 태그, fetch·pull·push, 실행 취소, 파일 기록, blame을 저장소 탭 3개까지 쓸 수 있습니다. Pro는 선택 구독입니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "어떤 Mac에서 쓸 수 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Branchlane은 SwiftUI로 만든 macOS 네이티브 앱이고, macOS 14 Sonoma 이상의 Apple 실리콘 Mac과 Intel Mac에서 동작합니다. Mac에 이미 있는 Xcode Command Line Tools의 Git을 씁니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "GitHub, GitLab, Bitbucket과 함께 쓸 수 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SSH나 HTTPS로 연결하는 모든 Git 원격 저장소와 함께 쓸 수 있습니다. GitHub, GitLab, Bitbucket, 직접 운영하는 서버도 됩니다. HTTPS 토큰은 macOS 키체인에 저장합니다. Pro에서 내 토큰을 넣으면 GitHub와 GitLab의 풀 리퀘스트와 이슈도 보고 열 수 있습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "다른 Git GUI와 무엇이 다른가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "계정이나 로그인이 필요 없고 Branchlane 서버도 없어서 저장소와 기록이 Mac 밖으로 나가지 않습니다. 체크아웃, 커밋, 리셋, 버리기, 리베이스까지 되돌리는 실행 취소, CRLF와 UTF-8이 아닌 파일도 그대로 지키는 줄 단위 스테이징, AI 코딩 에이전트의 작업을 검토하는 에이전트 Lane이 있습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Claude Code나 Codex가 바꾼 내용을 검토할 수 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "네, Pro에서 됩니다. 에이전트 Lane은 코딩 에이전트마다 브랜치와 worktree를 따로 줍니다. 바뀐 내용을 검토하고, 파일이나 헝크를 빼고, 이유를 적어 돌려보내고, 받아들인 Lane을 대기열에서 차례로 통합합니다. 에이전트는 이 Mac의 프로그램만 접속할 수 있는 서버로 연결합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Branchlane이 내 코드를 올리나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "아니요. 저장소 데이터는 사용자가 요청할 때만, 고른 곳으로만 나갑니다. 내가 정한 Git 원격, 내 토큰을 넣은 GitHub나 GitLab, 내가 설정한 AI 제공자입니다. AI 기능은 내 로컬 모델, API 키, Apple 온디바이스 모델을 설정하기 전에는 꺼져 있습니다."
+        }
+      }
     ]
   }
   </script>
@@ -88,7 +144,7 @@
       </svg>
         <p class="hero-tag"><span class="ref solid code" style="--c:var(--teal)">v2.2.0</span> <span>AI 에이전트가 한 일을 검토하세요</span></p>
         <h1>Git 작업은<br>내 Mac에서.</h1>
-        <p class="lede">읽기 쉬운 커밋 그래프, 줄 단위 스테이징, 잘못된 작업을 되돌리는 실행 취소까지 갖춘 네이티브 Git 클라이언트입니다.</p>
+        <p class="lede">읽기 쉬운 커밋 그래프, 줄 단위 스테이징, 잘못된 작업을 되돌리는 실행 취소까지 갖춘 무료 macOS 네이티브 Git 클라이언트입니다.</p>
         <div class="actions">
           <a class="btn primary" href="https://apps.apple.com/app/id6785129372">무료 다운로드 <span class="arrow" aria-hidden="true">→</span></a>
           <a class="badge-link" href="https://apps.apple.com/app/id6785129372" aria-label="Mac App Store에서 다운로드"><img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-mac-app-store/black/ko-kr?releaseDate=1782777600" height="48" alt="Mac App Store에서 다운로드"></a>
@@ -424,6 +480,24 @@
             </article>
           </div>
           <p class="fine"><a href="pricing/" style="color:var(--teal);font-weight:600">전체 가격과 자주 묻는 질문 보기 →</a></p>
+        </div>
+      </section>
+
+      <section class="sec" id="faq">
+        <div class="wrap">
+          <header class="head node rv" style="--c:var(--amber)">
+            <span class="ref code" style="--c:var(--amber)">git help</span>
+            <h2>Branchlane에 대해 자주 묻는 질문.</h2>
+            <p class="lede">Mac에서 Git 클라이언트를 바꾸기 전에 많이 묻는 내용입니다.</p>
+          </header>
+          <div class="faq rv">
+            <details open><summary>Branchlane은 무료 Git 클라이언트인가요?</summary><p>네. 일상적인 Git은 기간 제한 없이 무료입니다. 커밋 그래프, 파일·헝크·줄 단위 스테이징, 커밋, 브랜치, 병합, 일반 리베이스, 스태시, 태그, fetch·pull·push, 실행 취소, 파일 기록, blame을 저장소 탭 3개까지 쓸 수 있습니다. Pro는 선택 구독입니다.</p></details>
+            <details><summary>어떤 Mac에서 쓸 수 있나요?</summary><p>Branchlane은 SwiftUI로 만든 macOS 네이티브 앱이고, macOS 14 Sonoma 이상의 Apple 실리콘 Mac과 Intel Mac에서 동작합니다. Mac에 이미 있는 Xcode Command Line Tools의 Git을 씁니다.</p></details>
+            <details><summary>GitHub, GitLab, Bitbucket과 함께 쓸 수 있나요?</summary><p>SSH나 HTTPS로 연결하는 모든 Git 원격 저장소와 함께 쓸 수 있습니다. GitHub, GitLab, Bitbucket, 직접 운영하는 서버도 됩니다. HTTPS 토큰은 macOS 키체인에 저장합니다. Pro에서 내 토큰을 넣으면 GitHub와 GitLab의 풀 리퀘스트와 이슈도 보고 열 수 있습니다.</p></details>
+            <details><summary>다른 Git GUI와 무엇이 다른가요?</summary><p>계정이나 로그인이 필요 없고 Branchlane 서버도 없어서 저장소와 기록이 Mac 밖으로 나가지 않습니다. 체크아웃, 커밋, 리셋, 버리기, 리베이스까지 되돌리는 실행 취소, CRLF와 UTF-8이 아닌 파일도 그대로 지키는 줄 단위 스테이징, AI 코딩 에이전트의 작업을 검토하는 에이전트 Lane이 있습니다.</p></details>
+            <details><summary>Claude Code나 Codex가 바꾼 내용을 검토할 수 있나요?</summary><p>네, Pro에서 됩니다. 에이전트 Lane은 코딩 에이전트마다 브랜치와 worktree를 따로 줍니다. 바뀐 내용을 검토하고, 파일이나 헝크를 빼고, 이유를 적어 돌려보내고, 받아들인 Lane을 대기열에서 차례로 통합합니다. 에이전트는 이 Mac의 프로그램만 접속할 수 있는 서버로 연결합니다.</p></details>
+            <details><summary>Branchlane이 내 코드를 올리나요?</summary><p>아니요. 저장소 데이터는 사용자가 요청할 때만, 고른 곳으로만 나갑니다. 내가 정한 Git 원격, 내 토큰을 넣은 GitHub나 GitLab, 내가 설정한 AI 제공자입니다. AI 기능은 내 로컬 모델, API 키, Apple 온디바이스 모델을 설정하기 전에는 꺼져 있습니다.</p></details>
+          </div>
         </div>
       </section>
     </div>
