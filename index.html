@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Branchlane - Private, Native Git Client for Mac</title>
-  <meta name="description" content="Branchlane is a private, native Git client for Mac. Everyday Git is free, and Branchlane Pro adds agent lanes to review AI agents' work, an assistant that reads your repository, themes, interactive rebase and more.">
+  <meta name="description" content="Branchlane is a free, native Git client for Mac: a readable commit graph, staging by line and undo, with no account or cloud. Pro adds agent lanes to review Claude Code and Codex work, interactive rebase and a conflict editor.">
   <meta name="theme-color" content="#090c11">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Branchlane - Private, Native Git Client for Mac">
-  <meta property="og:description" content="Branchlane is a private, native Git client for Mac. Everyday Git is free, and Branchlane Pro adds agent lanes to review AI agents' work, an assistant that reads your repository, themes, interactive rebase and more.">
+  <meta property="og:description" content="Branchlane is a free, native Git client for Mac: a readable commit graph, staging by line and undo, with no account or cloud. Pro adds agent lanes to review Claude Code and Codex work, interactive rebase and a conflict editor.">
   <meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
   <meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/">
   <meta name="twitter:card" content="summary_large_image">
@@ -40,6 +40,62 @@
     },
     "sameAs": [
       "https://apps.apple.com/app/id6785129372"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Branchlane a free Git client for Mac?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Everyday Git is free with no time limit: the commit graph, staging by file, hunk or line, commits, branches, merges, plain rebase, stashes, tags, fetch, pull and push, undo, file history and blame, with up to 3 repository tabs. Pro is an optional subscription."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Macs does it run on?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Branchlane is a native macOS app built with SwiftUI for macOS 14 Sonoma or later, on Apple silicon and Intel Macs. It uses the Git from Xcode Command Line Tools that is already on your Mac."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it work with GitHub, GitLab and Bitbucket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Branchlane works with any Git remote over SSH or HTTPS, including GitHub, GitLab, Bitbucket and self-hosted servers. HTTPS tokens are kept in the macOS Keychain. With Pro and your own token, you can also browse and open pull requests and issues on GitHub and GitLab."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is it different from other Git GUIs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Branchlane needs no account or sign-in and has no Branchlane server, so your repositories and history stay on your Mac. It adds undo for checkout, commit, reset, discard and rebase, line-level staging that keeps CRLF and non-UTF-8 files intact, and agent lanes for reviewing work from AI coding agents."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I review what Claude Code or Codex changed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, with Pro. Agent lanes give each coding agent its own branch and worktree. You review the changes, leave out files or hunks, send a lane back with your reasons, and integrate accepted lanes in a queue. Agents connect through a server that only programs on your Mac can reach."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Branchlane upload my code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Repository data leaves your Mac only when you ask: to a Git remote you chose, to GitHub or GitLab with your own token, or to the AI provider you set up. AI features are off until you configure your own local model, API key or Apple's on-device model."
+        }
+      }
     ]
   }
   </script>
@@ -88,7 +144,7 @@
       </svg>
         <p class="hero-tag"><span class="ref solid code" style="--c:var(--teal)">v2.2.0</span> <span>Review what your AI agents did</span></p>
         <h1>Git work stays<br>on your Mac.</h1>
-        <p class="lede">A native Git client with a commit graph you can actually read, staging down to the line, and undo for when a move goes wrong.</p>
+        <p class="lede">A free, native Git client for macOS with a commit graph you can actually read, staging down to the line, and undo for when a move goes wrong.</p>
         <div class="actions">
           <a class="btn primary" href="https://apps.apple.com/app/id6785129372">Download free <span class="arrow" aria-hidden="true">→</span></a>
           <a class="badge-link" href="https://apps.apple.com/app/id6785129372" aria-label="Download on the Mac App Store"><img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-mac-app-store/black/en-us?releaseDate=1782777600" height="48" alt="Download on the Mac App Store"></a>
@@ -424,6 +480,24 @@
             </article>
           </div>
           <p class="fine"><a href="pricing/" style="color:var(--teal);font-weight:600">See all pricing and questions →</a></p>
+        </div>
+      </section>
+
+      <section class="sec" id="faq">
+        <div class="wrap">
+          <header class="head node rv" style="--c:var(--amber)">
+            <span class="ref code" style="--c:var(--amber)">git help</span>
+            <h2>Questions about Branchlane.</h2>
+            <p class="lede">What people ask before they switch Git clients on the Mac.</p>
+          </header>
+          <div class="faq rv">
+            <details open><summary>Is Branchlane a free Git client for Mac?</summary><p>Yes. Everyday Git is free with no time limit: the commit graph, staging by file, hunk or line, commits, branches, merges, plain rebase, stashes, tags, fetch, pull and push, undo, file history and blame, with up to 3 repository tabs. Pro is an optional subscription.</p></details>
+            <details><summary>Which Macs does it run on?</summary><p>Branchlane is a native macOS app built with SwiftUI for macOS 14 Sonoma or later, on Apple silicon and Intel Macs. It uses the Git from Xcode Command Line Tools that is already on your Mac.</p></details>
+            <details><summary>Does it work with GitHub, GitLab and Bitbucket?</summary><p>Branchlane works with any Git remote over SSH or HTTPS, including GitHub, GitLab, Bitbucket and self-hosted servers. HTTPS tokens are kept in the macOS Keychain. With Pro and your own token, you can also browse and open pull requests and issues on GitHub and GitLab.</p></details>
+            <details><summary>How is it different from other Git GUIs?</summary><p>Branchlane needs no account or sign-in and has no Branchlane server, so your repositories and history stay on your Mac. It adds undo for checkout, commit, reset, discard and rebase, line-level staging that keeps CRLF and non-UTF-8 files intact, and agent lanes for reviewing work from AI coding agents.</p></details>
+            <details><summary>Can I review what Claude Code or Codex changed?</summary><p>Yes, with Pro. Agent lanes give each coding agent its own branch and worktree. You review the changes, leave out files or hunks, send a lane back with your reasons, and integrate accepted lanes in a queue. Agents connect through a server that only programs on your Mac can reach.</p></details>
+            <details><summary>Does Branchlane upload my code?</summary><p>No. Repository data leaves your Mac only when you ask: to a Git remote you chose, to GitHub or GitLab with your own token, or to the AI provider you set up. AI features are off until you configure your own local model, API key or Apple's on-device model.</p></details>
+          </div>
         </div>
       </section>
     </div>
