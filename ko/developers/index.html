@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>개발자 문서 - Branchlane</title>
+  <meta name="description" content="에이전트와 도구를 Branchlane에 연결하는 방법: 에이전트 Lane용 로컬 MCP 서버와 도구, 체크포인트 훅, .branchlane/policy.json, Agent Trace 노트, AI 제공자 연결.">
+  <meta name="theme-color" content="#090c11">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="개발자 문서 - Branchlane">
+  <meta property="og:description" content="에이전트와 도구를 Branchlane에 연결하는 방법: 에이전트 Lane용 로컬 MCP 서버와 도구, 체크포인트 훅, .branchlane/policy.json, Agent Trace 노트, AI 제공자 연결.">
+  <meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
+  <meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/ko/developers/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/">
+  <link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/developers/">
+  <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/">
+  <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/">
+  <link rel="icon" href="../../assets/app-icon.png">
+  <link rel="stylesheet" href="../../assets/site.css?v=20261123">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="brand" href="../../ko/" aria-label="Branchlane 홈">
+        <img src="../../assets/app-icon.png" width="30" height="30" alt="">
+        <span>Branchlane</span>
+      </a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="../../ko/#features">기능</a><a href="../../ko/#privacy">개인정보</a><a href="../../ko/guide/">가이드</a><a href="../../ko/developers/" aria-current=page>개발자</a><a href="../../ko/pricing/">가격</a>
+        <a href="../../developers/" lang="en">English</a>
+        <a class="btn primary" href="https://apps.apple.com/app/id6785129372">무료 다운로드</a>
+      </nav>
+      <details class="menu">
+        <summary aria-label="메뉴 열기"></summary>
+        <nav class="menu-panel" aria-label="모바일 메뉴">
+          <a href="../../ko/#features">기능</a><a href="../../ko/#privacy">개인정보</a><a href="../../ko/guide/">가이드</a><a href="../../ko/developers/" aria-current=page>개발자</a><a href="../../ko/pricing/">가격</a>
+          <a href="../../terms/">이용 약관</a>
+          <a href="../../developers/" lang="en">English</a>
+          <a href="https://apps.apple.com/app/id6785129372">무료 다운로드</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="document docs">
+      <p class="kicker">개발자</p>
+      <h1>Branchlane 위에 만들기</h1>
+      <p class="subtitle">로컬 MCP 서버로 코딩 에이전트와 내 도구를 연결하고, Branchlane이 저장소에 남기는 것을 읽으세요. 클라우드 API도 계정도 없습니다.</p>
+      <p class="updated">2026년 11월 23일, Branchlane 2.3 기준</p>
+
+      <nav class="toc" aria-label="이 페이지에서">
+        <p>이 페이지에서</p>
+        <ol>
+          <li><a href="#overview">무엇을 만들 수 있나</a></li>
+          <li><a href="#connect">에이전트 연결</a></li>
+          <li><a href="#protocol">프로토콜 세부</a></li>
+          <li><a href="#tools">도구</a></li>
+          <li><a href="#flow">Lane 흐름과 상태</a></li>
+          <li><a href="#hook">체크포인트 훅</a></li>
+          <li><a href="#policy">정책 파일</a></li>
+          <li><a href="#attribution">에이전트 출처 표시</a></li>
+          <li><a href="#summary">워크트리 요약</a></li>
+          <li><a href="#extend">Branchlane 확장</a></li>
+          <li><a href="#support">질문과 요청</a></li>
+        </ol>
+      </nav>
+
+      <h2 id="overview">무엇을 만들 수 있나</h2>
+<p>Branchlane에는 클라우드 API가 없습니다. 도구가 닿을 수 있는 것은 모두 같은 Mac에서 돌거나, 어떤 도구든 읽을 수 있게 저장소 안에 있습니다.</p>
+<ul>
+  <li><strong>에이전트용 로컬 MCP 서버.</strong> 코딩 에이전트와 내 도구가 Lane을 시작하고, 체크포인트를 남기고, 테스트 증거를 기록하고, 검토를 요청합니다. <a href="#connect">연결하기</a></li>
+  <li><strong>평범한 파일과 Git ref.</strong> 정책 파일, Agent Trace 노트, 커밋 트레일러, 모든 워크트리 요약을 Branchlane이 꺼져 있어도 읽을 수 있습니다. <a href="#policy">정책</a>, <a href="#attribution">출처 표시</a></li>
+  <li><strong>내 AI와 MCP 서버.</strong> OpenAI 호환 모델 서버를 연결하고, 비서가 내 MCP 서버를 HTTP로 부르게 합니다. <a href="#extend">Branchlane 확장</a></li>
+</ul>
+<p class="note">Lane 서버는 Branchlane Pro가 필요하고, 설정 &gt; 에이전트에서 <strong>에이전트 연결 허용</strong>을 켰을 때만 돕니다. URL 스킴, App Intents, AppleScript 사전은 없습니다.</p>
+
+      <h2 id="connect">에이전트 연결</h2>
+<p>설정 &gt; 에이전트에서 <strong>에이전트 연결 허용</strong>을 켜고 내 에이전트 줄을 복사합니다. 포트와 토큰이 이미 들어 있습니다. Branchlane은 이 파일들을 대신 쓰지 않습니다.</p>
+<h3>Claude Code</h3>
+<p>터미널에서 한 번 실행합니다.</p>
+<pre><code>claude mcp add --transport http branchlane http://127.0.0.1:47120/mcp --header &quot;Authorization: Bearer &lt;token&gt;&quot;</code></pre>
+<h3>Codex</h3>
+<p><code>~/.codex/config.toml</code>에 더합니다.</p>
+<pre><code>[mcp_servers.branchlane]
+url = &quot;http://127.0.0.1:47120/mcp&quot;
+http_headers = { Authorization = &quot;Bearer &lt;token&gt;&quot; }</code></pre>
+<h3>다른 MCP 클라이언트</h3>
+<p>Streamable HTTP 전송으로 <code>http://127.0.0.1:47120/mcp</code>에 <code>Authorization: Bearer &lt;token&gt;</code> 헤더를 붙여 연결합니다. 포트는 설정에서 바꿀 수 있습니다. 직접 해 보려면:</p>
+<pre><code>curl -s http://127.0.0.1:47120/mcp \
+  -H &quot;Authorization: Bearer $BRANCHLANE_TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;initialize&quot;,&quot;params&quot;:{&quot;protocolVersion&quot;:&quot;2025-06-18&quot;,&quot;capabilities&quot;:{},&quot;clientInfo&quot;:{&quot;name&quot;:&quot;my-tool&quot;,&quot;version&quot;:&quot;1.0&quot;}}}&#x27;
+
+curl -s http://127.0.0.1:47120/mcp \
+  -H &quot;Authorization: Bearer $BRANCHLANE_TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:2,&quot;method&quot;:&quot;tools/call&quot;,&quot;params&quot;:{&quot;name&quot;:&quot;lane_begin&quot;,&quot;arguments&quot;:{&quot;path&quot;:&quot;/Users/me/src/app&quot;,&quot;intent&quot;:&quot;Retry sync with backoff when the server is busy&quot;,&quot;agent&quot;:&quot;my-tool/model-x&quot;,&quot;scope&quot;:[&quot;Sources/Sync/&quot;]}}}&#x27;</code></pre>
+<p>모든 도구는 결과를 텍스트 항목 안의 JSON 문자열로 돌려줍니다.</p>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 2,
+  &quot;result&quot;: {
+    &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;{\n  \&quot;branch\&quot; : \&quot;lane/retry-sync-with-backoff-a7f4\&quot;,\n  \&quot;lane_id\&quot; : \&quot;a7f460dc\&quot;, ... }&quot; }],
+    &quot;isError&quot;: false
+  }
+}</code></pre>
+
+      <h2 id="protocol">프로토콜 세부</h2>
+<ul>
+  <li><strong>주소:</strong> IPv4 루프백 <code>127.0.0.1</code>에만 열립니다. 다른 인터페이스나 <code>::1</code>에서는 듣지 않습니다. 기본 포트 47120.</li>
+  <li><strong>전송:</strong> HTTP/1.1, 연결마다 요청 하나. <code>POST /mcp</code>만 받고 다른 메서드는 405입니다. SSE 스트림이 없어 모든 답은 POST 응답으로 옵니다. 알림은 빈 본문의 202를 받습니다.</li>
+  <li><strong>본문:</strong> <code>Content-Length</code>를 보내세요. chunked 본문은 411입니다. 본문 4 MiB, 헤더 64 KiB까지.</li>
+  <li><strong>인증:</strong> <code>Authorization: Bearer &lt;token&gt;</code>. 토큰은 키체인에 있는 64자 16진수이고, 설정의 새 토큰으로 바꿉니다. 없거나 틀리면 401.</li>
+  <li><strong>Origin:</strong> <code>Origin</code> 헤더가 <code>localhost</code>, <code>127.0.0.1</code>, <code>::1</code>이 아니면 403이라 웹 페이지는 서버를 부를 수 없습니다.</li>
+  <li><strong>MCP:</strong> 프로토콜 <code>2025-06-18</code>, <code>2025-03-26</code>, <code>2024-11-05</code>. 메서드 <code>initialize</code>, <code>ping</code>, <code>tools/list</code>, <code>tools/call</code>와 JSON-RPC 배치. 도구만 있고 resources와 prompts는 없습니다.</li>
+  <li><strong>저장소:</strong> 샌드박스 앱은 사람이 Branchlane에서 연 저장소만 열 수 있습니다. 아니면 도구가 그렇다고 오류로 알려 줍니다.</li>
+</ul>
+
+      <h2 id="tools">도구</h2>
+<p>모든 도구는 작업 폴더인 <code>path</code>를 받습니다. 저장소나 Lane 워크트리입니다. <code>path</code>가 Lane 워크트리 안이면 <code>lane_id</code>는 생략할 수 있습니다. 읽기 전용은 <code>lane_status</code>뿐입니다.</p>
+<div class="table-wrap"><table class="compare doc-table api"><thead><tr><th scope="col">도구</th><th scope="col">인자 (굵은 글씨는 필수)</th><th scope="col">하는 일</th></tr></thead><tbody><tr><th scope="row"><code>lane_begin</code></th><td><b>path</b>, <b>intent</b>, agent, scope[], target, clone[]</td><td>Lane을 시작합니다. 브랜치 <code>lane/&lt;slug&gt;-&lt;id&gt;</code>와 <code>.branchlane/lanes/&lt;id&gt;</code> 아래 워크트리를 만들고 <code>lane_id</code>, <code>worktree</code>, <code>branch</code>, <code>target</code>을 돌려줍니다. 그 뒤로는 그 워크트리에서만 작업합니다. <code>clone</code>은 <code>node_modules</code>, <code>.build</code> 같은 무시된 폴더를 복사합니다.</td></tr><tr><th scope="row"><code>lane_status</code></th><td><b>path</b>, lane_id</td><td>읽기 전용. 상태, 기록한 증거가 지금 코드와 맞는지, 검토 의견, 사람이 뺀 파일과 헝크, 다른 워크트리나 대상 브랜치와 겹치는 곳(줄 범위와 먼저 통합할 쪽 포함)을 돌려줍니다.</td></tr><tr><th scope="row"><code>lane_checkpoint</code></th><td><b>path</b>, lane_id, note</td><td>스테이징이나 커밋 없이 미커밋 변경까지 포함해 워크트리를 스냅샷으로 남깁니다.</td></tr><tr><th scope="row"><code>lane_evidence</code></th><td><b>path</b>, lane_id, <b>command</b>, <b>exit_code</b>, output</td><td>명령이 지금 내용에서 실행됐고 어떻게 끝났는지 기록합니다. 내용이 그대로일 때만 유효하니 마지막 수정 뒤에 부르세요. <code>output</code>은 끝부분만 비밀을 가려 남깁니다. <code>evidence_id</code>를 돌려줍니다.</td></tr><tr><th scope="row"><code>lane_propose</code></th><td><b>path</b>, lane_id, <b>summary</b>, claims[{text, evidence[]}]</td><td>지금 상태 그대로 검토를 요청합니다. 유효한 증거가 없는 주장은 표시됩니다.</td></tr><tr><th scope="row"><code>lane_request</code></th><td><b>path</b>, lane_id, <b>action</b>: push | force_push | rewrite_history, reason</td><td>푸시, 강제 푸시, 기록 다시 쓰기를 요청합니다. 정책이 정하고, 일부는 사람의 승인을 최대 2분 기다립니다. 승인된 푸시는 사람의 인증 정보로 실행됩니다.</td></tr></tbody></table></div>
+<p>주장마다 증거를 단 제안 예:</p>
+<pre><code>{&quot;name&quot;: &quot;lane_propose&quot;, &quot;arguments&quot;: {
+  &quot;path&quot;: &quot;/Users/me/src/app/.branchlane/lanes/a7f460dc&quot;,
+  &quot;summary&quot;: &quot;Pushes are retried with exponential backoff and jitter. Six attempts at most.&quot;,
+  &quot;claims&quot;: [
+    { &quot;text&quot;: &quot;A busy server is tried again, up to six times&quot;, &quot;evidence&quot;: [1] },
+    { &quot;text&quot;: &quot;The library file format is unchanged&quot; }
+  ]
+}}</code></pre>
+
+      <h2 id="flow">Lane 흐름과 상태</h2>
+<ol>
+  <li><code>lane_begin</code> 뒤에는 돌려받은 워크트리 안에서만 작업합니다. 커밋은 마음대로 해도 됩니다. 미커밋 작업도 스냅샷으로 남습니다.</li>
+  <li>시작 전과 제안 전에 <code>lane_status</code>로 다른 에이전트가 건드리는 파일을 봅니다.</li>
+  <li><code>lane_checkpoint</code>는 언제든 부릅니다. 체크포인트 훅도 턴이 끝날 때마다 하나씩 남깁니다.</li>
+  <li>마지막 수정 뒤에 테스트, 빌드, 린트마다 <code>lane_evidence</code>를 부르고 받은 id를 챙깁니다.</li>
+  <li>요약과 그 id를 단 주장으로 <code>lane_propose</code>를 부릅니다.</li>
+  <li>나중에 <code>lane_status</code>로 검토 의견, 빠진 파일과 헝크, 메모를 읽습니다.</li>
+</ol>
+<div class="table-wrap"><table class="compare doc-table"><thead><tr><th scope="col">값</th><th scope="col">앱 표시</th><th scope="col">언제</th></tr></thead><tbody><tr><th scope="row"><code>running</code></th><td>작업 중</td><td>lane_begin 직후, 또는 사람이 돌려보냄</td></tr><tr><th scope="row"><code>proposed</code></th><td>검토 대기</td><td>lane_propose</td></tr><tr><th scope="row"><code>accepted</code></th><td>대기열</td><td>사람이 승인함, requireEvidence를 통과해야 함</td></tr><tr><th scope="row"><code>needsUpdate</code></th><td>업데이트 필요</td><td>대상이 앞서가 작업이 맞지 않음. 대상 위로 맞춘 뒤 다시 제안</td></tr><tr><th scope="row"><code>integrated</code></th><td>통합됨</td><td>커밋 하나로 대상에 들어감</td></tr><tr><th scope="row"><code>reverted</code></th><td>되돌림</td><td>커밋 하나로 되돌림</td></tr><tr><th scope="row"><code>abandoned</code></th><td>버림</td><td>통합하지 않고 정리함</td></tr></tbody></table></div>
+
+      <h2 id="hook">체크포인트 훅</h2>
+<p><code>POST /hook/checkpoint</code>는 Claude Code가 보내는 훅 JSON에서 <code>cwd</code>를 읽습니다. 그 폴더가 Lane 워크트리 안이면 체크포인트를 남기고 <code>{"checkpoint":true}</code>를, 아니면 아무것도 하지 않고 <code>false</code>를 돌려줍니다. <code>.claude/settings.local.json</code>에 합칩니다.</p>
+<pre><code>{
+  &quot;hooks&quot;: {
+    &quot;Stop&quot;: [{ &quot;hooks&quot;: [{
+      &quot;type&quot;: &quot;command&quot;,
+      &quot;command&quot;: &quot;curl -s -m 5 -X POST -H &#x27;Authorization: Bearer &lt;token&gt;&#x27; -H &#x27;Content-Type: application/json&#x27; --data-binary @- http://127.0.0.1:47120/hook/checkpoint &gt;/dev/null 2&gt;&amp;1 || true&quot;
+    }] }]
+  }
+}</code></pre>
+<p>Branchlane이 꺼져 있으면 조용히 실패해서 에이전트를 막지 않습니다.</p>
+
+      <h2 id="policy">정책 파일</h2>
+<p>메인 워크트리의 <code>.branchlane/policy.json</code>은 Branchlane과 연결된 에이전트에게 무엇이 허용되는지 알려 줍니다. 커밋해서 팀이 함께 쓰세요. 설정 &gt; 에이전트에서 아래 기본값으로 만들 수 있습니다.</p>
+<pre><code>{
+  &quot;forbid&quot;: [&quot;force_push&quot;, &quot;rewrite_history&quot;],
+  &quot;protectedBranches&quot;: [&quot;main&quot;, &quot;master&quot;],
+  &quot;protectedPaths&quot;: [],
+  &quot;requireApproval&quot;: [&quot;push&quot;],
+  &quot;requireEvidence&quot;: [],
+  &quot;sensitivePaths&quot;: []
+}</code></pre>
+<ul>
+  <li><strong>동작</strong>은 <code>push</code>, <code>force_push</code>, <code>rewrite_history</code>, <code>integrate</code>입니다.</li>
+  <li><strong>판단 순서:</strong> 금지한 동작은 거절합니다. 보호 브랜치에서는 강제 푸시와 기록 다시 쓰기를 거절하고 나머지는 사람에게 묻습니다. 그 밖에는 <code>requireApproval</code>에 있는 동작만 사람에게 묻고 나머지는 허용합니다.</li>
+  <li><strong>requireEvidence</strong>는 <code>swift test</code> 같은 명령 앞부분 목록입니다. 제안한 내용 그대로에서 통과한 증거가 있어야 Lane을 승인할 수 있습니다.</li>
+  <li><strong>protectedPaths</strong>는 검토에서 파일마다 명시적으로 승인해야 합니다. <strong>sensitivePaths</strong>는 마이그레이션, 인증 코드, CI 워크플로, 잠금 파일, <code>.env</code> 같은 기본 목록에 더해 먼저 보여 줍니다.</li>
+  <li>패턴은 <code>.gitignore</code> 규칙을 따르고 키는 camelCase입니다. 읽을 수 없는 파일은 기본값으로 돌아가고 오류는 설정에 나옵니다.</li>
+</ul>
+<p>설정 &gt; 에이전트는 정책을 Claude Code <code>permissions.deny</code> 규칙으로도 바꿔 줍니다. Claude Code가 스스로 금지된 일을 거절하게 됩니다.</p>
+
+      <h2 id="attribution">에이전트 출처 표시</h2>
+<p>Branchlane은 무료판을 포함해 모두에게 그래프와 blame에서 에이전트 작업을 표시합니다. 내 도구는 세 가지 방법으로 알려 줄 수 있습니다.</p>
+<h3>커밋 트레일러</h3>
+<p><code>Agent:</code> 트레일러가 가장 우선합니다. 없으면 <code>Co-authored-by:</code>, 그다음 작성자와 커미터에서 <code>noreply@anthropic.com</code>, Codex, Copilot, Cursor, Gemini, Devin, Jules, aider 같은 알려진 에이전트 신원을 찾습니다. Branchlane이 만드는 통합 커밋에는 이렇게 붙습니다.</p>
+<pre><code>Lane: a7f460dc
+Change-Id: I3c1f…
+Agent: claude-code/claude-opus-5-5</code></pre>
+<h3>Agent Trace 노트</h3>
+<p>줄 단위 기록은 <code>refs/notes/agent-trace</code>의 git 노트로, 커밋마다 하나씩 Agent Trace 형식(버전 0.1.0, <code>application/vnd.agent-trace.record+json</code>)으로 남습니다. 노트 하나에 기록 하나, 배열, 또는 줄마다 하나를 넣을 수 있습니다. 같은 커밋에 다른 도구가 남긴 기록은 지우지 않습니다. blame에서 AI가 쓴 줄이 표시됩니다.</p>
+<pre><code>{
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;id&quot;: &quot;…&quot;,
+  &quot;timestamp&quot;: &quot;2026-11-23T02:09:00.000Z&quot;,
+  &quot;vcs&quot;: { &quot;type&quot;: &quot;git&quot;, &quot;revision&quot;: &quot;&lt;commit&gt;&quot; },
+  &quot;tool&quot;: { &quot;name&quot;: &quot;claude-code&quot; },
+  &quot;files&quot;: [{
+    &quot;path&quot;: &quot;Sources/Sync/RetryingSyncEngine.swift&quot;,
+    &quot;conversations&quot;: [{
+      &quot;contributor&quot;: { &quot;type&quot;: &quot;ai&quot;, &quot;model_id&quot;: &quot;claude-opus-5-5&quot; },
+      &quot;ranges&quot;: [{ &quot;start_line&quot;: 12, &quot;end_line&quot;: 48 }]
+    }]
+  }],
+  &quot;metadata&quot;: { &quot;com.bbdyno.branchlane&quot;: { &quot;written_by&quot;: &quot;Branchlane&quot;, &quot;lane&quot;: &quot;a7f460dc&quot; } }
+}</code></pre>
+<p>Lane을 공유하면 노트도 <code>refs/notes/agent-trace:refs/notes/agent-trace</code>로 함께 오갑니다.</p>
+<h3>Lane 기록</h3>
+<p>Lane은 <code>refs/branchlane/lanes/&lt;id&gt;/</code> 아래 Git ref(<code>state</code>, <code>checkpoints</code>, <code>proposal</code>)로 저장되고, <code>state</code> 커밋에 <code>lane.json</code>이 있습니다. 팀원의 Lane은 <code>refs/branchlane/shared/&lt;remote&gt;/&lt;id&gt;/</code>로 받아 옵니다. 읽기 전용으로 다루세요.</p>
+
+      <h2 id="summary">워크트리 요약</h2>
+<p>저장소에 워크트리가 둘 이상이고 Pro를 쓰면, Branchlane은 <code>&lt;git common dir&gt;/branchlane/worktrees.json</code>을 적어도 1분마다 새로 씁니다. MCP를 못 쓰는 에이전트는 워크트리마다 <code>git status</code>를 도는 대신 이 파일을 읽으면 됩니다. 워크트리가 하나만 남으면 지워집니다.</p>
+<pre><code>{
+  &quot;version&quot;: 1,
+  &quot;about&quot;: &quot;…&quot;,
+  &quot;generatedAt&quot;: &quot;2026-11-23T02:09:00Z&quot;,
+  &quot;target&quot;: &quot;refs/heads/main&quot;,
+  &quot;worktrees&quot;: [
+    { &quot;path&quot;: &quot;…&quot;, &quot;branch&quot;: &quot;lane/retry-sync-a7f4&quot;, &quot;head&quot;: &quot;…&quot;,
+      &quot;access&quot;: &quot;readable&quot;, &quot;uncommittedFiles&quot;: [&quot;Sources/Sync/SyncEngine.swift&quot;], &quot;lastChange&quot;: &quot;…&quot; }
+  ],
+  &quot;collisions&quot;: [
+    { &quot;between&quot;: [&quot;…&quot;, &quot;…&quot;], &quot;conflicts&quot;: false, &quot;sameFiles&quot;: [&quot;Sources/Sync/SyncEngine.swift&quot;],
+      &quot;conflictLines&quot;: { &quot;Sources/Sync/SyncEngine.swift&quot;: [[&quot;40-60&quot;, &quot;41&quot;]] } }
+  ]
+}</code></pre>
+
+      <h2 id="extend">Branchlane 확장</h2>
+<h3>내 모델 서버</h3>
+<p>설정 &gt; 비서는 OpenAI 호환 서버라면 무엇이든 받습니다. <code>stream: true</code>로 <code>POST {base}/chat/completions</code>를 부르고 SSE나 일반 JSON 응답을 읽으며, 연결 확인에는 <code>GET {base}/models</code>를 씁니다. 경로가 없으면 <code>/v1</code>을 붙이므로 Ollama(<code>http://localhost:11434</code>)와 LM Studio(<code>http://localhost:1234</code>)는 그대로 됩니다. 키는 다른 컴퓨터로 가는 일반 HTTP에는 절대 실리지 않습니다.</p>
+<p>저장소 데이터는 무작위 <code>BEGIN data-…</code>, <code>END data-…</code> 표시 사이에 넣고, 그 안은 지시가 아니라 데이터라고 모델에 알립니다.</p>
+<h3>비서용 내 MCP 서버</h3>
+<p>사람이 설정 &gt; 비서에 더한 MCP 서버의 도구를 비서가 부를 수 있습니다. Streamable HTTP(프로토콜 <code>2025-06-18</code>)를 HTTPS로, 또는 localhost에서는 HTTP로 열어 주세요. Branchlane은 <code>MCP-Protocol-Version</code>을 보내고 <code>Mcp-Session-Id</code>를 유지하며 Bearer 토큰을 붙일 수 있습니다. stdio 서버는 App Sandbox에서 띄울 수 없습니다.</p>
+
+      <h2 id="support">질문과 요청</h2>
+<p><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원 페이지</a>에 남겨 주세요. 여기 없는 연동이 필요하면 기능 요청도 환영합니다.</p>
+
+    </article>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <div>
+        <a class="brand" href="../../ko/">
+          <img src="../../assets/app-icon.png" width="30" height="30" alt="">
+          <span>Branchlane</span>
+        </a>
+        <p>Apple, Apple 로고, App Store, Mac, Mac App Store는 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p>
+      </div>
+      <nav aria-label="하단 메뉴">
+        <a href="../../ko/guide/">가이드</a>
+        <a href="../../ko/developers/">개발자</a>
+        <a href="../../ko/pricing/">가격</a>
+        <a href="../../privacy/">개인정보 처리방침</a>
+        <a href="../../terms/">이용 약관</a>
+        <a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a>
+        <a href="https://apps.apple.com/app/id6785129372">App Store</a>
+        <a href="../../developers/" lang="en">English</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../assets/site.js" defer></script>
+</body>
+</html>

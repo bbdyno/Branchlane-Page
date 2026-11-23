@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>가이드와 도움말 - Branchlane</title>
+  <meta name="description" content="Mac용 무료 Git 클라이언트 Branchlane 사용법: 저장소 열기, 줄 단위 스테이징, 병합, 실행 취소, Pro 도구, 에이전트 Lane, 단축키, 문제 해결.">
+  <meta name="theme-color" content="#090c11">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="가이드와 도움말 - Branchlane">
+  <meta property="og:description" content="Mac용 무료 Git 클라이언트 Branchlane 사용법: 저장소 열기, 줄 단위 스테이징, 병합, 실행 취소, Pro 도구, 에이전트 Lane, 단축키, 문제 해결.">
+  <meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
+  <meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/ko/guide/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/">
+  <link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/guide/">
+  <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/">
+  <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/">
+  <link rel="icon" href="../../assets/app-icon.png">
+  <link rel="stylesheet" href="../../assets/site.css?v=20261123">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="brand" href="../../ko/" aria-label="Branchlane 홈">
+        <img src="../../assets/app-icon.png" width="30" height="30" alt="">
+        <span>Branchlane</span>
+      </a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="../../ko/#features">기능</a><a href="../../ko/#privacy">개인정보</a><a href="../../ko/guide/" aria-current=page>가이드</a><a href="../../ko/developers/">개발자</a><a href="../../ko/pricing/">가격</a>
+        <a href="../../guide/" lang="en">English</a>
+        <a class="btn primary" href="https://apps.apple.com/app/id6785129372">무료 다운로드</a>
+      </nav>
+      <details class="menu">
+        <summary aria-label="메뉴 열기"></summary>
+        <nav class="menu-panel" aria-label="모바일 메뉴">
+          <a href="../../ko/#features">기능</a><a href="../../ko/#privacy">개인정보</a><a href="../../ko/guide/" aria-current=page>가이드</a><a href="../../ko/developers/">개발자</a><a href="../../ko/pricing/">가격</a>
+          <a href="../../terms/">이용 약관</a>
+          <a href="../../guide/" lang="en">English</a>
+          <a href="https://apps.apple.com/app/id6785129372">무료 다운로드</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="document docs">
+      <p class="kicker">가이드</p>
+      <h1>Branchlane 가이드</h1>
+      <p class="subtitle">Branchlane을 설정하고, 매일 쓰는 Git을 하고, App Sandbox 때문에 막히는 몇 가지를 푸는 방법입니다.</p>
+      <p class="updated">2026년 11월 23일, Branchlane 2.3 기준</p>
+
+      <nav class="toc" aria-label="이 페이지에서">
+        <p>이 페이지에서</p>
+        <ol>
+          <li><a href="#start">시작하기</a></li>
+          <li><a href="#everyday">매일 쓰는 Git</a></li>
+          <li><a href="#pro">Pro 도구</a></li>
+          <li><a href="#lanes">에이전트 Lane</a></li>
+          <li><a href="#shortcuts">단축키</a></li>
+          <li><a href="#trouble">문제 해결</a></li>
+          <li><a href="#help">도움 받기</a></li>
+        </ol>
+      </nav>
+
+      <h2 id="start">시작하기</h2>
+<p>Branchlane은 Mac에 이미 있는 <code>git</code>을 씁니다. 처음 열 때 macOS가 명령어 라인 개발자 도구를 설치할지 물으면 설치하세요. 따로 만들 계정은 없습니다.</p>
+<ol>
+  <li><strong>저장소 열기.</strong> 저장소 추가(<kbd>⌘O</kbd>)로 폴더를 고르거나, 저장소 복제(<kbd>⇧⌘O</kbd>)에 주소를 붙여 넣습니다.</li>
+  <li><strong>Git 신원 허락.</strong> App Sandbox 때문에 Branchlane은 허락 없이 홈 폴더를 읽지 못합니다. 설정 &gt; Git 및 SSH에서 <code>.gitconfig</code>를 한 번 고르면 커밋에 내 이름과 이메일이 들어갑니다.</li>
+  <li><strong>키 파일을 쓴다면 SSH 폴더 허락.</strong> <code>ssh-agent</code>에 올린 키는 그대로 동작합니다. 키 파일과 <code>~/.ssh/config</code>까지 쓰려면 같은 곳에서 <code>.ssh</code> 폴더를 고릅니다.</li>
+  <li><strong>HTTPS 원격은 물어볼 때 로그인.</strong> 원격이 처음 인증을 요구할 때 사용자 이름과 토큰을 묻고, 기억하기를 고른 경우에만 키체인에 저장합니다.</li>
+</ol>
+
+      <h2 id="everyday">매일 쓰는 Git</h2>
+<h3>스테이징과 커밋</h3>
+<p>오른쪽 패널에 스테이징 안 된 파일과 스테이징된 파일이 나옵니다. 파일째 올리거나, 파일을 열어 헝크나 줄 단위로 올립니다. 줄은 바이트 그대로 인덱스에 쓰여서 CRLF 줄 끝이나 다른 인코딩 파일도 그대로 남습니다. 요약을 쓰고 커밋, 또는 커밋 후 푸시를 누릅니다.</p>
+<h3>브랜치</h3>
+<p>새 브랜치는 <kbd>⌘B</kbd>, 브랜치 전환은 <kbd>⇧⌘B</kbd>입니다. 그래프에서 브랜치를 다른 브랜치 위로 끌어 놓으면 병합하거나 리베이스하고, 오른쪽 클릭하면 모든 동작이 나옵니다. 가져오기 <kbd>⇧⌘F</kbd>, 풀 <kbd>⇧⌘L</kbd>, 푸시 <kbd>⇧⌘K</kbd>.</p>
+<h3>병합 커밋 메시지</h3>
+<p>병합 커밋은 <code>Merge branch 'develop' into feature</code>처럼 브랜치 이름으로 남습니다. 설정 &gt; Git 및 SSH &gt; 병합에서 전체 ref(<code>refs/heads/develop</code>)나 커밋 해시로 바꿀 수 있습니다.</p>
+<h3>실행 취소</h3>
+<p><kbd>⌘Z</kbd>로 체크아웃, 커밋, 리셋, 버리기, 브랜치 삭제, 스태시 삭제, 리베이스를 되돌리고 <kbd>⇧⌘Z</kbd>로 다시 합니다. 기록이 Git 안에 남아서 앱을 껐다 켜도 됩니다.</p>
+<h3>스태시, 태그, 기록</h3>
+<p>스태시는 <kbd>⌥⌘S</kbd>, 최근 스태시 꺼내기는 <kbd>⇧⌥⌘S</kbd>입니다. 파일을 고르고 <kbd>⇧⌘H</kbd>를 누르면 그 파일의 기록이 나오고, 차이 화면에서 blame을 열 수 있습니다.</p>
+
+      <h2 id="pro">Pro 도구</h2>
+<p>아래 기능은 Branchlane Pro가 필요합니다. 처음 구독하는 대상자는 14일 동안 무료로 써 볼 수 있습니다.</p>
+<ul>
+  <li><strong>인터랙티브 리베이스:</strong> 커밋을 오른쪽 클릭해 인터랙티브 리베이스를 고릅니다. 순서 바꾸기, 메시지 고치기, 스쿼시, 빼기를 정하고 시작합니다. 실행 취소 한 번이면 리베이스 전체가 돌아갑니다.</li>
+  <li><strong>충돌 편집기:</strong> 병합, 리베이스, 체리픽이 멈추면 충돌 파일을 열어 변경마다 내 쪽, 상대 쪽, 둘 다를 고릅니다. 충돌 경고는 병합 전에 부딪히는 곳을 알려 줍니다.</li>
+  <li><strong>워크트리, 비교, Git Flow, 패치</strong>는 왼쪽 패널과 오른쪽 클릭 메뉴에 있습니다.</li>
+  <li><strong>PR과 이슈:</strong> 설정 &gt; 통합에 GitHub나 GitLab 토큰을 넣습니다. 토큰은 키체인에 남고 호스트와 직접 통신합니다.</li>
+  <li><strong>AI와 비서:</strong> 설정 &gt; 비서에서 로컬 모델, 내 API 키, Apple 온디바이스 모델 중에서 고릅니다. 요청하기 전에는 아무것도 보내지 않습니다. 비서는 <kbd>⇧⌘I</kbd>로 부르고, 비서가 제안한 변경은 내가 실행할 때까지 카드로 기다립니다.</li>
+</ul>
+
+      <h2 id="lanes">에이전트 Lane</h2>
+<p>에이전트 Lane은 Claude Code, Codex 같은 코딩 에이전트에게 브랜치와 폴더를 따로 주고, 그 작업을 한 곳에서 검토하고 통합하게 합니다.</p>
+<ol>
+  <li>설정 &gt; 에이전트에서 에이전트를 연결합니다. 에이전트마다 넣을 설정을 그대로 보여 주고, 서버는 이 Mac 안에서만 열립니다.</li>
+  <li>왼쪽 패널의 Lane 구역에서 Lane을 만들거나, 에이전트가 자기 도구로 시작하게 둡니다.</li>
+  <li>에이전트가 검토를 요청하면 Lane을 엽니다. 테스트 증거는 실행한 그 코드에만 유효하고, 위험한 파일이 먼저 나옵니다.</li>
+  <li>전부 받거나, 파일이나 헝크를 빼거나, 이유를 적어 돌려보냅니다. 통합한 Lane은 커밋 하나로 되돌릴 수 있습니다.</li>
+</ol>
+<p>내 도구를 연결하려면 <a href="../developers/">개발자 문서</a>를 보세요.</p>
+
+      <h2 id="shortcuts">단축키</h2>
+<div class="table-wrap"><table class="compare doc-table">
+<thead><tr><th scope="col">동작</th><th scope="col">키</th></tr></thead>
+<tbody>
+<tr><th scope="row">명령 팔레트</th><td><kbd>⇧⌘P</kbd></td></tr>
+<tr><th scope="row">빠른 열기: 저장소, 브랜치, 커밋, 파일</th><td><kbd>⌘P</kbd></td></tr>
+<tr><th scope="row">저장소 추가 / 복제</th><td><kbd>⌘O</kbd> / <kbd>⇧⌘O</kbd></td></tr>
+<tr><th scope="row">가져오기 / 풀 / 푸시</th><td><kbd>⇧⌘F</kbd> / <kbd>⇧⌘L</kbd> / <kbd>⇧⌘K</kbd></td></tr>
+<tr><th scope="row">새 브랜치 / 브랜치 전환</th><td><kbd>⌘B</kbd> / <kbd>⇧⌘B</kbd></td></tr>
+<tr><th scope="row">실행 취소 / 다시 실행</th><td><kbd>⌘Z</kbd> / <kbd>⇧⌘Z</kbd></td></tr>
+<tr><th scope="row">스태시 / 최근 스태시 꺼내기</th><td><kbd>⌥⌘S</kbd> / <kbd>⇧⌥⌘S</kbd></td></tr>
+<tr><th scope="row">왼쪽 패널 / 오른쪽 패널</th><td><kbd>⌘J</kbd> / <kbd>⌘K</kbd></td></tr>
+<tr><th scope="row">비서에게 묻기</th><td><kbd>⇧⌘I</kbd></td></tr>
+<tr><th scope="row">Git 콘솔</th><td><kbd>⇧⌘C</kbd></td></tr>
+<tr><th scope="row">새로고침</th><td><kbd>⌘R</kbd></td></tr>
+<tr><th scope="row">모든 단축키</th><td><kbd>⌘/</kbd></td></tr>
+</tbody></table></div>
+
+      <h2 id="trouble">문제 해결</h2>
+<h3>훅이나 스크립트가 "operation not permitted"로 멈춤</h3>
+<p>macOS는 App Store 앱이 쓴 파일을 격리하고, 격리된 프로그램은 실행되지 않습니다. Branchlane에서 복제, 풀, 체크아웃으로 받은 훅과 스크립트는 터미널에서 아래 명령을 한 번 실행해야 합니다. Branchlane이 나중에 다시 쓴 파일도 마찬가지입니다.</p>
+<pre><code>xattr -dr com.apple.quarantine /path/to/repo</code></pre>
+<p>이 문제로 Git 작업이 막히면 Branchlane이 내 경로를 넣은 명령을 보여 줍니다. 원래 디스크에 있던 훅은 그대로 실행됩니다.</p>
+<h3>커밋에 작성자가 없음</h3>
+<p>설정 &gt; Git 및 SSH에서 <code>.gitconfig</code>를 고르거나, 저장소에 이름과 이메일을 정합니다.</p>
+<h3>SSH가 호스트 키를 물어봄</h3>
+<p>호스트에 처음 연결할 때 지문이 나옵니다. 호스트가 공개한 지문과 같은지 확인하고 신뢰하세요. 신뢰한 호스트는 설정 &gt; Git 및 SSH에 나옵니다.</p>
+<h3>저장소 밖 워크트리에 변경이 안 보임</h3>
+<p>샌드박스가 그 폴더에 접근하려면 허락이 필요합니다. 워크트리 줄에서 접근 허용을 한 번 고르면 다음에도 기억합니다.</p>
+<h3>앱 안에 터미널이 없음</h3>
+<p>Git 콘솔(<kbd>⇧⌘C</kbd>)은 Git 명령만 실행합니다. 그 밖의 일은 터미널에서 열기로 터미널에 넘깁니다.</p>
+
+      <h2 id="help">도움 받기</h2>
+<p>질문이나 문제는 <a href="https://github.com/bbdyno/Branchlane-Page/issues">지원 페이지</a>에 남겨 주세요. macOS 버전, Branchlane 메뉴에 나오는 Branchlane 버전, 기대한 동작을 적어 주시면 빠르게 볼 수 있습니다. 저장소 내용과 토큰은 넣지 마세요.</p>
+
+    </article>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <div>
+        <a class="brand" href="../../ko/">
+          <img src="../../assets/app-icon.png" width="30" height="30" alt="">
+          <span>Branchlane</span>
+        </a>
+        <p>Apple, Apple 로고, App Store, Mac, Mac App Store는 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p>
+      </div>
+      <nav aria-label="하단 메뉴">
+        <a href="../../ko/guide/">가이드</a>
+        <a href="../../ko/developers/">개발자</a>
+        <a href="../../ko/pricing/">가격</a>
+        <a href="../../privacy/">개인정보 처리방침</a>
+        <a href="../../terms/">이용 약관</a>
+        <a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a>
+        <a href="https://apps.apple.com/app/id6785129372">App Store</a>
+        <a href="../../guide/" lang="en">English</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../assets/site.js" defer></script>
+</body>
+</html>
