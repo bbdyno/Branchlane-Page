@@ -142,7 +142,7 @@
         <g class="pill" style="--d:1.25s"><rect x="530" y="397" width="148" height="26" rx="7" fill="color-mix(in srgb, #f5a93a 14%, #090c11)" stroke="#f5a93a" stroke-opacity=".5"/><text x="604.0" y="414.5" text-anchor="middle" fill="color-mix(in srgb, #f5a93a 72%, white)">feature/settings</text></g>
         <g class="pill" style="--d:1.35s"><rect x="186" y="449" width="124" height="26" rx="7" fill="color-mix(in srgb, #4c9ff6 14%, #090c11)" stroke="#4c9ff6" stroke-opacity=".5"/><text x="248.0" y="466.5" text-anchor="middle" fill="color-mix(in srgb, #4c9ff6 72%, white)">origin/main</text></g>
       </svg>
-        <p class="hero-tag"><span class="ref solid code" style="--c:var(--teal)">v2.2.0</span> <span>Review what your AI agents did</span></p>
+        <p class="hero-tag"><span class="ref solid code" style="--c:var(--teal)">v2.3.0</span> <span>Review what your AI agents did</span></p>
         <h1>Git work stays<br>on your Mac.</h1>
         <p class="lede">A free, native Git client for macOS with a commit graph you can actually read, staging down to the line, and undo for when a move goes wrong.</p>
         <div class="actions">
@@ -426,19 +426,19 @@
       <section class="sec" id="whats-new">
         <div class="wrap log-grid">
           <header class="head node rv" style="--c:var(--violet)">
-            <span class="ref code" style="--c:var(--violet)">tag: v2.2.0</span>
-            <h2>Several AI agents, one place to review them.</h2>
-            <p class="lede">Branchlane 2.2 gives each coding agent a lane of its own and keeps you in charge of what lands, without a server and without leaving Git.</p>
+            <span class="ref code" style="--c:var(--violet)">tag: v2.3.0</span>
+            <h2>Agents that step on each other, settled in the lane.</h2>
+            <p class="lede">Branchlane 2.3 shows exactly which lines two lanes both change, says which should land first, and lets you settle the rest in the lane's own folder. Merge commits read the way Git writes them.</p>
           </header>
           <ul class="log rv">
+            <li style="--c:var(--violet)"><span class="ref pro">Pro</span><h3>Collisions down to the line</h3><p>When two lanes or worktrees change the same file, the lane shows the line ranges on each side and which one to integrate first. Agents read the same ranges from their own tools.</p></li>
+            <li style="--c:var(--amber)"><span class="ref pro">Pro</span><h3>Take in the target and settle</h3><p>When the target moved on, merge it into the lane in its own folder. Conflicts open in the lane's tab with the conflict editor, and the target branch does not move. Then propose the lane again.</p></li>
+            <li style="--c:var(--green)"><span class="ref free">Free</span><h3>Merge commits named after the branch</h3><p>Merges are written as <code>Merge branch 'develop' into feature</code> instead of a commit hash. Settings can show the full ref or the hash instead.</p></li>
+            <li style="--c:var(--blue)"><span class="ref free">Free</span><h3>A guide and developer docs</h3><p>A <a href="guide/" style="color:var(--teal)">guide</a> for everyday use and troubleshooting, and <a href="developers/" style="color:var(--teal)">developer docs</a> for connecting agents and tools to the local MCP server.</p></li>
             <li style="--c:var(--green)"><span class="ref pro">Pro</span><h3>Agent lanes</h3><p>Give Claude Code, Codex and other agents their own branch and worktree, and review and integrate their work in the app. They connect through a server only programs on this Mac can reach.</p></li>
             <li style="--c:var(--blue)"><span class="ref pro">Pro</span><h3>Evidence that knows its code</h3><p>Test results count only for the code they ran on. Change a file after the tests and the lane says so, with protected and sensitive files shown first.</p></li>
             <li style="--c:var(--teal)"><span class="ref pro">Pro</span><h3>Take part of the work</h3><p>Leave out a file or a single hunk, and send the lane back with your reasons. The agent reads them from its own tools.</p></li>
-            <li style="--c:var(--amber)"><span class="ref pro">Pro</span><h3>Integrate and undo safely</h3><p>When the target moved and the work no longer fits, nothing changes. An integrated lane comes back out with one commit.</p></li>
-            <li style="--c:var(--violet)"><span class="ref pro">Pro</span><h3>Collisions before the merge</h3><p>Worktrees are compared with each other, uncommitted changes included, so you see where agents step on each other early.</p></li>
-            <li style="--c:var(--red)"><span class="ref pro">Pro</span><h3>Rules for agents</h3><p>Protected branches and paths, actions that need your approval, and a confirmation before anything risky.</p></li>
             <li style="--c:var(--green)"><span class="ref free">Free</span><h3>Who wrote which line</h3><p>Commits made by agents are marked in the graph and blame, and Agent Trace records show the lines AI wrote.</p></li>
-            <li><span class="ref free">Free</span><h3>A usage summary that stays put</h3><p>Settings shows a summary of how you use lanes. It stays on your Mac and leaves only when you copy it.</p></li>
           </ul>
         </div>
       </section>
