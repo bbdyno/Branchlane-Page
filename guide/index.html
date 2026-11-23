@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guide and Help - Branchlane</title>
+  <meta name="description" content="How to use Branchlane, the free Git client for Mac: open a repository, stage lines, merge, undo, Pro tools, agent lanes, keyboard shortcuts and troubleshooting.">
+  <meta name="theme-color" content="#090c11">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Guide and Help - Branchlane">
+  <meta property="og:description" content="How to use Branchlane, the free Git client for Mac: open a repository, stage lines, merge, undo, Pro tools, agent lanes, keyboard shortcuts and troubleshooting.">
+  <meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
+  <meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/guide/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/guide/">
+  <link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/guide/">
+  <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/">
+  <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/">
+  <link rel="icon" href="../assets/app-icon.png">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="brand" href="../" aria-label="Branchlane home">
+        <img src="../assets/app-icon.png" width="30" height="30" alt="">
+        <span>Branchlane</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="../#features">Features</a><a href="../#privacy">Privacy</a><a href="../guide/" aria-current=page>Guide</a><a href="../developers/">Developers</a><a href="../pricing/">Pricing</a>
+        <a href="../ko/guide/" lang="ko">한국어</a>
+        <a class="btn primary" href="https://apps.apple.com/app/id6785129372">Download free</a>
+      </nav>
+      <details class="menu">
+        <summary aria-label="Open navigation"></summary>
+        <nav class="menu-panel" aria-label="Mobile navigation">
+          <a href="../#features">Features</a><a href="../#privacy">Privacy</a><a href="../guide/" aria-current=page>Guide</a><a href="../developers/">Developers</a><a href="../pricing/">Pricing</a>
+          <a href="../terms/">Terms</a>
+          <a href="../ko/guide/" lang="ko">한국어</a>
+          <a href="https://apps.apple.com/app/id6785129372">Download free</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="document docs">
+      <p class="kicker">Guide</p>
+      <h1>Branchlane guide</h1>
+      <p class="subtitle">Set up Branchlane, do everyday Git, and fix the few things the App Sandbox gets in the way of.</p>
+      <p class="updated">Updated November 23, 2026 for Branchlane 2.3</p>
+
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol>
+          <li><a href="#start">Get started</a></li>
+          <li><a href="#everyday">Everyday Git</a></li>
+          <li><a href="#pro">Pro tools</a></li>
+          <li><a href="#lanes">Agent lanes</a></li>
+          <li><a href="#shortcuts">Keyboard shortcuts</a></li>
+          <li><a href="#trouble">Troubleshooting</a></li>
+          <li><a href="#help">Get help</a></li>
+        </ol>
+      </nav>
+
+      <h2 id="start">Get started</h2>
+<p>Branchlane uses the <code>git</code> that is already on your Mac. If macOS asks to install the command line developer tools the first time, accept it. Branchlane has no account to create.</p>
+<ol>
+  <li><strong>Open a repository.</strong> Choose Add Repository (<kbd>⌘O</kbd>) and pick a folder, or Clone Repository (<kbd>⇧⌘O</kbd>) and paste a URL.</li>
+  <li><strong>Allow your Git identity.</strong> The App Sandbox keeps Branchlane out of your home folder until you say so. In Settings &gt; Git &amp; SSH, choose your <code>.gitconfig</code> once so commits use your name and email.</li>
+  <li><strong>Allow SSH keys if you use key files.</strong> Keys loaded in <code>ssh-agent</code> already work. To use key files and <code>~/.ssh/config</code>, choose your <code>.ssh</code> folder in the same place.</li>
+  <li><strong>Sign in to HTTPS remotes when asked.</strong> Branchlane asks for a username and token the first time a remote needs one, and keeps it in your Keychain only if you choose to remember it.</li>
+</ol>
+
+      <h2 id="everyday">Everyday Git</h2>
+<h3>Stage and commit</h3>
+<p>The right panel lists unstaged and staged files. Stage a whole file, or open it and stage single hunks or lines. Lines are written to the index byte for byte, so files with CRLF line endings or other encodings stay as they were. Write a summary and press Commit, or Commit and Push.</p>
+<h3>Branches</h3>
+<p>New Branch is <kbd>⌘B</kbd> and Switch Branch is <kbd>⇧⌘B</kbd>. In the graph, drag one branch onto another to merge or rebase it, or right-click a branch for every action. Fetch is <kbd>⇧⌘F</kbd>, Pull <kbd>⇧⌘L</kbd> and Push <kbd>⇧⌘K</kbd>.</p>
+<h3>Merge commit messages</h3>
+<p>A merge commit is named after the branch, as in <code>Merge branch 'develop' into feature</code>. Settings &gt; Git &amp; SSH &gt; Merge can show the full ref (<code>refs/heads/develop</code>) or the commit hash instead.</p>
+<h3>Undo</h3>
+<p><kbd>⌘Z</kbd> takes back checkout, commit, reset, discard, branch delete, stash drop and rebase, and <kbd>⇧⌘Z</kbd> redoes. Undo is kept in Git itself, so it still works after you quit.</p>
+<h3>Stashes, tags and history</h3>
+<p>Stash Changes is <kbd>⌥⌘S</kbd> and Pop Latest Stash <kbd>⇧⌥⌘S</kbd>. Select a file and press <kbd>⇧⌘H</kbd> for its history, or open blame from a diff.</p>
+
+      <h2 id="pro">Pro tools</h2>
+<p>These need Branchlane Pro. Every new eligible subscriber can try them free for 14 days.</p>
+<ul>
+  <li><strong>Interactive rebase:</strong> right-click a commit and choose Interactive Rebase. Reorder, reword, squash and drop, then start. Undo takes the whole rebase back.</li>
+  <li><strong>Conflict editor:</strong> when a merge, rebase or cherry-pick stops, open a conflicted file and choose ours, theirs or both, change by change. Conflict warnings show collisions before you merge.</li>
+  <li><strong>Worktrees, compare, Git Flow and patches</strong> are in the left panel and the right-click menus.</li>
+  <li><strong>Pull requests and issues:</strong> add a GitHub or GitLab token in Settings &gt; Integrations. It stays in your Keychain and talks to the host directly.</li>
+  <li><strong>AI and the assistant:</strong> choose a provider in Settings &gt; Assistant: a local model, your own API key, or Apple's on-device model. Nothing is sent until you ask. Ask the assistant with <kbd>⇧⌘I</kbd>. Changes it suggests wait on a card until you run them.</li>
+</ul>
+
+      <h2 id="lanes">Agent lanes</h2>
+<p>Agent lanes give Claude Code, Codex or another coding agent a branch and folder of their own, then let you review and integrate the work in one place.</p>
+<ol>
+  <li>Open Settings &gt; Agents and connect your agent. Branchlane shows the exact setting for each agent and only listens on this Mac.</li>
+  <li>Start a lane from the Lanes section of the left panel, or let the agent start one with its own tools.</li>
+  <li>When the agent asks for review, open the lane. Test evidence counts only for the code it ran on, and risky files come first.</li>
+  <li>Take the whole lane, leave out files or single hunks, or send it back with your reasons. Integrated lanes come back out with one commit.</li>
+</ol>
+<p>To connect your own tool, see the <a href="../developers/">developer docs</a>.</p>
+
+      <h2 id="shortcuts">Keyboard shortcuts</h2>
+<div class="table-wrap"><table class="compare doc-table">
+<thead><tr><th scope="col">Action</th><th scope="col">Keys</th></tr></thead>
+<tbody>
+<tr><th scope="row">Command palette</th><td><kbd>⇧⌘P</kbd></td></tr>
+<tr><th scope="row">Quick open: repositories, branches, commits, files</th><td><kbd>⌘P</kbd></td></tr>
+<tr><th scope="row">Add repository / Clone</th><td><kbd>⌘O</kbd> / <kbd>⇧⌘O</kbd></td></tr>
+<tr><th scope="row">Fetch / Pull / Push</th><td><kbd>⇧⌘F</kbd> / <kbd>⇧⌘L</kbd> / <kbd>⇧⌘K</kbd></td></tr>
+<tr><th scope="row">New branch / Switch branch</th><td><kbd>⌘B</kbd> / <kbd>⇧⌘B</kbd></td></tr>
+<tr><th scope="row">Undo / Redo</th><td><kbd>⌘Z</kbd> / <kbd>⇧⌘Z</kbd></td></tr>
+<tr><th scope="row">Stash / Pop latest stash</th><td><kbd>⌥⌘S</kbd> / <kbd>⇧⌥⌘S</kbd></td></tr>
+<tr><th scope="row">Left panel / Right panel</th><td><kbd>⌘J</kbd> / <kbd>⌘K</kbd></td></tr>
+<tr><th scope="row">Ask the assistant</th><td><kbd>⇧⌘I</kbd></td></tr>
+<tr><th scope="row">Git console</th><td><kbd>⇧⌘C</kbd></td></tr>
+<tr><th scope="row">Refresh</th><td><kbd>⌘R</kbd></td></tr>
+<tr><th scope="row">All shortcuts</th><td><kbd>⌘/</kbd></td></tr>
+</tbody></table></div>
+
+      <h2 id="trouble">Troubleshooting</h2>
+<h3>A hook or script says "operation not permitted"</h3>
+<p>macOS quarantines files written by App Store apps, and quarantined programs cannot run. Hooks and scripts that arrive through a clone, pull or checkout in Branchlane need this once in Terminal, and again after Branchlane writes them later:</p>
+<pre><code>xattr -dr com.apple.quarantine /path/to/repo</code></pre>
+<p>Branchlane shows the command with your path when this blocks a Git operation. Hooks that were already on disk run normally.</p>
+<h3>Commits have no author</h3>
+<p>Choose your <code>.gitconfig</code> in Settings &gt; Git &amp; SSH, or set a name and email for the repository.</p>
+<h3>SSH asks about a host key</h3>
+<p>The first connection to a host shows its fingerprint. Check it against your host's published fingerprint and trust it. Trusted hosts are listed in Settings &gt; Git &amp; SSH.</p>
+<h3>A worktree outside the repository shows no changes</h3>
+<p>The sandbox needs access to that folder. Choose Allow Access on the worktree row once, and Branchlane remembers it.</p>
+<h3>There is no terminal inside the app</h3>
+<p>The Git console (<kbd>⇧⌘C</kbd>) runs Git commands. For anything else, Open in Terminal hands the repository to Terminal.</p>
+
+      <h2 id="help">Get help</h2>
+<p>Ask a question or report a problem on the <a href="https://github.com/bbdyno/Branchlane-Page/issues">support page</a>. Include your macOS version, your Branchlane version from the Branchlane menu, and what you expected to happen. Leave out repository contents and tokens.</p>
+
+    </article>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <div>
+        <a class="brand" href="../">
+          <img src="../assets/app-icon.png" width="30" height="30" alt="">
+          <span>Branchlane</span>
+        </a>
+        <p>Apple, the Apple logo, App Store, Mac, and Mac App Store are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="../guide/">Guide</a>
+        <a href="../developers/">Developers</a>
+        <a href="../pricing/">Pricing</a>
+        <a href="../privacy/">Privacy Policy</a>
+        <a href="../terms/">Terms of Use</a>
+        <a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a>
+        <a href="https://apps.apple.com/app/id6785129372">App Store</a>
+        <a href="../ko/guide/" lang="ko">한국어</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,11 +1,13 @@
 # Branchlane Page
 
-Public landing, pricing, privacy, and EULA reference pages for Branchlane 2.2.
+Public landing, guide, developer docs, pricing, privacy, and EULA reference pages for Branchlane.
 
 - Landing Page: `https://bbdyno.github.io/Branchlane-Page/`
 - Korean Landing Page: `https://bbdyno.github.io/Branchlane-Page/ko/`
 - Pricing: `https://bbdyno.github.io/Branchlane-Page/pricing/`
 - Korean Pricing: `https://bbdyno.github.io/Branchlane-Page/ko/pricing/`
+- Guide and help: `https://bbdyno.github.io/Branchlane-Page/guide/` (Korean: `/ko/guide/`)
+- Developer docs: `https://bbdyno.github.io/Branchlane-Page/developers/` (Korean: `/ko/developers/`)
 - App Store: `https://apps.apple.com/app/id6785129372`
 - Privacy Policy: `https://bbdyno.github.io/Branchlane-Page/privacy/`
 - Terms of Use (EULA): `https://www.apple.com/legal/internet-services/itunes/dev/stdeula/`

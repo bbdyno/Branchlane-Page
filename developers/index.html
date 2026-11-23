@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Developer Docs - Branchlane</title>
+  <meta name="description" content="Connect agents and tools to Branchlane: the local MCP server for agent lanes, its tools, the checkpoint hook, .branchlane/policy.json, Agent Trace notes and AI provider endpoints.">
+  <meta name="theme-color" content="#090c11">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Developer Docs - Branchlane">
+  <meta property="og:description" content="Connect agents and tools to Branchlane: the local MCP server for agent lanes, its tools, the checkpoint hook, .branchlane/policy.json, Agent Trace notes and AI provider endpoints.">
+  <meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
+  <meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/developers/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/developers/">
+  <link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/developers/">
+  <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/">
+  <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/">
+  <link rel="icon" href="../assets/app-icon.png">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="brand" href="../" aria-label="Branchlane home">
+        <img src="../assets/app-icon.png" width="30" height="30" alt="">
+        <span>Branchlane</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="../#features">Features</a><a href="../#privacy">Privacy</a><a href="../guide/">Guide</a><a href="../developers/" aria-current=page>Developers</a><a href="../pricing/">Pricing</a>
+        <a href="../ko/developers/" lang="ko">한국어</a>
+        <a class="btn primary" href="https://apps.apple.com/app/id6785129372">Download free</a>
+      </nav>
+      <details class="menu">
+        <summary aria-label="Open navigation"></summary>
+        <nav class="menu-panel" aria-label="Mobile navigation">
+          <a href="../#features">Features</a><a href="../#privacy">Privacy</a><a href="../guide/">Guide</a><a href="../developers/" aria-current=page>Developers</a><a href="../pricing/">Pricing</a>
+          <a href="../terms/">Terms</a>
+          <a href="../ko/developers/" lang="ko">한국어</a>
+          <a href="https://apps.apple.com/app/id6785129372">Download free</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="document docs">
+      <p class="kicker">Developers</p>
+      <h1>Build on Branchlane</h1>
+      <p class="subtitle">Connect coding agents and your own tools through a local MCP server, and read what Branchlane keeps in the repository. No cloud API, no account.</p>
+      <p class="updated">Updated November 23, 2026 for Branchlane 2.3</p>
+
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol>
+          <li><a href="#overview">What you can build</a></li>
+          <li><a href="#connect">Connect an agent</a></li>
+          <li><a href="#protocol">Protocol details</a></li>
+          <li><a href="#tools">Tools</a></li>
+          <li><a href="#flow">Lane flow and states</a></li>
+          <li><a href="#hook">Checkpoint hook</a></li>
+          <li><a href="#policy">Policy file</a></li>
+          <li><a href="#attribution">Agent attribution</a></li>
+          <li><a href="#summary">Worktree summary</a></li>
+          <li><a href="#extend">Extend Branchlane</a></li>
+          <li><a href="#support">Questions and requests</a></li>
+        </ol>
+      </nav>
+
+      <h2 id="overview">What you can build</h2>
+<p>Branchlane has no cloud API. Everything a tool can reach runs on the same Mac, or lives in the repository where any tool can read it:</p>
+<ul>
+  <li><strong>A local MCP server for agents.</strong> Coding agents and your own tools start lanes, save checkpoints, record test evidence and ask for review. <a href="#connect">Connect</a></li>
+  <li><strong>Plain files and Git refs.</strong> A policy file, Agent Trace notes, commit trailers and a summary of every worktree, all readable without Branchlane running. <a href="#policy">Policy</a>, <a href="#attribution">attribution</a></li>
+  <li><strong>Your own AI and MCP servers.</strong> Point Branchlane at any OpenAI-compatible model server, and let its assistant call your MCP server over HTTP. <a href="#extend">Extend Branchlane</a></li>
+</ul>
+<p class="note">The lane server needs Branchlane Pro and runs only while <strong>Let agents connect</strong> is on in Settings &gt; Agents. Branchlane has no URL scheme, App Intents or AppleScript dictionary.</p>
+
+      <h2 id="connect">Connect an agent</h2>
+<p>Open Settings &gt; Agents, turn on <strong>Let agents connect</strong>, and copy the line for your agent. It already holds your port and token. Branchlane never writes these files for you.</p>
+<h3>Claude Code</h3>
+<p>Run once in Terminal:</p>
+<pre><code>claude mcp add --transport http branchlane http://127.0.0.1:47120/mcp --header &quot;Authorization: Bearer &lt;token&gt;&quot;</code></pre>
+<h3>Codex</h3>
+<p>Add to <code>~/.codex/config.toml</code>:</p>
+<pre><code>[mcp_servers.branchlane]
+url = &quot;http://127.0.0.1:47120/mcp&quot;
+http_headers = { Authorization = &quot;Bearer &lt;token&gt;&quot; }</code></pre>
+<h3>Any other MCP client</h3>
+<p>Use the Streamable HTTP transport with the endpoint <code>http://127.0.0.1:47120/mcp</code> and the header <code>Authorization: Bearer &lt;token&gt;</code>. The port can be changed in Settings. To try it by hand:</p>
+<pre><code>curl -s http://127.0.0.1:47120/mcp \
+  -H &quot;Authorization: Bearer $BRANCHLANE_TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;initialize&quot;,&quot;params&quot;:{&quot;protocolVersion&quot;:&quot;2025-06-18&quot;,&quot;capabilities&quot;:{},&quot;clientInfo&quot;:{&quot;name&quot;:&quot;my-tool&quot;,&quot;version&quot;:&quot;1.0&quot;}}}&#x27;
+
+curl -s http://127.0.0.1:47120/mcp \
+  -H &quot;Authorization: Bearer $BRANCHLANE_TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:2,&quot;method&quot;:&quot;tools/call&quot;,&quot;params&quot;:{&quot;name&quot;:&quot;lane_begin&quot;,&quot;arguments&quot;:{&quot;path&quot;:&quot;/Users/me/src/app&quot;,&quot;intent&quot;:&quot;Retry sync with backoff when the server is busy&quot;,&quot;agent&quot;:&quot;my-tool/model-x&quot;,&quot;scope&quot;:[&quot;Sources/Sync/&quot;]}}}&#x27;</code></pre>
+<p>Every tool returns its result as a JSON string inside a text item:</p>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 2,
+  &quot;result&quot;: {
+    &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;{\n  \&quot;branch\&quot; : \&quot;lane/retry-sync-with-backoff-a7f4\&quot;,\n  \&quot;lane_id\&quot; : \&quot;a7f460dc\&quot;, ... }&quot; }],
+    &quot;isError&quot;: false
+  }
+}</code></pre>
+
+      <h2 id="protocol">Protocol details</h2>
+<ul>
+  <li><strong>Address:</strong> IPv4 loopback only, <code>127.0.0.1</code>. Nothing listens on other interfaces or on <code>::1</code>. Default port 47120.</li>
+  <li><strong>Transport:</strong> HTTP/1.1, one request per connection. Only <code>POST /mcp</code> is served; other methods get 405. There is no SSE stream, so every answer comes back on the POST. Notifications get 202 with an empty body.</li>
+  <li><strong>Body:</strong> send <code>Content-Length</code>. Chunked bodies get 411. Bodies up to 4 MiB, headers up to 64 KiB.</li>
+  <li><strong>Auth:</strong> <code>Authorization: Bearer &lt;token&gt;</code>, a 64-character hex token kept in the Keychain. New Token in Settings replaces it. Missing or wrong tokens get 401.</li>
+  <li><strong>Origin:</strong> a request with an <code>Origin</code> header that is not <code>localhost</code>, <code>127.0.0.1</code> or <code>::1</code> gets 403, so web pages cannot call the server.</li>
+  <li><strong>MCP:</strong> protocol versions <code>2025-06-18</code>, <code>2025-03-26</code> and <code>2024-11-05</code>. Methods <code>initialize</code>, <code>ping</code>, <code>tools/list</code> and <code>tools/call</code>, and JSON-RPC batches. Tools only: no resources or prompts.</li>
+  <li><strong>Repositories:</strong> the sandboxed app can only open repositories the person has opened in Branchlane. Otherwise the tool answers with an error that says so.</li>
+</ul>
+
+      <h2 id="tools">Tools</h2>
+<p>Every tool takes <code>path</code>, your working directory: the repository, or the lane's worktree. <code>lane_id</code> can be left out when <code>path</code> is inside the lane's worktree. Only <code>lane_status</code> is read-only.</p>
+<div class="table-wrap"><table class="compare doc-table api"><thead><tr><th scope="col">Tool</th><th scope="col">Arguments (bold is required)</th><th scope="col">What it does</th></tr></thead><tbody><tr><th scope="row"><code>lane_begin</code></th><td><b>path</b>, <b>intent</b>, agent, scope[], target, clone[]</td><td>Starts a lane: a branch <code>lane/&lt;slug&gt;-&lt;id&gt;</code> and a worktree under <code>.branchlane/lanes/&lt;id&gt;</code>. Returns <code>lane_id</code>, <code>worktree</code>, <code>branch</code>, <code>target</code>. Work only in that worktree afterwards. <code>clone</code> copies ignored folders such as <code>node_modules</code> or <code>.build</code>.</td></tr><tr><th scope="row"><code>lane_status</code></th><td><b>path</b>, lane_id</td><td>Read-only. Status, whether recorded evidence still matches the code, review feedback, files and hunks the person left out, and collisions with other worktrees or the target, with line ranges and which side should go first.</td></tr><tr><th scope="row"><code>lane_checkpoint</code></th><td><b>path</b>, lane_id, note</td><td>Snapshots the worktree, uncommitted changes included, without staging or committing.</td></tr><tr><th scope="row"><code>lane_evidence</code></th><td><b>path</b>, lane_id, <b>command</b>, <b>exit_code</b>, output</td><td>Records that a command ran on the current content and how it ended. Valid only while the content stays exactly the same, so call it after your last edit. Only the end of <code>output</code> is kept, with secrets masked. Returns <code>evidence_id</code>.</td></tr><tr><th scope="row"><code>lane_propose</code></th><td><b>path</b>, lane_id, <b>summary</b>, claims[{text, evidence[]}]</td><td>Asks the person to review the lane as it is now. Claims without current evidence are flagged.</td></tr><tr><th scope="row"><code>lane_request</code></th><td><b>path</b>, lane_id, <b>action</b>: push | force_push | rewrite_history, reason</td><td>Asks to push, force-push or rewrite history. The policy decides, and some requests wait up to two minutes for the person. An approved push runs with the person's credentials.</td></tr></tbody></table></div>
+<p>A proposal with claims tied to evidence:</p>
+<pre><code>{&quot;name&quot;: &quot;lane_propose&quot;, &quot;arguments&quot;: {
+  &quot;path&quot;: &quot;/Users/me/src/app/.branchlane/lanes/a7f460dc&quot;,
+  &quot;summary&quot;: &quot;Pushes are retried with exponential backoff and jitter. Six attempts at most.&quot;,
+  &quot;claims&quot;: [
+    { &quot;text&quot;: &quot;A busy server is tried again, up to six times&quot;, &quot;evidence&quot;: [1] },
+    { &quot;text&quot;: &quot;The library file format is unchanged&quot; }
+  ]
+}}</code></pre>
+
+      <h2 id="flow">Lane flow and states</h2>
+<ol>
+  <li><code>lane_begin</code>, then work only inside the returned worktree. Commit there as you like: Branchlane snapshots uncommitted work too.</li>
+  <li><code>lane_status</code> before you start and before you propose. It tells you which files other agents are touching.</li>
+  <li><code>lane_checkpoint</code> whenever you like. The checkpoint hook also saves one at the end of every turn.</li>
+  <li><code>lane_evidence</code> after your last edit, for each test, build or lint run. Keep the returned ids.</li>
+  <li><code>lane_propose</code> with a summary and claims that cite those ids.</li>
+  <li><code>lane_status</code> later, for review feedback, left-out files and hunks, and notes.</li>
+</ol>
+<div class="table-wrap"><table class="compare doc-table"><thead><tr><th scope="col">Value</th><th scope="col">In the app</th><th scope="col">When</th></tr></thead><tbody><tr><th scope="row"><code>running</code></th><td>Working</td><td>lane_begin, or returned by the person</td></tr><tr><th scope="row"><code>proposed</code></th><td>Ready for Review</td><td>lane_propose</td></tr><tr><th scope="row"><code>accepted</code></th><td>In Queue</td><td>The person accepted it; requireEvidence must pass</td></tr><tr><th scope="row"><code>needsUpdate</code></th><td>Needs Update</td><td>The target moved and the work no longer applies. Rebase onto the target and propose again.</td></tr><tr><th scope="row"><code>integrated</code></th><td>Integrated</td><td>Landed on the target in one commit</td></tr><tr><th scope="row"><code>reverted</code></th><td>Reverted</td><td>Taken back out with one commit</td></tr><tr><th scope="row"><code>abandoned</code></th><td>Abandoned</td><td>Cleaned up without integrating</td></tr></tbody></table></div>
+
+      <h2 id="hook">Checkpoint hook</h2>
+<p><code>POST /hook/checkpoint</code> takes the hook JSON that Claude Code sends and reads its <code>cwd</code>. If that folder is inside a lane worktree, Branchlane saves a checkpoint and answers <code>{"checkpoint":true}</code>; anywhere else it answers <code>false</code> and does nothing. Merge this into <code>.claude/settings.local.json</code>:</p>
+<pre><code>{
+  &quot;hooks&quot;: {
+    &quot;Stop&quot;: [{ &quot;hooks&quot;: [{
+      &quot;type&quot;: &quot;command&quot;,
+      &quot;command&quot;: &quot;curl -s -m 5 -X POST -H &#x27;Authorization: Bearer &lt;token&gt;&#x27; -H &#x27;Content-Type: application/json&#x27; --data-binary @- http://127.0.0.1:47120/hook/checkpoint &gt;/dev/null 2&gt;&amp;1 || true&quot;
+    }] }]
+  }
+}</code></pre>
+<p>The command fails quietly when Branchlane is not running, so the agent is never blocked.</p>
+
+      <h2 id="policy">Policy file</h2>
+<p><code>.branchlane/policy.json</code> in the main worktree tells Branchlane, and the agents it serves, what is allowed. Commit it so the whole team shares it. Settings &gt; Agents can create it with these defaults:</p>
+<pre><code>{
+  &quot;forbid&quot;: [&quot;force_push&quot;, &quot;rewrite_history&quot;],
+  &quot;protectedBranches&quot;: [&quot;main&quot;, &quot;master&quot;],
+  &quot;protectedPaths&quot;: [],
+  &quot;requireApproval&quot;: [&quot;push&quot;],
+  &quot;requireEvidence&quot;: [],
+  &quot;sensitivePaths&quot;: []
+}</code></pre>
+<ul>
+  <li><strong>Actions</strong> are <code>push</code>, <code>force_push</code>, <code>rewrite_history</code> and <code>integrate</code>.</li>
+  <li><strong>Decision order:</strong> a forbidden action is denied. On a protected branch, force-push and rewrite are denied and the rest go to the person. Otherwise actions in <code>requireApproval</code> go to the person and the rest are allowed.</li>
+  <li><strong>requireEvidence</strong> lists command prefixes, such as <code>swift test</code>, that must have passed on exactly the proposed content before a lane can be accepted.</li>
+  <li><strong>protectedPaths</strong> need an explicit yes for each file in review. <strong>sensitivePaths</strong> are shown first, on top of built-in ones such as migrations, auth code, CI workflows, lock files and <code>.env</code> files.</li>
+  <li>Patterns follow <code>.gitignore</code> rules. Keys are camelCase. A file that does not parse falls back to the defaults and the error shows in Settings.</li>
+</ul>
+<p>Settings &gt; Agents also turns the policy into Claude Code <code>permissions.deny</code> rules, so Claude Code itself refuses what the policy forbids.</p>
+
+      <h2 id="attribution">Agent attribution</h2>
+<p>Branchlane marks agent work in the graph and blame for everyone, Free included. Your tool can feed it in three ways.</p>
+<h3>Commit trailers</h3>
+<p>An <code>Agent:</code> trailer wins. Otherwise Branchlane looks at <code>Co-authored-by:</code>, then at the author and committer, for known agent identities such as <code>noreply@anthropic.com</code>, Codex, Copilot, Cursor, Gemini, Devin, Jules and aider. Integration commits that Branchlane makes carry:</p>
+<pre><code>Lane: a7f460dc
+Change-Id: I3c1f…
+Agent: claude-code/claude-opus-5-5</code></pre>
+<h3>Agent Trace notes</h3>
+<p>Line-level records live as git notes on <code>refs/notes/agent-trace</code>, one note per commit, in the Agent Trace format (version 0.1.0, <code>application/vnd.agent-trace.record+json</code>). A note may hold one record, an array, or one per line. Records from other tools on the same commit are kept. Blame shows the lines AI wrote.</p>
+<pre><code>{
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;id&quot;: &quot;…&quot;,
+  &quot;timestamp&quot;: &quot;2026-11-23T02:09:00.000Z&quot;,
+  &quot;vcs&quot;: { &quot;type&quot;: &quot;git&quot;, &quot;revision&quot;: &quot;&lt;commit&gt;&quot; },
+  &quot;tool&quot;: { &quot;name&quot;: &quot;claude-code&quot; },
+  &quot;files&quot;: [{
+    &quot;path&quot;: &quot;Sources/Sync/RetryingSyncEngine.swift&quot;,
+    &quot;conversations&quot;: [{
+      &quot;contributor&quot;: { &quot;type&quot;: &quot;ai&quot;, &quot;model_id&quot;: &quot;claude-opus-5-5&quot; },
+      &quot;ranges&quot;: [{ &quot;start_line&quot;: 12, &quot;end_line&quot;: 48 }]
+    }]
+  }],
+  &quot;metadata&quot;: { &quot;com.bbdyno.branchlane&quot;: { &quot;written_by&quot;: &quot;Branchlane&quot;, &quot;lane&quot;: &quot;a7f460dc&quot; } }
+}</code></pre>
+<p>Notes travel with <code>refs/notes/agent-trace:refs/notes/agent-trace</code> when you share lanes.</p>
+<h3>Lane records</h3>
+<p>Lanes are stored as Git refs under <code>refs/branchlane/lanes/&lt;id&gt;/</code> (<code>state</code>, <code>checkpoints</code>, <code>proposal</code>). The <code>state</code> commits hold a <code>lane.json</code>. Teammates' lanes are fetched to <code>refs/branchlane/shared/&lt;remote&gt;/&lt;id&gt;/</code>. Treat these as read-only.</p>
+
+      <h2 id="summary">Worktree summary</h2>
+<p>When a repository has more than one worktree and the person has Pro, Branchlane keeps <code>&lt;git common dir&gt;/branchlane/worktrees.json</code> up to date, at least once a minute. Agents that do not speak MCP can read it instead of running <code>git status</code> in every worktree. It is removed when only one worktree is left.</p>
+<pre><code>{
+  &quot;version&quot;: 1,
+  &quot;about&quot;: &quot;…&quot;,
+  &quot;generatedAt&quot;: &quot;2026-11-23T02:09:00Z&quot;,
+  &quot;target&quot;: &quot;refs/heads/main&quot;,
+  &quot;worktrees&quot;: [
+    { &quot;path&quot;: &quot;…&quot;, &quot;branch&quot;: &quot;lane/retry-sync-a7f4&quot;, &quot;head&quot;: &quot;…&quot;,
+      &quot;access&quot;: &quot;readable&quot;, &quot;uncommittedFiles&quot;: [&quot;Sources/Sync/SyncEngine.swift&quot;], &quot;lastChange&quot;: &quot;…&quot; }
+  ],
+  &quot;collisions&quot;: [
+    { &quot;between&quot;: [&quot;…&quot;, &quot;…&quot;], &quot;conflicts&quot;: false, &quot;sameFiles&quot;: [&quot;Sources/Sync/SyncEngine.swift&quot;],
+      &quot;conflictLines&quot;: { &quot;Sources/Sync/SyncEngine.swift&quot;: [[&quot;40-60&quot;, &quot;41&quot;]] } }
+  ]
+}</code></pre>
+
+      <h2 id="extend">Extend Branchlane</h2>
+<h3>Your own model server</h3>
+<p>Settings &gt; Assistant accepts any OpenAI-compatible server. Branchlane calls <code>POST {base}/chat/completions</code> with <code>stream: true</code> and reads server-sent events or a plain JSON reply, and uses <code>GET {base}/models</code> to test the connection. Without a path it adds <code>/v1</code>, so Ollama (<code>http://localhost:11434</code>) and LM Studio (<code>http://localhost:1234</code>) work as they are. A key is never sent over plain HTTP to another machine.</p>
+<p>Repository data is wrapped between random <code>BEGIN data-…</code> and <code>END data-…</code> markers, and the model is told that what is inside is data, not instructions.</p>
+<h3>Your own MCP server for the assistant</h3>
+<p>The assistant can call tools on MCP servers that the person adds in Settings &gt; Assistant. Serve the Streamable HTTP transport (protocol <code>2025-06-18</code>) over HTTPS, or over HTTP on localhost. Branchlane sends <code>MCP-Protocol-Version</code>, keeps <code>Mcp-Session-Id</code>, and can add a Bearer token. Stdio servers cannot be started from the App Sandbox.</p>
+
+      <h2 id="support">Questions and requests</h2>
+<p>Ask on the <a href="https://github.com/bbdyno/Branchlane-Page/issues">support page</a>. Integrations that need something not listed here are welcome as feature requests.</p>
+
+    </article>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <div>
+        <a class="brand" href="../">
+          <img src="../assets/app-icon.png" width="30" height="30" alt="">
+          <span>Branchlane</span>
+        </a>
+        <p>Apple, the Apple logo, App Store, Mac, and Mac App Store are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="../guide/">Guide</a>
+        <a href="../developers/">Developers</a>
+        <a href="../pricing/">Pricing</a>
+        <a href="../privacy/">Privacy Policy</a>
+        <a href="../terms/">Terms of Use</a>
+        <a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a>
+        <a href="https://apps.apple.com/app/id6785129372">App Store</a>
+        <a href="../ko/developers/" lang="ko">한국어</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../assets/site.js" defer></script>
+</body>
+</html>

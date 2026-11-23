@@ -30,4 +30,28 @@
   <url>
     <loc>https://bbdyno.github.io/Branchlane-Page/terms/</loc>
   </url>
+  <url>
+    <loc>https://bbdyno.github.io/Branchlane-Page/guide/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/guide/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/"/>
+  </url>
+  <url>
+    <loc>https://bbdyno.github.io/Branchlane-Page/ko/guide/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/guide/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/"/>
+  </url>
+  <url>
+    <loc>https://bbdyno.github.io/Branchlane-Page/developers/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/developers/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/"/>
+  </url>
+  <url>
+    <loc>https://bbdyno.github.io/Branchlane-Page/ko/developers/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/developers/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/"/>
+  </url>
 </urlset>
