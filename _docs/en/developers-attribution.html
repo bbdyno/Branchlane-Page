@@ -1,0 +1,26 @@
+<p>Branchlane marks agent work in the graph and blame for everyone, Free included. Your tool can feed it in three ways.</p>
+<h2>Commit trailers</h2>
+<p>An <code>Agent:</code> trailer wins. Otherwise Branchlane looks at <code>Co-authored-by:</code>, then at the author and committer, for known agent identities such as <code>noreply@anthropic.com</code>, Codex, Copilot, Cursor, Gemini, Devin, Jules and aider. Integration commits that Branchlane makes carry:</p>
+<pre data-lang="text"><code>Lane: a7f460dc
+Change-Id: I3c1f…
+Agent: claude-code/claude-opus-5-5</code></pre>
+<h2>Agent Trace notes</h2>
+<p>Line-level records live as git notes on <code>refs/notes/agent-trace</code>, one note per commit, in the Agent Trace format (version 0.1.0, <code>application/vnd.agent-trace.record+json</code>). A note may hold one record, an array, or one per line. Records from other tools on the same commit are kept. Blame shows the lines AI wrote.</p>
+<pre data-lang="json"><code>{
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;id&quot;: &quot;…&quot;,
+  &quot;timestamp&quot;: &quot;2026-11-23T02:09:00.000Z&quot;,
+  &quot;vcs&quot;: { &quot;type&quot;: &quot;git&quot;, &quot;revision&quot;: &quot;&lt;commit&gt;&quot; },
+  &quot;tool&quot;: { &quot;name&quot;: &quot;claude-code&quot; },
+  &quot;files&quot;: [{
+    &quot;path&quot;: &quot;Sources/Sync/RetryingSyncEngine.swift&quot;,
+    &quot;conversations&quot;: [{
+      &quot;contributor&quot;: { &quot;type&quot;: &quot;ai&quot;, &quot;model_id&quot;: &quot;claude-opus-5-5&quot; },
+      &quot;ranges&quot;: [{ &quot;start_line&quot;: 12, &quot;end_line&quot;: 48 }]
+    }]
+  }],
+  &quot;metadata&quot;: { &quot;com.bbdyno.branchlane&quot;: { &quot;written_by&quot;: &quot;Branchlane&quot;, &quot;lane&quot;: &quot;a7f460dc&quot; } }
+}</code></pre>
+<p>Notes travel with <code>refs/notes/agent-trace:refs/notes/agent-trace</code> when you share lanes.</p>
+<h2>Lane records</h2>
+<p>Lanes are stored as Git refs under <code>refs/branchlane/lanes/&lt;id&gt;/</code> (<code>state</code>, <code>checkpoints</code>, <code>proposal</code>). The <code>state</code> commits hold a <code>lane.json</code>. Teammates' lanes are fetched to <code>refs/branchlane/shared/&lt;remote&gt;/&lt;id&gt;/</code>. Treat these as read-only.</p>

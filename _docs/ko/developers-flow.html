@@ -1,0 +1,23 @@
+<h2 id="order">부르는 순서</h2>
+<ol class="steps">
+  <li><code>lane_begin</code> 뒤에는 돌려받은 워크트리 안에서만 작업합니다. 커밋은 마음대로 해도 됩니다. 미커밋 작업도 스냅샷으로 남습니다.</li>
+  <li>시작 전과 제안 전에 <code>lane_status</code>로 다른 에이전트가 건드리는 파일을 봅니다.</li>
+  <li><code>lane_checkpoint</code>는 언제든 부릅니다. 체크포인트 훅도 턴이 끝날 때마다 하나씩 남깁니다.</li>
+  <li>마지막 수정 뒤에 테스트, 빌드, 린트마다 <code>lane_evidence</code>를 부르고 받은 id를 챙깁니다.</li>
+  <li>요약과 그 id를 단 주장으로 <code>lane_propose</code>를 부릅니다.</li>
+  <li>나중에 <code>lane_status</code>로 검토 의견, 빠진 파일과 헝크, 메모를 읽습니다.</li>
+</ol>
+
+<h2 id="states">상태</h2>
+<div class="states" aria-hidden="true"><span>running</span><i></i><span>proposed</span><i></i><span>accepted</span><i></i><span class="end">integrated</span></div>
+<div class="table-wrap"><table>
+<thead>
+<tr><th scope="col">값</th><th scope="col">앱 표시</th><th scope="col">언제</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>running</code></th><td>작업 중</td><td>lane_begin 직후, 또는 사람이 돌려보냄</td></tr>
+<tr><th scope="row"><code>proposed</code></th><td>검토 대기</td><td>lane_propose</td></tr>
+<tr><th scope="row"><code>accepted</code></th><td>대기열</td><td>사람이 승인함, requireEvidence를 통과해야 함</td></tr>
+<tr><th scope="row"><code>needsUpdate</code></th><td>업데이트 필요</td><td>대상이 앞서가 작업이 맞지 않음. 대상 위로 맞춘 뒤 다시 제안</td></tr>
+<tr><th scope="row"><code>integrated</code></th><td>통합됨</td><td>커밋 하나로 대상에 들어감</td></tr>
+<tr><th scope="row"><code>reverted</code></th><td>되돌림</td><td>커밋 하나로 되돌림</td></tr>
+<tr><th scope="row"><code>abandoned</code></th><td>버림</td><td>통합하지 않고 정리함</td></tr></tbody></table></div>

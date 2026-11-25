@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Policy file - Branchlane Docs</title>
+<meta name="description" content="What agents may do in a repository, in one committed file.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Policy file - Branchlane Docs">
+<meta property="og:description" content="What agents may do in a repository, in one committed file.">
+<meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
+<meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/developers/policy/">
+<link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/developers/policy/">
+<link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/developers/policy/">
+<link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/policy/">
+<link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/policy/">
+<link rel="icon" href="../../assets/app-icon.png">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="bar-in">
+<button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+<a class="brand" href="../../"><img src="../../assets/app-icon.png" width="26" height="26" alt=""><span>Branchlane</span></a>
+<nav class="areas" aria-label="Docs"><a href="../../guide/">Guide</a><a href="../../developers/" aria-current="true">Developers</a></nav>
+<div class="bar-end">
+<button class="find" type="button" aria-label="Search docs"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.6 10.6 3.4 3.4"/></svg><span>Search docs</span><kbd>⌘K</kbd></button>
+<button class="icon theme" type="button" aria-label="Switch between light and dark"><svg class="sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.2v1.6M10 16.2v1.6M2.2 10h1.6M16.2 10h1.6M4.5 4.5l1.1 1.1M14.4 14.4l1.1 1.1M4.5 15.5l1.1-1.1M14.4 5.6l1.1-1.1"/></svg><svg class="moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.6 12.1A7 7 0 0 1 7.9 3.4a7 7 0 1 0 8.7 8.7Z"/></svg></button>
+<a class="text-link" href="../../ko/developers/policy/" lang="ko">한국어</a>
+<a class="get" href="https://apps.apple.com/app/id6785129372">Download free</a>
+</div></div></header>
+<div class="scrim"></div>
+<div class="shell">
+<nav class="side" id="side" aria-label="Docs navigation"><div class="side-areas"><a href="../../guide/">Guide</a><a href="../../developers/" aria-current="true">Developers</a></div><div class="group"><p>Connect</p><ul><li><a href="../../developers/">Build on Branchlane</a></li><li><a href="../../developers/connect/">Connect an agent</a></li><li><a href="../../developers/lanes/">Lane flow and states</a></li></ul></div><div class="group"><p>Reference</p><ul><li><a href="../../developers/tools/">Tools</a></li><li><a href="../../developers/protocol/">Protocol</a></li><li><a href="../../developers/hook/">Checkpoint hook</a></li></ul></div><div class="group"><p>Files and refs</p><ul><li><a href="../../developers/policy/" aria-current="page">Policy file</a></li><li><a href="../../developers/attribution/">Agent attribution</a></li><li><a href="../../developers/worktrees/">Worktree summary</a></li></ul></div><div class="group"><p>Build</p><ul><li><a href="../../developers/extend/">Extend Branchlane</a></li><li><a href="../../developers/support/">Questions and requests</a></li></ul></div></nav>
+<main id="main"><article class="page">
+<p class="crumb"><a href="../../developers/">Developers</a><span aria-hidden="true">/</span><span>Files and refs</span></p>
+<h1>Policy file</h1>
+<p class="lede">What agents may do in a repository, in one committed file.</p>
+<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="text">
+<h2 id="defaults">Defaults<a class="anchor" href="#defaults" aria-label="#Defaults">#</a></h2>
+<p><code>.branchlane/policy.json</code> in the main worktree tells Branchlane, and the agents it serves, what is allowed. Commit it so the whole team shares it. Settings &gt; Agents can create it with these defaults:</p>
+<div class="code"><div class="code-head"><span>.branchlane/policy.json</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>{
+  <span class="k">"forbid"</span>: [<span class="s">"force_push"</span>, <span class="s">"rewrite_history"</span>],
+  <span class="k">"protectedBranches"</span>: [<span class="s">"main"</span>, <span class="s">"master"</span>],
+  <span class="k">"protectedPaths"</span>: [],
+  <span class="k">"requireApproval"</span>: [<span class="s">"push"</span>],
+  <span class="k">"requireEvidence"</span>: [],
+  <span class="k">"sensitivePaths"</span>: []
+}</code></pre></div>
+
+<h2 id="decisions">How it decides<a class="anchor" href="#decisions" aria-label="#How it decides">#</a></h2>
+<ul>
+  <li><strong>Actions</strong> are <code>push</code>, <code>force_push</code>, <code>rewrite_history</code> and <code>integrate</code>.</li>
+  <li><strong>Decision order:</strong> a forbidden action is denied. On a protected branch, force-push and rewrite are denied and the rest go to the person. Otherwise actions in <code>requireApproval</code> go to the person and the rest are allowed.</li>
+  <li><strong>requireEvidence</strong> lists command prefixes, such as <code>swift test</code>, that must have passed on exactly the proposed content before a lane can be accepted.</li>
+  <li><strong>protectedPaths</strong> need an explicit yes for each file in review. <strong>sensitivePaths</strong> are shown first, on top of built-in ones such as migrations, auth code, CI workflows, lock files and <code>.env</code> files.</li>
+  <li>Patterns follow <code>.gitignore</code> rules. Keys are camelCase. A file that does not parse falls back to the defaults and the error shows in Settings.</li>
+</ul>
+
+<h2 id="claude-code">Claude Code<a class="anchor" href="#claude-code" aria-label="#Claude Code">#</a></h2>
+<p>Settings &gt; Agents also turns the policy into Claude Code <code>permissions.deny</code> rules, so Claude Code itself refuses what the policy forbids.</p>
+</div>
+<nav class="next" aria-label="Previous, Next"><a class="back" href="../../developers/hook/"><small>Previous</small><b>Checkpoint hook</b></a><a class="fwd" href="../../developers/attribution/"><small>Next</small><b>Agent attribution</b></a></nav>
+<footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/developers-policy.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
+</article></main>
+<aside class="outline"><p>On this page</p><ul><li><a href="#defaults">Defaults</a></li><li><a href="#decisions">How it decides</a></li><li><a href="#claude-code">Claude Code</a></li></ul></aside>
+</div>
+<dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
+<script src="../../assets/docs.js?v=20261125"></script>
+</body>
+</html>

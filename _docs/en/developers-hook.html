@@ -1,0 +1,10 @@
+<p><code>POST /hook/checkpoint</code> takes the hook JSON that Claude Code sends and reads its <code>cwd</code>. If that folder is inside a lane worktree, Branchlane saves a checkpoint and answers <code>{"checkpoint":true}</code>; anywhere else it answers <code>false</code> and does nothing. Merge this into <code>.claude/settings.local.json</code>:</p>
+<pre data-lang="json" data-file=".claude/settings.local.json"><code>{
+  &quot;hooks&quot;: {
+    &quot;Stop&quot;: [{ &quot;hooks&quot;: [{
+      &quot;type&quot;: &quot;command&quot;,
+      &quot;command&quot;: &quot;curl -s -m 5 -X POST -H &#x27;Authorization: Bearer &lt;token&gt;&#x27; -H &#x27;Content-Type: application/json&#x27; --data-binary @- http://127.0.0.1:47120/hook/checkpoint &gt;/dev/null 2&gt;&amp;1 || true&quot;
+    }] }]
+  }
+}</code></pre>
+<p>The command fails quietly when Branchlane is not running, so the agent is never blocked.</p>

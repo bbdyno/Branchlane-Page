@@ -1,0 +1,57 @@
+<h2 id="common">Common arguments</h2>
+<p>Every tool takes these.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
+<tr><th scope="row"><code>path</code><span class="req">required</span></th><td>string</td><td>Your working directory: the repository, or the lane's worktree.</td></tr>
+<tr><th scope="row"><code>lane_id</code></th><td>string</td><td>Can be left out when <code>path</code> is inside the lane's worktree.</td></tr>
+</tbody></table></div>
+
+<h2 id="lane_begin" class="sig"><code>lane_begin</code></h2>
+<p>Starts a lane: a branch <code>lane/&lt;slug&gt;-&lt;id&gt;</code> and a worktree under <code>.branchlane/lanes/&lt;id&gt;</code>. Work only in that worktree afterwards. Returns <code>lane_id</code>, <code>worktree</code>, <code>branch</code> and <code>target</code>.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
+<tr><th scope="row"><code>intent</code><span class="req">required</span></th><td>string</td><td>What the person asked for, in one or two sentences.</td></tr>
+<tr><th scope="row"><code>agent</code></th><td>string</td><td>Your tool and model, such as <code>claude-code/claude-opus-5-5</code>.</td></tr>
+<tr><th scope="row"><code>scope</code></th><td>string[]</td><td>Paths you expect to change. A hint for collision warnings.</td></tr>
+<tr><th scope="row"><code>target</code></th><td>string</td><td>Branch the work should land on. The repository's main branch if left out.</td></tr>
+<tr><th scope="row"><code>clone</code></th><td>string[]</td><td>Ignored folders to copy from the main worktree, such as <code>node_modules</code> or <code>.build</code>.</td></tr>
+</tbody></table></div>
+
+<h2 id="lane_status" class="sig"><code>lane_status</code><span class="badge read">Read-only</span></h2>
+<p>Where the lane stands: its status, whether recorded evidence still matches the code, review feedback, files and hunks the person left out, and collisions with other worktrees or the target, with line ranges and which side should go first.</p>
+
+
+<h2 id="lane_checkpoint" class="sig"><code>lane_checkpoint</code></h2>
+<p>Snapshots the worktree, uncommitted changes included, without staging or committing.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
+<tr><th scope="row"><code>note</code></th><td>string</td><td>A word about the snapshot.</td></tr>
+</tbody></table></div>
+
+<h2 id="lane_evidence" class="sig"><code>lane_evidence</code></h2>
+<p>Records that a command ran on the current content and how it ended. It is valid only while the content stays exactly the same, so call it after your last edit. Returns <code>evidence_id</code>.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
+<tr><th scope="row"><code>command</code><span class="req">required</span></th><td>string</td><td>The command that ran, such as <code>swift test</code>.</td></tr>
+<tr><th scope="row"><code>exit_code</code><span class="req">required</span></th><td>integer</td><td>How it ended. 0 is a pass.</td></tr>
+<tr><th scope="row"><code>output</code></th><td>string</td><td>The command's output. Only the end is kept, with secrets masked.</td></tr>
+</tbody></table></div>
+
+<h2 id="lane_propose" class="sig"><code>lane_propose</code></h2>
+<p>Asks the person to review the lane as it is now. Claims without current evidence are flagged.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
+<tr><th scope="row"><code>summary</code><span class="req">required</span></th><td>string</td><td>What changed and why, for the reviewer.</td></tr>
+<tr><th scope="row"><code>claims</code></th><td>object[]</td><td>Statements with the evidence ids that back them: <code>{ text, evidence[] }</code>.</td></tr>
+</tbody></table></div>
+<h3 id="lane_propose-example">Example</h3>
+<pre data-lang="json"><code>{&quot;name&quot;: &quot;lane_propose&quot;, &quot;arguments&quot;: {
+  &quot;path&quot;: &quot;/Users/me/src/app/.branchlane/lanes/a7f460dc&quot;,
+  &quot;summary&quot;: &quot;Pushes are retried with exponential backoff and jitter. Six attempts at most.&quot;,
+  &quot;claims&quot;: [
+    { &quot;text&quot;: &quot;A busy server is tried again, up to six times&quot;, &quot;evidence&quot;: [1] },
+    { &quot;text&quot;: &quot;The library file format is unchanged&quot; }
+  ]
+}}</code></pre>
+
+<h2 id="lane_request" class="sig"><code>lane_request</code></h2>
+<p>Asks to push, force-push or rewrite history. The policy decides, and some requests wait up to two minutes for the person. An approved push runs with the person's credentials.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
+<tr><th scope="row"><code>action</code><span class="req">required</span></th><td>enum</td><td><code>push</code>, <code>force_push</code> or <code>rewrite_history</code>.</td></tr>
+<tr><th scope="row"><code>reason</code></th><td>string</td><td>Why, shown to the person.</td></tr>
+</tbody></table></div>

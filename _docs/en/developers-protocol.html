@@ -1,0 +1,20 @@
+<h2 id="server">Server</h2>
+<ul class="props">
+  <li><strong>Address</strong><span>IPv4 loopback only, <code>127.0.0.1</code>. Nothing listens on other interfaces or on <code>::1</code>. Default port 47120.</span></li>
+  <li><strong>Transport</strong><span>HTTP/1.1, one request per connection. Only <code>POST /mcp</code> is served; other methods get 405. There is no SSE stream, so every answer comes back on the POST. Notifications get 202 with an empty body.</span></li>
+  <li><strong>Body</strong><span>Send <code>Content-Length</code>. Chunked bodies get 411. Bodies up to 4 MiB, headers up to 64 KiB.</span></li>
+  <li><strong>Auth</strong><span><code>Authorization: Bearer &lt;token&gt;</code>, a 64-character hex token kept in the Keychain. New Token in Settings replaces it. Missing or wrong tokens get 401.</span></li>
+  <li><strong>Origin</strong><span>A request with an <code>Origin</code> header that is not <code>localhost</code>, <code>127.0.0.1</code> or <code>::1</code> gets 403, so web pages cannot call the server.</span></li>
+  <li><strong>MCP</strong><span>Protocol versions <code>2025-06-18</code>, <code>2025-03-26</code> and <code>2024-11-05</code>. Methods <code>initialize</code>, <code>ping</code>, <code>tools/list</code> and <code>tools/call</code>, and JSON-RPC batches. Tools only: no resources or prompts.</span></li>
+  <li><strong>Repositories</strong><span>The sandboxed app can only open repositories the person has opened in Branchlane. Otherwise the tool answers with an error that says so.</span></li>
+</ul>
+
+<h2 id="status">Status codes</h2>
+<div class="table-wrap"><table><thead><tr><th scope="col">Code</th><th scope="col">When</th></tr></thead><tbody>
+<tr><th scope="row"><code>200</code></th><td>A result, also when a tool reports an error (<code>isError</code>)</td></tr>
+<tr><th scope="row"><code>202</code></th><td>A notification, with an empty body</td></tr>
+<tr><th scope="row"><code>401</code></th><td>A missing or wrong token</td></tr>
+<tr><th scope="row"><code>403</code></th><td>An <code>Origin</code> that is not this Mac</td></tr>
+<tr><th scope="row"><code>405</code></th><td>A method other than <code>POST</code></td></tr>
+<tr><th scope="row"><code>411</code></th><td>A chunked body, or no <code>Content-Length</code></td></tr>
+</tbody></table></div>

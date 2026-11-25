@@ -1,0 +1,26 @@
+<p>Branchlane은 무료판을 포함해 모두에게 그래프와 blame에서 에이전트 작업을 표시합니다. 내 도구는 세 가지 방법으로 알려 줄 수 있습니다.</p>
+<h2>커밋 트레일러</h2>
+<p><code>Agent:</code> 트레일러가 가장 우선합니다. 없으면 <code>Co-authored-by:</code>, 그다음 작성자와 커미터에서 <code>noreply@anthropic.com</code>, Codex, Copilot, Cursor, Gemini, Devin, Jules, aider 같은 알려진 에이전트 신원을 찾습니다. Branchlane이 만드는 통합 커밋에는 이렇게 붙습니다.</p>
+<pre data-lang="text"><code>Lane: a7f460dc
+Change-Id: I3c1f…
+Agent: claude-code/claude-opus-5-5</code></pre>
+<h2>Agent Trace 노트</h2>
+<p>줄 단위 기록은 <code>refs/notes/agent-trace</code>의 git 노트로, 커밋마다 하나씩 Agent Trace 형식(버전 0.1.0, <code>application/vnd.agent-trace.record+json</code>)으로 남습니다. 노트 하나에 기록 하나, 배열, 또는 줄마다 하나를 넣을 수 있습니다. 같은 커밋에 다른 도구가 남긴 기록은 지우지 않습니다. blame에서 AI가 쓴 줄이 표시됩니다.</p>
+<pre data-lang="json"><code>{
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;id&quot;: &quot;…&quot;,
+  &quot;timestamp&quot;: &quot;2026-11-23T02:09:00.000Z&quot;,
+  &quot;vcs&quot;: { &quot;type&quot;: &quot;git&quot;, &quot;revision&quot;: &quot;&lt;commit&gt;&quot; },
+  &quot;tool&quot;: { &quot;name&quot;: &quot;claude-code&quot; },
+  &quot;files&quot;: [{
+    &quot;path&quot;: &quot;Sources/Sync/RetryingSyncEngine.swift&quot;,
+    &quot;conversations&quot;: [{
+      &quot;contributor&quot;: { &quot;type&quot;: &quot;ai&quot;, &quot;model_id&quot;: &quot;claude-opus-5-5&quot; },
+      &quot;ranges&quot;: [{ &quot;start_line&quot;: 12, &quot;end_line&quot;: 48 }]
+    }]
+  }],
+  &quot;metadata&quot;: { &quot;com.bbdyno.branchlane&quot;: { &quot;written_by&quot;: &quot;Branchlane&quot;, &quot;lane&quot;: &quot;a7f460dc&quot; } }
+}</code></pre>
+<p>Lane을 공유하면 노트도 <code>refs/notes/agent-trace:refs/notes/agent-trace</code>로 함께 오갑니다.</p>
+<h2>Lane 기록</h2>
+<p>Lane은 <code>refs/branchlane/lanes/&lt;id&gt;/</code> 아래 Git ref(<code>state</code>, <code>checkpoints</code>, <code>proposal</code>)로 저장되고, <code>state</code> 커밋에 <code>lane.json</code>이 있습니다. 팀원의 Lane은 <code>refs/branchlane/shared/&lt;remote&gt;/&lt;id&gt;/</code>로 받아 옵니다. 읽기 전용으로 다루세요.</p>

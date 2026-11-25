@@ -1,0 +1,15 @@
+<p>저장소에 워크트리가 둘 이상이고 Pro를 쓰면, Branchlane은 <code>&lt;git common dir&gt;/branchlane/worktrees.json</code>을 적어도 1분마다 새로 씁니다. MCP를 못 쓰는 에이전트는 워크트리마다 <code>git status</code>를 도는 대신 이 파일을 읽으면 됩니다. 워크트리가 하나만 남으면 지워집니다.</p>
+<pre data-lang="json" data-file="branchlane/worktrees.json"><code>{
+  &quot;version&quot;: 1,
+  &quot;about&quot;: &quot;…&quot;,
+  &quot;generatedAt&quot;: &quot;2026-11-23T02:09:00Z&quot;,
+  &quot;target&quot;: &quot;refs/heads/main&quot;,
+  &quot;worktrees&quot;: [
+    { &quot;path&quot;: &quot;…&quot;, &quot;branch&quot;: &quot;lane/retry-sync-a7f4&quot;, &quot;head&quot;: &quot;…&quot;,
+      &quot;access&quot;: &quot;readable&quot;, &quot;uncommittedFiles&quot;: [&quot;Sources/Sync/SyncEngine.swift&quot;], &quot;lastChange&quot;: &quot;…&quot; }
+  ],
+  &quot;collisions&quot;: [
+    { &quot;between&quot;: [&quot;…&quot;, &quot;…&quot;], &quot;conflicts&quot;: false, &quot;sameFiles&quot;: [&quot;Sources/Sync/SyncEngine.swift&quot;],
+      &quot;conflictLines&quot;: { &quot;Sources/Sync/SyncEngine.swift&quot;: [[&quot;40-60&quot;, &quot;41&quot;]] } }
+  ]
+}</code></pre>

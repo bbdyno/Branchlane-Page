@@ -1,0 +1,20 @@
+<h2 id="server">서버</h2>
+<ul class="props">
+  <li><strong>주소</strong><span>IPv4 루프백 <code>127.0.0.1</code>에만 열립니다. 다른 인터페이스나 <code>::1</code>에서는 듣지 않습니다. 기본 포트 47120.</span></li>
+  <li><strong>전송</strong><span>HTTP/1.1, 연결마다 요청 하나. <code>POST /mcp</code>만 받고 다른 메서드는 405입니다. SSE 스트림이 없어 모든 답은 POST 응답으로 옵니다. 알림은 빈 본문의 202를 받습니다.</span></li>
+  <li><strong>본문</strong><span><code>Content-Length</code>를 보내세요. chunked 본문은 411입니다. 본문 4 MiB, 헤더 64 KiB까지.</span></li>
+  <li><strong>인증</strong><span><code>Authorization: Bearer &lt;token&gt;</code>. 토큰은 키체인에 있는 64자 16진수이고, 설정의 새 토큰으로 바꿉니다. 없거나 틀리면 401.</span></li>
+  <li><strong>Origin</strong><span><code>Origin</code> 헤더가 <code>localhost</code>, <code>127.0.0.1</code>, <code>::1</code>이 아니면 403이라 웹 페이지는 서버를 부를 수 없습니다.</span></li>
+  <li><strong>MCP</strong><span>프로토콜 <code>2025-06-18</code>, <code>2025-03-26</code>, <code>2024-11-05</code>. 메서드 <code>initialize</code>, <code>ping</code>, <code>tools/list</code>, <code>tools/call</code>와 JSON-RPC 배치. 도구만 있고 resources와 prompts는 없습니다.</span></li>
+  <li><strong>저장소</strong><span>샌드박스 앱은 사람이 Branchlane에서 연 저장소만 열 수 있습니다. 아니면 도구가 그렇다고 오류로 알려 줍니다.</span></li>
+</ul>
+
+<h2 id="status">상태 코드</h2>
+<div class="table-wrap"><table><thead><tr><th scope="col">코드</th><th scope="col">언제</th></tr></thead><tbody>
+<tr><th scope="row"><code>200</code></th><td>결과. 도구가 오류를 알릴 때도 같습니다(<code>isError</code>)</td></tr>
+<tr><th scope="row"><code>202</code></th><td>알림. 본문이 비어 있습니다</td></tr>
+<tr><th scope="row"><code>401</code></th><td>토큰이 없거나 틀림</td></tr>
+<tr><th scope="row"><code>403</code></th><td>이 Mac이 아닌 <code>Origin</code></td></tr>
+<tr><th scope="row"><code>405</code></th><td><code>POST</code>가 아닌 메서드</td></tr>
+<tr><th scope="row"><code>411</code></th><td>chunked 본문이거나 <code>Content-Length</code>가 없음</td></tr>
+</tbody></table></div>

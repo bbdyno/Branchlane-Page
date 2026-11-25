@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tools - Branchlane Docs</title>
+<meta name="description" content="Every MCP tool, its arguments and what it returns.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tools - Branchlane Docs">
+<meta property="og:description" content="Every MCP tool, its arguments and what it returns.">
+<meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
+<meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/developers/tools/">
+<link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/developers/tools/">
+<link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/developers/tools/">
+<link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/tools/">
+<link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/tools/">
+<link rel="icon" href="../../assets/app-icon.png">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="bar-in">
+<button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+<a class="brand" href="../../"><img src="../../assets/app-icon.png" width="26" height="26" alt=""><span>Branchlane</span></a>
+<nav class="areas" aria-label="Docs"><a href="../../guide/">Guide</a><a href="../../developers/" aria-current="true">Developers</a></nav>
+<div class="bar-end">
+<button class="find" type="button" aria-label="Search docs"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.6 10.6 3.4 3.4"/></svg><span>Search docs</span><kbd>⌘K</kbd></button>
+<button class="icon theme" type="button" aria-label="Switch between light and dark"><svg class="sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.2v1.6M10 16.2v1.6M2.2 10h1.6M16.2 10h1.6M4.5 4.5l1.1 1.1M14.4 14.4l1.1 1.1M4.5 15.5l1.1-1.1M14.4 5.6l1.1-1.1"/></svg><svg class="moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.6 12.1A7 7 0 0 1 7.9 3.4a7 7 0 1 0 8.7 8.7Z"/></svg></button>
+<a class="text-link" href="../../ko/developers/tools/" lang="ko">한국어</a>
+<a class="get" href="https://apps.apple.com/app/id6785129372">Download free</a>
+</div></div></header>
+<div class="scrim"></div>
+<div class="shell">
+<nav class="side" id="side" aria-label="Docs navigation"><div class="side-areas"><a href="../../guide/">Guide</a><a href="../../developers/" aria-current="true">Developers</a></div><div class="group"><p>Connect</p><ul><li><a href="../../developers/">Build on Branchlane</a></li><li><a href="../../developers/connect/">Connect an agent</a></li><li><a href="../../developers/lanes/">Lane flow and states</a></li></ul></div><div class="group"><p>Reference</p><ul><li><a href="../../developers/tools/" aria-current="page">Tools</a></li><li><a href="../../developers/protocol/">Protocol</a></li><li><a href="../../developers/hook/">Checkpoint hook</a></li></ul></div><div class="group"><p>Files and refs</p><ul><li><a href="../../developers/policy/">Policy file</a></li><li><a href="../../developers/attribution/">Agent attribution</a></li><li><a href="../../developers/worktrees/">Worktree summary</a></li></ul></div><div class="group"><p>Build</p><ul><li><a href="../../developers/extend/">Extend Branchlane</a></li><li><a href="../../developers/support/">Questions and requests</a></li></ul></div></nav>
+<main id="main"><article class="page">
+<p class="crumb"><a href="../../developers/">Developers</a><span aria-hidden="true">/</span><span>Reference</span></p>
+<h1>Tools</h1>
+<p class="lede">Every MCP tool, its arguments and what it returns.</p>
+<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="text">
+<h2 id="common">Common arguments<a class="anchor" href="#common" aria-label="#Common arguments">#</a></h2>
+<p>Every tool takes these.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
+<tr><th scope="row"><code>path</code><span class="req">required</span></th><td>string</td><td>Your working directory: the repository, or the lane's worktree.</td></tr>
+<tr><th scope="row"><code>lane_id</code></th><td>string</td><td>Can be left out when <code>path</code> is inside the lane's worktree.</td></tr>
+</tbody></table></div>
+
+<h2 id="lane_begin" class="sig"><code>lane_begin</code><a class="anchor" href="#lane_begin" aria-label="#lane_begin">#</a></h2>
+<p>Starts a lane: a branch <code>lane/&lt;slug&gt;-&lt;id&gt;</code> and a worktree under <code>.branchlane/lanes/&lt;id&gt;</code>. Work only in that worktree afterwards. Returns <code>lane_id</code>, <code>worktree</code>, <code>branch</code> and <code>target</code>.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
+<tr><th scope="row"><code>intent</code><span class="req">required</span></th><td>string</td><td>What the person asked for, in one or two sentences.</td></tr>
+<tr><th scope="row"><code>agent</code></th><td>string</td><td>Your tool and model, such as <code>claude-code/claude-opus-5-5</code>.</td></tr>
+<tr><th scope="row"><code>scope</code></th><td>string[]</td><td>Paths you expect to change. A hint for collision warnings.</td></tr>
+<tr><th scope="row"><code>target</code></th><td>string</td><td>Branch the work should land on. The repository's main branch if left out.</td></tr>
+<tr><th scope="row"><code>clone</code></th><td>string[]</td><td>Ignored folders to copy from the main worktree, such as <code>node_modules</code> or <code>.build</code>.</td></tr>
+</tbody></table></div>
+
+<h2 id="lane_status" class="sig"><code>lane_status</code><span class="badge read">Read-only</span><a class="anchor" href="#lane_status" aria-label="#lane_status">#</a></h2>
+<p>Where the lane stands: its status, whether recorded evidence still matches the code, review feedback, files and hunks the person left out, and collisions with other worktrees or the target, with line ranges and which side should go first.</p>
+
+
+<h2 id="lane_checkpoint" class="sig"><code>lane_checkpoint</code><a class="anchor" href="#lane_checkpoint" aria-label="#lane_checkpoint">#</a></h2>
+<p>Snapshots the worktree, uncommitted changes included, without staging or committing.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
+<tr><th scope="row"><code>note</code></th><td>string</td><td>A word about the snapshot.</td></tr>
+</tbody></table></div>
+
+<h2 id="lane_evidence" class="sig"><code>lane_evidence</code><a class="anchor" href="#lane_evidence" aria-label="#lane_evidence">#</a></h2>
+<p>Records that a command ran on the current content and how it ended. It is valid only while the content stays exactly the same, so call it after your last edit. Returns <code>evidence_id</code>.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
+<tr><th scope="row"><code>command</code><span class="req">required</span></th><td>string</td><td>The command that ran, such as <code>swift test</code>.</td></tr>
+<tr><th scope="row"><code>exit_code</code><span class="req">required</span></th><td>integer</td><td>How it ended. 0 is a pass.</td></tr>
+<tr><th scope="row"><code>output</code></th><td>string</td><td>The command's output. Only the end is kept, with secrets masked.</td></tr>
+</tbody></table></div>
+
+<h2 id="lane_propose" class="sig"><code>lane_propose</code><a class="anchor" href="#lane_propose" aria-label="#lane_propose">#</a></h2>
+<p>Asks the person to review the lane as it is now. Claims without current evidence are flagged.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
+<tr><th scope="row"><code>summary</code><span class="req">required</span></th><td>string</td><td>What changed and why, for the reviewer.</td></tr>
+<tr><th scope="row"><code>claims</code></th><td>object[]</td><td>Statements with the evidence ids that back them: <code>{ text, evidence[] }</code>.</td></tr>
+</tbody></table></div>
+<h3 id="lane_propose-example">Example<a class="anchor" href="#lane_propose-example" aria-label="#Example">#</a></h3>
+<div class="code"><div class="code-head"><span>JSON</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>{<span class="k">"name"</span>: <span class="s">"lane_propose"</span>, <span class="k">"arguments"</span>: {
+  <span class="k">"path"</span>: <span class="s">"/Users/me/src/app/.branchlane/lanes/a7f460dc"</span>,
+  <span class="k">"summary"</span>: <span class="s">"Pushes are retried with exponential backoff and jitter. Six attempts at most."</span>,
+  <span class="k">"claims"</span>: [
+    { <span class="k">"text"</span>: <span class="s">"A busy server is tried again, up to six times"</span>, <span class="k">"evidence"</span>: [<span class="n">1</span>] },
+    { <span class="k">"text"</span>: <span class="s">"The library file format is unchanged"</span> }
+  ]
+}}</code></pre></div>
+
+<h2 id="lane_request" class="sig"><code>lane_request</code><a class="anchor" href="#lane_request" aria-label="#lane_request">#</a></h2>
+<p>Asks to push, force-push or rewrite history. The policy decides, and some requests wait up to two minutes for the person. An approved push runs with the person's credentials.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
+<tr><th scope="row"><code>action</code><span class="req">required</span></th><td>enum</td><td><code>push</code>, <code>force_push</code> or <code>rewrite_history</code>.</td></tr>
+<tr><th scope="row"><code>reason</code></th><td>string</td><td>Why, shown to the person.</td></tr>
+</tbody></table></div>
+</div>
+<nav class="next" aria-label="Previous, Next"><a class="back" href="../../developers/lanes/"><small>Previous</small><b>Lane flow and states</b></a><a class="fwd" href="../../developers/protocol/"><small>Next</small><b>Protocol</b></a></nav>
+<footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/developers-tools.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
+</article></main>
+<aside class="outline"><p>On this page</p><ul><li><a href="#common">Common arguments</a></li><li><a href="#lane_begin">lane_begin</a></li><li><a href="#lane_status">lane_status</a></li><li><a href="#lane_checkpoint">lane_checkpoint</a></li><li><a href="#lane_evidence">lane_evidence</a></li><li><a href="#lane_propose">lane_propose</a></li><li class="sub"><a href="#lane_propose-example">Example</a></li><li><a href="#lane_request">lane_request</a></li></ul></aside>
+</div>
+<dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
+<script src="../../assets/docs.js?v=20261125"></script>
+</body>
+</html>
