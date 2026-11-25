@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extend Branchlane - Branchlane Docs</title>
+<meta name="description" content="Bring your own model server, or an MCP server for the assistant.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Extend Branchlane - Branchlane Docs">
+<meta property="og:description" content="Bring your own model server, or an MCP server for the assistant.">
+<meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
+<meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/developers/extend/">
+<link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/developers/extend/">
+<link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/developers/extend/">
+<link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/extend/">
+<link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/extend/">
+<link rel="icon" href="../../assets/app-icon.png">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="bar-in">
+<button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+<a class="brand" href="../../"><img src="../../assets/app-icon.png" width="26" height="26" alt=""><span>Branchlane</span></a>
+<nav class="areas" aria-label="Docs"><a href="../../guide/">Guide</a><a href="../../developers/" aria-current="true">Developers</a></nav>
+<div class="bar-end">
+<button class="find" type="button" aria-label="Search docs"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.6 10.6 3.4 3.4"/></svg><span>Search docs</span><kbd>⌘K</kbd></button>
+<button class="icon theme" type="button" aria-label="Switch between light and dark"><svg class="sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.2v1.6M10 16.2v1.6M2.2 10h1.6M16.2 10h1.6M4.5 4.5l1.1 1.1M14.4 14.4l1.1 1.1M4.5 15.5l1.1-1.1M14.4 5.6l1.1-1.1"/></svg><svg class="moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.6 12.1A7 7 0 0 1 7.9 3.4a7 7 0 1 0 8.7 8.7Z"/></svg></button>
+<a class="text-link" href="../../ko/developers/extend/" lang="ko">한국어</a>
+<a class="get" href="https://apps.apple.com/app/id6785129372">Download free</a>
+</div></div></header>
+<div class="scrim"></div>
+<div class="shell">
+<nav class="side" id="side" aria-label="Docs navigation"><div class="side-areas"><a href="../../guide/">Guide</a><a href="../../developers/" aria-current="true">Developers</a></div><div class="group"><p>Connect</p><ul><li><a href="../../developers/">Build on Branchlane</a></li><li><a href="../../developers/connect/">Connect an agent</a></li><li><a href="../../developers/lanes/">Lane flow and states</a></li></ul></div><div class="group"><p>Reference</p><ul><li><a href="../../developers/tools/">Tools</a></li><li><a href="../../developers/protocol/">Protocol</a></li><li><a href="../../developers/hook/">Checkpoint hook</a></li></ul></div><div class="group"><p>Files and refs</p><ul><li><a href="../../developers/policy/">Policy file</a></li><li><a href="../../developers/attribution/">Agent attribution</a></li><li><a href="../../developers/worktrees/">Worktree summary</a></li></ul></div><div class="group"><p>Build</p><ul><li><a href="../../developers/extend/" aria-current="page">Extend Branchlane</a></li><li><a href="../../developers/support/">Questions and requests</a></li></ul></div></nav>
+<main id="main"><article class="page">
+<p class="crumb"><a href="../../developers/">Developers</a><span aria-hidden="true">/</span><span>Build</span></p>
+<h1>Extend Branchlane</h1>
+<p class="lede">Bring your own model server, or an MCP server for the assistant.</p>
+<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="text">
+<h2 id="your-own-model-server">Your own model server<a class="anchor" href="#your-own-model-server" aria-label="#Your own model server">#</a></h2>
+<p>Settings &gt; Assistant accepts any OpenAI-compatible server. Branchlane calls <code>POST ../..//chat/completions</code> with <code>stream: true</code> and reads server-sent events or a plain JSON reply, and uses <code>GET ../..//models</code> to test the connection. Without a path it adds <code>/v1</code>, so Ollama (<code>http://localhost:11434</code>) and LM Studio (<code>http://localhost:1234</code>) work as they are. A key is never sent over plain HTTP to another machine.</p>
+<p>Repository data is wrapped between random <code>BEGIN data-…</code> and <code>END data-…</code> markers, and the model is told that what is inside is data, not instructions.</p>
+<h2 id="your-own-mcp-server-for-the-assistant">Your own MCP server for the assistant<a class="anchor" href="#your-own-mcp-server-for-the-assistant" aria-label="#Your own MCP server for the assistant">#</a></h2>
+<p>The assistant can call tools on MCP servers that the person adds in Settings &gt; Assistant. Serve the Streamable HTTP transport (protocol <code>2025-06-18</code>) over HTTPS, or over HTTP on localhost. Branchlane sends <code>MCP-Protocol-Version</code>, keeps <code>Mcp-Session-Id</code>, and can add a Bearer token. Stdio servers cannot be started from the App Sandbox.</p>
+</div>
+<nav class="next" aria-label="Previous, Next"><a class="back" href="../../developers/worktrees/"><small>Previous</small><b>Worktree summary</b></a><a class="fwd" href="../../developers/support/"><small>Next</small><b>Questions and requests</b></a></nav>
+<footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/developers-extend.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
+</article></main>
+<aside class="outline"><p>On this page</p><ul><li><a href="#your-own-model-server">Your own model server</a></li><li><a href="#your-own-mcp-server-for-the-assistant">Your own MCP server for the assistant</a></li></ul></aside>
+</div>
+<dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
+<script src="../../assets/docs.js?v=20261125"></script>
+</body>
+</html>

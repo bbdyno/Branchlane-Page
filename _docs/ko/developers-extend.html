@@ -1,0 +1,5 @@
+<h2>내 모델 서버</h2>
+<p>설정 &gt; 비서는 OpenAI 호환 서버라면 무엇이든 받습니다. <code>stream: true</code>로 <code>POST {base}/chat/completions</code>를 부르고 SSE나 일반 JSON 응답을 읽으며, 연결 확인에는 <code>GET {base}/models</code>를 씁니다. 경로가 없으면 <code>/v1</code>을 붙이므로 Ollama(<code>http://localhost:11434</code>)와 LM Studio(<code>http://localhost:1234</code>)는 그대로 됩니다. 키는 다른 컴퓨터로 가는 일반 HTTP에는 절대 실리지 않습니다.</p>
+<p>저장소 데이터는 무작위 <code>BEGIN data-…</code>, <code>END data-…</code> 표시 사이에 넣고, 그 안은 지시가 아니라 데이터라고 모델에 알립니다.</p>
+<h2>비서용 내 MCP 서버</h2>
+<p>사람이 설정 &gt; 비서에 더한 MCP 서버의 도구를 비서가 부를 수 있습니다. Streamable HTTP(프로토콜 <code>2025-06-18</code>)를 HTTPS로, 또는 localhost에서는 HTTP로 열어 주세요. Branchlane은 <code>MCP-Protocol-Version</code>을 보내고 <code>Mcp-Session-Id</code>를 유지하며 Bearer 토큰을 붙일 수 있습니다. stdio 서버는 App Sandbox에서 띄울 수 없습니다.</p>

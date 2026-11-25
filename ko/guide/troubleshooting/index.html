@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문제 해결 - Branchlane 문서</title>
+<meta name="description" content="App Sandbox 때문에 막히는 곳을 푸는 방법입니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="문제 해결 - Branchlane 문서">
+<meta property="og:description" content="App Sandbox 때문에 막히는 곳을 푸는 방법입니다.">
+<meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
+<meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/ko/guide/troubleshooting/">
+<link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/troubleshooting/">
+<link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/guide/troubleshooting/">
+<link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/troubleshooting/">
+<link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/troubleshooting/">
+<link rel="icon" href="../../../assets/app-icon.png">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-base="../../../" data-area="ko/guide/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<a class="skip" href="#main">본문으로</a>
+<header class="bar"><div class="bar-in">
+<button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+<a class="brand" href="../../../ko/"><img src="../../../assets/app-icon.png" width="26" height="26" alt=""><span>Branchlane</span></a>
+<nav class="areas" aria-label="문서"><a href="../../../ko/guide/" aria-current="true">가이드</a><a href="../../../ko/developers/">개발자</a><a href="../../../ko/notes/">기술 노트</a></nav>
+<div class="bar-end">
+<button class="find" type="button" aria-label="문서 검색"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.6 10.6 3.4 3.4"/></svg><span>문서 검색</span><kbd>⌘K</kbd></button>
+<button class="icon theme" type="button" aria-label="밝은 화면과 어두운 화면 바꾸기"><svg class="sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.2v1.6M10 16.2v1.6M2.2 10h1.6M16.2 10h1.6M4.5 4.5l1.1 1.1M14.4 14.4l1.1 1.1M4.5 15.5l1.1-1.1M14.4 5.6l1.1-1.1"/></svg><svg class="moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.6 12.1A7 7 0 0 1 7.9 3.4a7 7 0 1 0 8.7 8.7Z"/></svg></button>
+<a class="text-link" href="../../../guide/troubleshooting/" lang="en">English</a>
+<a class="get" href="https://apps.apple.com/app/id6785129372">무료 다운로드</a>
+</div></div></header>
+<div class="scrim"></div>
+<div class="shell">
+<nav class="side" id="side" aria-label="문서 메뉴"><div class="side-areas"><a href="../../../ko/guide/" aria-current="true">가이드</a><a href="../../../ko/developers/">개발자</a><a href="../../../ko/notes/">기술 노트</a></div><div class="group"><p>시작</p><ul><li><a href="../../../ko/guide/">시작하기</a></li></ul></div><div class="group"><p>사용</p><ul><li><a href="../../../ko/guide/everyday/">매일 쓰는 Git</a></li><li><a href="../../../ko/guide/pro/">Pro 도구</a></li><li><a href="../../../ko/guide/shortcuts/">단축키</a></li></ul></div><div class="group"><p>에이전트</p><ul><li><a href="../../../ko/guide/lanes/">에이전트 Lane</a></li></ul></div><div class="group"><p>도움</p><ul><li><a href="../../../ko/guide/troubleshooting/" aria-current="page">문제 해결</a></li><li><a href="../../../ko/guide/support/">도움 받기</a></li></ul></div></nav>
+<main id="main"><article class="page">
+<p class="crumb"><a href="../../../ko/guide/">가이드</a><span aria-hidden="true">/</span><span>도움</span></p>
+<h1>문제 해결</h1>
+<p class="lede">App Sandbox 때문에 막히는 곳을 푸는 방법입니다.</p>
+<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="text">
+<h2 id="훅이나-스크립트가-operation-not-permitted-로-멈춤">훅이나 스크립트가 "operation not permitted"로 멈춤<a class="anchor" href="#훅이나-스크립트가-operation-not-permitted-로-멈춤" aria-label="#훅이나 스크립트가 &quot;operation not permitted&quot;로 멈춤">#</a></h2>
+<p>macOS는 App Store 앱이 쓴 파일을 격리하고, 격리된 프로그램은 실행되지 않습니다. Branchlane에서 복제, 풀, 체크아웃으로 받은 훅과 스크립트는 터미널에서 아래 명령을 한 번 실행해야 합니다. Branchlane이 나중에 다시 쓴 파일도 마찬가지입니다.</p>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">xattr</span> <span class="k">-dr</span> com.apple.quarantine /path/to/repo</code></pre></div>
+<p>이 문제로 Git 작업이 막히면 Branchlane이 내 경로를 넣은 명령을 보여 줍니다. 원래 디스크에 있던 훅은 그대로 실행됩니다.</p>
+<h2 id="커밋에-작성자가-없음">커밋에 작성자가 없음<a class="anchor" href="#커밋에-작성자가-없음" aria-label="#커밋에 작성자가 없음">#</a></h2>
+<p>설정 &gt; Git 및 SSH에서 <code>.gitconfig</code>를 고르거나, 저장소에 이름과 이메일을 정합니다.</p>
+<h2 id="ssh가-호스트-키를-물어봄">SSH가 호스트 키를 물어봄<a class="anchor" href="#ssh가-호스트-키를-물어봄" aria-label="#SSH가 호스트 키를 물어봄">#</a></h2>
+<p>호스트에 처음 연결할 때 지문이 나옵니다. 호스트가 공개한 지문과 같은지 확인하고 신뢰하세요. 신뢰한 호스트는 설정 &gt; Git 및 SSH에 나옵니다.</p>
+<h2 id="저장소-밖-워크트리에-변경이-안-보임">저장소 밖 워크트리에 변경이 안 보임<a class="anchor" href="#저장소-밖-워크트리에-변경이-안-보임" aria-label="#저장소 밖 워크트리에 변경이 안 보임">#</a></h2>
+<p>샌드박스가 그 폴더에 접근하려면 허락이 필요합니다. 워크트리 줄에서 접근 허용을 한 번 고르면 다음에도 기억합니다.</p>
+<h2 id="앱-안에-터미널이-없음">앱 안에 터미널이 없음<a class="anchor" href="#앱-안에-터미널이-없음" aria-label="#앱 안에 터미널이 없음">#</a></h2>
+<p>Git 콘솔(<kbd>⇧⌘C</kbd>)은 Git 명령만 실행합니다. 그 밖의 일은 터미널에서 열기로 터미널에 넘깁니다.</p>
+</div>
+<nav class="next" aria-label="이전, 다음"><a class="back" href="../../../ko/guide/lanes/"><small>이전</small><b>에이전트 Lane</b></a><a class="fwd" href="../../../ko/guide/support/"><small>다음</small><b>도움 받기</b></a></nav>
+<footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/guide-trouble.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../../privacy/">개인정보 처리방침</a><a href="../../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
+</article></main>
+<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#훅이나-스크립트가-operation-not-permitted-로-멈춤">훅이나 스크립트가 &quot;operation not permitted&quot;로 멈춤</a></li><li><a href="#커밋에-작성자가-없음">커밋에 작성자가 없음</a></li><li><a href="#ssh가-호스트-키를-물어봄">SSH가 호스트 키를 물어봄</a></li><li><a href="#저장소-밖-워크트리에-변경이-안-보임">저장소 밖 워크트리에 변경이 안 보임</a></li><li><a href="#앱-안에-터미널이-없음">앱 안에 터미널이 없음</a></li></ul></aside>
+</div>
+<dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
+<script src="../../../assets/docs.js?v=20261125"></script>
+</body>
+</html>

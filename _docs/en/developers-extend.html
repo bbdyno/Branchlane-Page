@@ -1,0 +1,5 @@
+<h2>Your own model server</h2>
+<p>Settings &gt; Assistant accepts any OpenAI-compatible server. Branchlane calls <code>POST {base}/chat/completions</code> with <code>stream: true</code> and reads server-sent events or a plain JSON reply, and uses <code>GET {base}/models</code> to test the connection. Without a path it adds <code>/v1</code>, so Ollama (<code>http://localhost:11434</code>) and LM Studio (<code>http://localhost:1234</code>) work as they are. A key is never sent over plain HTTP to another machine.</p>
+<p>Repository data is wrapped between random <code>BEGIN data-…</code> and <code>END data-…</code> markers, and the model is told that what is inside is data, not instructions.</p>
+<h2>Your own MCP server for the assistant</h2>
+<p>The assistant can call tools on MCP servers that the person adds in Settings &gt; Assistant. Serve the Streamable HTTP transport (protocol <code>2025-06-18</code>) over HTTPS, or over HTTP on localhost. Branchlane sends <code>MCP-Protocol-Version</code>, keeps <code>Mcp-Session-Id</code>, and can add a Bearer token. Stdio servers cannot be started from the App Sandbox.</p>

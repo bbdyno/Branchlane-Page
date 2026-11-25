@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Branchlane 확장 - Branchlane 문서</title>
+<meta name="description" content="내 모델 서버나 비서용 MCP 서버를 연결합니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Branchlane 확장 - Branchlane 문서">
+<meta property="og:description" content="내 모델 서버나 비서용 MCP 서버를 연결합니다.">
+<meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
+<meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/ko/developers/extend/">
+<link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/extend/">
+<link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/developers/extend/">
+<link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/extend/">
+<link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/extend/">
+<link rel="icon" href="../../../assets/app-icon.png">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<a class="skip" href="#main">본문으로</a>
+<header class="bar"><div class="bar-in">
+<button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+<a class="brand" href="../../../ko/"><img src="../../../assets/app-icon.png" width="26" height="26" alt=""><span>Branchlane</span></a>
+<nav class="areas" aria-label="문서"><a href="../../../ko/guide/">가이드</a><a href="../../../ko/developers/" aria-current="true">개발자</a><a href="../../../ko/notes/">기술 노트</a></nav>
+<div class="bar-end">
+<button class="find" type="button" aria-label="문서 검색"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.6 10.6 3.4 3.4"/></svg><span>문서 검색</span><kbd>⌘K</kbd></button>
+<button class="icon theme" type="button" aria-label="밝은 화면과 어두운 화면 바꾸기"><svg class="sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.2v1.6M10 16.2v1.6M2.2 10h1.6M16.2 10h1.6M4.5 4.5l1.1 1.1M14.4 14.4l1.1 1.1M4.5 15.5l1.1-1.1M14.4 5.6l1.1-1.1"/></svg><svg class="moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.6 12.1A7 7 0 0 1 7.9 3.4a7 7 0 1 0 8.7 8.7Z"/></svg></button>
+<a class="text-link" href="../../../developers/extend/" lang="en">English</a>
+<a class="get" href="https://apps.apple.com/app/id6785129372">무료 다운로드</a>
+</div></div></header>
+<div class="scrim"></div>
+<div class="shell">
+<nav class="side" id="side" aria-label="문서 메뉴"><div class="side-areas"><a href="../../../ko/guide/">가이드</a><a href="../../../ko/developers/" aria-current="true">개발자</a><a href="../../../ko/notes/">기술 노트</a></div><div class="group"><p>연결</p><ul><li><a href="../../../ko/developers/">Branchlane 위에 만들기</a></li><li><a href="../../../ko/developers/connect/">에이전트 연결</a></li><li><a href="../../../ko/developers/lanes/">Lane 흐름과 상태</a></li></ul></div><div class="group"><p>레퍼런스</p><ul><li><a href="../../../ko/developers/tools/">도구</a></li><li><a href="../../../ko/developers/protocol/">프로토콜</a></li><li><a href="../../../ko/developers/hook/">체크포인트 훅</a></li></ul></div><div class="group"><p>파일과 ref</p><ul><li><a href="../../../ko/developers/policy/">정책 파일</a></li><li><a href="../../../ko/developers/attribution/">에이전트 출처 표시</a></li><li><a href="../../../ko/developers/worktrees/">워크트리 요약</a></li></ul></div><div class="group"><p>만들기</p><ul><li><a href="../../../ko/developers/extend/" aria-current="page">Branchlane 확장</a></li><li><a href="../../../ko/developers/support/">질문과 요청</a></li></ul></div></nav>
+<main id="main"><article class="page">
+<p class="crumb"><a href="../../../ko/developers/">개발자</a><span aria-hidden="true">/</span><span>만들기</span></p>
+<h1>Branchlane 확장</h1>
+<p class="lede">내 모델 서버나 비서용 MCP 서버를 연결합니다.</p>
+<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="text">
+<h2 id="내-모델-서버">내 모델 서버<a class="anchor" href="#내-모델-서버" aria-label="#내 모델 서버">#</a></h2>
+<p>설정 &gt; 비서는 OpenAI 호환 서버라면 무엇이든 받습니다. <code>stream: true</code>로 <code>POST ../../../ko//chat/completions</code>를 부르고 SSE나 일반 JSON 응답을 읽으며, 연결 확인에는 <code>GET ../../../ko//models</code>를 씁니다. 경로가 없으면 <code>/v1</code>을 붙이므로 Ollama(<code>http://localhost:11434</code>)와 LM Studio(<code>http://localhost:1234</code>)는 그대로 됩니다. 키는 다른 컴퓨터로 가는 일반 HTTP에는 절대 실리지 않습니다.</p>
+<p>저장소 데이터는 무작위 <code>BEGIN data-…</code>, <code>END data-…</code> 표시 사이에 넣고, 그 안은 지시가 아니라 데이터라고 모델에 알립니다.</p>
+<h2 id="비서용-내-mcp-서버">비서용 내 MCP 서버<a class="anchor" href="#비서용-내-mcp-서버" aria-label="#비서용 내 MCP 서버">#</a></h2>
+<p>사람이 설정 &gt; 비서에 더한 MCP 서버의 도구를 비서가 부를 수 있습니다. Streamable HTTP(프로토콜 <code>2025-06-18</code>)를 HTTPS로, 또는 localhost에서는 HTTP로 열어 주세요. Branchlane은 <code>MCP-Protocol-Version</code>을 보내고 <code>Mcp-Session-Id</code>를 유지하며 Bearer 토큰을 붙일 수 있습니다. stdio 서버는 App Sandbox에서 띄울 수 없습니다.</p>
+</div>
+<nav class="next" aria-label="이전, 다음"><a class="back" href="../../../ko/developers/worktrees/"><small>이전</small><b>워크트리 요약</b></a><a class="fwd" href="../../../ko/developers/support/"><small>다음</small><b>질문과 요청</b></a></nav>
+<footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/developers-extend.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../../privacy/">개인정보 처리방침</a><a href="../../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
+</article></main>
+<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#내-모델-서버">내 모델 서버</a></li><li><a href="#비서용-내-mcp-서버">비서용 내 MCP 서버</a></li></ul></aside>
+</div>
+<dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
+<script src="../../../assets/docs.js?v=20261125"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lane flow and states - Branchlane Docs</title>
+<meta name="description" content="The order of calls, and what each state means.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lane flow and states - Branchlane Docs">
+<meta property="og:description" content="The order of calls, and what each state means.">
+<meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
+<meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/developers/lanes/">
+<link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/developers/lanes/">
+<link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/developers/lanes/">
+<link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/lanes/">
+<link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/lanes/">
+<link rel="icon" href="../../assets/app-icon.png">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="bar-in">
+<button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+<a class="brand" href="../../"><img src="../../assets/app-icon.png" width="26" height="26" alt=""><span>Branchlane</span></a>
+<nav class="areas" aria-label="Docs"><a href="../../guide/">Guide</a><a href="../../developers/" aria-current="true">Developers</a></nav>
+<div class="bar-end">
+<button class="find" type="button" aria-label="Search docs"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.6 10.6 3.4 3.4"/></svg><span>Search docs</span><kbd>⌘K</kbd></button>
+<button class="icon theme" type="button" aria-label="Switch between light and dark"><svg class="sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.2v1.6M10 16.2v1.6M2.2 10h1.6M16.2 10h1.6M4.5 4.5l1.1 1.1M14.4 14.4l1.1 1.1M4.5 15.5l1.1-1.1M14.4 5.6l1.1-1.1"/></svg><svg class="moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.6 12.1A7 7 0 0 1 7.9 3.4a7 7 0 1 0 8.7 8.7Z"/></svg></button>
+<a class="text-link" href="../../ko/developers/lanes/" lang="ko">한국어</a>
+<a class="get" href="https://apps.apple.com/app/id6785129372">Download free</a>
+</div></div></header>
+<div class="scrim"></div>
+<div class="shell">
+<nav class="side" id="side" aria-label="Docs navigation"><div class="side-areas"><a href="../../guide/">Guide</a><a href="../../developers/" aria-current="true">Developers</a></div><div class="group"><p>Connect</p><ul><li><a href="../../developers/">Build on Branchlane</a></li><li><a href="../../developers/connect/">Connect an agent</a></li><li><a href="../../developers/lanes/" aria-current="page">Lane flow and states</a></li></ul></div><div class="group"><p>Reference</p><ul><li><a href="../../developers/tools/">Tools</a></li><li><a href="../../developers/protocol/">Protocol</a></li><li><a href="../../developers/hook/">Checkpoint hook</a></li></ul></div><div class="group"><p>Files and refs</p><ul><li><a href="../../developers/policy/">Policy file</a></li><li><a href="../../developers/attribution/">Agent attribution</a></li><li><a href="../../developers/worktrees/">Worktree summary</a></li></ul></div><div class="group"><p>Build</p><ul><li><a href="../../developers/extend/">Extend Branchlane</a></li><li><a href="../../developers/support/">Questions and requests</a></li></ul></div></nav>
+<main id="main"><article class="page">
+<p class="crumb"><a href="../../developers/">Developers</a><span aria-hidden="true">/</span><span>Connect</span></p>
+<h1>Lane flow and states</h1>
+<p class="lede">The order of calls, and what each state means.</p>
+<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="text">
+<h2 id="order">Order of calls<a class="anchor" href="#order" aria-label="#Order of calls">#</a></h2>
+<ol class="steps">
+  <li><code>lane_begin</code>, then work only inside the returned worktree. Commit there as you like: Branchlane snapshots uncommitted work too.</li>
+  <li><code>lane_status</code> before you start and before you propose. It tells you which files other agents are touching.</li>
+  <li><code>lane_checkpoint</code> whenever you like. The checkpoint hook also saves one at the end of every turn.</li>
+  <li><code>lane_evidence</code> after your last edit, for each test, build or lint run. Keep the returned ids.</li>
+  <li><code>lane_propose</code> with a summary and claims that cite those ids.</li>
+  <li><code>lane_status</code> later, for review feedback, left-out files and hunks, and notes.</li>
+</ol>
+
+<h2 id="states">States<a class="anchor" href="#states" aria-label="#States">#</a></h2>
+<div class="states" aria-hidden="true"><span>running</span><i></i><span>proposed</span><i></i><span>accepted</span><i></i><span class="end">integrated</span></div>
+<div class="table-wrap"><table>
+<thead>
+<tr><th scope="col">Value</th><th scope="col">In the app</th><th scope="col">When</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>running</code></th><td>Working</td><td>lane_begin, or returned by the person</td></tr>
+<tr><th scope="row"><code>proposed</code></th><td>Ready for Review</td><td>lane_propose</td></tr>
+<tr><th scope="row"><code>accepted</code></th><td>In Queue</td><td>The person accepted it; requireEvidence must pass</td></tr>
+<tr><th scope="row"><code>needsUpdate</code></th><td>Needs Update</td><td>The target moved and the work no longer applies. Rebase onto the target and propose again.</td></tr>
+<tr><th scope="row"><code>integrated</code></th><td>Integrated</td><td>Landed on the target in one commit</td></tr>
+<tr><th scope="row"><code>reverted</code></th><td>Reverted</td><td>Taken back out with one commit</td></tr>
+<tr><th scope="row"><code>abandoned</code></th><td>Abandoned</td><td>Cleaned up without integrating</td></tr></tbody></table></div>
+</div>
+<nav class="next" aria-label="Previous, Next"><a class="back" href="../../developers/connect/"><small>Previous</small><b>Connect an agent</b></a><a class="fwd" href="../../developers/tools/"><small>Next</small><b>Tools</b></a></nav>
+<footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/developers-flow.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
+</article></main>
+<aside class="outline"><p>On this page</p><ul><li><a href="#order">Order of calls</a></li><li><a href="#states">States</a></li></ul></aside>
+</div>
+<dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
+<script src="../../assets/docs.js?v=20261125"></script>
+</body>
+</html>

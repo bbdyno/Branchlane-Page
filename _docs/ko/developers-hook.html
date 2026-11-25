@@ -1,0 +1,10 @@
+<p><code>POST /hook/checkpoint</code>는 Claude Code가 보내는 훅 JSON에서 <code>cwd</code>를 읽습니다. 그 폴더가 Lane 워크트리 안이면 체크포인트를 남기고 <code>{"checkpoint":true}</code>를, 아니면 아무것도 하지 않고 <code>false</code>를 돌려줍니다. <code>.claude/settings.local.json</code>에 합칩니다.</p>
+<pre data-lang="json" data-file=".claude/settings.local.json"><code>{
+  &quot;hooks&quot;: {
+    &quot;Stop&quot;: [{ &quot;hooks&quot;: [{
+      &quot;type&quot;: &quot;command&quot;,
+      &quot;command&quot;: &quot;curl -s -m 5 -X POST -H &#x27;Authorization: Bearer &lt;token&gt;&#x27; -H &#x27;Content-Type: application/json&#x27; --data-binary @- http://127.0.0.1:47120/hook/checkpoint &gt;/dev/null 2&gt;&amp;1 || true&quot;
+    }] }]
+  }
+}</code></pre>
+<p>Branchlane이 꺼져 있으면 조용히 실패해서 에이전트를 막지 않습니다.</p>

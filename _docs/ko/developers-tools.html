@@ -1,0 +1,57 @@
+<h2 id="common">공통 인자</h2>
+<p>모든 도구가 받습니다.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">인자</th><th scope="col">형식</th><th scope="col">설명</th></tr></thead><tbody>
+<tr><th scope="row"><code>path</code><span class="req">필수</span></th><td>string</td><td>작업 폴더. 저장소나 Lane 워크트리입니다.</td></tr>
+<tr><th scope="row"><code>lane_id</code></th><td>string</td><td><code>path</code>가 Lane 워크트리 안이면 생략할 수 있습니다.</td></tr>
+</tbody></table></div>
+
+<h2 id="lane_begin" class="sig"><code>lane_begin</code></h2>
+<p>Lane을 시작합니다. 브랜치 <code>lane/&lt;slug&gt;-&lt;id&gt;</code>와 <code>.branchlane/lanes/&lt;id&gt;</code> 아래 워크트리를 만듭니다. 그 뒤로는 그 워크트리에서만 작업합니다. <code>lane_id</code>, <code>worktree</code>, <code>branch</code>, <code>target</code>을 돌려줍니다.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">인자</th><th scope="col">형식</th><th scope="col">설명</th></tr></thead><tbody>
+<tr><th scope="row"><code>intent</code><span class="req">필수</span></th><td>string</td><td>사람이 부탁한 일을 한두 문장으로 적습니다.</td></tr>
+<tr><th scope="row"><code>agent</code></th><td>string</td><td>도구와 모델. 예: <code>claude-code/claude-opus-5-5</code></td></tr>
+<tr><th scope="row"><code>scope</code></th><td>string[]</td><td>바꿀 것 같은 경로. 충돌 경고의 실마리로 씁니다.</td></tr>
+<tr><th scope="row"><code>target</code></th><td>string</td><td>작업이 들어갈 브랜치. 생략하면 저장소의 메인 브랜치입니다.</td></tr>
+<tr><th scope="row"><code>clone</code></th><td>string[]</td><td>메인 워크트리에서 복사할 무시된 폴더. 예: <code>node_modules</code>, <code>.build</code></td></tr>
+</tbody></table></div>
+
+<h2 id="lane_status" class="sig"><code>lane_status</code><span class="badge read">읽기 전용</span></h2>
+<p>Lane의 상태, 기록한 증거가 지금 코드와 맞는지, 검토 의견, 사람이 뺀 파일과 헝크, 다른 워크트리나 대상 브랜치와 겹치는 곳(줄 범위와 먼저 통합할 쪽 포함)을 돌려줍니다.</p>
+
+
+<h2 id="lane_checkpoint" class="sig"><code>lane_checkpoint</code></h2>
+<p>스테이징이나 커밋 없이 미커밋 변경까지 포함해 워크트리를 스냅샷으로 남깁니다.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">인자</th><th scope="col">형식</th><th scope="col">설명</th></tr></thead><tbody>
+<tr><th scope="row"><code>note</code></th><td>string</td><td>스냅샷에 남길 메모.</td></tr>
+</tbody></table></div>
+
+<h2 id="lane_evidence" class="sig"><code>lane_evidence</code></h2>
+<p>명령이 지금 내용에서 실행됐고 어떻게 끝났는지 기록합니다. 내용이 그대로일 때만 유효하니 마지막 수정 뒤에 부르세요. <code>evidence_id</code>를 돌려줍니다.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">인자</th><th scope="col">형식</th><th scope="col">설명</th></tr></thead><tbody>
+<tr><th scope="row"><code>command</code><span class="req">필수</span></th><td>string</td><td>실행한 명령. 예: <code>swift test</code></td></tr>
+<tr><th scope="row"><code>exit_code</code><span class="req">필수</span></th><td>integer</td><td>끝난 값. 0이면 통과입니다.</td></tr>
+<tr><th scope="row"><code>output</code></th><td>string</td><td>명령의 출력. 끝부분만 비밀을 가려 남깁니다.</td></tr>
+</tbody></table></div>
+
+<h2 id="lane_propose" class="sig"><code>lane_propose</code></h2>
+<p>지금 상태 그대로 검토를 요청합니다. 유효한 증거가 없는 주장은 표시됩니다.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">인자</th><th scope="col">형식</th><th scope="col">설명</th></tr></thead><tbody>
+<tr><th scope="row"><code>summary</code><span class="req">필수</span></th><td>string</td><td>검토하는 사람에게 보여 줄, 바꾼 내용과 이유.</td></tr>
+<tr><th scope="row"><code>claims</code></th><td>object[]</td><td>주장과 그것을 받치는 증거 id. <code>{ text, evidence[] }</code></td></tr>
+</tbody></table></div>
+<h3 id="lane_propose-example">예시</h3>
+<pre data-lang="json"><code>{&quot;name&quot;: &quot;lane_propose&quot;, &quot;arguments&quot;: {
+  &quot;path&quot;: &quot;/Users/me/src/app/.branchlane/lanes/a7f460dc&quot;,
+  &quot;summary&quot;: &quot;Pushes are retried with exponential backoff and jitter. Six attempts at most.&quot;,
+  &quot;claims&quot;: [
+    { &quot;text&quot;: &quot;A busy server is tried again, up to six times&quot;, &quot;evidence&quot;: [1] },
+    { &quot;text&quot;: &quot;The library file format is unchanged&quot; }
+  ]
+}}</code></pre>
+
+<h2 id="lane_request" class="sig"><code>lane_request</code></h2>
+<p>푸시, 강제 푸시, 기록 다시 쓰기를 요청합니다. 정책이 정하고, 일부는 사람의 승인을 최대 2분 기다립니다. 승인된 푸시는 사람의 인증 정보로 실행됩니다.</p>
+<div class="table-wrap"><table class="params"><thead><tr><th scope="col">인자</th><th scope="col">형식</th><th scope="col">설명</th></tr></thead><tbody>
+<tr><th scope="row"><code>action</code><span class="req">필수</span></th><td>enum</td><td><code>push</code>, <code>force_push</code>, <code>rewrite_history</code> 중 하나.</td></tr>
+<tr><th scope="row"><code>reason</code></th><td>string</td><td>사람에게 보여 줄 이유.</td></tr>
+</tbody></table></div>

@@ -1,0 +1,54 @@
+<h2 id="add">Add the server</h2>
+<p>Open Settings &gt; Agents, turn on <strong>Let agents connect</strong>, and copy the line for your agent. It already holds your port and token. Branchlane never writes these files for you.</p>
+<tabs>
+<tab name="Claude Code"><p>Run once in Terminal:</p>
+<pre data-lang="bash"><code>claude mcp add --transport http branchlane \
+  http://127.0.0.1:47120/mcp \
+  --header &quot;Authorization: Bearer &lt;token&gt;&quot;</code></pre></tab>
+<tab name="Codex"><p>Add to <code>~/.codex/config.toml</code>:</p>
+<pre data-lang="toml" data-file="~/.codex/config.toml"><code>[mcp_servers.branchlane]
+url = &quot;http://127.0.0.1:47120/mcp&quot;
+http_headers = { Authorization = &quot;Bearer &lt;token&gt;&quot; }</code></pre></tab>
+<tab name="Any other MCP client"><p>Use the Streamable HTTP transport with the endpoint <code>http://127.0.0.1:47120/mcp</code> and the header <code>Authorization: Bearer &lt;token&gt;</code>. The port can be changed in Settings.</p></tab>
+</tabs>
+
+<h2 id="try">Try it by hand</h2>
+<p>Start a session:</p>
+<pre data-lang="bash"><code>curl -s http://127.0.0.1:47120/mcp \
+  -H "Authorization: Bearer $BRANCHLANE_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+  "jsonrpc": "2.0", "id": 1, "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-06-18",
+    "capabilities": {},
+    "clientInfo": { "name": "my-tool", "version": "1.0" }
+  }
+}'</code></pre>
+<p>Call a tool:</p>
+<pre data-lang="bash"><code>curl -s http://127.0.0.1:47120/mcp \
+  -H "Authorization: Bearer $BRANCHLANE_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+  "jsonrpc": "2.0", "id": 2, "method": "tools/call",
+  "params": {
+    "name": "lane_begin",
+    "arguments": {
+      "path": "/Users/me/src/app",
+      "intent": "Retry sync with backoff when the server is busy",
+      "agent": "my-tool/model-x",
+      "scope": ["Sources/Sync/"]
+    }
+  }
+}'</code></pre>
+
+<h2 id="result">Read the result</h2>
+<p>Every tool returns its result as a JSON string inside a text item:</p>
+<pre data-lang="json"><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 2,
+  &quot;result&quot;: {
+    &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;{\n  \&quot;branch\&quot; : \&quot;lane/retry-sync-with-backoff-a7f4\&quot;,\n  \&quot;lane_id\&quot; : \&quot;a7f460dc\&quot;, ... }&quot; }],
+    &quot;isError&quot;: false
+  }
+}</code></pre>

@@ -1,0 +1,23 @@
+<h2 id="order">Order of calls</h2>
+<ol class="steps">
+  <li><code>lane_begin</code>, then work only inside the returned worktree. Commit there as you like: Branchlane snapshots uncommitted work too.</li>
+  <li><code>lane_status</code> before you start and before you propose. It tells you which files other agents are touching.</li>
+  <li><code>lane_checkpoint</code> whenever you like. The checkpoint hook also saves one at the end of every turn.</li>
+  <li><code>lane_evidence</code> after your last edit, for each test, build or lint run. Keep the returned ids.</li>
+  <li><code>lane_propose</code> with a summary and claims that cite those ids.</li>
+  <li><code>lane_status</code> later, for review feedback, left-out files and hunks, and notes.</li>
+</ol>
+
+<h2 id="states">States</h2>
+<div class="states" aria-hidden="true"><span>running</span><i></i><span>proposed</span><i></i><span>accepted</span><i></i><span class="end">integrated</span></div>
+<div class="table-wrap"><table>
+<thead>
+<tr><th scope="col">Value</th><th scope="col">In the app</th><th scope="col">When</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>running</code></th><td>Working</td><td>lane_begin, or returned by the person</td></tr>
+<tr><th scope="row"><code>proposed</code></th><td>Ready for Review</td><td>lane_propose</td></tr>
+<tr><th scope="row"><code>accepted</code></th><td>In Queue</td><td>The person accepted it; requireEvidence must pass</td></tr>
+<tr><th scope="row"><code>needsUpdate</code></th><td>Needs Update</td><td>The target moved and the work no longer applies. Rebase onto the target and propose again.</td></tr>
+<tr><th scope="row"><code>integrated</code></th><td>Integrated</td><td>Landed on the target in one commit</td></tr>
+<tr><th scope="row"><code>reverted</code></th><td>Reverted</td><td>Taken back out with one commit</td></tr>
+<tr><th scope="row"><code>abandoned</code></th><td>Abandoned</td><td>Cleaned up without integrating</td></tr></tbody></table></div>

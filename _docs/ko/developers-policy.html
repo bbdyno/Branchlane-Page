@@ -1,0 +1,22 @@
+<h2 id="defaults">기본값</h2>
+<p>메인 워크트리의 <code>.branchlane/policy.json</code>은 Branchlane과 연결된 에이전트에게 무엇이 허용되는지 알려 줍니다. 커밋해서 팀이 함께 쓰세요. 설정 &gt; 에이전트에서 아래 기본값으로 만들 수 있습니다.</p>
+<pre data-lang="json" data-file=".branchlane/policy.json"><code>{
+  &quot;forbid&quot;: [&quot;force_push&quot;, &quot;rewrite_history&quot;],
+  &quot;protectedBranches&quot;: [&quot;main&quot;, &quot;master&quot;],
+  &quot;protectedPaths&quot;: [],
+  &quot;requireApproval&quot;: [&quot;push&quot;],
+  &quot;requireEvidence&quot;: [],
+  &quot;sensitivePaths&quot;: []
+}</code></pre>
+
+<h2 id="decisions">판단하는 방법</h2>
+<ul>
+  <li><strong>동작</strong>은 <code>push</code>, <code>force_push</code>, <code>rewrite_history</code>, <code>integrate</code>입니다.</li>
+  <li><strong>판단 순서:</strong> 금지한 동작은 거절합니다. 보호 브랜치에서는 강제 푸시와 기록 다시 쓰기를 거절하고 나머지는 사람에게 묻습니다. 그 밖에는 <code>requireApproval</code>에 있는 동작만 사람에게 묻고 나머지는 허용합니다.</li>
+  <li><strong>requireEvidence</strong>는 <code>swift test</code> 같은 명령 앞부분 목록입니다. 제안한 내용 그대로에서 통과한 증거가 있어야 Lane을 승인할 수 있습니다.</li>
+  <li><strong>protectedPaths</strong>는 검토에서 파일마다 명시적으로 승인해야 합니다. <strong>sensitivePaths</strong>는 마이그레이션, 인증 코드, CI 워크플로, 잠금 파일, <code>.env</code> 같은 기본 목록에 더해 먼저 보여 줍니다.</li>
+  <li>패턴은 <code>.gitignore</code> 규칙을 따르고 키는 camelCase입니다. 읽을 수 없는 파일은 기본값으로 돌아가고 오류는 설정에 나옵니다.</li>
+</ul>
+
+<h2 id="claude-code">Claude Code</h2>
+<p>설정 &gt; 에이전트는 정책을 Claude Code <code>permissions.deny</code> 규칙으로도 바꿔 줍니다. Claude Code가 스스로 금지된 일을 거절하게 됩니다.</p>

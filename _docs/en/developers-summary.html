@@ -1,0 +1,15 @@
+<p>When a repository has more than one worktree and the person has Pro, Branchlane keeps <code>&lt;git common dir&gt;/branchlane/worktrees.json</code> up to date, at least once a minute. Agents that do not speak MCP can read it instead of running <code>git status</code> in every worktree. It is removed when only one worktree is left.</p>
+<pre data-lang="json" data-file="branchlane/worktrees.json"><code>{
+  &quot;version&quot;: 1,
+  &quot;about&quot;: &quot;…&quot;,
+  &quot;generatedAt&quot;: &quot;2026-11-23T02:09:00Z&quot;,
+  &quot;target&quot;: &quot;refs/heads/main&quot;,
+  &quot;worktrees&quot;: [
+    { &quot;path&quot;: &quot;…&quot;, &quot;branch&quot;: &quot;lane/retry-sync-a7f4&quot;, &quot;head&quot;: &quot;…&quot;,
+      &quot;access&quot;: &quot;readable&quot;, &quot;uncommittedFiles&quot;: [&quot;Sources/Sync/SyncEngine.swift&quot;], &quot;lastChange&quot;: &quot;…&quot; }
+  ],
+  &quot;collisions&quot;: [
+    { &quot;between&quot;: [&quot;…&quot;, &quot;…&quot;], &quot;conflicts&quot;: false, &quot;sameFiles&quot;: [&quot;Sources/Sync/SyncEngine.swift&quot;],
+      &quot;conflictLines&quot;: { &quot;Sources/Sync/SyncEngine.swift&quot;: [[&quot;40-60&quot;, &quot;41&quot;]] } }
+  ]
+}</code></pre>

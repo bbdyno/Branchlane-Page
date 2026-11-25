@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Troubleshooting - Branchlane Docs</title>
+<meta name="description" content="What to do where the App Sandbox gets in the way.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Troubleshooting - Branchlane Docs">
+<meta property="og:description" content="What to do where the App Sandbox gets in the way.">
+<meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
+<meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/guide/troubleshooting/">
+<link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/guide/troubleshooting/">
+<link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/guide/troubleshooting/">
+<link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/troubleshooting/">
+<link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/troubleshooting/">
+<link rel="icon" href="../../assets/app-icon.png">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-base="../../" data-area="guide/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="bar-in">
+<button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+<a class="brand" href="../../"><img src="../../assets/app-icon.png" width="26" height="26" alt=""><span>Branchlane</span></a>
+<nav class="areas" aria-label="Docs"><a href="../../guide/" aria-current="true">Guide</a><a href="../../developers/">Developers</a></nav>
+<div class="bar-end">
+<button class="find" type="button" aria-label="Search docs"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.6 10.6 3.4 3.4"/></svg><span>Search docs</span><kbd>⌘K</kbd></button>
+<button class="icon theme" type="button" aria-label="Switch between light and dark"><svg class="sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.2v1.6M10 16.2v1.6M2.2 10h1.6M16.2 10h1.6M4.5 4.5l1.1 1.1M14.4 14.4l1.1 1.1M4.5 15.5l1.1-1.1M14.4 5.6l1.1-1.1"/></svg><svg class="moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.6 12.1A7 7 0 0 1 7.9 3.4a7 7 0 1 0 8.7 8.7Z"/></svg></button>
+<a class="text-link" href="../../ko/guide/troubleshooting/" lang="ko">한국어</a>
+<a class="get" href="https://apps.apple.com/app/id6785129372">Download free</a>
+</div></div></header>
+<div class="scrim"></div>
+<div class="shell">
+<nav class="side" id="side" aria-label="Docs navigation"><div class="side-areas"><a href="../../guide/" aria-current="true">Guide</a><a href="../../developers/">Developers</a></div><div class="group"><p>Start</p><ul><li><a href="../../guide/">Get started</a></li></ul></div><div class="group"><p>Use</p><ul><li><a href="../../guide/everyday/">Everyday Git</a></li><li><a href="../../guide/pro/">Pro tools</a></li><li><a href="../../guide/shortcuts/">Keyboard shortcuts</a></li></ul></div><div class="group"><p>Agents</p><ul><li><a href="../../guide/lanes/">Agent lanes</a></li></ul></div><div class="group"><p>Help</p><ul><li><a href="../../guide/troubleshooting/" aria-current="page">Troubleshooting</a></li><li><a href="../../guide/support/">Get help</a></li></ul></div></nav>
+<main id="main"><article class="page">
+<p class="crumb"><a href="../../guide/">Guide</a><span aria-hidden="true">/</span><span>Help</span></p>
+<h1>Troubleshooting</h1>
+<p class="lede">What to do where the App Sandbox gets in the way.</p>
+<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="text">
+<h2 id="a-hook-or-script-says-operation-not-permitted">A hook or script says "operation not permitted"<a class="anchor" href="#a-hook-or-script-says-operation-not-permitted" aria-label="#A hook or script says &quot;operation not permitted&quot;">#</a></h2>
+<p>macOS quarantines files written by App Store apps, and quarantined programs cannot run. Hooks and scripts that arrive through a clone, pull or checkout in Branchlane need this once in Terminal, and again after Branchlane writes them later:</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">xattr</span> <span class="k">-dr</span> com.apple.quarantine /path/to/repo</code></pre></div>
+<p>Branchlane shows the command with your path when this blocks a Git operation. Hooks that were already on disk run normally.</p>
+<h2 id="commits-have-no-author">Commits have no author<a class="anchor" href="#commits-have-no-author" aria-label="#Commits have no author">#</a></h2>
+<p>Choose your <code>.gitconfig</code> in Settings &gt; Git &amp; SSH, or set a name and email for the repository.</p>
+<h2 id="ssh-asks-about-a-host-key">SSH asks about a host key<a class="anchor" href="#ssh-asks-about-a-host-key" aria-label="#SSH asks about a host key">#</a></h2>
+<p>The first connection to a host shows its fingerprint. Check it against your host's published fingerprint and trust it. Trusted hosts are listed in Settings &gt; Git &amp; SSH.</p>
+<h2 id="a-worktree-outside-the-repository-shows-no-changes">A worktree outside the repository shows no changes<a class="anchor" href="#a-worktree-outside-the-repository-shows-no-changes" aria-label="#A worktree outside the repository shows no changes">#</a></h2>
+<p>The sandbox needs access to that folder. Choose Allow Access on the worktree row once, and Branchlane remembers it.</p>
+<h2 id="there-is-no-terminal-inside-the-app">There is no terminal inside the app<a class="anchor" href="#there-is-no-terminal-inside-the-app" aria-label="#There is no terminal inside the app">#</a></h2>
+<p>The Git console (<kbd>⇧⌘C</kbd>) runs Git commands. For anything else, Open in Terminal hands the repository to Terminal.</p>
+</div>
+<nav class="next" aria-label="Previous, Next"><a class="back" href="../../guide/lanes/"><small>Previous</small><b>Agent lanes</b></a><a class="fwd" href="../../guide/support/"><small>Next</small><b>Get help</b></a></nav>
+<footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/guide-trouble.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
+</article></main>
+<aside class="outline"><p>On this page</p><ul><li><a href="#a-hook-or-script-says-operation-not-permitted">A hook or script says &quot;operation not permitted&quot;</a></li><li><a href="#commits-have-no-author">Commits have no author</a></li><li><a href="#ssh-asks-about-a-host-key">SSH asks about a host key</a></li><li><a href="#a-worktree-outside-the-repository-shows-no-changes">A worktree outside the repository shows no changes</a></li><li><a href="#there-is-no-terminal-inside-the-app">There is no terminal inside the app</a></li></ul></aside>
+</div>
+<dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
+<script src="../../assets/docs.js?v=20261125"></script>
+</body>
+</html>

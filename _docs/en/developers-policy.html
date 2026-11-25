@@ -1,0 +1,22 @@
+<h2 id="defaults">Defaults</h2>
+<p><code>.branchlane/policy.json</code> in the main worktree tells Branchlane, and the agents it serves, what is allowed. Commit it so the whole team shares it. Settings &gt; Agents can create it with these defaults:</p>
+<pre data-lang="json" data-file=".branchlane/policy.json"><code>{
+  &quot;forbid&quot;: [&quot;force_push&quot;, &quot;rewrite_history&quot;],
+  &quot;protectedBranches&quot;: [&quot;main&quot;, &quot;master&quot;],
+  &quot;protectedPaths&quot;: [],
+  &quot;requireApproval&quot;: [&quot;push&quot;],
+  &quot;requireEvidence&quot;: [],
+  &quot;sensitivePaths&quot;: []
+}</code></pre>
+
+<h2 id="decisions">How it decides</h2>
+<ul>
+  <li><strong>Actions</strong> are <code>push</code>, <code>force_push</code>, <code>rewrite_history</code> and <code>integrate</code>.</li>
+  <li><strong>Decision order:</strong> a forbidden action is denied. On a protected branch, force-push and rewrite are denied and the rest go to the person. Otherwise actions in <code>requireApproval</code> go to the person and the rest are allowed.</li>
+  <li><strong>requireEvidence</strong> lists command prefixes, such as <code>swift test</code>, that must have passed on exactly the proposed content before a lane can be accepted.</li>
+  <li><strong>protectedPaths</strong> need an explicit yes for each file in review. <strong>sensitivePaths</strong> are shown first, on top of built-in ones such as migrations, auth code, CI workflows, lock files and <code>.env</code> files.</li>
+  <li>Patterns follow <code>.gitignore</code> rules. Keys are camelCase. A file that does not parse falls back to the defaults and the error shows in Settings.</li>
+</ul>
+
+<h2 id="claude-code">Claude Code</h2>
+<p>Settings &gt; Agents also turns the policy into Claude Code <code>permissions.deny</code> rules, so Claude Code itself refuses what the policy forbids.</p>

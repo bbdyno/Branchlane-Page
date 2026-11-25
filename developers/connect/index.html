@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connect an agent - Branchlane Docs</title>
+<meta name="description" content="Add the local MCP server to Claude Code, Codex or any MCP client.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Connect an agent - Branchlane Docs">
+<meta property="og:description" content="Add the local MCP server to Claude Code, Codex or any MCP client.">
+<meta property="og:image" content="https://bbdyno.github.io/Branchlane-Page/screenshots/branchlane-graph.png">
+<meta property="og:url" content="https://bbdyno.github.io/Branchlane-Page/developers/connect/">
+<link rel="canonical" href="https://bbdyno.github.io/Branchlane-Page/developers/connect/">
+<link rel="alternate" hreflang="en" href="https://bbdyno.github.io/Branchlane-Page/developers/connect/">
+<link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/connect/">
+<link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/connect/">
+<link rel="icon" href="../../assets/app-icon.png">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="bar-in">
+<button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+<a class="brand" href="../../"><img src="../../assets/app-icon.png" width="26" height="26" alt=""><span>Branchlane</span></a>
+<nav class="areas" aria-label="Docs"><a href="../../guide/">Guide</a><a href="../../developers/" aria-current="true">Developers</a></nav>
+<div class="bar-end">
+<button class="find" type="button" aria-label="Search docs"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.6 10.6 3.4 3.4"/></svg><span>Search docs</span><kbd>⌘K</kbd></button>
+<button class="icon theme" type="button" aria-label="Switch between light and dark"><svg class="sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.2v1.6M10 16.2v1.6M2.2 10h1.6M16.2 10h1.6M4.5 4.5l1.1 1.1M14.4 14.4l1.1 1.1M4.5 15.5l1.1-1.1M14.4 5.6l1.1-1.1"/></svg><svg class="moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.6 12.1A7 7 0 0 1 7.9 3.4a7 7 0 1 0 8.7 8.7Z"/></svg></button>
+<a class="text-link" href="../../ko/developers/connect/" lang="ko">한국어</a>
+<a class="get" href="https://apps.apple.com/app/id6785129372">Download free</a>
+</div></div></header>
+<div class="scrim"></div>
+<div class="shell">
+<nav class="side" id="side" aria-label="Docs navigation"><div class="side-areas"><a href="../../guide/">Guide</a><a href="../../developers/" aria-current="true">Developers</a></div><div class="group"><p>Connect</p><ul><li><a href="../../developers/">Build on Branchlane</a></li><li><a href="../../developers/connect/" aria-current="page">Connect an agent</a></li><li><a href="../../developers/lanes/">Lane flow and states</a></li></ul></div><div class="group"><p>Reference</p><ul><li><a href="../../developers/tools/">Tools</a></li><li><a href="../../developers/protocol/">Protocol</a></li><li><a href="../../developers/hook/">Checkpoint hook</a></li></ul></div><div class="group"><p>Files and refs</p><ul><li><a href="../../developers/policy/">Policy file</a></li><li><a href="../../developers/attribution/">Agent attribution</a></li><li><a href="../../developers/worktrees/">Worktree summary</a></li></ul></div><div class="group"><p>Build</p><ul><li><a href="../../developers/extend/">Extend Branchlane</a></li><li><a href="../../developers/support/">Questions and requests</a></li></ul></div></nav>
+<main id="main"><article class="page">
+<p class="crumb"><a href="../../developers/">Developers</a><span aria-hidden="true">/</span><span>Connect</span></p>
+<h1>Connect an agent</h1>
+<p class="lede">Add the local MCP server to Claude Code, Codex or any MCP client.</p>
+<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="text">
+<h2 id="add">Add the server<a class="anchor" href="#add" aria-label="#Add the server">#</a></h2>
+<p>Open Settings &gt; Agents, turn on <strong>Let agents connect</strong>, and copy the line for your agent. It already holds your port and token. Branchlane never writes these files for you.</p>
+<div class="tabs"><div class="tablist" role="tablist"><button type="button" role="tab" id="t1-0" aria-controls="p1-0" data-tab="Claude Code" aria-selected="true">Claude Code</button><button type="button" role="tab" id="t1-1" aria-controls="p1-1" data-tab="Codex" aria-selected="false">Codex</button><button type="button" role="tab" id="t1-2" aria-controls="p1-2" data-tab="Any other MCP client" aria-selected="false">Any other MCP client</button></div><div class="panel" role="tabpanel" id="p1-0" aria-labelledby="t1-0"><p>Run once in Terminal:</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">claude</span> mcp add <span class="k">--transport</span> http branchlane \
+  http://127.0.0.1:47120/mcp \
+  <span class="k">--header</span> <span class="s">"Authorization: Bearer &lt;token&gt;"</span></code></pre></div></div><div class="panel" role="tabpanel" id="p1-1" aria-labelledby="t1-1" hidden><p>Add to <code>~/.codex/config.toml</code>:</p>
+<div class="code"><div class="code-head"><span>~/.codex/config.toml</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">[mcp_servers.branchlane]</span>
+<span class="k">url</span> = <span class="s">"http://127.0.0.1:47120/mcp"</span>
+<span class="k">http_headers</span> = { <span class="k">Authorization</span> = <span class="s">"Bearer &lt;token&gt;"</span> }</code></pre></div></div><div class="panel" role="tabpanel" id="p1-2" aria-labelledby="t1-2" hidden><p>Use the Streamable HTTP transport with the endpoint <code>http://127.0.0.1:47120/mcp</code> and the header <code>Authorization: Bearer &lt;token&gt;</code>. The port can be changed in Settings.</p></div></div>
+
+<h2 id="try">Try it by hand<a class="anchor" href="#try" aria-label="#Try it by hand">#</a></h2>
+<p>Start a session:</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">curl</span> <span class="k">-s</span> http://127.0.0.1:47120/mcp \
+  <span class="k">-H</span> <span class="s">"Authorization: Bearer $BRANCHLANE_TOKEN"</span> \
+  <span class="k">-H</span> <span class="s">"Content-Type: application/json"</span> \
+  <span class="k">-d</span> <span class="s">'{
+  "jsonrpc": "2.0", "id": 1, "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-06-18",
+    "capabilities": {},
+    "clientInfo": { "name": "my-tool", "version": "1.0" }
+  }
+}'</span></code></pre></div>
+<p>Call a tool:</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">curl</span> <span class="k">-s</span> http://127.0.0.1:47120/mcp \
+  <span class="k">-H</span> <span class="s">"Authorization: Bearer $BRANCHLANE_TOKEN"</span> \
+  <span class="k">-H</span> <span class="s">"Content-Type: application/json"</span> \
+  <span class="k">-d</span> <span class="s">'{
+  "jsonrpc": "2.0", "id": 2, "method": "tools/call",
+  "params": {
+    "name": "lane_begin",
+    "arguments": {
+      "path": "/Users/me/src/app",
+      "intent": "Retry sync with backoff when the server is busy",
+      "agent": "my-tool/model-x",
+      "scope": ["Sources/Sync/"]
+    }
+  }
+}'</span></code></pre></div>
+
+<h2 id="result">Read the result<a class="anchor" href="#result" aria-label="#Read the result">#</a></h2>
+<p>Every tool returns its result as a JSON string inside a text item:</p>
+<div class="code"><div class="code-head"><span>JSON</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>{
+  <span class="k">"jsonrpc"</span>: <span class="s">"2.0"</span>,
+  <span class="k">"id"</span>: <span class="n">2</span>,
+  <span class="k">"result"</span>: {
+    <span class="k">"content"</span>: [{ <span class="k">"type"</span>: <span class="s">"text"</span>, <span class="k">"text"</span>: <span class="s">"{\n  \"branch\" : \"lane/retry-sync-with-backoff-a7f4\",\n  \"lane_id\" : \"a7f460dc\", ... }"</span> }],
+    <span class="k">"isError"</span>: <span class="w">false</span>
+  }
+}</code></pre></div>
+</div>
+<nav class="next" aria-label="Previous, Next"><a class="back" href="../../developers/"><small>Previous</small><b>Build on Branchlane</b></a><a class="fwd" href="../../developers/lanes/"><small>Next</small><b>Lane flow and states</b></a></nav>
+<footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/developers-connect.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
+</article></main>
+<aside class="outline"><p>On this page</p><ul><li><a href="#add">Add the server</a></li><li><a href="#try">Try it by hand</a></li><li><a href="#result">Read the result</a></li></ul></aside>
+</div>
+<dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
+<script src="../../assets/docs.js?v=20261125"></script>
+</body>
+</html>
