@@ -8,3 +8,11 @@
   }
 }</code></pre>
 <p>The command fails quietly when Branchlane is not running, so the agent is never blocked.</p>
+<h2 id="test">Test the hook</h2>
+<p>Send just a <code>cwd</code>, the way Claude Code does. Inside a lane worktree the answer is <code>true</code>.</p>
+<pre data-lang="bash"><code>echo '{"cwd":"/Users/me/src/app/.branchlane/lanes/a7f460dc"}' \
+  | curl -s -X POST http://127.0.0.1:47120/hook/checkpoint \
+      -H "Authorization: Bearer $BRANCHLANE_TOKEN" \
+      -H "Content-Type: application/json" --data-binary @-</code></pre>
+<pre data-lang="output"><code>{"checkpoint":true}</code></pre>
+

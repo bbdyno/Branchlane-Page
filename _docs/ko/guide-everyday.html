@@ -1,5 +1,11 @@
 <h2>스테이징과 커밋</h2>
-<p>오른쪽 패널에 스테이징 안 된 파일과 스테이징된 파일이 나옵니다. 파일째 올리거나, 파일을 열어 헝크나 줄 단위로 올립니다. 줄은 바이트 그대로 인덱스에 쓰여서 CRLF 줄 끝이나 다른 인코딩 파일도 그대로 남습니다. 요약을 쓰고 커밋, 또는 커밋 후 푸시를 누릅니다.</p>
+<p>오른쪽 패널에 스테이징 안 된 파일과 스테이징된 파일이 나옵니다. 파일째 올리거나, 파일을 열어 헝크나 줄 단위로 올립니다. 요약을 쓰고 커밋, 또는 커밋 후 푸시를 누릅니다.</p>
+<shot src="docs/staging" alt="오른쪽 패널. 스테이징 안 된 파일 4개와 스테이징된 파일 1개, 아래쪽에 커밋 요약과 커밋 버튼" narrow>파일 목록과 커밋 입력. 수정 커밋을 켜면 마지막 커밋을 고칩니다</shot>
+
+<h3 id="lines">줄 단위로 올리기</h3>
+<p>차이 화면에서 줄을 고르면 아래에 줄 스테이징과 줄 폐기가 나옵니다. 헝크 하나에서 일부 줄만 커밋하거나 버릴 때 씁니다. 줄은 바이트 그대로 인덱스에 쓰여서 CRLF 줄 끝이나 다른 인코딩 파일도 그대로 남습니다.</p>
+<shot src="docs/lines" alt="분할 차이 화면에서 5줄을 고르고 줄 폐기, 줄 스테이징, 지우기 버튼이 뜬 모습">새 함수의 다섯 줄만 골라 스테이징</shot>
+
 <h2>브랜치</h2>
 <p>새 브랜치는 <kbd>⌘B</kbd>, 브랜치 전환은 <kbd>⇧⌘B</kbd>입니다. 그래프에서 브랜치를 다른 브랜치 위로 끌어 놓으면 병합하거나 리베이스하고, 오른쪽 클릭하면 모든 동작이 나옵니다. 가져오기 <kbd>⇧⌘F</kbd>, 풀 <kbd>⇧⌘L</kbd>, 푸시 <kbd>⇧⌘K</kbd>.</p>
 <h2>병합 커밋 메시지</h2>
@@ -8,3 +14,18 @@
 <p><kbd>⌘Z</kbd>로 체크아웃, 커밋, 리셋, 버리기, 브랜치 삭제, 스태시 삭제, 리베이스를 되돌리고 <kbd>⇧⌘Z</kbd>로 다시 합니다. 기록이 Git 안에 남아서 앱을 껐다 켜도 됩니다.</p>
 <h2>스태시, 태그, 기록</h2>
 <p>스태시는 <kbd>⌥⌘S</kbd>, 최근 스태시 꺼내기는 <kbd>⇧⌥⌘S</kbd>입니다. 파일을 고르고 <kbd>⇧⌘H</kbd>를 누르면 그 파일의 기록이 나오고, 차이 화면에서 blame을 열 수 있습니다.</p>
+
+<h2 id="git">Git 명령으로 보면</h2>
+<p>터미널에 익숙하다면 아래처럼 대응합니다. Git 콘솔(<kbd>⇧⌘C</kbd>)에서 Git 명령을 직접 실행할 수도 있습니다.</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Branchlane에서</th><th scope="col">비슷한 Git 명령</th></tr></thead>
+<tbody>
+<tr><th scope="row">파일 스테이징</th><td><code>git add &lt;파일&gt;</code></td></tr>
+<tr><th scope="row">헝크나 줄 스테이징</th><td><code>git add -p &lt;파일&gt;</code></td></tr>
+<tr><th scope="row">모두 스테이징 해제</th><td><code>git restore --staged .</code></td></tr>
+<tr><th scope="row">수정 커밋</th><td><code>git commit --amend</code></td></tr>
+<tr><th scope="row">커밋 후 푸시</th><td><code>git commit -m "…" &amp;&amp; git push</code></td></tr>
+<tr><th scope="row">새 브랜치 <kbd>⌘B</kbd></th><td><code>git switch -c &lt;이름&gt;</code></td></tr>
+<tr><th scope="row">스태시 / 꺼내기</th><td><code>git stash push</code> / <code>git stash pop</code></td></tr>
+<tr><th scope="row">파일 기록 <kbd>⇧⌘H</kbd></th><td><code>git log --follow -- &lt;파일&gt;</code></td></tr>
+</tbody></table></div>

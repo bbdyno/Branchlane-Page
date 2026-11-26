@@ -86,6 +86,26 @@
   }
 
   // Search
+  // Screenshots open larger in their own dialog.
+  var lightbox;
+  document.addEventListener('click', function (event) {
+    var zoom = event.target.closest('.zoom');
+    if (!zoom) return;
+    var image = zoom.parentNode.querySelector('img');
+    if (!lightbox) {
+      lightbox = document.createElement('dialog');
+      lightbox.className = 'lightbox';
+      lightbox.addEventListener('click', function () { lightbox.close(); });
+      document.body.appendChild(lightbox);
+    }
+    var big = new Image();
+    big.src = image.currentSrc || image.src;
+    big.alt = image.alt;
+    lightbox.replaceChildren(big);
+    lightbox.setAttribute('aria-label', image.alt);
+    lightbox.showModal();
+  });
+
   var dialog = document.querySelector('dialog');
   var input = dialog.querySelector('input');
   var list = dialog.querySelector('.hits');

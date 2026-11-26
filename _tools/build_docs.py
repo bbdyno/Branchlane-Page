@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://bbdyno.github.io/Branchlane-Page/"
 REPO = "https://github.com/bbdyno/Branchlane-Page"
 STORE = "https://apps.apple.com/app/id6785129372"
-VERSION = "20261125"
+VERSION = "20261126"
 
 # area, folder of the page inside the area, source, group, {lang: (title, summary)}
 G = {"start": ("Start", "시작"), "use": ("Use", "사용"), "agents": ("Agents", "에이전트"), "help": ("Help", "도움"),
@@ -53,13 +53,13 @@ MOVED = {
 T = {
     "en": dict(docs="Docs", search="Search docs", copy="Copy", copied="Copied", selected="Selected", theme="Switch between light and dark", menu="Open navigation",
                outline="On this page", prev="Previous", next="Next", edit="Edit this page", support="Support", privacy="Privacy Policy", other="한국어", otherlang="ko",
-               get="Download free", home="Product", updated="Updated November 25, 2026", for_="Branchlane 2.3", hint="Type a tool, a setting or a question.",
-               none="Nothing found.", failed="Search could not be loaded.", skip="Skip to content", nav="Docs navigation", original="Original post",
+               get="Download free", home="Product", updated="Updated November 26, 2026", for_="Branchlane 2.3", hint="Type a tool, a setting or a question.",
+               none="Nothing found.", failed="Search could not be loaded.", skip="Skip to content", nav="Docs navigation", original="Original post", enlarge="Enlarge", output="Output",
                tm="Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions."),
     "ko": dict(docs="문서", search="문서 검색", copy="복사", copied="복사함", selected="선택함", theme="밝은 화면과 어두운 화면 바꾸기", menu="메뉴 열기",
                outline="이 페이지에서", prev="이전", next="다음", edit="이 페이지 고치기", support="지원", privacy="개인정보 처리방침", other="English", otherlang="en",
-               get="무료 다운로드", home="제품 소개", updated="2026년 11월 25일 고침", for_="Branchlane 2.3", hint="도구, 설정, 궁금한 것을 입력하세요.",
-               none="찾은 내용이 없습니다.", failed="검색을 불러오지 못했습니다.", skip="본문으로", nav="문서 메뉴", original="블로그 원문",
+               get="무료 다운로드", home="제품 소개", updated="2026년 11월 26일 고침", for_="Branchlane 2.3", hint="도구, 설정, 궁금한 것을 입력하세요.",
+               none="찾은 내용이 없습니다.", failed="검색을 불러오지 못했습니다.", skip="본문으로", nav="문서 메뉴", original="블로그 원문", enlarge="크게 보기", output="출력",
                tm="Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다."),
 }
 
@@ -81,7 +81,7 @@ def span(kind, text):
 RULES = {
     "json": r'(?P<k>"(?:\\.|[^"\\])*")(?=\s*:)|(?P<s>"(?:\\.|[^"\\])*")|(?P<n>\b-?\d+(?:\.\d+)?\b)|(?P<w>\b(?:true|false|null)\b)',
     "toml": r'(?P<w>^\[[^\]]+\])|(?P<s>"(?:\\.|[^"\\])*")|(?P<k>[A-Za-z_]+)(?=\s*=)|(?P<c>#.*$)',
-    "bash": r"(?P<s>\"(?:\\.|[^\"\\])*\"|'[^']*')|(?P<c>(?<!\S)#.*$)|(?P<k>(?<=\s)--?[A-Za-z][\w-]*)|(?P<w>^(?:claude|curl|git|xattr|export|codex)\b)",
+    "bash": r"(?P<s>\"(?:\\.|[^\"\\])*\"|'[^']*')|(?P<c>(?<!\S)#.*$)|(?P<k>(?<=\s)--?[A-Za-z][\w-]*)|(?P<w>^(?:claude|curl|git|xattr|export|codex|jq|ssh-add|ssh-keygen|ssh-keyscan|ssh|xcode-select|echo|ollama|lms)(?![\w-]))",
 }
 
 
@@ -96,6 +96,19 @@ def highlight(code, lang):
     return "".join(out) + html.escape(code[at:], quote=False)
 
 
+def webp_size(path):
+    data = path.read_bytes()[:40]
+    kind = data[12:16]
+    if kind == b"VP8X":
+        return 1 + int.from_bytes(data[24:27], "little"), 1 + int.from_bytes(data[27:30], "little")
+    if kind == b"VP8L":
+        bits = int.from_bytes(data[21:25], "little")
+        return 1 + (bits & 0x3FFF), 1 + ((bits >> 14) & 0x3FFF)
+    if kind == b"VP8 ":
+        return int.from_bytes(data[26:28], "little") & 0x3FFF, int.from_bytes(data[28:30], "little") & 0x3FFF
+    raise ValueError(f"Not a WebP image: {path}")
+
+
 def render(source, lang):
     words = T[lang]
     heads, ids, tabs = [], set(), [0]
@@ -105,9 +118,24 @@ def render(source, lang):
         name = re.search(r'data-file="([^"]+)"', attributes)
         language = re.search(r'data-lang="([^"]+)"', attributes)
         language = language[1] if language else "text"
-        label = name[1] if name else {"bash": "Terminal" if lang == "en" else "터미널", "json": "JSON", "toml": "TOML"}.get(language, "")
+        label = name[1] if name else {"bash": "Terminal" if lang == "en" else "터미널", "json": "JSON", "toml": "TOML", "output": words["output"]}.get(language, "")
         return (f'<div class="code"><div class="code-head"><span>{label}</span><button class="copy" type="button">{words["copy"]}</button></div>'
                 f'<pre tabindex="0"><code>{highlight(body, language)}</code></pre></div>')
+
+    def shot(match):
+        """<shot src="docs/lines" alt="..." pins="x,y x,y" narrow>caption</shot>, a screenshot in screenshots/<lang>/."""
+        attributes, caption = match[1], match[2].strip()
+        src = re.search(r'src="([^"]+)"', attributes)[1]
+        alt = re.search(r'alt="([^"]*)"', attributes)[1]
+        pins = re.search(r'pins="([^"]+)"', attributes)
+        file = f"screenshots/{lang}/{src}.webp"
+        width, height = webp_size(ROOT / file)
+        marks = "".join(f'<span class="pin" style="left:{x}%;top:{y}%" aria-hidden="true">{i}</span>'
+                        for i, (x, y) in enumerate((pair.split(",") for pair in pins[1].split()), 1)) if pins else ""
+        size = " narrow" if re.search(r"\bnarrow\b", attributes) else ""
+        return (f'<figure class="shot{size}"><div class="frame"><img src="{{root}}{file}" width="{width}" height="{height}" alt="{alt}" loading="lazy" decoding="async">{marks}'
+                f'<button class="zoom" type="button" aria-label="{words["enlarge"]}: {alt}"></button></div>'
+                + (f"<figcaption>{caption}</figcaption>" if caption else "") + "</figure>")
 
     def tabset(match):
         tabs[0] += 1
@@ -131,12 +159,13 @@ def render(source, lang):
 
     body = re.sub(r"<pre([^>]*)><code>(.*?)</code></pre>", code, source, flags=re.S)
     body = re.sub(r"<tabs>(.*?)</tabs>", tabset, body, flags=re.S)
+    body = re.sub(r"<shot([^>]*)>(.*?)</shot>", shot, body, flags=re.S)
     body = re.sub(r"<h([23])([^>]*)>(.*?)</h\1>", heading, body, flags=re.S)
     return body, heads
 
 
 def plain(fragment):
-    fragment = re.sub(r'<div class="code-head">.*?</div>|<a class="anchor".*?</a>', "", fragment, flags=re.S)
+    fragment = re.sub(r'<div class="code-head">.*?</div>|<a class="anchor".*?</a>|<svg.*?</svg>|<span class="pin".*?</span>', "", fragment, flags=re.S)
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", fragment))).strip()
 
 
@@ -221,7 +250,7 @@ def build(lang):
 <link rel="stylesheet" href="{up}assets/docs.css?v={VERSION}">
 <script>try{{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}}catch(e){{}}</script>
 </head>
-<body data-base="{up}" data-area="{"ko/" if lang == "ko" else ""}{area}/" data-index="{up}assets/docs-{lang}.json?v={VERSION}" data-copy="{words['copy']}" data-copied="{words['copied']}" data-selected="{words['selected']}" data-hint="{words['hint']}" data-none="{words['none']}" data-failed="{words['failed']}">
+<body data-base="{up}" data-area="{"ko/" if lang == "ko" else ""}{area}/" data-index="{up}assets/docs-{lang}.json?v={VERSION}" data-copy="{words['copy']}" data-copied="{words['copied']}" data-selected="{words['selected']}" data-hint="{words['hint']}" data-none="{words['none']}" data-failed="{words['failed']}" data-enlarge="{words['enlarge']}">
 <a class="skip" href="#main">{words['skip']}</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="{words['menu']}" aria-expanded="false" aria-controls="side">{BURGER}</button>

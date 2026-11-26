@@ -1,8 +1,29 @@
 <p>Agent lanes give Claude Code, Codex or another coding agent a branch and folder of their own, then let you review and integrate the work in one place.</p>
+<shot src="lanes" alt="Reviewing a lane: the proposal and its claims, test evidence, a warning about overlapping work, and each file's diff with buttons to leave hunks out" pins="31.5,20 65,31.7 65,46 65,58 65,75"></shot>
+<ol class="legend">
+  <li><strong>Decide.</strong> Send it back, accept it into the queue, or integrate it now.</li>
+  <li><strong>Proposal.</strong> The agent's summary and claims. Claims without evidence, or with stale evidence, are marked.</li>
+  <li><strong>Evidence.</strong> Tests, builds and lint runs the agent recorded. Each counts only for the content it ran on, and files changed since then are listed.</li>
+  <li><strong>Overlapping work.</strong> When another lane or the target changes the same lines, you see the line ranges and which side should land first.</li>
+  <li><strong>Files to review.</strong> Risky files come first. Leave out a file or a hunk and that part is not integrated.</li>
+</ol>
+
+<h2 id="steps">How it goes</h2>
 <ol class="steps">
   <li>Open Settings &gt; Agents and connect your agent. Branchlane shows the exact setting for each agent and only listens on this Mac.</li>
   <li>Start a lane from the Lanes section of the left panel, or let the agent start one with its own tools.</li>
-  <li>When the agent asks for review, open the lane. Test evidence counts only for the code it ran on, and risky files come first.</li>
+  <li>When the agent asks for review, open the lane.</li>
   <li>Take the whole lane, leave out files or single hunks, or send it back with your reasons. Integrated lanes come back out with one commit.</li>
 </ol>
+
+<h2 id="ask">What to tell your agent</h2>
+<p>Once it is connected, ask for the work as usual and add a line about lanes.</p>
+<pre data-lang="text" data-file="Claude Code"><code>Work in a Branchlane lane. Retry sync with exponential backoff when the server is busy,
+record the swift test run as evidence, then ask for review.</code></pre>
+
+<h2 id="terminal">See it from Terminal</h2>
+<p>A lane is an ordinary Git branch and worktree, so Terminal and other Git tools see it too.</p>
+<pre data-lang="bash"><code>git worktree list</code></pre>
+<pre data-lang="output"><code>/Users/me/src/app                              9b26e1e [main]
+/Users/me/src/app/.branchlane/lanes/a7f460dc   4c1d2e0 [lane/retry-sync-with-backoff-a7f4]</code></pre>
 <p>To connect your own tool, see the <a href="{base}developers/">developer docs</a>.</p>

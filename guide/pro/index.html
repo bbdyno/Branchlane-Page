@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/pro/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/pro/">
 <link rel="icon" href="../../assets/app-icon.png">
-<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../" data-area="guide/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<body data-base="../../" data-area="guide/" data-index="../../assets/docs-en.json?v=20261126" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded." data-enlarge="Enlarge">
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,23 +37,45 @@
 <p class="crumb"><a href="../../guide/">Guide</a><span aria-hidden="true">/</span><span>Use</span></p>
 <h1>Pro tools</h1>
 <p class="lede">Interactive rebase, the conflict editor, pull requests and AI.</p>
-<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>Updated November 26, 2026</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <p class="callout">These need Branchlane Pro. Every new eligible subscriber can try them free for 14 days.</p>
+
+<h2 id="rebase">Interactive rebase<a class="anchor" href="#rebase" aria-label="#Interactive rebase">#</a></h2>
+<p>Right-click a commit and choose Interactive Rebase. Reorder, reword, squash and drop, then start the rebase. Undo takes the whole rebase back.</p>
+<figure class="shot"><div class="frame"><img src="../../screenshots/en/rebase.webp" width="2400" height="1500" alt="Interactive rebase: a list of commits, each set to pick, reword, squash or drop, and the Start Rebase button" loading="lazy" decoding="async"><button class="zoom" type="button" aria-label="Enlarge: Interactive rebase: a list of commits, each set to pick, reword, squash or drop, and the Start Rebase button"></button></div><figcaption>A plan that folds 12 commits into 8. The result is at the top and the keys are at the bottom</figcaption></figure>
+<p>Keys are faster in the list: <kbd>P</kbd> pick, <kbd>R</kbd> reword, <kbd>S</kbd> squash, <kbd>D</kbd> drop, and <kbd>⌥↑</kbd> <kbd>⌥↓</kbd> to move a commit.</p>
+
+<h2 id="conflicts">Conflict editor<a class="anchor" href="#conflicts" aria-label="#Conflict editor">#</a></h2>
+<p>When a merge, rebase or cherry-pick stops, open a conflicted file. Both sides sit side by side at the top, and the result is below. Conflict warnings show collisions before you merge.</p>
+<figure class="shot"><div class="frame"><img src="../../screenshots/en/conflict.webp" width="2400" height="1500" alt="The conflict editor: the current branch and the incoming branch side by side, the result and its conflict markers below" loading="lazy" decoding="async"><span class="pin" style="left:16%;top:15.5%" aria-hidden="true">1</span><span class="pin" style="left:55%;top:15.5%" aria-hidden="true">2</span><span class="pin" style="left:55%;top:70%" aria-hidden="true">3</span><span class="pin" style="left:29%;top:53.7%" aria-hidden="true">4</span><button class="zoom" type="button" aria-label="Enlarge: The conflict editor: the current branch and the incoming branch side by side, the result and its conflict markers below"></button></div></figure>
+<ol class="legend">
+  <li><strong>Ours.</strong> The branch you have checked out.</li>
+  <li><strong>Theirs.</strong> The branch being merged in.</li>
+  <li><strong>Result.</strong> Conflicts you have not settled stay red, and parts that merged on their own are marked.</li>
+  <li><strong>Choose for each conflict.</strong> Your change, theirs, both, both in reverse order, or the base, or edit it yourself. When all are done, press Continue in the bar at the top.</li>
+</ol>
+
+<h2 id="assistant">AI and the assistant<a class="anchor" href="#assistant" aria-label="#AI and the assistant">#</a></h2>
+<p>Choose a provider in Settings &gt; Assistant: a local model, your own API key, or Apple's on-device model. Nothing is sent until you ask. Ask the assistant with <kbd>⇧⌘I</kbd>. Changes it suggests wait on a card until you run them.</p>
+<figure class="shot narrow"><div class="frame"><img src="../../screenshots/en/docs/assistant-card.webp" width="690" height="640" alt="The assistant panel: it summarizes the branch and shows a card to commit one staged file, with Run and Dismiss buttons" loading="lazy" decoding="async"><button class="zoom" type="button" aria-label="Enlarge: The assistant panel: it summarizes the branch and shows a card to commit one staged file, with Run and Dismiss buttons"></button></div><figcaption>What it read folds out above, and anything that changes the repository waits on a card</figcaption></figure>
+<p>To run a model on this Mac, pull one with Ollama and put <code>http://localhost:11434</code> in Settings &gt; Assistant.</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">ollama</span> pull llama3.2
+<span class="w">curl</span> <span class="k">-s</span> http://localhost:11434/v1/models</code></pre></div>
+
+<h2 id="more">More Pro tools<a class="anchor" href="#more" aria-label="#More Pro tools">#</a></h2>
 <ul>
-  <li><strong>Interactive rebase:</strong> right-click a commit and choose Interactive Rebase. Reorder, reword, squash and drop, then start. Undo takes the whole rebase back.</li>
-  <li><strong>Conflict editor:</strong> when a merge, rebase or cherry-pick stops, open a conflicted file and choose ours, theirs or both, change by change. Conflict warnings show collisions before you merge.</li>
   <li><strong>Worktrees, compare, Git Flow and patches</strong> are in the left panel and the right-click menus.</li>
   <li><strong>Pull requests and issues:</strong> add a GitHub or GitLab token in Settings &gt; Integrations. It stays in your Keychain and talks to the host directly.</li>
-  <li><strong>AI and the assistant:</strong> choose a provider in Settings &gt; Assistant: a local model, your own API key, or Apple's on-device model. Nothing is sent until you ask. Ask the assistant with <kbd>⇧⌘I</kbd>. Changes it suggests wait on a card until you run them.</li>
+  <li><strong>Themes:</strong> themes beyond White and Black are Pro. You can preview every theme in Settings &gt; Themes on the free plan.</li>
 </ul>
 </div>
 <nav class="next" aria-label="Previous, Next"><a class="back" href="../../guide/everyday/"><small>Previous</small><b>Everyday Git</b></a><a class="fwd" href="../../guide/shortcuts/"><small>Next</small><b>Keyboard shortcuts</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/guide-pro.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
 </article></main>
-<div></div>
+<aside class="outline"><p>On this page</p><ul><li><a href="#rebase">Interactive rebase</a></li><li><a href="#conflicts">Conflict editor</a></li><li><a href="#assistant">AI and the assistant</a></li><li><a href="#more">More Pro tools</a></li></ul></aside>
 </div>
 <dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
-<script src="../../assets/docs.js?v=20261125"></script>
+<script src="../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

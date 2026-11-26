@@ -13,3 +13,13 @@
       &quot;conflictLines&quot;: { &quot;Sources/Sync/SyncEngine.swift&quot;: [[&quot;40-60&quot;, &quot;41&quot;]] } }
   ]
 }</code></pre>
+<h2 id="read">Read it</h2>
+<p>The file sits in Git's common directory, so the same path works from any worktree.</p>
+<pre data-lang="bash"><code>f="$(git rev-parse --git-common-dir)/branchlane/worktrees.json"
+
+# Uncommitted files in each worktree
+jq -r '.worktrees[] | "\(.branch)\t\(.uncommittedFiles | length)"' "$f"
+
+# Only the pairs that will really conflict
+jq '.collisions[] | select(.conflicts)' "$f"</code></pre>
+

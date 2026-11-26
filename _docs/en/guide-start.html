@@ -1,7 +1,31 @@
 <p>Branchlane uses the <code>git</code> that is already on your Mac. If macOS asks to install the command line developer tools the first time, accept it. Branchlane has no account to create.</p>
+<shot src="graph" alt="The Branchlane window: toolbar and branch list on the left, the commit graph in the middle, changes and the commit box on the right" pins="1.9,11.8 16,26.5 37.5,44.5 93,19.5"></shot>
+<ol class="legend">
+  <li><strong>Toolbar.</strong> Undo, fetch, pull, push, branch and stash. The number on Push is how many commits you have not sent yet.</li>
+  <li><strong>Left panel.</strong> Local and remote branches, pull requests, stashes, tags and Git Flow. <kbd>⌘J</kbd> hides it.</li>
+  <li><strong>Commit graph.</strong> Each branch keeps a straight line. The <code>// WIP</code> row at the top is what you have not committed yet.</li>
+  <li><strong>Right panel.</strong> Changes, the commit box and the assistant. Click a commit in the graph to see what it changed. <kbd>⌘K</kbd> hides it.</li>
+</ol>
+
+<h2 id="setup">First setup</h2>
 <ol class="steps">
   <li><strong>Open a repository.</strong> Choose Add Repository (<kbd>⌘O</kbd>) and pick a folder, or Clone Repository (<kbd>⇧⌘O</kbd>) and paste a URL.</li>
   <li><strong>Allow your Git identity.</strong> The App Sandbox keeps Branchlane out of your home folder until you say so. In Settings &gt; Git &amp; SSH, choose your <code>.gitconfig</code> once so commits use your name and email.</li>
   <li><strong>Allow SSH keys if you use key files.</strong> Keys loaded in <code>ssh-agent</code> already work. To use key files and <code>~/.ssh/config</code>, choose your <code>.ssh</code> folder in the same place.</li>
   <li><strong>Sign in to HTTPS remotes when asked.</strong> Branchlane asks for a username and token the first time a remote needs one, and keeps it in your Keychain only if you choose to remember it.</li>
 </ol>
+
+<h2 id="check">Check from Terminal first</h2>
+<p>These are the same Git and SSH settings the app uses. Skip what you already have.</p>
+<pre data-lang="bash"><code># Command line developer tools and Git
+xcode-select --install
+git --version
+
+# The name and email that go into your commits
+git config --global user.name "Alex Kim"
+git config --global user.email "alex@example.com"
+
+# Load your key into ssh-agent and test GitHub
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+ssh -T git@github.com</code></pre>
+<p>If the last command ends with <code>You've successfully authenticated</code>, your SSH remotes work in Branchlane as they are.</p>

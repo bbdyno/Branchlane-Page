@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/attribution/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/attribution/">
 <link rel="icon" href="../../assets/app-icon.png">
-<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261126" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded." data-enlarge="Enlarge">
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,7 +37,7 @@
 <p class="crumb"><a href="../../developers/">Developers</a><span aria-hidden="true">/</span><span>Files and refs</span></p>
 <h1>Agent attribution</h1>
 <p class="lede">Commit trailers, Agent Trace notes and lane records.</p>
-<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>Updated November 26, 2026</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <p>Branchlane marks agent work in the graph and blame for everyone, Free included. Your tool can feed it in three ways.</p>
 <h2 id="commit-trailers">Commit trailers<a class="anchor" href="#commit-trailers" aria-label="#Commit trailers">#</a></h2>
@@ -65,13 +65,27 @@ Agent: claude-code/claude-opus-5-5</code></pre></div>
 <p>Notes travel with <code>refs/notes/agent-trace:refs/notes/agent-trace</code> when you share lanes.</p>
 <h2 id="lane-records">Lane records<a class="anchor" href="#lane-records" aria-label="#Lane records">#</a></h2>
 <p>Lanes are stored as Git refs under <code>refs/branchlane/lanes/&lt;id&gt;/</code> (<code>state</code>, <code>checkpoints</code>, <code>proposal</code>). The <code>state</code> commits hold a <code>lane.json</code>. Teammates' lanes are fetched to <code>refs/branchlane/shared/&lt;remote&gt;/&lt;id&gt;/</code>. Treat these as read-only.</p>
+
+<h2 id="read">Read it from Terminal<a class="anchor" href="#read" aria-label="#Read it from Terminal">#</a></h2>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="c"># The Agent trailer of each commit</span>
+<span class="w">git</span> log <span class="k">--format</span>=<span class="s">'%h %(trailers:key=Agent,valueonly,separator=%x2C) %s'</span> -10
+
+<span class="c"># Fetch the Agent Trace notes from the remote and read one</span>
+<span class="w">git</span> fetch origin refs/notes/agent-trace:refs/notes/agent-trace
+<span class="w">git</span> notes <span class="k">--ref</span>=agent-trace show HEAD | jq <span class="s">'.files[].path'</span>
+
+<span class="c"># Lane records</span>
+<span class="w">git</span> for-each-ref refs/branchlane/lanes <span class="k">--format</span>=<span class="s">'%(refname)'</span>
+<span class="w">git</span> show refs/branchlane/lanes/a7f460dc/state:lane.json | jq <span class="s">'{intent, status}'</span></code></pre></div>
+<div class="code"><div class="code-head"><span>git log output</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>4c1d2e0 claude-code/claude-opus-5-5 Retry sync with backoff when the server is busy
+9b26e1e  Trim blank lines on export</code></pre></div>
 </div>
 <nav class="next" aria-label="Previous, Next"><a class="back" href="../../developers/policy/"><small>Previous</small><b>Policy file</b></a><a class="fwd" href="../../developers/worktrees/"><small>Next</small><b>Worktree summary</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/developers-attribution.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
 </article></main>
-<aside class="outline"><p>On this page</p><ul><li><a href="#commit-trailers">Commit trailers</a></li><li><a href="#agent-trace-notes">Agent Trace notes</a></li><li><a href="#lane-records">Lane records</a></li></ul></aside>
+<aside class="outline"><p>On this page</p><ul><li><a href="#commit-trailers">Commit trailers</a></li><li><a href="#agent-trace-notes">Agent Trace notes</a></li><li><a href="#lane-records">Lane records</a></li><li><a href="#read">Read it from Terminal</a></li></ul></aside>
 </div>
 <dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
-<script src="../../assets/docs.js?v=20261125"></script>
+<script src="../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

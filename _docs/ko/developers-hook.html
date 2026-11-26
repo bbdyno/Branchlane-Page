@@ -8,3 +8,11 @@
   }
 }</code></pre>
 <p>Branchlane이 꺼져 있으면 조용히 실패해서 에이전트를 막지 않습니다.</p>
+<h2 id="test">훅 시험하기</h2>
+<p>Claude Code가 보내는 것처럼 <code>cwd</code>만 담아 보내 봅니다. Lane 워크트리 안이면 <code>true</code>입니다.</p>
+<pre data-lang="bash"><code>echo '{"cwd":"/Users/me/src/app/.branchlane/lanes/a7f460dc"}' \
+  | curl -s -X POST http://127.0.0.1:47120/hook/checkpoint \
+      -H "Authorization: Bearer $BRANCHLANE_TOKEN" \
+      -H "Content-Type: application/json" --data-binary @-</code></pre>
+<pre data-lang="output"><code>{"checkpoint":true}</code></pre>
+

@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/lanes/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/lanes/">
 <link rel="icon" href="../../../assets/app-icon.png">
-<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261126" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다." data-enlarge="크게 보기">
 <a class="skip" href="#main">본문으로</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,9 +37,10 @@
 <p class="crumb"><a href="../../../ko/developers/">개발자</a><span aria-hidden="true">/</span><span>연결</span></p>
 <h1>Lane 흐름과 상태</h1>
 <p class="lede">부르는 순서와 상태마다의 뜻입니다.</p>
-<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>2026년 11월 26일 고침</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <h2 id="order">부르는 순서<a class="anchor" href="#order" aria-label="#부르는 순서">#</a></h2>
+<div class="diagram"><svg viewBox="0 0 760 486" role="img" aria-label="호출 순서: 에이전트가 lane_begin, lane_checkpoint, lane_evidence, lane_propose를 부르면 Branchlane이 사람에게 검토를 요청하고, 사람이 결정한 뒤 에이전트가 lane_status로 의견을 읽습니다"><line class="life" x1="120" y1="56" x2="120" y2="478"/><rect class="box" x="35" y="12" width="170" height="42" rx="9"/><text x="120" y="38" text-anchor="middle">에이전트</text><line class="life" x1="380" y1="56" x2="380" y2="478"/><rect class="box hot soft" x="295" y="12" width="170" height="42" rx="9"/><text x="380" y="38" text-anchor="middle">Branchlane</text><line class="life" x1="640" y1="56" x2="640" y2="478"/><rect class="box" x="555" y="12" width="170" height="42" rx="9"/><text x="640" y="38" text-anchor="middle">사람</text><line class="wire hot" x1="120" y1="92" x2="371" y2="92"/><polygon class="tip hot" points="371,87 380,92 371,97"/><text class="label" x="250" y="84" text-anchor="middle">lane_begin</text><line class="wire dash" x1="380" y1="122" x2="129" y2="122"/><polygon class="tip" points="129,117 120,122 129,127"/><text class="label" x="250" y="114" text-anchor="middle">lane_id, worktree</text><rect class="box" x="24" y="146" width="192" height="34" rx="8"/><text class="note" x="120" y="168" text-anchor="middle">워크트리에서 고치고 커밋</text><line class="wire" x1="120" y1="214" x2="371" y2="214"/><polygon class="tip" points="371,209 380,214 371,219"/><text class="label" x="250" y="206" text-anchor="middle">lane_checkpoint 또는 훅</text><line class="wire hot" x1="120" y1="256" x2="371" y2="256"/><polygon class="tip hot" points="371,251 380,256 371,261"/><text class="label" x="250" y="248" text-anchor="middle">lane_evidence  swift test → 0</text><line class="wire dash" x1="380" y1="286" x2="129" y2="286"/><polygon class="tip" points="129,281 120,286 129,291"/><text class="label" x="250" y="278" text-anchor="middle">evidence_id: 1</text><line class="wire hot" x1="120" y1="330" x2="371" y2="330"/><polygon class="tip hot" points="371,325 380,330 371,335"/><text class="label" x="250" y="322" text-anchor="middle">lane_propose  summary, claims</text><line class="wire" x1="380" y1="352" x2="631" y2="352"/><polygon class="tip" points="631,347 640,352 631,357"/><text class="label" x="510" y="344" text-anchor="middle">검토 요청</text><line class="wire" x1="640" y1="392" x2="389" y2="392"/><polygon class="tip" points="389,387 380,392 389,397"/><text class="label" x="510" y="384" text-anchor="middle">승인, 빼기, 돌려보내기</text><line class="wire" x1="120" y1="428" x2="371" y2="428"/><polygon class="tip" points="371,423 380,428 371,433"/><text class="label" x="250" y="420" text-anchor="middle">lane_status</text><line class="wire dash" x1="380" y1="466" x2="129" y2="466"/><polygon class="tip" points="129,461 120,466 129,471"/><text class="label" x="250" y="458" text-anchor="middle">review_feedback, rejected_files</text></svg></div>
 <ol class="steps">
   <li><code>lane_begin</code> 뒤에는 돌려받은 워크트리 안에서만 작업합니다. 커밋은 마음대로 해도 됩니다. 미커밋 작업도 스냅샷으로 남습니다.</li>
   <li>시작 전과 제안 전에 <code>lane_status</code>로 다른 에이전트가 건드리는 파일을 봅니다.</li>
@@ -48,6 +49,27 @@
   <li>요약과 그 id를 단 주장으로 <code>lane_propose</code>를 부릅니다.</li>
   <li>나중에 <code>lane_status</code>로 검토 의견, 빠진 파일과 헝크, 메모를 읽습니다.</li>
 </ol>
+
+<h2 id="example">한 번 따라 해 보기<a class="anchor" href="#example" aria-label="#한 번 따라 해 보기">#</a></h2>
+<p>아래 셸 함수는 도구를 부르고 안쪽 JSON만 꺼냅니다. 에이전트가 하는 일을 손으로 해 보거나 내 도구를 시험할 때 씁니다.</p>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>lane() {  <span class="c"># lane &lt;도구&gt; '&lt;인자 JSON&gt;'</span>
+  curl <span class="k">-s</span> http://127.0.0.1:47120/mcp \
+    <span class="k">-H</span> <span class="s">"Authorization: Bearer $BRANCHLANE_TOKEN"</span> \
+    <span class="k">-H</span> <span class="s">"Content-Type: application/json"</span> \
+    <span class="k">-d</span> <span class="s">"{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"$1\",\"arguments\":$2}}"</span> \
+    | jq <span class="s">'.result.content[0].text | fromjson? // .'</span>
+}
+
+lane lane_begin <span class="s">'{"path":"/Users/me/src/app","intent":"Retry sync with backoff","agent":"me/manual"}'</span>
+cd /Users/me/src/app/.branchlane/lanes/a7f460dc      <span class="c"># 돌려받은 worktree</span>
+<span class="c"># … 고치고 커밋 …</span>
+swift test; lane lane_evidence <span class="s">"{\"path\":\"$PWD\",\"command\":\"swift test\",\"exit_code\":$?}"</span>
+lane lane_propose <span class="s">"{\"path\":\"$PWD\",\"summary\":\"Retries with backoff\",\"claims\":[{\"text\":\"Tests pass\",\"evidence\":[1]}]}"</span></code></pre></div>
+<div class="code"><div class="code-head"><span>lane_propose 결과</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{
+  <span class="k">"claims_without_current_evidence"</span>: [],
+  <span class="k">"next"</span>: <span class="s">"The person reviews in Branchlane. Call lane_status later for feedback."</span>,
+  <span class="k">"status"</span>: <span class="s">"proposed"</span>
+}</code></pre></div>
 
 <h2 id="states">상태<a class="anchor" href="#states" aria-label="#상태">#</a></h2>
 <div class="states" aria-hidden="true"><span>running</span><i></i><span>proposed</span><i></i><span>accepted</span><i></i><span class="end">integrated</span></div>
@@ -66,9 +88,9 @@
 <nav class="next" aria-label="이전, 다음"><a class="back" href="../../../ko/developers/connect/"><small>이전</small><b>에이전트 연결</b></a><a class="fwd" href="../../../ko/developers/tools/"><small>다음</small><b>도구</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/developers-flow.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../../privacy/">개인정보 처리방침</a><a href="../../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
 </article></main>
-<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#order">부르는 순서</a></li><li><a href="#states">상태</a></li></ul></aside>
+<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#order">부르는 순서</a></li><li><a href="#example">한 번 따라 해 보기</a></li><li><a href="#states">상태</a></li></ul></aside>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
-<script src="../../../assets/docs.js?v=20261125"></script>
+<script src="../../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

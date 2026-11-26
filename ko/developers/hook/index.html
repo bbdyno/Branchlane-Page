@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/hook/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/hook/">
 <link rel="icon" href="../../../assets/app-icon.png">
-<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261126" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다." data-enlarge="크게 보기">
 <a class="skip" href="#main">본문으로</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,7 +37,7 @@
 <p class="crumb"><a href="../../../ko/developers/">개발자</a><span aria-hidden="true">/</span><span>레퍼런스</span></p>
 <h1>체크포인트 훅</h1>
 <p class="lede">에이전트 턴이 끝날 때마다 체크포인트를 남깁니다.</p>
-<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>2026년 11월 26일 고침</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <p><code>POST /hook/checkpoint</code>는 Claude Code가 보내는 훅 JSON에서 <code>cwd</code>를 읽습니다. 그 폴더가 Lane 워크트리 안이면 체크포인트를 남기고 <code>{"checkpoint":true}</code>를, 아니면 아무것도 하지 않고 <code>false</code>를 돌려줍니다. <code>.claude/settings.local.json</code>에 합칩니다.</p>
 <div class="code"><div class="code-head"><span>.claude/settings.local.json</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{
@@ -49,6 +49,13 @@
   }
 }</code></pre></div>
 <p>Branchlane이 꺼져 있으면 조용히 실패해서 에이전트를 막지 않습니다.</p>
+<h2 id="test">훅 시험하기<a class="anchor" href="#test" aria-label="#훅 시험하기">#</a></h2>
+<p>Claude Code가 보내는 것처럼 <code>cwd</code>만 담아 보내 봅니다. Lane 워크트리 안이면 <code>true</code>입니다.</p>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">echo</span> <span class="s">'{"cwd":"/Users/me/src/app/.branchlane/lanes/a7f460dc"}'</span> \
+  | curl <span class="k">-s</span> <span class="k">-X</span> POST http://127.0.0.1:47120/hook/checkpoint \
+      <span class="k">-H</span> <span class="s">"Authorization: Bearer $BRANCHLANE_TOKEN"</span> \
+      <span class="k">-H</span> <span class="s">"Content-Type: application/json"</span> <span class="k">--data-binary</span> @-</code></pre></div>
+<div class="code"><div class="code-head"><span>출력</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{"checkpoint":true}</code></pre></div>
 </div>
 <nav class="next" aria-label="이전, 다음"><a class="back" href="../../../ko/developers/protocol/"><small>이전</small><b>프로토콜</b></a><a class="fwd" href="../../../ko/developers/policy/"><small>다음</small><b>정책 파일</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/developers-hook.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../../privacy/">개인정보 처리방침</a><a href="../../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
@@ -56,6 +63,6 @@
 <div></div>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
-<script src="../../../assets/docs.js?v=20261125"></script>
+<script src="../../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

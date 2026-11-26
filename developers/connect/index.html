@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/connect/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/connect/">
 <link rel="icon" href="../../assets/app-icon.png">
-<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261126" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded." data-enlarge="Enlarge">
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,21 +37,35 @@
 <p class="crumb"><a href="../../developers/">Developers</a><span aria-hidden="true">/</span><span>Connect</span></p>
 <h1>Connect an agent</h1>
 <p class="lede">Add the local MCP server to Claude Code, Codex or any MCP client.</p>
-<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>Updated November 26, 2026</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <h2 id="add">Add the server<a class="anchor" href="#add" aria-label="#Add the server">#</a></h2>
 <p>Open Settings &gt; Agents, turn on <strong>Let agents connect</strong>, and copy the line for your agent. It already holds your port and token. Branchlane never writes these files for you.</p>
-<div class="tabs"><div class="tablist" role="tablist"><button type="button" role="tab" id="t1-0" aria-controls="p1-0" data-tab="Claude Code" aria-selected="true">Claude Code</button><button type="button" role="tab" id="t1-1" aria-controls="p1-1" data-tab="Codex" aria-selected="false">Codex</button><button type="button" role="tab" id="t1-2" aria-controls="p1-2" data-tab="Any other MCP client" aria-selected="false">Any other MCP client</button></div><div class="panel" role="tabpanel" id="p1-0" aria-labelledby="t1-0"><p>Run once in Terminal:</p>
+<div class="tabs"><div class="tablist" role="tablist"><button type="button" role="tab" id="t1-0" aria-controls="p1-0" data-tab="Claude Code" aria-selected="true">Claude Code</button><button type="button" role="tab" id="t1-1" aria-controls="p1-1" data-tab="Codex" aria-selected="false">Codex</button><button type="button" role="tab" id="t1-2" aria-controls="p1-2" data-tab="Any other MCP client" aria-selected="false">Any other MCP client</button></div><div class="panel" role="tabpanel" id="p1-0" aria-labelledby="t1-0"><p>Run once in Terminal, then check that it connected:</p>
 <div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">claude</span> mcp add <span class="k">--transport</span> http branchlane \
   http://127.0.0.1:47120/mcp \
-  <span class="k">--header</span> <span class="s">"Authorization: Bearer &lt;token&gt;"</span></code></pre></div></div><div class="panel" role="tabpanel" id="p1-1" aria-labelledby="t1-1" hidden><p>Add to <code>~/.codex/config.toml</code>:</p>
+  <span class="k">--header</span> <span class="s">"Authorization: Bearer &lt;token&gt;"</span>
+
+<span class="w">claude</span> mcp list</code></pre></div></div><div class="panel" role="tabpanel" id="p1-1" aria-labelledby="t1-1" hidden><p>Add to <code>~/.codex/config.toml</code>:</p>
 <div class="code"><div class="code-head"><span>~/.codex/config.toml</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">[mcp_servers.branchlane]</span>
 <span class="k">url</span> = <span class="s">"http://127.0.0.1:47120/mcp"</span>
-<span class="k">http_headers</span> = { <span class="k">Authorization</span> = <span class="s">"Bearer &lt;token&gt;"</span> }</code></pre></div></div><div class="panel" role="tabpanel" id="p1-2" aria-labelledby="t1-2" hidden><p>Use the Streamable HTTP transport with the endpoint <code>http://127.0.0.1:47120/mcp</code> and the header <code>Authorization: Bearer &lt;token&gt;</code>. The port can be changed in Settings.</p></div></div>
+<span class="k">http_headers</span> = { <span class="k">Authorization</span> = <span class="s">"Bearer &lt;token&gt;"</span> }</code></pre></div></div><div class="panel" role="tabpanel" id="p1-2" aria-labelledby="t1-2" hidden><p>Use the Streamable HTTP transport with the endpoint <code>http://127.0.0.1:47120/mcp</code> and the header <code>Authorization: Bearer &lt;token&gt;</code>. The port can be changed in Settings.</p>
+<div class="code"><div class="code-head"><span>mcp.json</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>{
+  <span class="k">"mcpServers"</span>: {
+    <span class="k">"branchlane"</span>: {
+      <span class="k">"type"</span>: <span class="s">"http"</span>,
+      <span class="k">"url"</span>: <span class="s">"http://127.0.0.1:47120/mcp"</span>,
+      <span class="k">"headers"</span>: { <span class="k">"Authorization"</span>: <span class="s">"Bearer &lt;token&gt;"</span> }
+    }
+  }
+}</code></pre></div>
+<p>Each client shapes its settings file a little differently. Only the address and the header have to match.</p></div></div>
 
 <h2 id="try">Try it by hand<a class="anchor" href="#try" aria-label="#Try it by hand">#</a></h2>
-<p>Start a session:</p>
-<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">curl</span> <span class="k">-s</span> http://127.0.0.1:47120/mcp \
+<p>Put the token in an environment variable and start a session:</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">export</span> BRANCHLANE_TOKEN=<span class="s">"the token from Settings"</span>
+
+<span class="w">curl</span> <span class="k">-s</span> http://127.0.0.1:47120/mcp \
   <span class="k">-H</span> <span class="s">"Authorization: Bearer $BRANCHLANE_TOKEN"</span> \
   <span class="k">-H</span> <span class="s">"Content-Type: application/json"</span> \
   <span class="k">-d</span> <span class="s">'{
@@ -62,7 +76,17 @@
     "clientInfo": { "name": "my-tool", "version": "1.0" }
   }
 }'</span></code></pre></div>
-<p>Call a tool:</p>
+<div class="code"><div class="code-head"><span>Response</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>{
+  <span class="k">"jsonrpc"</span>: <span class="s">"2.0"</span>,
+  <span class="k">"id"</span>: <span class="n">1</span>,
+  <span class="k">"result"</span>: {
+    <span class="k">"protocolVersion"</span>: <span class="s">"2025-06-18"</span>,
+    <span class="k">"capabilities"</span>: { <span class="k">"tools"</span>: { <span class="k">"listChanged"</span>: <span class="w">false</span> } },
+    <span class="k">"serverInfo"</span>: { <span class="k">"name"</span>: <span class="s">"branchlane"</span>, <span class="k">"version"</span>: <span class="s">"1"</span> },
+    <span class="k">"instructions"</span>: <span class="s">"Branchlane coordinates parallel agents in this repository. Start each task with lane_begin and work in the worktree it returns. …"</span>
+  }
+}</code></pre></div>
+<p>Call a tool. <code>path</code> must be a repository you opened in Branchlane.</p>
 <div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">curl</span> <span class="k">-s</span> http://127.0.0.1:47120/mcp \
   <span class="k">-H</span> <span class="s">"Authorization: Bearer $BRANCHLANE_TOKEN"</span> \
   <span class="k">-H</span> <span class="s">"Content-Type: application/json"</span> \
@@ -81,14 +105,25 @@
 
 <h2 id="result">Read the result<a class="anchor" href="#result" aria-label="#Read the result">#</a></h2>
 <p>Every tool returns its result as a JSON string inside a text item:</p>
-<div class="code"><div class="code-head"><span>JSON</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>{
+<div class="code"><div class="code-head"><span>Response</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>{
   <span class="k">"jsonrpc"</span>: <span class="s">"2.0"</span>,
   <span class="k">"id"</span>: <span class="n">2</span>,
   <span class="k">"result"</span>: {
-    <span class="k">"content"</span>: [{ <span class="k">"type"</span>: <span class="s">"text"</span>, <span class="k">"text"</span>: <span class="s">"{\n  \"branch\" : \"lane/retry-sync-with-backoff-a7f4\",\n  \"lane_id\" : \"a7f460dc\", ... }"</span> }],
+    <span class="k">"content"</span>: [{ <span class="k">"type"</span>: <span class="s">"text"</span>, <span class="k">"text"</span>: <span class="s">"{\n  \"branch\" : \"lane/retry-sync-with-backoff-a7f4\",\n  \"cloned\" : [],\n  \"lane_id\" : \"a7f460dc\", ... }"</span> }],
     <span class="k">"isError"</span>: <span class="w">false</span>
   }
 }</code></pre></div>
+<p>Unpacked with <code>jq</code>, it looks like this:</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">curl</span> <span class="k">-s</span> … | jq <span class="s">'.result.content[0].text | fromjson'</span></code></pre></div>
+<div class="code"><div class="code-head"><span>lane_begin result</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>{
+  <span class="k">"branch"</span>: <span class="s">"lane/retry-sync-with-backoff-a7f4"</span>,
+  <span class="k">"cloned"</span>: [],
+  <span class="k">"lane_id"</span>: <span class="s">"a7f460dc"</span>,
+  <span class="k">"next"</span>: <span class="s">"Work only inside `worktree`. Commit there as you like; Branchlane snapshots uncommitted work too."</span>,
+  <span class="k">"target"</span>: <span class="s">"refs/heads/main"</span>,
+  <span class="k">"worktree"</span>: <span class="s">"/Users/me/src/app/.branchlane/lanes/a7f460dc"</span>
+}</code></pre></div>
+<p>When a tool fails, HTTP is still 200, <code>isError</code> is <code>true</code>, and the text says why.</p>
 </div>
 <nav class="next" aria-label="Previous, Next"><a class="back" href="../../developers/"><small>Previous</small><b>Build on Branchlane</b></a><a class="fwd" href="../../developers/lanes/"><small>Next</small><b>Lane flow and states</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/developers-connect.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
@@ -96,6 +131,6 @@
 <aside class="outline"><p>On this page</p><ul><li><a href="#add">Add the server</a></li><li><a href="#try">Try it by hand</a></li><li><a href="#result">Read the result</a></li></ul></aside>
 </div>
 <dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
-<script src="../../assets/docs.js?v=20261125"></script>
+<script src="../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

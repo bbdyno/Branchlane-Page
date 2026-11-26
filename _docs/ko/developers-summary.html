@@ -13,3 +13,13 @@
       &quot;conflictLines&quot;: { &quot;Sources/Sync/SyncEngine.swift&quot;: [[&quot;40-60&quot;, &quot;41&quot;]] } }
   ]
 }</code></pre>
+<h2 id="read">읽어 보기</h2>
+<p>파일은 Git 공통 폴더 안에 있으니 어느 워크트리에서든 같은 경로로 찾습니다.</p>
+<pre data-lang="bash"><code>f="$(git rev-parse --git-common-dir)/branchlane/worktrees.json"
+
+# 워크트리마다 미커밋 파일 수
+jq -r '.worktrees[] | "\(.branch)\t\(.uncommittedFiles | length)"' "$f"
+
+# 실제로 충돌할 쌍만
+jq '.collisions[] | select(.conflicts)' "$f"</code></pre>
+

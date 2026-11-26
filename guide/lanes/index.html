@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/lanes/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/lanes/">
 <link rel="icon" href="../../assets/app-icon.png">
-<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../" data-area="guide/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<body data-base="../../" data-area="guide/" data-index="../../assets/docs-en.json?v=20261126" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded." data-enlarge="Enlarge">
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,23 +37,44 @@
 <p class="crumb"><a href="../../guide/">Guide</a><span aria-hidden="true">/</span><span>Agents</span></p>
 <h1>Agent lanes</h1>
 <p class="lede">Give each coding agent its own branch and folder, and review its work in one place.</p>
-<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>Updated November 26, 2026</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <p>Agent lanes give Claude Code, Codex or another coding agent a branch and folder of their own, then let you review and integrate the work in one place.</p>
+<figure class="shot"><div class="frame"><img src="../../screenshots/en/lanes.webp" width="2400" height="1500" alt="Reviewing a lane: the proposal and its claims, test evidence, a warning about overlapping work, and each file's diff with buttons to leave hunks out" loading="lazy" decoding="async"><span class="pin" style="left:31.5%;top:20%" aria-hidden="true">1</span><span class="pin" style="left:65%;top:31.7%" aria-hidden="true">2</span><span class="pin" style="left:65%;top:46%" aria-hidden="true">3</span><span class="pin" style="left:65%;top:58%" aria-hidden="true">4</span><span class="pin" style="left:65%;top:75%" aria-hidden="true">5</span><button class="zoom" type="button" aria-label="Enlarge: Reviewing a lane: the proposal and its claims, test evidence, a warning about overlapping work, and each file's diff with buttons to leave hunks out"></button></div></figure>
+<ol class="legend">
+  <li><strong>Decide.</strong> Send it back, accept it into the queue, or integrate it now.</li>
+  <li><strong>Proposal.</strong> The agent's summary and claims. Claims without evidence, or with stale evidence, are marked.</li>
+  <li><strong>Evidence.</strong> Tests, builds and lint runs the agent recorded. Each counts only for the content it ran on, and files changed since then are listed.</li>
+  <li><strong>Overlapping work.</strong> When another lane or the target changes the same lines, you see the line ranges and which side should land first.</li>
+  <li><strong>Files to review.</strong> Risky files come first. Leave out a file or a hunk and that part is not integrated.</li>
+</ol>
+
+<h2 id="steps">How it goes<a class="anchor" href="#steps" aria-label="#How it goes">#</a></h2>
 <ol class="steps">
   <li>Open Settings &gt; Agents and connect your agent. Branchlane shows the exact setting for each agent and only listens on this Mac.</li>
   <li>Start a lane from the Lanes section of the left panel, or let the agent start one with its own tools.</li>
-  <li>When the agent asks for review, open the lane. Test evidence counts only for the code it ran on, and risky files come first.</li>
+  <li>When the agent asks for review, open the lane.</li>
   <li>Take the whole lane, leave out files or single hunks, or send it back with your reasons. Integrated lanes come back out with one commit.</li>
 </ol>
+
+<h2 id="ask">What to tell your agent<a class="anchor" href="#ask" aria-label="#What to tell your agent">#</a></h2>
+<p>Once it is connected, ask for the work as usual and add a line about lanes.</p>
+<div class="code"><div class="code-head"><span>Claude Code</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>Work in a Branchlane lane. Retry sync with exponential backoff when the server is busy,
+record the swift test run as evidence, then ask for review.</code></pre></div>
+
+<h2 id="terminal">See it from Terminal<a class="anchor" href="#terminal" aria-label="#See it from Terminal">#</a></h2>
+<p>A lane is an ordinary Git branch and worktree, so Terminal and other Git tools see it too.</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">git</span> worktree list</code></pre></div>
+<div class="code"><div class="code-head"><span>Output</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>/Users/me/src/app                              9b26e1e [main]
+/Users/me/src/app/.branchlane/lanes/a7f460dc   4c1d2e0 [lane/retry-sync-with-backoff-a7f4]</code></pre></div>
 <p>To connect your own tool, see the <a href="../../developers/">developer docs</a>.</p>
 </div>
 <nav class="next" aria-label="Previous, Next"><a class="back" href="../../guide/shortcuts/"><small>Previous</small><b>Keyboard shortcuts</b></a><a class="fwd" href="../../guide/troubleshooting/"><small>Next</small><b>Troubleshooting</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/guide-lanes.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
 </article></main>
-<div></div>
+<aside class="outline"><p>On this page</p><ul><li><a href="#steps">How it goes</a></li><li><a href="#ask">What to tell your agent</a></li><li><a href="#terminal">See it from Terminal</a></li></ul></aside>
 </div>
 <dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
-<script src="../../assets/docs.js?v=20261125"></script>
+<script src="../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

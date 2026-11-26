@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/everyday/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/everyday/">
 <link rel="icon" href="../../assets/app-icon.png">
-<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../" data-area="guide/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<body data-base="../../" data-area="guide/" data-index="../../assets/docs-en.json?v=20261126" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded." data-enlarge="Enlarge">
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,10 +37,16 @@
 <p class="crumb"><a href="../../guide/">Guide</a><span aria-hidden="true">/</span><span>Use</span></p>
 <h1>Everyday Git</h1>
 <p class="lede">Stage, commit, branch, undo, stash and read history.</p>
-<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>Updated November 26, 2026</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <h2 id="stage-and-commit">Stage and commit<a class="anchor" href="#stage-and-commit" aria-label="#Stage and commit">#</a></h2>
-<p>The right panel lists unstaged and staged files. Stage a whole file, or open it and stage single hunks or lines. Lines are written to the index byte for byte, so files with CRLF line endings or other encodings stay as they were. Write a summary and press Commit, or Commit and Push.</p>
+<p>The right panel lists unstaged and staged files. Stage a whole file, or open it and stage single hunks or lines. Write a summary and press Commit, or Commit and Push.</p>
+<figure class="shot narrow"><div class="frame"><img src="../../screenshots/en/docs/staging.webp" width="690" height="1400" alt="The right panel: four unstaged files, one staged file, and the commit summary and buttons below" loading="lazy" decoding="async"><button class="zoom" type="button" aria-label="Enlarge: The right panel: four unstaged files, one staged file, and the commit summary and buttons below"></button></div><figcaption>Files to stage and the commit box. Turn on Amend to change the last commit</figcaption></figure>
+
+<h3 id="lines">Stage single lines<a class="anchor" href="#lines" aria-label="#Stage single lines">#</a></h3>
+<p>Select lines in a diff and Stage Lines and Discard Lines appear below. Use them to commit or throw away part of a hunk. Lines are written to the index byte for byte, so files with CRLF line endings or other encodings stay as they were.</p>
+<figure class="shot"><div class="frame"><img src="../../screenshots/en/docs/lines.webp" width="1620" height="585" alt="A side-by-side diff with five lines selected and the Discard Lines, Stage Lines and Clear buttons" loading="lazy" decoding="async"><button class="zoom" type="button" aria-label="Enlarge: A side-by-side diff with five lines selected and the Discard Lines, Stage Lines and Clear buttons"></button></div><figcaption>Staging only the five lines of a new function</figcaption></figure>
+
 <h2 id="branches">Branches<a class="anchor" href="#branches" aria-label="#Branches">#</a></h2>
 <p>New Branch is <kbd>⌘B</kbd> and Switch Branch is <kbd>⇧⌘B</kbd>. In the graph, drag one branch onto another to merge or rebase it, or right-click a branch for every action. Fetch is <kbd>⇧⌘F</kbd>, Pull <kbd>⇧⌘L</kbd> and Push <kbd>⇧⌘K</kbd>.</p>
 <h2 id="merge-commit-messages">Merge commit messages<a class="anchor" href="#merge-commit-messages" aria-label="#Merge commit messages">#</a></h2>
@@ -49,13 +55,28 @@
 <p><kbd>⌘Z</kbd> takes back checkout, commit, reset, discard, branch delete, stash drop and rebase, and <kbd>⇧⌘Z</kbd> redoes. Undo is kept in Git itself, so it still works after you quit.</p>
 <h2 id="stashes-tags-and-history">Stashes, tags and history<a class="anchor" href="#stashes-tags-and-history" aria-label="#Stashes, tags and history">#</a></h2>
 <p>Stash Changes is <kbd>⌥⌘S</kbd> and Pop Latest Stash <kbd>⇧⌥⌘S</kbd>. Select a file and press <kbd>⇧⌘H</kbd> for its history, or open blame from a diff.</p>
+
+<h2 id="git">In Git terms<a class="anchor" href="#git" aria-label="#In Git terms">#</a></h2>
+<p>If you know the command line, this is roughly what each action does. The Git console (<kbd>⇧⌘C</kbd>) runs Git commands directly too.</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">In Branchlane</th><th scope="col">Similar Git command</th></tr></thead>
+<tbody>
+<tr><th scope="row">Stage a file</th><td><code>git add &lt;file&gt;</code></td></tr>
+<tr><th scope="row">Stage hunks or lines</th><td><code>git add -p &lt;file&gt;</code></td></tr>
+<tr><th scope="row">Unstage All</th><td><code>git restore --staged .</code></td></tr>
+<tr><th scope="row">Amend</th><td><code>git commit --amend</code></td></tr>
+<tr><th scope="row">Commit and Push</th><td><code>git commit -m "…" &amp;&amp; git push</code></td></tr>
+<tr><th scope="row">New Branch <kbd>⌘B</kbd></th><td><code>git switch -c &lt;name&gt;</code></td></tr>
+<tr><th scope="row">Stash / Pop</th><td><code>git stash push</code> / <code>git stash pop</code></td></tr>
+<tr><th scope="row">File history <kbd>⇧⌘H</kbd></th><td><code>git log --follow -- &lt;file&gt;</code></td></tr>
+</tbody></table></div>
 </div>
 <nav class="next" aria-label="Previous, Next"><a class="back" href="../../guide/"><small>Previous</small><b>Get started</b></a><a class="fwd" href="../../guide/pro/"><small>Next</small><b>Pro tools</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/guide-everyday.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
 </article></main>
-<aside class="outline"><p>On this page</p><ul><li><a href="#stage-and-commit">Stage and commit</a></li><li><a href="#branches">Branches</a></li><li><a href="#merge-commit-messages">Merge commit messages</a></li><li><a href="#undo">Undo</a></li><li><a href="#stashes-tags-and-history">Stashes, tags and history</a></li></ul></aside>
+<aside class="outline"><p>On this page</p><ul><li><a href="#stage-and-commit">Stage and commit</a></li><li class="sub"><a href="#lines">Stage single lines</a></li><li><a href="#branches">Branches</a></li><li><a href="#merge-commit-messages">Merge commit messages</a></li><li><a href="#undo">Undo</a></li><li><a href="#stashes-tags-and-history">Stashes, tags and history</a></li><li><a href="#git">In Git terms</a></li></ul></aside>
 </div>
 <dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
-<script src="../../assets/docs.js?v=20261125"></script>
+<script src="../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

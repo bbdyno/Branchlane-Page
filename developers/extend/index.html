@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/extend/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/extend/">
 <link rel="icon" href="../../assets/app-icon.png">
-<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261126" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded." data-enlarge="Enlarge">
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,10 +37,18 @@
 <p class="crumb"><a href="../../developers/">Developers</a><span aria-hidden="true">/</span><span>Build</span></p>
 <h1>Extend Branchlane</h1>
 <p class="lede">Bring your own model server, or an MCP server for the assistant.</p>
-<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>Updated November 26, 2026</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <h2 id="your-own-model-server">Your own model server<a class="anchor" href="#your-own-model-server" aria-label="#Your own model server">#</a></h2>
 <p>Settings &gt; Assistant accepts any OpenAI-compatible server. Branchlane calls <code>POST ../..//chat/completions</code> with <code>stream: true</code> and reads server-sent events or a plain JSON reply, and uses <code>GET ../..//models</code> to test the connection. Without a path it adds <code>/v1</code>, so Ollama (<code>http://localhost:11434</code>) and LM Studio (<code>http://localhost:1234</code>) work as they are. A key is never sent over plain HTTP to another machine.</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="c"># Ollama: pull a model and check that it is listed</span>
+<span class="w">ollama</span> pull llama3.2
+<span class="w">curl</span> <span class="k">-s</span> http://localhost:11434/v1/models | jq <span class="k">-r</span> <span class="s">'.data[].id'</span>
+
+<span class="c"># LM Studio: start the server and check the same way</span>
+<span class="w">lms</span> server start
+<span class="w">curl</span> <span class="k">-s</span> http://localhost:1234/v1/models | jq <span class="k">-r</span> <span class="s">'.data[].id'</span></code></pre></div>
+<p>When the list shows up, put that address in Settings &gt; Assistant and pick the model.</p>
 <p>Repository data is wrapped between random <code>BEGIN data-…</code> and <code>END data-…</code> markers, and the model is told that what is inside is data, not instructions.</p>
 <h2 id="your-own-mcp-server-for-the-assistant">Your own MCP server for the assistant<a class="anchor" href="#your-own-mcp-server-for-the-assistant" aria-label="#Your own MCP server for the assistant">#</a></h2>
 <p>The assistant can call tools on MCP servers that the person adds in Settings &gt; Assistant. Serve the Streamable HTTP transport (protocol <code>2025-06-18</code>) over HTTPS, or over HTTP on localhost. Branchlane sends <code>MCP-Protocol-Version</code>, keeps <code>Mcp-Session-Id</code>, and can add a Bearer token. Stdio servers cannot be started from the App Sandbox.</p>
@@ -51,6 +59,6 @@
 <aside class="outline"><p>On this page</p><ul><li><a href="#your-own-model-server">Your own model server</a></li><li><a href="#your-own-mcp-server-for-the-assistant">Your own MCP server for the assistant</a></li></ul></aside>
 </div>
 <dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
-<script src="../../assets/docs.js?v=20261125"></script>
+<script src="../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/worktrees/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/worktrees/">
 <link rel="icon" href="../../../assets/app-icon.png">
-<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261126" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다." data-enlarge="크게 보기">
 <a class="skip" href="#main">본문으로</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,7 +37,7 @@
 <p class="crumb"><a href="../../../ko/developers/">개발자</a><span aria-hidden="true">/</span><span>파일과 ref</span></p>
 <h1>워크트리 요약</h1>
 <p class="lede">모든 워크트리를 적은 JSON 파일 하나입니다.</p>
-<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>2026년 11월 26일 고침</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <p>저장소에 워크트리가 둘 이상이고 Pro를 쓰면, Branchlane은 <code>&lt;git common dir&gt;/branchlane/worktrees.json</code>을 적어도 1분마다 새로 씁니다. MCP를 못 쓰는 에이전트는 워크트리마다 <code>git status</code>를 도는 대신 이 파일을 읽으면 됩니다. 워크트리가 하나만 남으면 지워집니다.</p>
 <div class="code"><div class="code-head"><span>branchlane/worktrees.json</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{
@@ -54,6 +54,15 @@
       <span class="k">"conflictLines"</span>: { <span class="k">"Sources/Sync/SyncEngine.swift"</span>: [[<span class="s">"40-60"</span>, <span class="s">"41"</span>]] } }
   ]
 }</code></pre></div>
+<h2 id="read">읽어 보기<a class="anchor" href="#read" aria-label="#읽어 보기">#</a></h2>
+<p>파일은 Git 공통 폴더 안에 있으니 어느 워크트리에서든 같은 경로로 찾습니다.</p>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>f=<span class="s">"$(git rev-parse --git-common-dir)/branchlane/worktrees.json"</span>
+
+<span class="c"># 워크트리마다 미커밋 파일 수</span>
+<span class="w">jq</span> <span class="k">-r</span> <span class="s">'.worktrees[] | "\(.branch)\t\(.uncommittedFiles | length)"'</span> <span class="s">"$f"</span>
+
+<span class="c"># 실제로 충돌할 쌍만</span>
+<span class="w">jq</span> <span class="s">'.collisions[] | select(.conflicts)'</span> <span class="s">"$f"</span></code></pre></div>
 </div>
 <nav class="next" aria-label="이전, 다음"><a class="back" href="../../../ko/developers/attribution/"><small>이전</small><b>에이전트 출처 표시</b></a><a class="fwd" href="../../../ko/developers/extend/"><small>다음</small><b>Branchlane 확장</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/developers-summary.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../../privacy/">개인정보 처리방침</a><a href="../../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
@@ -61,6 +70,6 @@
 <div></div>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
-<script src="../../../assets/docs.js?v=20261125"></script>
+<script src="../../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

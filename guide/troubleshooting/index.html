@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/troubleshooting/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/troubleshooting/">
 <link rel="icon" href="../../assets/app-icon.png">
-<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../" data-area="guide/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<body data-base="../../" data-area="guide/" data-index="../../assets/docs-en.json?v=20261126" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded." data-enlarge="Enlarge">
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,16 +37,24 @@
 <p class="crumb"><a href="../../guide/">Guide</a><span aria-hidden="true">/</span><span>Help</span></p>
 <h1>Troubleshooting</h1>
 <p class="lede">What to do where the App Sandbox gets in the way.</p>
-<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>Updated November 26, 2026</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <h2 id="a-hook-or-script-says-operation-not-permitted">A hook or script says "operation not permitted"<a class="anchor" href="#a-hook-or-script-says-operation-not-permitted" aria-label="#A hook or script says &quot;operation not permitted&quot;">#</a></h2>
 <p>macOS quarantines files written by App Store apps, and quarantined programs cannot run. Hooks and scripts that arrive through a clone, pull or checkout in Branchlane need this once in Terminal, and again after Branchlane writes them later:</p>
-<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">xattr</span> <span class="k">-dr</span> com.apple.quarantine /path/to/repo</code></pre></div>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="c"># Is it quarantined? A value means yes</span>
+<span class="w">xattr</span> <span class="k">-p</span> com.apple.quarantine .git/hooks/pre-commit
+
+<span class="c"># Clear the quarantine flag for the whole repository</span>
+<span class="w">xattr</span> <span class="k">-dr</span> com.apple.quarantine /path/to/repo</code></pre></div>
 <p>Branchlane shows the command with your path when this blocks a Git operation. Hooks that were already on disk run normally.</p>
 <h2 id="commits-have-no-author">Commits have no author<a class="anchor" href="#commits-have-no-author" aria-label="#Commits have no author">#</a></h2>
-<p>Choose your <code>.gitconfig</code> in Settings &gt; Git &amp; SSH, or set a name and email for the repository.</p>
+<p>Choose your <code>.gitconfig</code> in Settings &gt; Git &amp; SSH, or set a name and email for this repository from its folder:</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">git</span> config user.name <span class="s">"Alex Kim"</span>
+<span class="w">git</span> config user.email <span class="s">"alex@example.com"</span></code></pre></div>
 <h2 id="ssh-asks-about-a-host-key">SSH asks about a host key<a class="anchor" href="#ssh-asks-about-a-host-key" aria-label="#SSH asks about a host key">#</a></h2>
-<p>The first connection to a host shows its fingerprint. Check it against your host's published fingerprint and trust it. Trusted hosts are listed in Settings &gt; Git &amp; SSH.</p>
+<p>The first connection to a host shows its fingerprint. Check it against your host's published fingerprint and trust it. Trusted hosts are listed in Settings &gt; Git &amp; SSH. You can see the fingerprint from Terminal first:</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">ssh-keyscan</span> github.com 2&gt;/dev/null | ssh-keygen <span class="k">-lf</span> -</code></pre></div>
+<p>GitHub publishes its fingerprints in the <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints">GitHub docs</a>.</p>
 <h2 id="a-worktree-outside-the-repository-shows-no-changes">A worktree outside the repository shows no changes<a class="anchor" href="#a-worktree-outside-the-repository-shows-no-changes" aria-label="#A worktree outside the repository shows no changes">#</a></h2>
 <p>The sandbox needs access to that folder. Choose Allow Access on the worktree row once, and Branchlane remembers it.</p>
 <h2 id="there-is-no-terminal-inside-the-app">There is no terminal inside the app<a class="anchor" href="#there-is-no-terminal-inside-the-app" aria-label="#There is no terminal inside the app">#</a></h2>
@@ -58,6 +66,6 @@
 <aside class="outline"><p>On this page</p><ul><li><a href="#a-hook-or-script-says-operation-not-permitted">A hook or script says &quot;operation not permitted&quot;</a></li><li><a href="#commits-have-no-author">Commits have no author</a></li><li><a href="#ssh-asks-about-a-host-key">SSH asks about a host key</a></li><li><a href="#a-worktree-outside-the-repository-shows-no-changes">A worktree outside the repository shows no changes</a></li><li><a href="#there-is-no-terminal-inside-the-app">There is no terminal inside the app</a></li></ul></aside>
 </div>
 <dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
-<script src="../../assets/docs.js?v=20261125"></script>
+<script src="../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

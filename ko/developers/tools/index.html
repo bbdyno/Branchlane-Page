@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/tools/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/tools/">
 <link rel="icon" href="../../../assets/app-icon.png">
-<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261126" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다." data-enlarge="크게 보기">
 <a class="skip" href="#main">본문으로</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,8 +37,9 @@
 <p class="crumb"><a href="../../../ko/developers/">개발자</a><span aria-hidden="true">/</span><span>레퍼런스</span></p>
 <h1>도구</h1>
 <p class="lede">MCP 도구마다의 인자와 돌려주는 값입니다.</p>
-<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>2026년 11월 26일 고침</span><span>Branchlane 2.3</span></div>
 <div class="text">
+<p>예시의 결과는 <code>result.content[0].text</code> 안의 JSON을 풀어 보인 것입니다. 실제로는 키가 알파벳 순서로 오고 들여쓰기가 다를 수 있습니다.</p>
 <h2 id="common">공통 인자<a class="anchor" href="#common" aria-label="#공통 인자">#</a></h2>
 <p>모든 도구가 받습니다.</p>
 <div class="table-wrap"><table class="params"><thead><tr><th scope="col">인자</th><th scope="col">형식</th><th scope="col">설명</th></tr></thead><tbody>
@@ -55,9 +56,35 @@
 <tr><th scope="row"><code>target</code></th><td>string</td><td>작업이 들어갈 브랜치. 생략하면 저장소의 메인 브랜치입니다.</td></tr>
 <tr><th scope="row"><code>clone</code></th><td>string[]</td><td>메인 워크트리에서 복사할 무시된 폴더. 예: <code>node_modules</code>, <code>.build</code></td></tr>
 </tbody></table></div>
+<div class="code"><div class="code-head"><span>결과</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{
+  <span class="k">"branch"</span>: <span class="s">"lane/retry-sync-with-backoff-a7f4"</span>,
+  <span class="k">"cloned"</span>: [<span class="s">"node_modules"</span>],
+  <span class="k">"lane_id"</span>: <span class="s">"a7f460dc"</span>,
+  <span class="k">"next"</span>: <span class="s">"Work only inside `worktree`. Commit there as you like; Branchlane snapshots uncommitted work too."</span>,
+  <span class="k">"target"</span>: <span class="s">"refs/heads/main"</span>,
+  <span class="k">"worktree"</span>: <span class="s">"/Users/me/src/app/.branchlane/lanes/a7f460dc"</span>
+}</code></pre></div>
 
 <h2 id="lane_status" class="sig"><code>lane_status</code><span class="badge read">읽기 전용</span><a class="anchor" href="#lane_status" aria-label="#lane_status">#</a></h2>
 <p>Lane의 상태, 기록한 증거가 지금 코드와 맞는지, 검토 의견, 사람이 뺀 파일과 헝크, 다른 워크트리나 대상 브랜치와 겹치는 곳(줄 범위와 먼저 통합할 쪽 포함)을 돌려줍니다.</p>
+<div class="code"><div class="code-head"><span>결과</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{
+  <span class="k">"branch"</span>: <span class="s">"lane/retry-sync-with-backoff-a7f4"</span>,
+  <span class="k">"collisions"</span>: [{
+    <span class="k">"advice"</span>: <span class="s">"Your lane should land first. Keep your changes on these lines as they are."</span>,
+    <span class="k">"conflict_lines"</span>: [{ <span class="k">"path"</span>: <span class="s">"Sources/Sync/SyncEngine.swift"</span>, <span class="k">"theirs"</span>: [<span class="s">"41"</span>], <span class="k">"yours"</span>: [<span class="s">"40-60"</span>] }],
+    <span class="k">"conflicts"</span>: [<span class="s">"Sources/Sync/SyncEngine.swift"</span>],
+    <span class="k">"integrate_first"</span>: <span class="s">"you"</span>,
+    <span class="k">"same_files"</span>: [<span class="s">"Sources/Sync/SyncEngine.swift"</span>],
+    <span class="k">"with"</span>: <span class="s">"/Users/me/src/app/.branchlane/lanes/c19e02b7"</span>
+  }],
+  <span class="k">"evidence"</span>: [{ <span class="k">"command"</span>: <span class="s">"swift test"</span>, <span class="k">"current"</span>: <span class="w">true</span>, <span class="k">"exit_code"</span>: <span class="n">0</span>, <span class="k">"id"</span>: <span class="n">1</span> }],
+  <span class="k">"intent"</span>: <span class="s">"Retry sync with backoff when the server is busy"</span>,
+  <span class="k">"lane_id"</span>: <span class="s">"a7f460dc"</span>,
+  <span class="k">"status"</span>: <span class="s">"running"</span>,
+  <span class="k">"target"</span>: <span class="s">"refs/heads/main"</span>,
+  <span class="k">"worktree"</span>: <span class="s">"/Users/me/src/app/.branchlane/lanes/a7f460dc"</span>
+}</code></pre></div>
+<p>사람이 검토한 뒤에는 <code>review_feedback</code>(돌려보낸 이유), <code>rejected_files</code>(뺀 파일과 이유), <code>left_out_hunks</code>(뺀 헝크), <code>note</code>가 더해질 수 있습니다. 증거 뒤에 내용이 바뀌면 <code>current</code>가 <code>false</code>가 되고 <code>changed_since</code>에 바뀐 파일이 나옵니다.</p>
 
 
 <h2 id="lane_checkpoint" class="sig"><code>lane_checkpoint</code><a class="anchor" href="#lane_checkpoint" aria-label="#lane_checkpoint">#</a></h2>
@@ -65,6 +92,7 @@
 <div class="table-wrap"><table class="params"><thead><tr><th scope="col">인자</th><th scope="col">형식</th><th scope="col">설명</th></tr></thead><tbody>
 <tr><th scope="row"><code>note</code></th><td>string</td><td>스냅샷에 남길 메모.</td></tr>
 </tbody></table></div>
+<div class="code"><div class="code-head"><span>결과</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{ <span class="k">"checkpoint"</span>: <span class="s">"5f0c8e1…"</span>, <span class="k">"tree"</span>: <span class="s">"b41d9a2…"</span> }</code></pre></div>
 
 <h2 id="lane_evidence" class="sig"><code>lane_evidence</code><a class="anchor" href="#lane_evidence" aria-label="#lane_evidence">#</a></h2>
 <p>명령이 지금 내용에서 실행됐고 어떻게 끝났는지 기록합니다. 내용이 그대로일 때만 유효하니 마지막 수정 뒤에 부르세요. <code>evidence_id</code>를 돌려줍니다.</p>
@@ -73,6 +101,11 @@
 <tr><th scope="row"><code>exit_code</code><span class="req">필수</span></th><td>integer</td><td>끝난 값. 0이면 통과입니다.</td></tr>
 <tr><th scope="row"><code>output</code></th><td>string</td><td>명령의 출력. 끝부분만 비밀을 가려 남깁니다.</td></tr>
 </tbody></table></div>
+<div class="code"><div class="code-head"><span>결과</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{
+  <span class="k">"evidence_id"</span>: <span class="n">1</span>,
+  <span class="k">"note"</span>: <span class="s">"Valid only while the content stays exactly as it is now. Cite this id in lane_propose claims."</span>,
+  <span class="k">"tree"</span>: <span class="s">"b41d9a2…"</span>
+}</code></pre></div>
 
 <h2 id="lane_propose" class="sig"><code>lane_propose</code><a class="anchor" href="#lane_propose" aria-label="#lane_propose">#</a></h2>
 <p>지금 상태 그대로 검토를 요청합니다. 유효한 증거가 없는 주장은 표시됩니다.</p>
@@ -89,6 +122,11 @@
     { <span class="k">"text"</span>: <span class="s">"The library file format is unchanged"</span> }
   ]
 }}</code></pre></div>
+<div class="code"><div class="code-head"><span>결과</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{
+  <span class="k">"claims_without_current_evidence"</span>: [<span class="s">"The library file format is unchanged"</span>],
+  <span class="k">"next"</span>: <span class="s">"The person reviews in Branchlane. Call lane_status later for feedback."</span>,
+  <span class="k">"status"</span>: <span class="s">"proposed"</span>
+}</code></pre></div>
 
 <h2 id="lane_request" class="sig"><code>lane_request</code><a class="anchor" href="#lane_request" aria-label="#lane_request">#</a></h2>
 <p>푸시, 강제 푸시, 기록 다시 쓰기를 요청합니다. 정책이 정하고, 일부는 사람의 승인을 최대 2분 기다립니다. 승인된 푸시는 사람의 인증 정보로 실행됩니다.</p>
@@ -96,6 +134,9 @@
 <tr><th scope="row"><code>action</code><span class="req">필수</span></th><td>enum</td><td><code>push</code>, <code>force_push</code>, <code>rewrite_history</code> 중 하나.</td></tr>
 <tr><th scope="row"><code>reason</code></th><td>string</td><td>사람에게 보여 줄 이유.</td></tr>
 </tbody></table></div>
+<p>정책과 사람의 결정에 따라 세 가지 중 하나가 옵니다. 거절과 거부는 <code>isError</code>가 <code>true</code>입니다.</p>
+<div class="tabs"><div class="tablist" role="tablist"><button type="button" role="tab" id="t1-0" aria-controls="p1-0" data-tab="승인" aria-selected="true">승인</button><button type="button" role="tab" id="t1-1" aria-controls="p1-1" data-tab="정책이 거절" aria-selected="false">정책이 거절</button><button type="button" role="tab" id="t1-2" aria-controls="p1-2" data-tab="사람이 거부" aria-selected="false">사람이 거부</button></div><div class="panel" role="tabpanel" id="p1-0" aria-labelledby="t1-0"><div class="code"><div class="code-head"><span>JSON</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{ <span class="k">"decision"</span>: <span class="s">"approved"</span>, <span class="k">"done"</span>: <span class="w">true</span>, <span class="k">"output"</span>: <span class="s">"To github.com:me/app.git\n   9b26e1e..4c1d2e0  lane/retry-sync-with-backoff-a7f4 -&gt; lane/retry-sync-with-backoff-a7f4"</span> }</code></pre></div>
+<p>기록 다시 쓰기는 Lane 브랜치 안에서 에이전트가 직접 합니다. 이때는 <code>"done": false</code>와 함께 해도 된다는 메모가 옵니다.</p></div><div class="panel" role="tabpanel" id="p1-1" aria-labelledby="t1-1" hidden><div class="code"><div class="code-head"><span>JSON</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{ <span class="k">"decision"</span>: <span class="s">"denied"</span>, <span class="k">"reason"</span>: <span class="s">"The repository's policy forbids force_push."</span> }</code></pre></div></div><div class="panel" role="tabpanel" id="p1-2" aria-labelledby="t1-2" hidden><div class="code"><div class="code-head"><span>JSON</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{ <span class="k">"decision"</span>: <span class="s">"declined"</span>, <span class="k">"reason"</span>: <span class="s">"The person did not approve it."</span> }</code></pre></div></div></div>
 </div>
 <nav class="next" aria-label="이전, 다음"><a class="back" href="../../../ko/developers/lanes/"><small>이전</small><b>Lane 흐름과 상태</b></a><a class="fwd" href="../../../ko/developers/protocol/"><small>다음</small><b>프로토콜</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/developers-tools.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../../privacy/">개인정보 처리방침</a><a href="../../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
@@ -103,6 +144,6 @@
 <aside class="outline"><p>이 페이지에서</p><ul><li><a href="#common">공통 인자</a></li><li><a href="#lane_begin">lane_begin</a></li><li><a href="#lane_status">lane_status</a></li><li><a href="#lane_checkpoint">lane_checkpoint</a></li><li><a href="#lane_evidence">lane_evidence</a></li><li><a href="#lane_propose">lane_propose</a></li><li class="sub"><a href="#lane_propose-example">예시</a></li><li><a href="#lane_request">lane_request</a></li></ul></aside>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
-<script src="../../../assets/docs.js?v=20261125"></script>
+<script src="../../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

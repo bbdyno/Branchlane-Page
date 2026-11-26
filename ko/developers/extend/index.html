@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/extend/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/extend/">
 <link rel="icon" href="../../../assets/app-icon.png">
-<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261126" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다." data-enlarge="크게 보기">
 <a class="skip" href="#main">본문으로</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,10 +37,18 @@
 <p class="crumb"><a href="../../../ko/developers/">개발자</a><span aria-hidden="true">/</span><span>만들기</span></p>
 <h1>Branchlane 확장</h1>
 <p class="lede">내 모델 서버나 비서용 MCP 서버를 연결합니다.</p>
-<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>2026년 11월 26일 고침</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <h2 id="내-모델-서버">내 모델 서버<a class="anchor" href="#내-모델-서버" aria-label="#내 모델 서버">#</a></h2>
 <p>설정 &gt; 비서는 OpenAI 호환 서버라면 무엇이든 받습니다. <code>stream: true</code>로 <code>POST ../../../ko//chat/completions</code>를 부르고 SSE나 일반 JSON 응답을 읽으며, 연결 확인에는 <code>GET ../../../ko//models</code>를 씁니다. 경로가 없으면 <code>/v1</code>을 붙이므로 Ollama(<code>http://localhost:11434</code>)와 LM Studio(<code>http://localhost:1234</code>)는 그대로 됩니다. 키는 다른 컴퓨터로 가는 일반 HTTP에는 절대 실리지 않습니다.</p>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="c"># Ollama: 모델을 받고 목록이 나오는지 확인</span>
+<span class="w">ollama</span> pull llama3.2
+<span class="w">curl</span> <span class="k">-s</span> http://localhost:11434/v1/models | jq <span class="k">-r</span> <span class="s">'.data[].id'</span>
+
+<span class="c"># LM Studio: 서버를 켜고 같은 방법으로 확인</span>
+<span class="w">lms</span> server start
+<span class="w">curl</span> <span class="k">-s</span> http://localhost:1234/v1/models | jq <span class="k">-r</span> <span class="s">'.data[].id'</span></code></pre></div>
+<p>목록이 나오면 그 주소를 설정 &gt; 비서에 넣고 모델을 고릅니다.</p>
 <p>저장소 데이터는 무작위 <code>BEGIN data-…</code>, <code>END data-…</code> 표시 사이에 넣고, 그 안은 지시가 아니라 데이터라고 모델에 알립니다.</p>
 <h2 id="비서용-내-mcp-서버">비서용 내 MCP 서버<a class="anchor" href="#비서용-내-mcp-서버" aria-label="#비서용 내 MCP 서버">#</a></h2>
 <p>사람이 설정 &gt; 비서에 더한 MCP 서버의 도구를 비서가 부를 수 있습니다. Streamable HTTP(프로토콜 <code>2025-06-18</code>)를 HTTPS로, 또는 localhost에서는 HTTP로 열어 주세요. Branchlane은 <code>MCP-Protocol-Version</code>을 보내고 <code>Mcp-Session-Id</code>를 유지하며 Bearer 토큰을 붙일 수 있습니다. stdio 서버는 App Sandbox에서 띄울 수 없습니다.</p>
@@ -51,6 +59,6 @@
 <aside class="outline"><p>이 페이지에서</p><ul><li><a href="#내-모델-서버">내 모델 서버</a></li><li><a href="#비서용-내-mcp-서버">비서용 내 MCP 서버</a></li></ul></aside>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
-<script src="../../../assets/docs.js?v=20261125"></script>
+<script src="../../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

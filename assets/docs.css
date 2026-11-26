@@ -175,6 +175,39 @@ td:has(kbd) { white-space: nowrap; }
 .states span.end { border-color: var(--accent); color: var(--accent); }
 .states i { width: 26px; height: 2px; background: var(--lane); }
 
+/* Screenshots: numbered pins match a .legend list below; the whole picture opens larger. */
+.shot { margin: 22px 0 0; }
+.shot .frame { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: #1b1e23; }
+.text .shot img { width: 100%; margin: 0; border: 0; border-radius: 0; }
+.shot.narrow { max-width: 300px; }
+.shot figcaption { margin-top: 9px; }
+.pin { position: absolute; display: grid; width: 22px; height: 22px; place-items: center; border-radius: 50%; background: var(--accent); color: var(--on-accent); box-shadow: 0 0 0 2px rgba(5, 12, 16, 0.6); font: 700 0.72rem var(--sans); transform: translate(-50%, -50%); pointer-events: none; }
+.zoom { position: absolute; inset: 0; width: 100%; border: 0; background: none; cursor: zoom-in; }
+.zoom:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 10px; }
+.legend { padding: 0 !important; counter-reset: pin; list-style: none; }
+.legend > li { position: relative; padding-left: 34px; counter-increment: pin; }
+.legend > li::before { position: absolute; top: 2px; left: 0; display: grid; width: 22px; height: 22px; place-items: center; border-radius: 50%; background: var(--accent); color: var(--on-accent); font: 700 0.74rem var(--sans); content: counter(pin); }
+dialog.lightbox { width: auto; max-width: calc(100vw - 24px); max-height: calc(100vh - 24px); margin: auto; border: 0; border-radius: 10px; background: #1b1e23; box-shadow: var(--shadow); cursor: zoom-out; }
+dialog.lightbox::backdrop { background: rgba(4, 9, 12, 0.82); }
+dialog.lightbox img { display: block; max-width: calc(100vw - 24px); max-height: calc(100vh - 24px); width: auto; height: auto; }
+
+/* Diagrams drawn inline, coloured by the theme. */
+.diagram { margin: 22px 0 0; padding: 18px; overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-side); }
+.diagram svg { display: block; width: 100%; min-width: 600px; height: auto; }
+.diagram .box { fill: var(--bg); stroke: var(--line-2); stroke-width: 1.5; }
+.diagram .hot { stroke: var(--accent); }
+.diagram .soft { fill: var(--accent-soft); }
+.diagram text { fill: var(--fg); font: 600 13px var(--sans); }
+.diagram .sub { fill: var(--fg-3); font: 400 11.5px var(--mono); }
+.diagram .label { fill: var(--fg-2); font: 500 11.5px var(--mono); }
+.diagram .note { fill: var(--fg-2); font: 500 12px var(--sans); }
+.diagram .wire { fill: none; stroke: var(--lane); stroke-width: 2; }
+.diagram .wire.hot { stroke: var(--accent); }
+.diagram .dash { stroke-dasharray: 5 5; }
+.diagram .tip { fill: var(--lane); }
+.diagram .tip.hot { fill: var(--accent); }
+.diagram .life { stroke: var(--line-2); stroke-width: 1.5; stroke-dasharray: 3 5; }
+
 .next { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 64px; }
 .next a { padding: 13px 18px; border: 1px solid var(--line); border-radius: 10px; }
 .next a:hover { border-color: var(--accent); }
