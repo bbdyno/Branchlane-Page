@@ -61,6 +61,15 @@
 }</code></pre></div>
 <p>Each client shapes its settings file a little differently. Only the address and the header have to match.</p></div></div>
 
+<h2 id="kit">All at once with the agent kit<a class="anchor" href="#kit" aria-label="#All at once with the agent kit">#</a></h2>
+<p><a href="https://github.com/bbdyno/branchlane-agent-kit">Branchlane Agent Kit</a> is a public repository that bundles the setup above with how an agent should use lanes. For Claude Code it brings the MCP server, two skills, and a hook that saves a checkpoint at the end of every turn. The token is read from an environment variable, never written to a file.</p>
+<div class="tabs"><div class="tablist" role="tablist"><button type="button" role="tab" id="t2-0" aria-controls="p2-0" data-tab="Claude Code" aria-selected="true">Claude Code</button><button type="button" role="tab" id="t2-1" aria-controls="p2-1" data-tab="Codex" aria-selected="false">Codex</button><button type="button" role="tab" id="t2-2" aria-controls="p2-2" data-tab="Any other MCP client" aria-selected="false">Any other MCP client</button></div><div class="panel" role="tabpanel" id="p2-0" aria-labelledby="t2-0"><div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">export</span> BRANCHLANE_TOKEN=<span class="s">"the token from Settings"</span>
+
+<span class="w">claude</span> plugin marketplace add bbdyno/branchlane-agent-kit
+<span class="w">claude</span> plugin install branchlane@branchlane</code></pre></div>
+<p>With the plugin, skip the <code>claude mcp add</code> line above.</p></div><div class="panel" role="tabpanel" id="p2-1" aria-labelledby="t2-1" hidden><p>Add the kit's <code>codex/config.toml</code> to <code>~/.codex/config.toml</code>, and <code>codex/AGENTS.snippet.md</code> to your repository's <code>AGENTS.md</code>.</p></div><div class="panel" role="tabpanel" id="p2-2" aria-labelledby="t2-2" hidden><p>Use the kit's <code>clients/mcp.json</code>. For clients that do not expand environment variables, enter the address and header yourself.</p></div></div>
+<p class="callout">The App Store version is 2.3. The kit's three conflict tools work from 2.4; everything else works in 2.3.</p>
+
 <h2 id="try">Try it by hand<a class="anchor" href="#try" aria-label="#Try it by hand">#</a></h2>
 <p>Put the token in an environment variable and start a session:</p>
 <div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">export</span> BRANCHLANE_TOKEN=<span class="s">"the token from Settings"</span>
@@ -128,7 +137,7 @@
 <nav class="next" aria-label="Previous, Next"><a class="back" href="../../developers/"><small>Previous</small><b>Build on Branchlane</b></a><a class="fwd" href="../../developers/lanes/"><small>Next</small><b>Lane flow and states</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/developers-connect.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
 </article></main>
-<aside class="outline"><p>On this page</p><ul><li><a href="#add">Add the server</a></li><li><a href="#try">Try it by hand</a></li><li><a href="#result">Read the result</a></li></ul></aside>
+<aside class="outline"><p>On this page</p><ul><li><a href="#add">Add the server</a></li><li><a href="#kit">All at once with the agent kit</a></li><li><a href="#try">Try it by hand</a></li><li><a href="#result">Read the result</a></li></ul></aside>
 </div>
 <dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
 <script src="../../assets/docs.js?v=20261126"></script>
