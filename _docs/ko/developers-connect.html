@@ -24,6 +24,19 @@ http_headers = { Authorization = "Bearer &lt;token&gt;" }</code></pre></tab>
 <p>설정 파일 모양은 클라이언트마다 조금씩 다릅니다. 주소와 헤더만 맞으면 됩니다.</p></tab>
 </tabs>
 
+<h2 id="kit">연결 키트로 한 번에</h2>
+<p><a href="https://github.com/bbdyno/branchlane-agent-kit">Branchlane Agent Kit</a>은 위 설정에 에이전트가 Lane을 쓰는 방법까지 묶은 공개 저장소입니다. Claude Code에는 MCP 서버, 스킬 두 개, 턴이 끝날 때마다 체크포인트를 남기는 훅이 함께 들어갑니다. 토큰은 파일에 적지 않고 환경 변수로 읽습니다.</p>
+<tabs>
+<tab name="Claude Code"><pre data-lang="bash"><code>export BRANCHLANE_TOKEN="설정에서 복사한 토큰"
+
+claude plugin marketplace add bbdyno/branchlane-agent-kit
+claude plugin install branchlane@branchlane</code></pre>
+<p>플러그인을 쓰면 위의 <code>claude mcp add</code> 줄은 실행하지 않습니다.</p></tab>
+<tab name="Codex"><p>키트의 <code>codex/config.toml</code>을 <code>~/.codex/config.toml</code>에, <code>codex/AGENTS.snippet.md</code>를 저장소의 <code>AGENTS.md</code>에 더합니다.</p></tab>
+<tab name="다른 MCP 클라이언트"><p>키트의 <code>clients/mcp.json</code>을 씁니다. 환경 변수를 펼치지 않는 클라이언트는 주소와 헤더를 직접 넣습니다.</p></tab>
+</tabs>
+<p class="callout">App Store 판은 2.3입니다. 키트의 충돌 도구 세 개는 2.4부터 동작하고, 그 밖의 기능은 2.3에서 됩니다.</p>
+
 <h2 id="try">직접 불러 보기</h2>
 <p>토큰을 환경 변수에 넣고 세션을 시작합니다.</p>
 <pre data-lang="bash"><code>export BRANCHLANE_TOKEN="설정에서 복사한 토큰"

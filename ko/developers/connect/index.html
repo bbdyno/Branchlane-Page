@@ -61,6 +61,15 @@
 }</code></pre></div>
 <p>설정 파일 모양은 클라이언트마다 조금씩 다릅니다. 주소와 헤더만 맞으면 됩니다.</p></div></div>
 
+<h2 id="kit">연결 키트로 한 번에<a class="anchor" href="#kit" aria-label="#연결 키트로 한 번에">#</a></h2>
+<p><a href="https://github.com/bbdyno/branchlane-agent-kit">Branchlane Agent Kit</a>은 위 설정에 에이전트가 Lane을 쓰는 방법까지 묶은 공개 저장소입니다. Claude Code에는 MCP 서버, 스킬 두 개, 턴이 끝날 때마다 체크포인트를 남기는 훅이 함께 들어갑니다. 토큰은 파일에 적지 않고 환경 변수로 읽습니다.</p>
+<div class="tabs"><div class="tablist" role="tablist"><button type="button" role="tab" id="t2-0" aria-controls="p2-0" data-tab="Claude Code" aria-selected="true">Claude Code</button><button type="button" role="tab" id="t2-1" aria-controls="p2-1" data-tab="Codex" aria-selected="false">Codex</button><button type="button" role="tab" id="t2-2" aria-controls="p2-2" data-tab="다른 MCP 클라이언트" aria-selected="false">다른 MCP 클라이언트</button></div><div class="panel" role="tabpanel" id="p2-0" aria-labelledby="t2-0"><div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">export</span> BRANCHLANE_TOKEN=<span class="s">"설정에서 복사한 토큰"</span>
+
+<span class="w">claude</span> plugin marketplace add bbdyno/branchlane-agent-kit
+<span class="w">claude</span> plugin install branchlane@branchlane</code></pre></div>
+<p>플러그인을 쓰면 위의 <code>claude mcp add</code> 줄은 실행하지 않습니다.</p></div><div class="panel" role="tabpanel" id="p2-1" aria-labelledby="t2-1" hidden><p>키트의 <code>codex/config.toml</code>을 <code>~/.codex/config.toml</code>에, <code>codex/AGENTS.snippet.md</code>를 저장소의 <code>AGENTS.md</code>에 더합니다.</p></div><div class="panel" role="tabpanel" id="p2-2" aria-labelledby="t2-2" hidden><p>키트의 <code>clients/mcp.json</code>을 씁니다. 환경 변수를 펼치지 않는 클라이언트는 주소와 헤더를 직접 넣습니다.</p></div></div>
+<p class="callout">App Store 판은 2.3입니다. 키트의 충돌 도구 세 개는 2.4부터 동작하고, 그 밖의 기능은 2.3에서 됩니다.</p>
+
 <h2 id="try">직접 불러 보기<a class="anchor" href="#try" aria-label="#직접 불러 보기">#</a></h2>
 <p>토큰을 환경 변수에 넣고 세션을 시작합니다.</p>
 <div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">export</span> BRANCHLANE_TOKEN=<span class="s">"설정에서 복사한 토큰"</span>
@@ -128,7 +137,7 @@
 <nav class="next" aria-label="이전, 다음"><a class="back" href="../../../ko/developers/"><small>이전</small><b>Branchlane 위에 만들기</b></a><a class="fwd" href="../../../ko/developers/lanes/"><small>다음</small><b>Lane 흐름과 상태</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/developers-connect.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../../privacy/">개인정보 처리방침</a><a href="../../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
 </article></main>
-<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#add">서버 더하기</a></li><li><a href="#try">직접 불러 보기</a></li><li><a href="#result">결과 읽기</a></li></ul></aside>
+<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#add">서버 더하기</a></li><li><a href="#kit">연결 키트로 한 번에</a></li><li><a href="#try">직접 불러 보기</a></li><li><a href="#result">결과 읽기</a></li></ul></aside>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
 <script src="../../../assets/docs.js?v=20261126"></script>

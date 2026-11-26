@@ -24,6 +24,19 @@ http_headers = { Authorization = "Bearer &lt;token&gt;" }</code></pre></tab>
 <p>Each client shapes its settings file a little differently. Only the address and the header have to match.</p></tab>
 </tabs>
 
+<h2 id="kit">All at once with the agent kit</h2>
+<p><a href="https://github.com/bbdyno/branchlane-agent-kit">Branchlane Agent Kit</a> is a public repository that bundles the setup above with how an agent should use lanes. For Claude Code it brings the MCP server, two skills, and a hook that saves a checkpoint at the end of every turn. The token is read from an environment variable, never written to a file.</p>
+<tabs>
+<tab name="Claude Code"><pre data-lang="bash"><code>export BRANCHLANE_TOKEN="the token from Settings"
+
+claude plugin marketplace add bbdyno/branchlane-agent-kit
+claude plugin install branchlane@branchlane</code></pre>
+<p>With the plugin, skip the <code>claude mcp add</code> line above.</p></tab>
+<tab name="Codex"><p>Add the kit's <code>codex/config.toml</code> to <code>~/.codex/config.toml</code>, and <code>codex/AGENTS.snippet.md</code> to your repository's <code>AGENTS.md</code>.</p></tab>
+<tab name="Any other MCP client"><p>Use the kit's <code>clients/mcp.json</code>. For clients that do not expand environment variables, enter the address and header yourself.</p></tab>
+</tabs>
+<p class="callout">The App Store version is 2.3. The kit's three conflict tools work from 2.4; everything else works in 2.3.</p>
+
 <h2 id="try">Try it by hand</h2>
 <p>Put the token in an environment variable and start a session:</p>
 <pre data-lang="bash"><code>export BRANCHLANE_TOKEN="the token from Settings"
