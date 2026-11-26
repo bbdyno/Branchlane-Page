@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/lanes/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/lanes/">
 <link rel="icon" href="../../../assets/app-icon.png">
-<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../../" data-area="ko/guide/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<body data-base="../../../" data-area="ko/guide/" data-index="../../../assets/docs-ko.json?v=20261126" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다." data-enlarge="크게 보기">
 <a class="skip" href="#main">본문으로</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,23 +37,44 @@
 <p class="crumb"><a href="../../../ko/guide/">가이드</a><span aria-hidden="true">/</span><span>에이전트</span></p>
 <h1>에이전트 Lane</h1>
 <p class="lede">코딩 에이전트마다 브랜치와 폴더를 따로 주고 한 곳에서 검토합니다.</p>
-<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>2026년 11월 26일 고침</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <p>에이전트 Lane은 Claude Code, Codex 같은 코딩 에이전트에게 브랜치와 폴더를 따로 주고, 그 작업을 한 곳에서 검토하고 통합하게 합니다.</p>
+<figure class="shot"><div class="frame"><img src="../../../screenshots/ko/lanes.webp" width="2400" height="1500" alt="Lane 검토 화면. 제안 요약과 주장, 테스트 증거, 겹치는 작업 경고, 파일별 차이와 헝크 빼기 버튼" loading="lazy" decoding="async"><span class="pin" style="left:31.5%;top:20%" aria-hidden="true">1</span><span class="pin" style="left:65%;top:31.7%" aria-hidden="true">2</span><span class="pin" style="left:65%;top:46%" aria-hidden="true">3</span><span class="pin" style="left:65%;top:58%" aria-hidden="true">4</span><span class="pin" style="left:65%;top:75%" aria-hidden="true">5</span><button class="zoom" type="button" aria-label="크게 보기: Lane 검토 화면. 제안 요약과 주장, 테스트 증거, 겹치는 작업 경고, 파일별 차이와 헝크 빼기 버튼"></button></div></figure>
+<ol class="legend">
+  <li><strong>결정.</strong> 돌려보내기, 승인하고 대기열에 넣기, 지금 통합 중에서 고릅니다.</li>
+  <li><strong>제안.</strong> 에이전트가 적은 요약과 주장입니다. 증거가 없거나 오래된 주장은 표시됩니다.</li>
+  <li><strong>증거.</strong> 에이전트가 기록한 테스트, 빌드, 린트입니다. 실행한 그 내용에서만 유효하고, 그 뒤에 바뀐 파일이 있으면 알려 줍니다.</li>
+  <li><strong>겹치는 작업.</strong> 다른 Lane이나 대상 브랜치와 같은 줄을 고치면 줄 범위와 먼저 통합할 쪽을 보여 줍니다.</li>
+  <li><strong>검토 파일.</strong> 위험한 파일이 먼저 나옵니다. 파일이나 헝크를 빼면 그 부분은 통합하지 않습니다.</li>
+</ol>
+
+<h2 id="steps">쓰는 순서<a class="anchor" href="#steps" aria-label="#쓰는 순서">#</a></h2>
 <ol class="steps">
   <li>설정 &gt; 에이전트에서 에이전트를 연결합니다. 에이전트마다 넣을 설정을 그대로 보여 주고, 서버는 이 Mac 안에서만 열립니다.</li>
   <li>왼쪽 패널의 Lane 구역에서 Lane을 만들거나, 에이전트가 자기 도구로 시작하게 둡니다.</li>
-  <li>에이전트가 검토를 요청하면 Lane을 엽니다. 테스트 증거는 실행한 그 코드에만 유효하고, 위험한 파일이 먼저 나옵니다.</li>
+  <li>에이전트가 검토를 요청하면 Lane을 엽니다.</li>
   <li>전부 받거나, 파일이나 헝크를 빼거나, 이유를 적어 돌려보냅니다. 통합한 Lane은 커밋 하나로 되돌릴 수 있습니다.</li>
 </ol>
+
+<h2 id="ask">에이전트에게 이렇게 부탁하세요<a class="anchor" href="#ask" aria-label="#에이전트에게 이렇게 부탁하세요">#</a></h2>
+<p>연결한 뒤에는 평소처럼 일을 맡기고 Lane을 쓰라고 한마디 붙이면 됩니다.</p>
+<div class="code"><div class="code-head"><span>Claude Code</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>Branchlane Lane에서 작업해 줘. 서버가 바쁠 때 동기화를 지수 백오프로 다시 시도하게 하고,
+swift test를 돌린 결과를 증거로 남긴 뒤 검토를 요청해.</code></pre></div>
+
+<h2 id="terminal">터미널에서 보기<a class="anchor" href="#terminal" aria-label="#터미널에서 보기">#</a></h2>
+<p>Lane은 평범한 Git 브랜치와 워크트리라서 터미널과 다른 Git 도구에서도 보입니다.</p>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">git</span> worktree list</code></pre></div>
+<div class="code"><div class="code-head"><span>출력</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>/Users/me/src/app                              9b26e1e [main]
+/Users/me/src/app/.branchlane/lanes/a7f460dc   4c1d2e0 [lane/retry-sync-with-backoff-a7f4]</code></pre></div>
 <p>내 도구를 연결하려면 <a href="../../../ko/developers/">개발자 문서</a>를 보세요.</p>
 </div>
 <nav class="next" aria-label="이전, 다음"><a class="back" href="../../../ko/guide/shortcuts/"><small>이전</small><b>단축키</b></a><a class="fwd" href="../../../ko/guide/troubleshooting/"><small>다음</small><b>문제 해결</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/guide-lanes.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../../privacy/">개인정보 처리방침</a><a href="../../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
 </article></main>
-<div></div>
+<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#steps">쓰는 순서</a></li><li><a href="#ask">에이전트에게 이렇게 부탁하세요</a></li><li><a href="#terminal">터미널에서 보기</a></li></ul></aside>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
-<script src="../../../assets/docs.js?v=20261125"></script>
+<script src="../../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

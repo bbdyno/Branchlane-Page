@@ -18,3 +18,20 @@
 <tr><th scope="row"><code>405</code></th><td>A method other than <code>POST</code></td></tr>
 <tr><th scope="row"><code>411</code></th><td>A chunked body, or no <code>Content-Length</code></td></tr>
 </tbody></table></div>
+
+<h2 id="examples">Try it</h2>
+<p>Without a token you get a 401.</p>
+<pre data-lang="bash"><code>curl -i -s -X POST http://127.0.0.1:47120/mcp -d '{}'</code></pre>
+<pre data-lang="output"><code>HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Bearer
+…
+
+Unauthorized</code></pre>
+<p>Several requests can go in one JSON-RPC batch, and the answers come back as an array.</p>
+<pre data-lang="bash"><code>curl -s http://127.0.0.1:47120/mcp \
+  -H "Authorization: Bearer $BRANCHLANE_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '[{"jsonrpc":"2.0","id":1,"method":"ping"},
+       {"jsonrpc":"2.0","id":2,"method":"tools/list"}]' \
+  | jq '.[].id'</code></pre>
+

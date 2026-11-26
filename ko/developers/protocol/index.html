@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/protocol/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/protocol/">
 <link rel="icon" href="../../../assets/app-icon.png">
-<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261126" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다." data-enlarge="크게 보기">
 <a class="skip" href="#main">본문으로</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,7 +37,7 @@
 <p class="crumb"><a href="../../../ko/developers/">개발자</a><span aria-hidden="true">/</span><span>레퍼런스</span></p>
 <h1>프로토콜</h1>
 <p class="lede">주소, 전송, 한도, 인증, MCP 버전입니다.</p>
-<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>2026년 11월 26일 고침</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <h2 id="server">서버<a class="anchor" href="#server" aria-label="#서버">#</a></h2>
 <ul class="props">
@@ -59,13 +59,29 @@
 <tr><th scope="row"><code>405</code></th><td><code>POST</code>가 아닌 메서드</td></tr>
 <tr><th scope="row"><code>411</code></th><td>chunked 본문이거나 <code>Content-Length</code>가 없음</td></tr>
 </tbody></table></div>
+
+<h2 id="examples">확인해 보기<a class="anchor" href="#examples" aria-label="#확인해 보기">#</a></h2>
+<p>토큰 없이 부르면 401이 옵니다.</p>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">curl</span> <span class="k">-i</span> <span class="k">-s</span> <span class="k">-X</span> POST http://127.0.0.1:47120/mcp <span class="k">-d</span> <span class="s">'{}'</span></code></pre></div>
+<div class="code"><div class="code-head"><span>출력</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Bearer
+…
+
+Unauthorized</code></pre></div>
+<p>여러 요청을 JSON-RPC 배치로 한 번에 보낼 수 있습니다. 답도 배열로 옵니다.</p>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">curl</span> <span class="k">-s</span> http://127.0.0.1:47120/mcp \
+  <span class="k">-H</span> <span class="s">"Authorization: Bearer $BRANCHLANE_TOKEN"</span> \
+  <span class="k">-H</span> <span class="s">"Content-Type: application/json"</span> \
+  <span class="k">-d</span> <span class="s">'[{"jsonrpc":"2.0","id":1,"method":"ping"},
+       {"jsonrpc":"2.0","id":2,"method":"tools/list"}]'</span> \
+  | jq <span class="s">'.[].id'</span></code></pre></div>
 </div>
 <nav class="next" aria-label="이전, 다음"><a class="back" href="../../../ko/developers/tools/"><small>이전</small><b>도구</b></a><a class="fwd" href="../../../ko/developers/hook/"><small>다음</small><b>체크포인트 훅</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/developers-protocol.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../../privacy/">개인정보 처리방침</a><a href="../../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
 </article></main>
-<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#server">서버</a></li><li><a href="#status">상태 코드</a></li></ul></aside>
+<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#server">서버</a></li><li><a href="#status">상태 코드</a></li><li><a href="#examples">확인해 보기</a></li></ul></aside>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
-<script src="../../../assets/docs.js?v=20261125"></script>
+<script src="../../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

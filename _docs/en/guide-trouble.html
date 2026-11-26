@@ -1,11 +1,19 @@
 <h2>A hook or script says "operation not permitted"</h2>
 <p>macOS quarantines files written by App Store apps, and quarantined programs cannot run. Hooks and scripts that arrive through a clone, pull or checkout in Branchlane need this once in Terminal, and again after Branchlane writes them later:</p>
-<pre data-lang="bash"><code>xattr -dr com.apple.quarantine /path/to/repo</code></pre>
+<pre data-lang="bash"><code># Is it quarantined? A value means yes
+xattr -p com.apple.quarantine .git/hooks/pre-commit
+
+# Clear the quarantine flag for the whole repository
+xattr -dr com.apple.quarantine /path/to/repo</code></pre>
 <p>Branchlane shows the command with your path when this blocks a Git operation. Hooks that were already on disk run normally.</p>
 <h2>Commits have no author</h2>
-<p>Choose your <code>.gitconfig</code> in Settings &gt; Git &amp; SSH, or set a name and email for the repository.</p>
+<p>Choose your <code>.gitconfig</code> in Settings &gt; Git &amp; SSH, or set a name and email for this repository from its folder:</p>
+<pre data-lang="bash"><code>git config user.name "Alex Kim"
+git config user.email "alex@example.com"</code></pre>
 <h2>SSH asks about a host key</h2>
-<p>The first connection to a host shows its fingerprint. Check it against your host's published fingerprint and trust it. Trusted hosts are listed in Settings &gt; Git &amp; SSH.</p>
+<p>The first connection to a host shows its fingerprint. Check it against your host's published fingerprint and trust it. Trusted hosts are listed in Settings &gt; Git &amp; SSH. You can see the fingerprint from Terminal first:</p>
+<pre data-lang="bash"><code>ssh-keyscan github.com 2&gt;/dev/null | ssh-keygen -lf -</code></pre>
+<p>GitHub publishes its fingerprints in the <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints">GitHub docs</a>.</p>
 <h2>A worktree outside the repository shows no changes</h2>
 <p>The sandbox needs access to that folder. Choose Allow Access on the worktree row once, and Branchlane remembers it.</p>
 <h2>There is no terminal inside the app</h2>

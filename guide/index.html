@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/">
 <link rel="icon" href="../assets/app-icon.png">
-<link rel="stylesheet" href="../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../" data-area="guide/" data-index="../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<body data-base="../" data-area="guide/" data-index="../assets/docs-en.json?v=20261126" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded." data-enlarge="Enlarge">
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,23 +37,47 @@
 <p class="crumb"><a href="../guide/">Guide</a><span aria-hidden="true">/</span><span>Start</span></p>
 <h1>Get started</h1>
 <p class="lede">Set up Branchlane with the Git, SSH keys and remotes you already have.</p>
-<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>Updated November 26, 2026</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <p>Branchlane uses the <code>git</code> that is already on your Mac. If macOS asks to install the command line developer tools the first time, accept it. Branchlane has no account to create.</p>
+<figure class="shot"><div class="frame"><img src="../screenshots/en/graph.webp" width="2400" height="1500" alt="The Branchlane window: toolbar and branch list on the left, the commit graph in the middle, changes and the commit box on the right" loading="lazy" decoding="async"><span class="pin" style="left:1.9%;top:11.8%" aria-hidden="true">1</span><span class="pin" style="left:16%;top:26.5%" aria-hidden="true">2</span><span class="pin" style="left:37.5%;top:44.5%" aria-hidden="true">3</span><span class="pin" style="left:93%;top:19.5%" aria-hidden="true">4</span><button class="zoom" type="button" aria-label="Enlarge: The Branchlane window: toolbar and branch list on the left, the commit graph in the middle, changes and the commit box on the right"></button></div></figure>
+<ol class="legend">
+  <li><strong>Toolbar.</strong> Undo, fetch, pull, push, branch and stash. The number on Push is how many commits you have not sent yet.</li>
+  <li><strong>Left panel.</strong> Local and remote branches, pull requests, stashes, tags and Git Flow. <kbd>⌘J</kbd> hides it.</li>
+  <li><strong>Commit graph.</strong> Each branch keeps a straight line. The <code>// WIP</code> row at the top is what you have not committed yet.</li>
+  <li><strong>Right panel.</strong> Changes, the commit box and the assistant. Click a commit in the graph to see what it changed. <kbd>⌘K</kbd> hides it.</li>
+</ol>
+
+<h2 id="setup">First setup<a class="anchor" href="#setup" aria-label="#First setup">#</a></h2>
 <ol class="steps">
   <li><strong>Open a repository.</strong> Choose Add Repository (<kbd>⌘O</kbd>) and pick a folder, or Clone Repository (<kbd>⇧⌘O</kbd>) and paste a URL.</li>
   <li><strong>Allow your Git identity.</strong> The App Sandbox keeps Branchlane out of your home folder until you say so. In Settings &gt; Git &amp; SSH, choose your <code>.gitconfig</code> once so commits use your name and email.</li>
   <li><strong>Allow SSH keys if you use key files.</strong> Keys loaded in <code>ssh-agent</code> already work. To use key files and <code>~/.ssh/config</code>, choose your <code>.ssh</code> folder in the same place.</li>
   <li><strong>Sign in to HTTPS remotes when asked.</strong> Branchlane asks for a username and token the first time a remote needs one, and keeps it in your Keychain only if you choose to remember it.</li>
 </ol>
+
+<h2 id="check">Check from Terminal first<a class="anchor" href="#check" aria-label="#Check from Terminal first">#</a></h2>
+<p>These are the same Git and SSH settings the app uses. Skip what you already have.</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="c"># Command line developer tools and Git</span>
+<span class="w">xcode-select</span> <span class="k">--install</span>
+<span class="w">git</span> <span class="k">--version</span>
+
+<span class="c"># The name and email that go into your commits</span>
+<span class="w">git</span> config <span class="k">--global</span> user.name <span class="s">"Alex Kim"</span>
+<span class="w">git</span> config <span class="k">--global</span> user.email <span class="s">"alex@example.com"</span>
+
+<span class="c"># Load your key into ssh-agent and test GitHub</span>
+<span class="w">ssh-add</span> <span class="k">--apple-use-keychain</span> ~/.ssh/id_ed25519
+<span class="w">ssh</span> <span class="k">-T</span> git@github.com</code></pre></div>
+<p>If the last command ends with <code>You've successfully authenticated</code>, your SSH remotes work in Branchlane as they are.</p>
 </div>
 <nav class="next" aria-label="Previous, Next"><a class="fwd" href="../guide/everyday/"><small>Next</small><b>Everyday Git</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/guide-start.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../privacy/">Privacy Policy</a><a href="../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
 </article></main>
-<div></div>
+<aside class="outline"><p>On this page</p><ul><li><a href="#setup">First setup</a></li><li><a href="#check">Check from Terminal first</a></li></ul></aside>
 </div>
 <dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
 <script>window.docsMoved={"everyday": "everyday/", "pro": "pro/", "lanes": "lanes/", "shortcuts": "shortcuts/", "trouble": "troubleshooting/", "help": "support/"}</script>
-<script src="../assets/docs.js?v=20261125"></script>
+<script src="../assets/docs.js?v=20261126"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <h2 id="order">부르는 순서</h2>
+<div class="diagram"><svg viewBox="0 0 760 486" role="img" aria-label="호출 순서: 에이전트가 lane_begin, lane_checkpoint, lane_evidence, lane_propose를 부르면 Branchlane이 사람에게 검토를 요청하고, 사람이 결정한 뒤 에이전트가 lane_status로 의견을 읽습니다"><line class="life" x1="120" y1="56" x2="120" y2="478"/><rect class="box" x="35" y="12" width="170" height="42" rx="9"/><text x="120" y="38" text-anchor="middle">에이전트</text><line class="life" x1="380" y1="56" x2="380" y2="478"/><rect class="box hot soft" x="295" y="12" width="170" height="42" rx="9"/><text x="380" y="38" text-anchor="middle">Branchlane</text><line class="life" x1="640" y1="56" x2="640" y2="478"/><rect class="box" x="555" y="12" width="170" height="42" rx="9"/><text x="640" y="38" text-anchor="middle">사람</text><line class="wire hot" x1="120" y1="92" x2="371" y2="92"/><polygon class="tip hot" points="371,87 380,92 371,97"/><text class="label" x="250" y="84" text-anchor="middle">lane_begin</text><line class="wire dash" x1="380" y1="122" x2="129" y2="122"/><polygon class="tip" points="129,117 120,122 129,127"/><text class="label" x="250" y="114" text-anchor="middle">lane_id, worktree</text><rect class="box" x="24" y="146" width="192" height="34" rx="8"/><text class="note" x="120" y="168" text-anchor="middle">워크트리에서 고치고 커밋</text><line class="wire" x1="120" y1="214" x2="371" y2="214"/><polygon class="tip" points="371,209 380,214 371,219"/><text class="label" x="250" y="206" text-anchor="middle">lane_checkpoint 또는 훅</text><line class="wire hot" x1="120" y1="256" x2="371" y2="256"/><polygon class="tip hot" points="371,251 380,256 371,261"/><text class="label" x="250" y="248" text-anchor="middle">lane_evidence  swift test → 0</text><line class="wire dash" x1="380" y1="286" x2="129" y2="286"/><polygon class="tip" points="129,281 120,286 129,291"/><text class="label" x="250" y="278" text-anchor="middle">evidence_id: 1</text><line class="wire hot" x1="120" y1="330" x2="371" y2="330"/><polygon class="tip hot" points="371,325 380,330 371,335"/><text class="label" x="250" y="322" text-anchor="middle">lane_propose  summary, claims</text><line class="wire" x1="380" y1="352" x2="631" y2="352"/><polygon class="tip" points="631,347 640,352 631,357"/><text class="label" x="510" y="344" text-anchor="middle">검토 요청</text><line class="wire" x1="640" y1="392" x2="389" y2="392"/><polygon class="tip" points="389,387 380,392 389,397"/><text class="label" x="510" y="384" text-anchor="middle">승인, 빼기, 돌려보내기</text><line class="wire" x1="120" y1="428" x2="371" y2="428"/><polygon class="tip" points="371,423 380,428 371,433"/><text class="label" x="250" y="420" text-anchor="middle">lane_status</text><line class="wire dash" x1="380" y1="466" x2="129" y2="466"/><polygon class="tip" points="129,461 120,466 129,471"/><text class="label" x="250" y="458" text-anchor="middle">review_feedback, rejected_files</text></svg></div>
 <ol class="steps">
   <li><code>lane_begin</code> 뒤에는 돌려받은 워크트리 안에서만 작업합니다. 커밋은 마음대로 해도 됩니다. 미커밋 작업도 스냅샷으로 남습니다.</li>
   <li>시작 전과 제안 전에 <code>lane_status</code>로 다른 에이전트가 건드리는 파일을 봅니다.</li>
@@ -7,6 +8,27 @@
   <li>요약과 그 id를 단 주장으로 <code>lane_propose</code>를 부릅니다.</li>
   <li>나중에 <code>lane_status</code>로 검토 의견, 빠진 파일과 헝크, 메모를 읽습니다.</li>
 </ol>
+
+<h2 id="example">한 번 따라 해 보기</h2>
+<p>아래 셸 함수는 도구를 부르고 안쪽 JSON만 꺼냅니다. 에이전트가 하는 일을 손으로 해 보거나 내 도구를 시험할 때 씁니다.</p>
+<pre data-lang="bash"><code>lane() {  # lane &lt;도구&gt; '&lt;인자 JSON&gt;'
+  curl -s http://127.0.0.1:47120/mcp \
+    -H "Authorization: Bearer $BRANCHLANE_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"$1\",\"arguments\":$2}}" \
+    | jq '.result.content[0].text | fromjson? // .'
+}
+
+lane lane_begin '{"path":"/Users/me/src/app","intent":"Retry sync with backoff","agent":"me/manual"}'
+cd /Users/me/src/app/.branchlane/lanes/a7f460dc      # 돌려받은 worktree
+# … 고치고 커밋 …
+swift test; lane lane_evidence "{\"path\":\"$PWD\",\"command\":\"swift test\",\"exit_code\":$?}"
+lane lane_propose "{\"path\":\"$PWD\",\"summary\":\"Retries with backoff\",\"claims\":[{\"text\":\"Tests pass\",\"evidence\":[1]}]}"</code></pre>
+<pre data-lang="json" data-file="lane_propose 결과"><code>{
+  "claims_without_current_evidence": [],
+  "next": "The person reviews in Branchlane. Call lane_status later for feedback.",
+  "status": "proposed"
+}</code></pre>
 
 <h2 id="states">상태</h2>
 <div class="states" aria-hidden="true"><span>running</span><i></i><span>proposed</span><i></i><span>accepted</span><i></i><span class="end">integrated</span></div>

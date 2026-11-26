@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/troubleshooting/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/troubleshooting/">
 <link rel="icon" href="../../../assets/app-icon.png">
-<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../../" data-area="ko/guide/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<body data-base="../../../" data-area="ko/guide/" data-index="../../../assets/docs-ko.json?v=20261126" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다." data-enlarge="크게 보기">
 <a class="skip" href="#main">본문으로</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,16 +37,24 @@
 <p class="crumb"><a href="../../../ko/guide/">가이드</a><span aria-hidden="true">/</span><span>도움</span></p>
 <h1>문제 해결</h1>
 <p class="lede">App Sandbox 때문에 막히는 곳을 푸는 방법입니다.</p>
-<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>2026년 11월 26일 고침</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <h2 id="훅이나-스크립트가-operation-not-permitted-로-멈춤">훅이나 스크립트가 "operation not permitted"로 멈춤<a class="anchor" href="#훅이나-스크립트가-operation-not-permitted-로-멈춤" aria-label="#훅이나 스크립트가 &quot;operation not permitted&quot;로 멈춤">#</a></h2>
 <p>macOS는 App Store 앱이 쓴 파일을 격리하고, 격리된 프로그램은 실행되지 않습니다. Branchlane에서 복제, 풀, 체크아웃으로 받은 훅과 스크립트는 터미널에서 아래 명령을 한 번 실행해야 합니다. Branchlane이 나중에 다시 쓴 파일도 마찬가지입니다.</p>
-<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">xattr</span> <span class="k">-dr</span> com.apple.quarantine /path/to/repo</code></pre></div>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="c"># 격리됐는지 확인: 값이 나오면 격리된 파일입니다</span>
+<span class="w">xattr</span> <span class="k">-p</span> com.apple.quarantine .git/hooks/pre-commit
+
+<span class="c"># 저장소 전체의 격리 표시 지우기</span>
+<span class="w">xattr</span> <span class="k">-dr</span> com.apple.quarantine /path/to/repo</code></pre></div>
 <p>이 문제로 Git 작업이 막히면 Branchlane이 내 경로를 넣은 명령을 보여 줍니다. 원래 디스크에 있던 훅은 그대로 실행됩니다.</p>
 <h2 id="커밋에-작성자가-없음">커밋에 작성자가 없음<a class="anchor" href="#커밋에-작성자가-없음" aria-label="#커밋에 작성자가 없음">#</a></h2>
-<p>설정 &gt; Git 및 SSH에서 <code>.gitconfig</code>를 고르거나, 저장소에 이름과 이메일을 정합니다.</p>
+<p>설정 &gt; Git 및 SSH에서 <code>.gitconfig</code>를 고르거나, 저장소 폴더에서 이 저장소에만 쓸 이름과 이메일을 정합니다.</p>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">git</span> config user.name <span class="s">"Kim Minji"</span>
+<span class="w">git</span> config user.email <span class="s">"minji@example.com"</span></code></pre></div>
 <h2 id="ssh가-호스트-키를-물어봄">SSH가 호스트 키를 물어봄<a class="anchor" href="#ssh가-호스트-키를-물어봄" aria-label="#SSH가 호스트 키를 물어봄">#</a></h2>
-<p>호스트에 처음 연결할 때 지문이 나옵니다. 호스트가 공개한 지문과 같은지 확인하고 신뢰하세요. 신뢰한 호스트는 설정 &gt; Git 및 SSH에 나옵니다.</p>
+<p>호스트에 처음 연결할 때 지문이 나옵니다. 호스트가 공개한 지문과 같은지 확인하고 신뢰하세요. 신뢰한 호스트는 설정 &gt; Git 및 SSH에 나옵니다. 터미널에서 지문을 미리 볼 수도 있습니다.</p>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">ssh-keyscan</span> github.com 2&gt;/dev/null | ssh-keygen <span class="k">-lf</span> -</code></pre></div>
+<p>GitHub의 지문은 <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints">GitHub 문서</a>에 있습니다.</p>
 <h2 id="저장소-밖-워크트리에-변경이-안-보임">저장소 밖 워크트리에 변경이 안 보임<a class="anchor" href="#저장소-밖-워크트리에-변경이-안-보임" aria-label="#저장소 밖 워크트리에 변경이 안 보임">#</a></h2>
 <p>샌드박스가 그 폴더에 접근하려면 허락이 필요합니다. 워크트리 줄에서 접근 허용을 한 번 고르면 다음에도 기억합니다.</p>
 <h2 id="앱-안에-터미널이-없음">앱 안에 터미널이 없음<a class="anchor" href="#앱-안에-터미널이-없음" aria-label="#앱 안에 터미널이 없음">#</a></h2>
@@ -58,6 +66,6 @@
 <aside class="outline"><p>이 페이지에서</p><ul><li><a href="#훅이나-스크립트가-operation-not-permitted-로-멈춤">훅이나 스크립트가 &quot;operation not permitted&quot;로 멈춤</a></li><li><a href="#커밋에-작성자가-없음">커밋에 작성자가 없음</a></li><li><a href="#ssh가-호스트-키를-물어봄">SSH가 호스트 키를 물어봄</a></li><li><a href="#저장소-밖-워크트리에-변경이-안-보임">저장소 밖 워크트리에 변경이 안 보임</a></li><li><a href="#앱-안에-터미널이-없음">앱 안에 터미널이 없음</a></li></ul></aside>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
-<script src="../../../assets/docs.js?v=20261125"></script>
+<script src="../../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

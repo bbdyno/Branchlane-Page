@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/policy/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/policy/">
 <link rel="icon" href="../../assets/app-icon.png">
-<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261126" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded." data-enlarge="Enlarge">
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,7 +37,7 @@
 <p class="crumb"><a href="../../developers/">Developers</a><span aria-hidden="true">/</span><span>Files and refs</span></p>
 <h1>Policy file</h1>
 <p class="lede">What agents may do in a repository, in one committed file.</p>
-<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>Updated November 26, 2026</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <h2 id="defaults">Defaults<a class="anchor" href="#defaults" aria-label="#Defaults">#</a></h2>
 <p><code>.branchlane/policy.json</code> in the main worktree tells Branchlane, and the agents it serves, what is allowed. Commit it so the whole team shares it. Settings &gt; Agents can create it with these defaults:</p>
@@ -59,15 +59,28 @@
   <li>Patterns follow <code>.gitignore</code> rules. Keys are camelCase. A file that does not parse falls back to the defaults and the error shows in Settings.</li>
 </ul>
 
+<h2 id="team">A team example<a class="anchor" href="#team" aria-label="#A team example">#</a></h2>
+<p>Protect release branches too, approve billing code file by file, and accept a lane only with test and lint evidence.</p>
+<div class="code"><div class="code-head"><span>.branchlane/policy.json</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>{
+  <span class="k">"forbid"</span>: [<span class="s">"force_push"</span>, <span class="s">"rewrite_history"</span>],
+  <span class="k">"protectedBranches"</span>: [<span class="s">"main"</span>, <span class="s">"release/*"</span>],
+  <span class="k">"protectedPaths"</span>: [<span class="s">"Sources/Billing/"</span>],
+  <span class="k">"requireApproval"</span>: [<span class="s">"push"</span>],
+  <span class="k">"requireEvidence"</span>: [<span class="s">"swift test"</span>, <span class="s">"swiftlint"</span>],
+  <span class="k">"sensitivePaths"</span>: [<span class="s">"Package.resolved"</span>, <span class="s">"fastlane/"</span>]
+}</code></pre></div>
+<p>With this policy, an agent that asks for a force push with <code>lane_request</code> is refused at once, without asking the person.</p>
+<div class="code"><div class="code-head"><span>lane_request result</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>{ <span class="k">"decision"</span>: <span class="s">"denied"</span>, <span class="k">"reason"</span>: <span class="s">"The repository's policy forbids force_push."</span> }</code></pre></div>
+
 <h2 id="claude-code">Claude Code<a class="anchor" href="#claude-code" aria-label="#Claude Code">#</a></h2>
 <p>Settings &gt; Agents also turns the policy into Claude Code <code>permissions.deny</code> rules, so Claude Code itself refuses what the policy forbids.</p>
 </div>
 <nav class="next" aria-label="Previous, Next"><a class="back" href="../../developers/hook/"><small>Previous</small><b>Checkpoint hook</b></a><a class="fwd" href="../../developers/attribution/"><small>Next</small><b>Agent attribution</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/developers-policy.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
 </article></main>
-<aside class="outline"><p>On this page</p><ul><li><a href="#defaults">Defaults</a></li><li><a href="#decisions">How it decides</a></li><li><a href="#claude-code">Claude Code</a></li></ul></aside>
+<aside class="outline"><p>On this page</p><ul><li><a href="#defaults">Defaults</a></li><li><a href="#decisions">How it decides</a></li><li><a href="#team">A team example</a></li><li><a href="#claude-code">Claude Code</a></li></ul></aside>
 </div>
 <dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
-<script src="../../assets/docs.js?v=20261125"></script>
+<script src="../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

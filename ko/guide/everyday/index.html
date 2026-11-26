@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/everyday/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/everyday/">
 <link rel="icon" href="../../../assets/app-icon.png">
-<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../../" data-area="ko/guide/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<body data-base="../../../" data-area="ko/guide/" data-index="../../../assets/docs-ko.json?v=20261126" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다." data-enlarge="크게 보기">
 <a class="skip" href="#main">본문으로</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,10 +37,16 @@
 <p class="crumb"><a href="../../../ko/guide/">가이드</a><span aria-hidden="true">/</span><span>사용</span></p>
 <h1>매일 쓰는 Git</h1>
 <p class="lede">스테이징, 커밋, 브랜치, 실행 취소, 스태시, 기록을 다룹니다.</p>
-<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>2026년 11월 26일 고침</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <h2 id="스테이징과-커밋">스테이징과 커밋<a class="anchor" href="#스테이징과-커밋" aria-label="#스테이징과 커밋">#</a></h2>
-<p>오른쪽 패널에 스테이징 안 된 파일과 스테이징된 파일이 나옵니다. 파일째 올리거나, 파일을 열어 헝크나 줄 단위로 올립니다. 줄은 바이트 그대로 인덱스에 쓰여서 CRLF 줄 끝이나 다른 인코딩 파일도 그대로 남습니다. 요약을 쓰고 커밋, 또는 커밋 후 푸시를 누릅니다.</p>
+<p>오른쪽 패널에 스테이징 안 된 파일과 스테이징된 파일이 나옵니다. 파일째 올리거나, 파일을 열어 헝크나 줄 단위로 올립니다. 요약을 쓰고 커밋, 또는 커밋 후 푸시를 누릅니다.</p>
+<figure class="shot narrow"><div class="frame"><img src="../../../screenshots/ko/docs/staging.webp" width="690" height="1400" alt="오른쪽 패널. 스테이징 안 된 파일 4개와 스테이징된 파일 1개, 아래쪽에 커밋 요약과 커밋 버튼" loading="lazy" decoding="async"><button class="zoom" type="button" aria-label="크게 보기: 오른쪽 패널. 스테이징 안 된 파일 4개와 스테이징된 파일 1개, 아래쪽에 커밋 요약과 커밋 버튼"></button></div><figcaption>파일 목록과 커밋 입력. 수정 커밋을 켜면 마지막 커밋을 고칩니다</figcaption></figure>
+
+<h3 id="lines">줄 단위로 올리기<a class="anchor" href="#lines" aria-label="#줄 단위로 올리기">#</a></h3>
+<p>차이 화면에서 줄을 고르면 아래에 줄 스테이징과 줄 폐기가 나옵니다. 헝크 하나에서 일부 줄만 커밋하거나 버릴 때 씁니다. 줄은 바이트 그대로 인덱스에 쓰여서 CRLF 줄 끝이나 다른 인코딩 파일도 그대로 남습니다.</p>
+<figure class="shot"><div class="frame"><img src="../../../screenshots/ko/docs/lines.webp" width="1620" height="654" alt="분할 차이 화면에서 5줄을 고르고 줄 폐기, 줄 스테이징, 지우기 버튼이 뜬 모습" loading="lazy" decoding="async"><button class="zoom" type="button" aria-label="크게 보기: 분할 차이 화면에서 5줄을 고르고 줄 폐기, 줄 스테이징, 지우기 버튼이 뜬 모습"></button></div><figcaption>새 함수의 다섯 줄만 골라 스테이징</figcaption></figure>
+
 <h2 id="브랜치">브랜치<a class="anchor" href="#브랜치" aria-label="#브랜치">#</a></h2>
 <p>새 브랜치는 <kbd>⌘B</kbd>, 브랜치 전환은 <kbd>⇧⌘B</kbd>입니다. 그래프에서 브랜치를 다른 브랜치 위로 끌어 놓으면 병합하거나 리베이스하고, 오른쪽 클릭하면 모든 동작이 나옵니다. 가져오기 <kbd>⇧⌘F</kbd>, 풀 <kbd>⇧⌘L</kbd>, 푸시 <kbd>⇧⌘K</kbd>.</p>
 <h2 id="병합-커밋-메시지">병합 커밋 메시지<a class="anchor" href="#병합-커밋-메시지" aria-label="#병합 커밋 메시지">#</a></h2>
@@ -49,13 +55,28 @@
 <p><kbd>⌘Z</kbd>로 체크아웃, 커밋, 리셋, 버리기, 브랜치 삭제, 스태시 삭제, 리베이스를 되돌리고 <kbd>⇧⌘Z</kbd>로 다시 합니다. 기록이 Git 안에 남아서 앱을 껐다 켜도 됩니다.</p>
 <h2 id="스태시-태그-기록">스태시, 태그, 기록<a class="anchor" href="#스태시-태그-기록" aria-label="#스태시, 태그, 기록">#</a></h2>
 <p>스태시는 <kbd>⌥⌘S</kbd>, 최근 스태시 꺼내기는 <kbd>⇧⌥⌘S</kbd>입니다. 파일을 고르고 <kbd>⇧⌘H</kbd>를 누르면 그 파일의 기록이 나오고, 차이 화면에서 blame을 열 수 있습니다.</p>
+
+<h2 id="git">Git 명령으로 보면<a class="anchor" href="#git" aria-label="#Git 명령으로 보면">#</a></h2>
+<p>터미널에 익숙하다면 아래처럼 대응합니다. Git 콘솔(<kbd>⇧⌘C</kbd>)에서 Git 명령을 직접 실행할 수도 있습니다.</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Branchlane에서</th><th scope="col">비슷한 Git 명령</th></tr></thead>
+<tbody>
+<tr><th scope="row">파일 스테이징</th><td><code>git add &lt;파일&gt;</code></td></tr>
+<tr><th scope="row">헝크나 줄 스테이징</th><td><code>git add -p &lt;파일&gt;</code></td></tr>
+<tr><th scope="row">모두 스테이징 해제</th><td><code>git restore --staged .</code></td></tr>
+<tr><th scope="row">수정 커밋</th><td><code>git commit --amend</code></td></tr>
+<tr><th scope="row">커밋 후 푸시</th><td><code>git commit -m "…" &amp;&amp; git push</code></td></tr>
+<tr><th scope="row">새 브랜치 <kbd>⌘B</kbd></th><td><code>git switch -c &lt;이름&gt;</code></td></tr>
+<tr><th scope="row">스태시 / 꺼내기</th><td><code>git stash push</code> / <code>git stash pop</code></td></tr>
+<tr><th scope="row">파일 기록 <kbd>⇧⌘H</kbd></th><td><code>git log --follow -- &lt;파일&gt;</code></td></tr>
+</tbody></table></div>
 </div>
 <nav class="next" aria-label="이전, 다음"><a class="back" href="../../../ko/guide/"><small>이전</small><b>시작하기</b></a><a class="fwd" href="../../../ko/guide/pro/"><small>다음</small><b>Pro 도구</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/guide-everyday.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../../privacy/">개인정보 처리방침</a><a href="../../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
 </article></main>
-<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#스테이징과-커밋">스테이징과 커밋</a></li><li><a href="#브랜치">브랜치</a></li><li><a href="#병합-커밋-메시지">병합 커밋 메시지</a></li><li><a href="#실행-취소">실행 취소</a></li><li><a href="#스태시-태그-기록">스태시, 태그, 기록</a></li></ul></aside>
+<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#스테이징과-커밋">스테이징과 커밋</a></li><li class="sub"><a href="#lines">줄 단위로 올리기</a></li><li><a href="#브랜치">브랜치</a></li><li><a href="#병합-커밋-메시지">병합 커밋 메시지</a></li><li><a href="#실행-취소">실행 취소</a></li><li><a href="#스태시-태그-기록">스태시, 태그, 기록</a></li><li><a href="#git">Git 명령으로 보면</a></li></ul></aside>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
-<script src="../../../assets/docs.js?v=20261125"></script>
+<script src="../../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

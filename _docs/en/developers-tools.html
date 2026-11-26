@@ -1,3 +1,4 @@
+<p>Results below show the JSON inside <code>result.content[0].text</code>, unpacked. Keys arrive in alphabetical order and the indentation may differ.</p>
 <h2 id="common">Common arguments</h2>
 <p>Every tool takes these.</p>
 <div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
@@ -14,9 +15,35 @@
 <tr><th scope="row"><code>target</code></th><td>string</td><td>Branch the work should land on. The repository's main branch if left out.</td></tr>
 <tr><th scope="row"><code>clone</code></th><td>string[]</td><td>Ignored folders to copy from the main worktree, such as <code>node_modules</code> or <code>.build</code>.</td></tr>
 </tbody></table></div>
+<pre data-lang="json" data-file="Result"><code>{
+  "branch": "lane/retry-sync-with-backoff-a7f4",
+  "cloned": ["node_modules"],
+  "lane_id": "a7f460dc",
+  "next": "Work only inside `worktree`. Commit there as you like; Branchlane snapshots uncommitted work too.",
+  "target": "refs/heads/main",
+  "worktree": "/Users/me/src/app/.branchlane/lanes/a7f460dc"
+}</code></pre>
 
 <h2 id="lane_status" class="sig"><code>lane_status</code><span class="badge read">Read-only</span></h2>
 <p>Where the lane stands: its status, whether recorded evidence still matches the code, review feedback, files and hunks the person left out, and collisions with other worktrees or the target, with line ranges and which side should go first.</p>
+<pre data-lang="json" data-file="Result"><code>{
+  "branch": "lane/retry-sync-with-backoff-a7f4",
+  "collisions": [{
+    "advice": "Your lane should land first. Keep your changes on these lines as they are.",
+    "conflict_lines": [{ "path": "Sources/Sync/SyncEngine.swift", "theirs": ["41"], "yours": ["40-60"] }],
+    "conflicts": ["Sources/Sync/SyncEngine.swift"],
+    "integrate_first": "you",
+    "same_files": ["Sources/Sync/SyncEngine.swift"],
+    "with": "/Users/me/src/app/.branchlane/lanes/c19e02b7"
+  }],
+  "evidence": [{ "command": "swift test", "current": true, "exit_code": 0, "id": 1 }],
+  "intent": "Retry sync with backoff when the server is busy",
+  "lane_id": "a7f460dc",
+  "status": "running",
+  "target": "refs/heads/main",
+  "worktree": "/Users/me/src/app/.branchlane/lanes/a7f460dc"
+}</code></pre>
+<p>After a review it can also carry <code>review_feedback</code> (why it came back), <code>rejected_files</code> (files left out, with reasons), <code>left_out_hunks</code> and <code>note</code>. When the content changes after a run, <code>current</code> turns <code>false</code> and <code>changed_since</code> lists the files.</p>
 
 
 <h2 id="lane_checkpoint" class="sig"><code>lane_checkpoint</code></h2>
@@ -24,6 +51,7 @@
 <div class="table-wrap"><table class="params"><thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead><tbody>
 <tr><th scope="row"><code>note</code></th><td>string</td><td>A word about the snapshot.</td></tr>
 </tbody></table></div>
+<pre data-lang="json" data-file="Result"><code>{ "checkpoint": "5f0c8e1…", "tree": "b41d9a2…" }</code></pre>
 
 <h2 id="lane_evidence" class="sig"><code>lane_evidence</code></h2>
 <p>Records that a command ran on the current content and how it ended. It is valid only while the content stays exactly the same, so call it after your last edit. Returns <code>evidence_id</code>.</p>
@@ -32,6 +60,11 @@
 <tr><th scope="row"><code>exit_code</code><span class="req">required</span></th><td>integer</td><td>How it ended. 0 is a pass.</td></tr>
 <tr><th scope="row"><code>output</code></th><td>string</td><td>The command's output. Only the end is kept, with secrets masked.</td></tr>
 </tbody></table></div>
+<pre data-lang="json" data-file="Result"><code>{
+  "evidence_id": 1,
+  "note": "Valid only while the content stays exactly as it is now. Cite this id in lane_propose claims.",
+  "tree": "b41d9a2…"
+}</code></pre>
 
 <h2 id="lane_propose" class="sig"><code>lane_propose</code></h2>
 <p>Asks the person to review the lane as it is now. Claims without current evidence are flagged.</p>
@@ -48,6 +81,11 @@
     { &quot;text&quot;: &quot;The library file format is unchanged&quot; }
   ]
 }}</code></pre>
+<pre data-lang="json" data-file="Result"><code>{
+  "claims_without_current_evidence": ["The library file format is unchanged"],
+  "next": "The person reviews in Branchlane. Call lane_status later for feedback.",
+  "status": "proposed"
+}</code></pre>
 
 <h2 id="lane_request" class="sig"><code>lane_request</code></h2>
 <p>Asks to push, force-push or rewrite history. The policy decides, and some requests wait up to two minutes for the person. An approved push runs with the person's credentials.</p>
@@ -55,3 +93,10 @@
 <tr><th scope="row"><code>action</code><span class="req">required</span></th><td>enum</td><td><code>push</code>, <code>force_push</code> or <code>rewrite_history</code>.</td></tr>
 <tr><th scope="row"><code>reason</code></th><td>string</td><td>Why, shown to the person.</td></tr>
 </tbody></table></div>
+<p>One of three answers comes back, depending on the policy and the person. Denied and declined answers have <code>isError</code> set to <code>true</code>.</p>
+<tabs>
+<tab name="Approved"><pre data-lang="json"><code>{ "decision": "approved", "done": true, "output": "To github.com:me/app.git\n   9b26e1e..4c1d2e0  lane/retry-sync-with-backoff-a7f4 -&gt; lane/retry-sync-with-backoff-a7f4" }</code></pre>
+<p>Rewriting history happens inside the lane branch, by the agent itself. That answer has <code>"done": false</code> and a note saying it may go ahead.</p></tab>
+<tab name="Denied by policy"><pre data-lang="json"><code>{ "decision": "denied", "reason": "The repository's policy forbids force_push." }</code></pre></tab>
+<tab name="Declined by the person"><pre data-lang="json"><code>{ "decision": "declined", "reason": "The person did not approve it." }</code></pre></tab>
+</tabs>

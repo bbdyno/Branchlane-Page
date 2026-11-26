@@ -8,11 +8,28 @@
 
 <h2 id="build">무엇을 만들 수 있나</h2>
 <p>Branchlane에는 클라우드 API가 없습니다. 도구가 닿을 수 있는 것은 모두 같은 Mac에서 돌거나, 어떤 도구든 읽을 수 있게 저장소 안에 있습니다.</p>
+<div class="diagram"><svg viewBox="0 0 760 300" role="img" aria-label="구조도: Claude Code, Codex, 내 도구가 이 Mac 안의 Branchlane MCP 서버에 연결하고, Branchlane은 Lane 워크트리, Git ref와 노트, 저장소 파일을 다룹니다"><rect class="wire dash" x="4" y="24" width="752" height="270" rx="14"/><text class="label" x="22" y="16">이 Mac</text><rect class="box" x="24" y="46" width="176" height="54" rx="9"/><text x="112" y="69" text-anchor="middle">Claude Code</text><text class="sub" x="112" y="87" text-anchor="middle">claude mcp add</text><path class="wire hot" d="M200 73 C 245 73, 240 151, 280 151"/><rect class="box" x="24" y="124" width="176" height="54" rx="9"/><text x="112" y="147" text-anchor="middle">Codex</text><text class="sub" x="112" y="165" text-anchor="middle">~/.codex/config.toml</text><path class="wire hot" d="M200 151 C 245 151, 240 151, 280 151"/><rect class="box" x="24" y="202" width="176" height="54" rx="9"/><text x="112" y="225" text-anchor="middle">내 도구</text><text class="sub" x="112" y="243" text-anchor="middle">MCP 클라이언트, curl</text><path class="wire hot" d="M200 229 C 245 229, 240 151, 280 151"/><polygon class="tip hot" points="280,146 289,151 280,156"/><rect class="box hot soft" x="290" y="94" width="190" height="114" rx="11"/><text x="385" y="124" text-anchor="middle">Branchlane</text><text class="sub" x="385" y="147" text-anchor="middle">127.0.0.1:47120</text><text class="sub" x="385" y="166" text-anchor="middle">POST /mcp</text><text class="sub" x="385" y="185" text-anchor="middle">POST /hook/checkpoint</text><text class="label" x="385" y="236" text-anchor="middle">Streamable HTTP · Bearer 토큰</text><path class="wire" d="M480 151 C 520 151, 515 73, 560 73"/><circle class="tip" cx="560" cy="73" r="4"/><rect class="box" x="564" y="46" width="176" height="54" rx="9"/><text x="652" y="69" text-anchor="middle">Lane 워크트리</text><text class="sub" x="652" y="87" text-anchor="middle">.branchlane/lanes/&lt;id&gt;</text><path class="wire" d="M480 151 C 520 151, 515 151, 560 151"/><circle class="tip" cx="560" cy="151" r="4"/><rect class="box" x="564" y="124" width="176" height="54" rx="9"/><text x="652" y="147" text-anchor="middle">Git ref와 노트</text><text class="sub" x="652" y="165" text-anchor="middle">refs/branchlane/…</text><path class="wire" d="M480 151 C 520 151, 515 229, 560 229"/><circle class="tip" cx="560" cy="229" r="4"/><rect class="box" x="564" y="202" width="176" height="54" rx="9"/><text x="652" y="225" text-anchor="middle">저장소 파일</text><text class="sub" x="652" y="243" text-anchor="middle">.branchlane/policy.json</text></svg></div>
 <ul>
   <li><strong>에이전트용 로컬 MCP 서버.</strong> 코딩 에이전트와 내 도구가 Lane을 시작하고, 체크포인트를 남기고, 테스트 증거를 기록하고, 검토를 요청합니다. <a href="{base}developers/connect/">연결하기</a></li>
   <li><strong>평범한 파일과 Git ref.</strong> 정책 파일, Agent Trace 노트, 커밋 트레일러, 모든 워크트리 요약을 Branchlane이 꺼져 있어도 읽을 수 있습니다. <a href="{base}developers/policy/">정책</a>, <a href="{base}developers/attribution/">출처 표시</a></li>
   <li><strong>내 AI와 MCP 서버.</strong> OpenAI 호환 모델 서버를 연결하고, 비서가 내 MCP 서버를 HTTP로 부르게 합니다. <a href="{base}developers/extend/">Branchlane 확장</a></li>
 </ul>
+
+<h2 id="quick">1분 만에 확인하기</h2>
+<p>설정 &gt; 에이전트에서 연결을 켜고 토큰을 복사한 뒤, 서버가 답하는지 봅니다.</p>
+<pre data-lang="bash"><code>export BRANCHLANE_TOKEN="설정에서 복사한 토큰"
+
+curl -s http://127.0.0.1:47120/mcp \
+  -H "Authorization: Bearer $BRANCHLANE_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' \
+  | jq -r '.result.tools[].name'</code></pre>
+<pre data-lang="output"><code>lane_begin
+lane_status
+lane_checkpoint
+lane_evidence
+lane_propose
+lane_request</code></pre>
 
 <h2 id="before">시작하기 전에</h2>
 <p class="callout">Lane 서버는 Branchlane Pro가 필요하고, 설정 &gt; 에이전트에서 <strong>에이전트 연결 허용</strong>을 켰을 때만 돕니다. URL 스킴, App Intents, AppleScript 사전은 없습니다.</p>

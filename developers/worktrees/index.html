@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/worktrees/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/worktrees/">
 <link rel="icon" href="../../assets/app-icon.png">
-<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261126" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded." data-enlarge="Enlarge">
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,7 +37,7 @@
 <p class="crumb"><a href="../../developers/">Developers</a><span aria-hidden="true">/</span><span>Files and refs</span></p>
 <h1>Worktree summary</h1>
 <p class="lede">One JSON file that describes every worktree.</p>
-<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>Updated November 26, 2026</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <p>When a repository has more than one worktree and the person has Pro, Branchlane keeps <code>&lt;git common dir&gt;/branchlane/worktrees.json</code> up to date, at least once a minute. Agents that do not speak MCP can read it instead of running <code>git status</code> in every worktree. It is removed when only one worktree is left.</p>
 <div class="code"><div class="code-head"><span>branchlane/worktrees.json</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>{
@@ -54,6 +54,15 @@
       <span class="k">"conflictLines"</span>: { <span class="k">"Sources/Sync/SyncEngine.swift"</span>: [[<span class="s">"40-60"</span>, <span class="s">"41"</span>]] } }
   ]
 }</code></pre></div>
+<h2 id="read">Read it<a class="anchor" href="#read" aria-label="#Read it">#</a></h2>
+<p>The file sits in Git's common directory, so the same path works from any worktree.</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>f=<span class="s">"$(git rev-parse --git-common-dir)/branchlane/worktrees.json"</span>
+
+<span class="c"># Uncommitted files in each worktree</span>
+<span class="w">jq</span> <span class="k">-r</span> <span class="s">'.worktrees[] | "\(.branch)\t\(.uncommittedFiles | length)"'</span> <span class="s">"$f"</span>
+
+<span class="c"># Only the pairs that will really conflict</span>
+<span class="w">jq</span> <span class="s">'.collisions[] | select(.conflicts)'</span> <span class="s">"$f"</span></code></pre></div>
 </div>
 <nav class="next" aria-label="Previous, Next"><a class="back" href="../../developers/attribution/"><small>Previous</small><b>Agent attribution</b></a><a class="fwd" href="../../developers/extend/"><small>Next</small><b>Extend Branchlane</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/developers-summary.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
@@ -61,6 +70,6 @@
 <div></div>
 </div>
 <dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
-<script src="../../assets/docs.js?v=20261125"></script>
+<script src="../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/shortcuts/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/shortcuts/">
 <link rel="icon" href="../../../assets/app-icon.png">
-<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../../" data-area="ko/guide/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<body data-base="../../../" data-area="ko/guide/" data-index="../../../assets/docs-ko.json?v=20261126" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다." data-enlarge="크게 보기">
 <a class="skip" href="#main">본문으로</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,46 +37,49 @@
 <p class="crumb"><a href="../../../ko/guide/">가이드</a><span aria-hidden="true">/</span><span>사용</span></p>
 <h1>단축키</h1>
 <p class="lede">자주 쓰는 키입니다. 전체는 앱에서 ⌘/로 봅니다.</p>
-<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>2026년 11월 26일 고침</span><span>Branchlane 2.3</span></div>
 <div class="text">
+<h2 id="quick-open">빠른 열기<a class="anchor" href="#quick-open" aria-label="#빠른 열기">#</a></h2>
+<p><kbd>⌘P</kbd>로 열고 입력하면 브랜치, 커밋, 파일, 명령을 한꺼번에 찾습니다. 찾은 줄에서 <kbd>↩</kbd>를 누르면 체크아웃하거나 엽니다.</p>
+<figure class="shot"><div class="frame"><img src="../../../screenshots/ko/docs/palette.webp" width="1050" height="560" alt="빠른 열기에 settings를 입력해 브랜치, 원격 브랜치, 커밋, 파일, 비서에게 묻기가 함께 나온 모습" loading="lazy" decoding="async"><button class="zoom" type="button" aria-label="크게 보기: 빠른 열기에 settings를 입력해 브랜치, 원격 브랜치, 커밋, 파일, 비서에게 묻기가 함께 나온 모습"></button></div></figure>
+<p>앞에 기호를 붙이면 한 종류만 찾습니다.</p>
 <div class="table-wrap"><table>
+<thead><tr><th scope="col">기호</th><th scope="col">찾는 것</th><th scope="col">예</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>&gt;</code></th><td>명령</td><td><code>&gt;push</code></td></tr>
+<tr><th scope="row"><code>@</code></th><td>브랜치</td><td><code>@feature/</code></td></tr>
+<tr><th scope="row"><code>#</code></th><td>커밋</td><td><code>#tokenizer</code></td></tr>
+<tr><th scope="row"><code>/</code></th><td>파일</td><td><code>/NoteStore</code></td></tr>
+<tr><th scope="row"><code>+</code></th><td>변경된 파일</td><td><code>+README</code></td></tr>
+<tr><th scope="row"><code>^</code></th><td>태그</td><td><code>^v1.0</code></td></tr>
+<tr><th scope="row"><code>$</code></th><td>스태시</td><td><code>$shorter</code></td></tr>
+</tbody></table></div>
 
+<h2 id="keys">자주 쓰는 키<a class="anchor" href="#keys" aria-label="#자주 쓰는 키">#</a></h2>
+<div class="table-wrap"><table>
 <thead>
 <tr><th scope="col">동작</th><th scope="col">키</th></tr></thead>
-
 <tbody>
-
 <tr><th scope="row">명령 팔레트</th><td><kbd>⇧⌘P</kbd></td></tr>
-
 <tr><th scope="row">빠른 열기: 저장소, 브랜치, 커밋, 파일</th><td><kbd>⌘P</kbd></td></tr>
-
 <tr><th scope="row">저장소 추가 / 복제</th><td><kbd>⌘O</kbd> / <kbd>⇧⌘O</kbd></td></tr>
-
 <tr><th scope="row">가져오기 / 풀 / 푸시</th><td><kbd>⇧⌘F</kbd> / <kbd>⇧⌘L</kbd> / <kbd>⇧⌘K</kbd></td></tr>
-
 <tr><th scope="row">새 브랜치 / 브랜치 전환</th><td><kbd>⌘B</kbd> / <kbd>⇧⌘B</kbd></td></tr>
-
 <tr><th scope="row">실행 취소 / 다시 실행</th><td><kbd>⌘Z</kbd> / <kbd>⇧⌘Z</kbd></td></tr>
-
 <tr><th scope="row">스태시 / 최근 스태시 꺼내기</th><td><kbd>⌥⌘S</kbd> / <kbd>⇧⌥⌘S</kbd></td></tr>
-
 <tr><th scope="row">왼쪽 패널 / 오른쪽 패널</th><td><kbd>⌘J</kbd> / <kbd>⌘K</kbd></td></tr>
-
 <tr><th scope="row">비서에게 묻기</th><td><kbd>⇧⌘I</kbd></td></tr>
-
 <tr><th scope="row">Git 콘솔</th><td><kbd>⇧⌘C</kbd></td></tr>
-
 <tr><th scope="row">새로고침</th><td><kbd>⌘R</kbd></td></tr>
-
 <tr><th scope="row">모든 단축키</th><td><kbd>⌘/</kbd></td></tr>
 </tbody></table></div>
 </div>
 <nav class="next" aria-label="이전, 다음"><a class="back" href="../../../ko/guide/pro/"><small>이전</small><b>Pro 도구</b></a><a class="fwd" href="../../../ko/guide/lanes/"><small>다음</small><b>에이전트 Lane</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/guide-shortcuts.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../../privacy/">개인정보 처리방침</a><a href="../../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
 </article></main>
-<div></div>
+<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#quick-open">빠른 열기</a></li><li><a href="#keys">자주 쓰는 키</a></li></ul></aside>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
-<script src="../../../assets/docs.js?v=20261125"></script>
+<script src="../../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

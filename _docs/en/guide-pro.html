@@ -1,8 +1,30 @@
 <p class="callout">These need Branchlane Pro. Every new eligible subscriber can try them free for 14 days.</p>
+
+<h2 id="rebase">Interactive rebase</h2>
+<p>Right-click a commit and choose Interactive Rebase. Reorder, reword, squash and drop, then start the rebase. Undo takes the whole rebase back.</p>
+<shot src="rebase" alt="Interactive rebase: a list of commits, each set to pick, reword, squash or drop, and the Start Rebase button">A plan that folds 12 commits into 8. The result is at the top and the keys are at the bottom</shot>
+<p>Keys are faster in the list: <kbd>P</kbd> pick, <kbd>R</kbd> reword, <kbd>S</kbd> squash, <kbd>D</kbd> drop, and <kbd>⌥↑</kbd> <kbd>⌥↓</kbd> to move a commit.</p>
+
+<h2 id="conflicts">Conflict editor</h2>
+<p>When a merge, rebase or cherry-pick stops, open a conflicted file. Both sides sit side by side at the top, and the result is below. Conflict warnings show collisions before you merge.</p>
+<shot src="conflict" alt="The conflict editor: the current branch and the incoming branch side by side, the result and its conflict markers below" pins="16,15.5 55,15.5 55,70 29,53.7"></shot>
+<ol class="legend">
+  <li><strong>Ours.</strong> The branch you have checked out.</li>
+  <li><strong>Theirs.</strong> The branch being merged in.</li>
+  <li><strong>Result.</strong> Conflicts you have not settled stay red, and parts that merged on their own are marked.</li>
+  <li><strong>Choose for each conflict.</strong> Your change, theirs, both, both in reverse order, or the base, or edit it yourself. When all are done, press Continue in the bar at the top.</li>
+</ol>
+
+<h2 id="assistant">AI and the assistant</h2>
+<p>Choose a provider in Settings &gt; Assistant: a local model, your own API key, or Apple's on-device model. Nothing is sent until you ask. Ask the assistant with <kbd>⇧⌘I</kbd>. Changes it suggests wait on a card until you run them.</p>
+<shot src="docs/assistant-card" alt="The assistant panel: it summarizes the branch and shows a card to commit one staged file, with Run and Dismiss buttons" narrow>What it read folds out above, and anything that changes the repository waits on a card</shot>
+<p>To run a model on this Mac, pull one with Ollama and put <code>http://localhost:11434</code> in Settings &gt; Assistant.</p>
+<pre data-lang="bash"><code>ollama pull llama3.2
+curl -s http://localhost:11434/v1/models</code></pre>
+
+<h2 id="more">More Pro tools</h2>
 <ul>
-  <li><strong>Interactive rebase:</strong> right-click a commit and choose Interactive Rebase. Reorder, reword, squash and drop, then start. Undo takes the whole rebase back.</li>
-  <li><strong>Conflict editor:</strong> when a merge, rebase or cherry-pick stops, open a conflicted file and choose ours, theirs or both, change by change. Conflict warnings show collisions before you merge.</li>
   <li><strong>Worktrees, compare, Git Flow and patches</strong> are in the left panel and the right-click menus.</li>
   <li><strong>Pull requests and issues:</strong> add a GitHub or GitLab token in Settings &gt; Integrations. It stays in your Keychain and talks to the host directly.</li>
-  <li><strong>AI and the assistant:</strong> choose a provider in Settings &gt; Assistant: a local model, your own API key, or Apple's on-device model. Nothing is sent until you ask. Ask the assistant with <kbd>⇧⌘I</kbd>. Changes it suggests wait on a card until you run them.</li>
+  <li><strong>Themes:</strong> themes beyond White and Black are Pro. You can preview every theme in Settings &gt; Themes on the free plan.</li>
 </ul>

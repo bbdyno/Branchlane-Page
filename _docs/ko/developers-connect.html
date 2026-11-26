@@ -1,20 +1,34 @@
 <h2 id="add">서버 더하기</h2>
 <p>설정 &gt; 에이전트에서 <strong>에이전트 연결 허용</strong>을 켜고 내 에이전트 줄을 복사합니다. 포트와 토큰이 이미 들어 있습니다. Branchlane은 이 파일들을 대신 쓰지 않습니다.</p>
 <tabs>
-<tab name="Claude Code"><p>터미널에서 한 번 실행합니다.</p>
+<tab name="Claude Code"><p>터미널에서 한 번 실행하고, 연결됐는지 확인합니다.</p>
 <pre data-lang="bash"><code>claude mcp add --transport http branchlane \
   http://127.0.0.1:47120/mcp \
-  --header &quot;Authorization: Bearer &lt;token&gt;&quot;</code></pre></tab>
+  --header "Authorization: Bearer &lt;token&gt;"
+
+claude mcp list</code></pre></tab>
 <tab name="Codex"><p><code>~/.codex/config.toml</code>에 더합니다.</p>
 <pre data-lang="toml" data-file="~/.codex/config.toml"><code>[mcp_servers.branchlane]
-url = &quot;http://127.0.0.1:47120/mcp&quot;
-http_headers = { Authorization = &quot;Bearer &lt;token&gt;&quot; }</code></pre></tab>
-<tab name="다른 MCP 클라이언트"><p>Streamable HTTP 전송으로 <code>http://127.0.0.1:47120/mcp</code>에 <code>Authorization: Bearer &lt;token&gt;</code> 헤더를 붙여 연결합니다. 포트는 설정에서 바꿀 수 있습니다.</p></tab>
+url = "http://127.0.0.1:47120/mcp"
+http_headers = { Authorization = "Bearer &lt;token&gt;" }</code></pre></tab>
+<tab name="다른 MCP 클라이언트"><p>Streamable HTTP 전송으로 <code>http://127.0.0.1:47120/mcp</code>에 <code>Authorization: Bearer &lt;token&gt;</code> 헤더를 붙여 연결합니다. 포트는 설정에서 바꿀 수 있습니다.</p>
+<pre data-lang="json" data-file="mcp.json"><code>{
+  "mcpServers": {
+    "branchlane": {
+      "type": "http",
+      "url": "http://127.0.0.1:47120/mcp",
+      "headers": { "Authorization": "Bearer &lt;token&gt;" }
+    }
+  }
+}</code></pre>
+<p>설정 파일 모양은 클라이언트마다 조금씩 다릅니다. 주소와 헤더만 맞으면 됩니다.</p></tab>
 </tabs>
 
 <h2 id="try">직접 불러 보기</h2>
-<p>세션을 시작합니다.</p>
-<pre data-lang="bash"><code>curl -s http://127.0.0.1:47120/mcp \
+<p>토큰을 환경 변수에 넣고 세션을 시작합니다.</p>
+<pre data-lang="bash"><code>export BRANCHLANE_TOKEN="설정에서 복사한 토큰"
+
+curl -s http://127.0.0.1:47120/mcp \
   -H "Authorization: Bearer $BRANCHLANE_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -25,7 +39,17 @@ http_headers = { Authorization = &quot;Bearer &lt;token&gt;&quot; }</code></pre>
     "clientInfo": { "name": "my-tool", "version": "1.0" }
   }
 }'</code></pre>
-<p>도구를 부릅니다.</p>
+<pre data-lang="json" data-file="응답"><code>{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "protocolVersion": "2025-06-18",
+    "capabilities": { "tools": { "listChanged": false } },
+    "serverInfo": { "name": "branchlane", "version": "1" },
+    "instructions": "Branchlane coordinates parallel agents in this repository. Start each task with lane_begin and work in the worktree it returns. …"
+  }
+}</code></pre>
+<p>도구를 부릅니다. <code>path</code>는 Branchlane에서 연 저장소여야 합니다.</p>
 <pre data-lang="bash"><code>curl -s http://127.0.0.1:47120/mcp \
   -H "Authorization: Bearer $BRANCHLANE_TOKEN" \
   -H "Content-Type: application/json" \
@@ -44,11 +68,22 @@ http_headers = { Authorization = &quot;Bearer &lt;token&gt;&quot; }</code></pre>
 
 <h2 id="result">결과 읽기</h2>
 <p>모든 도구는 결과를 텍스트 항목 안의 JSON 문자열로 돌려줍니다.</p>
-<pre data-lang="json"><code>{
-  &quot;jsonrpc&quot;: &quot;2.0&quot;,
-  &quot;id&quot;: 2,
-  &quot;result&quot;: {
-    &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;{\n  \&quot;branch\&quot; : \&quot;lane/retry-sync-with-backoff-a7f4\&quot;,\n  \&quot;lane_id\&quot; : \&quot;a7f460dc\&quot;, ... }&quot; }],
-    &quot;isError&quot;: false
+<pre data-lang="json" data-file="응답"><code>{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "result": {
+    "content": [{ "type": "text", "text": "{\n  \"branch\" : \"lane/retry-sync-with-backoff-a7f4\",\n  \"cloned\" : [],\n  \"lane_id\" : \"a7f460dc\", ... }" }],
+    "isError": false
   }
 }</code></pre>
+<p><code>jq</code>로 안쪽 JSON을 풀면 이렇게 보입니다.</p>
+<pre data-lang="bash"><code>curl -s … | jq '.result.content[0].text | fromjson'</code></pre>
+<pre data-lang="json" data-file="lane_begin 결과"><code>{
+  "branch": "lane/retry-sync-with-backoff-a7f4",
+  "cloned": [],
+  "lane_id": "a7f460dc",
+  "next": "Work only inside `worktree`. Commit there as you like; Branchlane snapshots uncommitted work too.",
+  "target": "refs/heads/main",
+  "worktree": "/Users/me/src/app/.branchlane/lanes/a7f460dc"
+}</code></pre>
+<p>도구가 실패하면 HTTP는 그대로 200이고 <code>isError</code>가 <code>true</code>이며, 텍스트에 이유가 들어 있습니다.</p>

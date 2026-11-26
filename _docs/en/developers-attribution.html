@@ -24,3 +24,18 @@ Agent: claude-code/claude-opus-5-5</code></pre>
 <p>Notes travel with <code>refs/notes/agent-trace:refs/notes/agent-trace</code> when you share lanes.</p>
 <h2>Lane records</h2>
 <p>Lanes are stored as Git refs under <code>refs/branchlane/lanes/&lt;id&gt;/</code> (<code>state</code>, <code>checkpoints</code>, <code>proposal</code>). The <code>state</code> commits hold a <code>lane.json</code>. Teammates' lanes are fetched to <code>refs/branchlane/shared/&lt;remote&gt;/&lt;id&gt;/</code>. Treat these as read-only.</p>
+
+<h2 id="read">Read it from Terminal</h2>
+<pre data-lang="bash"><code># The Agent trailer of each commit
+git log --format='%h %(trailers:key=Agent,valueonly,separator=%x2C) %s' -10
+
+# Fetch the Agent Trace notes from the remote and read one
+git fetch origin refs/notes/agent-trace:refs/notes/agent-trace
+git notes --ref=agent-trace show HEAD | jq '.files[].path'
+
+# Lane records
+git for-each-ref refs/branchlane/lanes --format='%(refname)'
+git show refs/branchlane/lanes/a7f460dc/state:lane.json | jq '{intent, status}'</code></pre>
+<pre data-lang="output" data-file="git log output"><code>4c1d2e0 claude-code/claude-opus-5-5 Retry sync with backoff when the server is busy
+9b26e1e  Trim blank lines on export</code></pre>
+

@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/protocol/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/protocol/">
 <link rel="icon" href="../../assets/app-icon.png">
-<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261125" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded.">
+<body data-base="../../" data-area="developers/" data-index="../../assets/docs-en.json?v=20261126" data-copy="Copy" data-copied="Copied" data-selected="Selected" data-hint="Type a tool, a setting or a question." data-none="Nothing found." data-failed="Search could not be loaded." data-enlarge="Enlarge">
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,7 +37,7 @@
 <p class="crumb"><a href="../../developers/">Developers</a><span aria-hidden="true">/</span><span>Reference</span></p>
 <h1>Protocol</h1>
 <p class="lede">Address, transport, limits, authentication and MCP versions.</p>
-<div class="meta"><span>Updated November 25, 2026</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>Updated November 26, 2026</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <h2 id="server">Server<a class="anchor" href="#server" aria-label="#Server">#</a></h2>
 <ul class="props">
@@ -59,13 +59,29 @@
 <tr><th scope="row"><code>405</code></th><td>A method other than <code>POST</code></td></tr>
 <tr><th scope="row"><code>411</code></th><td>A chunked body, or no <code>Content-Length</code></td></tr>
 </tbody></table></div>
+
+<h2 id="examples">Try it<a class="anchor" href="#examples" aria-label="#Try it">#</a></h2>
+<p>Without a token you get a 401.</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">curl</span> <span class="k">-i</span> <span class="k">-s</span> <span class="k">-X</span> POST http://127.0.0.1:47120/mcp <span class="k">-d</span> <span class="s">'{}'</span></code></pre></div>
+<div class="code"><div class="code-head"><span>Output</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code>HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Bearer
+…
+
+Unauthorized</code></pre></div>
+<p>Several requests can go in one JSON-RPC batch, and the answers come back as an array.</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button">Copy</button></div><pre tabindex="0"><code><span class="w">curl</span> <span class="k">-s</span> http://127.0.0.1:47120/mcp \
+  <span class="k">-H</span> <span class="s">"Authorization: Bearer $BRANCHLANE_TOKEN"</span> \
+  <span class="k">-H</span> <span class="s">"Content-Type: application/json"</span> \
+  <span class="k">-d</span> <span class="s">'[{"jsonrpc":"2.0","id":1,"method":"ping"},
+       {"jsonrpc":"2.0","id":2,"method":"tools/list"}]'</span> \
+  | jq <span class="s">'.[].id'</span></code></pre></div>
 </div>
 <nav class="next" aria-label="Previous, Next"><a class="back" href="../../developers/tools/"><small>Previous</small><b>Tools</b></a><a class="fwd" href="../../developers/hook/"><small>Next</small><b>Checkpoint hook</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/developers-protocol.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
 </article></main>
-<aside class="outline"><p>On this page</p><ul><li><a href="#server">Server</a></li><li><a href="#status">Status codes</a></li></ul></aside>
+<aside class="outline"><p>On this page</p><ul><li><a href="#server">Server</a></li><li><a href="#status">Status codes</a></li><li><a href="#examples">Try it</a></li></ul></aside>
 </div>
 <dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
-<script src="../../assets/docs.js?v=20261125"></script>
+<script src="../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

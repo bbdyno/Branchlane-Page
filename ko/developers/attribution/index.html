@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/attribution/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/attribution/">
 <link rel="icon" href="../../../assets/app-icon.png">
-<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261126" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다." data-enlarge="크게 보기">
 <a class="skip" href="#main">본문으로</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,7 +37,7 @@
 <p class="crumb"><a href="../../../ko/developers/">개발자</a><span aria-hidden="true">/</span><span>파일과 ref</span></p>
 <h1>에이전트 출처 표시</h1>
 <p class="lede">커밋 트레일러, Agent Trace 노트, Lane 기록입니다.</p>
-<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>2026년 11월 26일 고침</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <p>Branchlane은 무료판을 포함해 모두에게 그래프와 blame에서 에이전트 작업을 표시합니다. 내 도구는 세 가지 방법으로 알려 줄 수 있습니다.</p>
 <h2 id="커밋-트레일러">커밋 트레일러<a class="anchor" href="#커밋-트레일러" aria-label="#커밋 트레일러">#</a></h2>
@@ -65,13 +65,27 @@ Agent: claude-code/claude-opus-5-5</code></pre></div>
 <p>Lane을 공유하면 노트도 <code>refs/notes/agent-trace:refs/notes/agent-trace</code>로 함께 오갑니다.</p>
 <h2 id="lane-기록">Lane 기록<a class="anchor" href="#lane-기록" aria-label="#Lane 기록">#</a></h2>
 <p>Lane은 <code>refs/branchlane/lanes/&lt;id&gt;/</code> 아래 Git ref(<code>state</code>, <code>checkpoints</code>, <code>proposal</code>)로 저장되고, <code>state</code> 커밋에 <code>lane.json</code>이 있습니다. 팀원의 Lane은 <code>refs/branchlane/shared/&lt;remote&gt;/&lt;id&gt;/</code>로 받아 옵니다. 읽기 전용으로 다루세요.</p>
+
+<h2 id="read">터미널에서 읽기<a class="anchor" href="#read" aria-label="#터미널에서 읽기">#</a></h2>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="c"># 커밋마다 Agent 트레일러</span>
+<span class="w">git</span> log <span class="k">--format</span>=<span class="s">'%h %(trailers:key=Agent,valueonly,separator=%x2C) %s'</span> -10
+
+<span class="c"># 원격의 Agent Trace 노트를 받아 와서 읽기</span>
+<span class="w">git</span> fetch origin refs/notes/agent-trace:refs/notes/agent-trace
+<span class="w">git</span> notes <span class="k">--ref</span>=agent-trace show HEAD | jq <span class="s">'.files[].path'</span>
+
+<span class="c"># Lane 기록</span>
+<span class="w">git</span> for-each-ref refs/branchlane/lanes <span class="k">--format</span>=<span class="s">'%(refname)'</span>
+<span class="w">git</span> show refs/branchlane/lanes/a7f460dc/state:lane.json | jq <span class="s">'{intent, status}'</span></code></pre></div>
+<div class="code"><div class="code-head"><span>git log 출력</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>4c1d2e0 claude-code/claude-opus-5-5 Retry sync with backoff when the server is busy
+9b26e1e  Trim blank lines on export</code></pre></div>
 </div>
 <nav class="next" aria-label="이전, 다음"><a class="back" href="../../../ko/developers/policy/"><small>이전</small><b>정책 파일</b></a><a class="fwd" href="../../../ko/developers/worktrees/"><small>다음</small><b>워크트리 요약</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/developers-attribution.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../../privacy/">개인정보 처리방침</a><a href="../../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
 </article></main>
-<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#커밋-트레일러">커밋 트레일러</a></li><li><a href="#agent-trace-노트">Agent Trace 노트</a></li><li><a href="#lane-기록">Lane 기록</a></li></ul></aside>
+<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#커밋-트레일러">커밋 트레일러</a></li><li><a href="#agent-trace-노트">Agent Trace 노트</a></li><li><a href="#lane-기록">Lane 기록</a></li><li><a href="#read">터미널에서 읽기</a></li></ul></aside>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
-<script src="../../../assets/docs.js?v=20261125"></script>
+<script src="../../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

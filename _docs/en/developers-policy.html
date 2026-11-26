@@ -18,5 +18,18 @@
   <li>Patterns follow <code>.gitignore</code> rules. Keys are camelCase. A file that does not parse falls back to the defaults and the error shows in Settings.</li>
 </ul>
 
+<h2 id="team">A team example</h2>
+<p>Protect release branches too, approve billing code file by file, and accept a lane only with test and lint evidence.</p>
+<pre data-lang="json" data-file=".branchlane/policy.json"><code>{
+  "forbid": ["force_push", "rewrite_history"],
+  "protectedBranches": ["main", "release/*"],
+  "protectedPaths": ["Sources/Billing/"],
+  "requireApproval": ["push"],
+  "requireEvidence": ["swift test", "swiftlint"],
+  "sensitivePaths": ["Package.resolved", "fastlane/"]
+}</code></pre>
+<p>With this policy, an agent that asks for a force push with <code>lane_request</code> is refused at once, without asking the person.</p>
+<pre data-lang="json" data-file="lane_request result"><code>{ "decision": "denied", "reason": "The repository's policy forbids force_push." }</code></pre>
+
 <h2 id="claude-code">Claude Code</h2>
 <p>Settings &gt; Agents also turns the policy into Claude Code <code>permissions.deny</code> rules, so Claude Code itself refuses what the policy forbids.</p>

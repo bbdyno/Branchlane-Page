@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/guide/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/guide/">
 <link rel="icon" href="../../assets/app-icon.png">
-<link rel="stylesheet" href="../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../" data-area="ko/guide/" data-index="../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<body data-base="../../" data-area="ko/guide/" data-index="../../assets/docs-ko.json?v=20261126" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다." data-enlarge="크게 보기">
 <a class="skip" href="#main">본문으로</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,23 +37,47 @@
 <p class="crumb"><a href="../../ko/guide/">가이드</a><span aria-hidden="true">/</span><span>시작</span></p>
 <h1>시작하기</h1>
 <p class="lede">이미 쓰던 Git, SSH 키, 원격으로 Branchlane을 설정합니다.</p>
-<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>2026년 11월 26일 고침</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <p>Branchlane은 Mac에 이미 있는 <code>git</code>을 씁니다. 처음 열 때 macOS가 명령어 라인 개발자 도구를 설치할지 물으면 설치하세요. 따로 만들 계정은 없습니다.</p>
+<figure class="shot"><div class="frame"><img src="../../screenshots/ko/graph.webp" width="2400" height="1500" alt="Branchlane 기본 화면. 왼쪽에 도구 막대와 브랜치 목록, 가운데 커밋 그래프, 오른쪽에 변경 사항과 커밋 입력" loading="lazy" decoding="async"><span class="pin" style="left:1.9%;top:11.8%" aria-hidden="true">1</span><span class="pin" style="left:16%;top:26.5%" aria-hidden="true">2</span><span class="pin" style="left:37.5%;top:44.5%" aria-hidden="true">3</span><span class="pin" style="left:93%;top:19.5%" aria-hidden="true">4</span><button class="zoom" type="button" aria-label="크게 보기: Branchlane 기본 화면. 왼쪽에 도구 막대와 브랜치 목록, 가운데 커밋 그래프, 오른쪽에 변경 사항과 커밋 입력"></button></div></figure>
+<ol class="legend">
+  <li><strong>도구 막대.</strong> 실행 취소, 가져오기, 풀, 푸시, 브랜치, 스태시가 있습니다. 푸시 버튼의 숫자는 아직 보내지 않은 커밋 수입니다.</li>
+  <li><strong>왼쪽 패널.</strong> 로컬과 원격 브랜치, PR, 스태시, 태그, Git Flow입니다. <kbd>⌘J</kbd>로 접습니다.</li>
+  <li><strong>커밋 그래프.</strong> 브랜치마다 줄이 곧게 이어집니다. 맨 위 <code>// WIP</code> 줄은 아직 커밋하지 않은 변경입니다.</li>
+  <li><strong>오른쪽 패널.</strong> 변경 사항, 커밋 입력, 비서입니다. 그래프에서 커밋을 누르면 그 커밋의 내용이 나옵니다. <kbd>⌘K</kbd>로 접습니다.</li>
+</ol>
+
+<h2 id="setup">처음 설정<a class="anchor" href="#setup" aria-label="#처음 설정">#</a></h2>
 <ol class="steps">
   <li><strong>저장소 열기.</strong> 저장소 추가(<kbd>⌘O</kbd>)로 폴더를 고르거나, 저장소 복제(<kbd>⇧⌘O</kbd>)에 주소를 붙여 넣습니다.</li>
   <li><strong>Git 신원 허락.</strong> App Sandbox 때문에 Branchlane은 허락 없이 홈 폴더를 읽지 못합니다. 설정 &gt; Git 및 SSH에서 <code>.gitconfig</code>를 한 번 고르면 커밋에 내 이름과 이메일이 들어갑니다.</li>
   <li><strong>키 파일을 쓴다면 SSH 폴더 허락.</strong> <code>ssh-agent</code>에 올린 키는 그대로 동작합니다. 키 파일과 <code>~/.ssh/config</code>까지 쓰려면 같은 곳에서 <code>.ssh</code> 폴더를 고릅니다.</li>
   <li><strong>HTTPS 원격은 물어볼 때 로그인.</strong> 원격이 처음 인증을 요구할 때 사용자 이름과 토큰을 묻고, 기억하기를 고른 경우에만 키체인에 저장합니다.</li>
 </ol>
+
+<h2 id="check">터미널에서 미리 확인하기<a class="anchor" href="#check" aria-label="#터미널에서 미리 확인하기">#</a></h2>
+<p>앱이 쓰는 것과 같은 Git과 SSH 설정입니다. 이미 되어 있으면 건너뛰세요.</p>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="c"># 명령어 라인 개발자 도구와 Git</span>
+<span class="w">xcode-select</span> <span class="k">--install</span>
+<span class="w">git</span> <span class="k">--version</span>
+
+<span class="c"># 커밋에 들어갈 이름과 이메일</span>
+<span class="w">git</span> config <span class="k">--global</span> user.name <span class="s">"Kim Minji"</span>
+<span class="w">git</span> config <span class="k">--global</span> user.email <span class="s">"minji@example.com"</span>
+
+<span class="c"># 키를 ssh-agent에 올리고 GitHub 연결 확인</span>
+<span class="w">ssh-add</span> <span class="k">--apple-use-keychain</span> ~/.ssh/id_ed25519
+<span class="w">ssh</span> <span class="k">-T</span> git@github.com</code></pre></div>
+<p>마지막 명령이 <code>You've successfully authenticated</code>로 끝나면 Branchlane에서도 SSH 원격을 그대로 쓸 수 있습니다.</p>
 </div>
 <nav class="next" aria-label="이전, 다음"><a class="fwd" href="../../ko/guide/everyday/"><small>다음</small><b>매일 쓰는 Git</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/guide-start.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../privacy/">개인정보 처리방침</a><a href="../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
 </article></main>
-<div></div>
+<aside class="outline"><p>이 페이지에서</p><ul><li><a href="#setup">처음 설정</a></li><li><a href="#check">터미널에서 미리 확인하기</a></li></ul></aside>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
 <script>window.docsMoved={"everyday": "everyday/", "pro": "pro/", "lanes": "lanes/", "shortcuts": "shortcuts/", "trouble": "troubleshooting/", "help": "support/"}</script>
-<script src="../../assets/docs.js?v=20261125"></script>
+<script src="../../assets/docs.js?v=20261126"></script>
 </body>
 </html>

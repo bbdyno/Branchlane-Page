@@ -15,10 +15,10 @@
 <link rel="alternate" hreflang="ko" href="https://bbdyno.github.io/Branchlane-Page/ko/developers/connect/">
 <link rel="alternate" hreflang="x-default" href="https://bbdyno.github.io/Branchlane-Page/developers/connect/">
 <link rel="icon" href="../../../assets/app-icon.png">
-<link rel="stylesheet" href="../../../assets/docs.css?v=20261125">
+<link rel="stylesheet" href="../../../assets/docs.css?v=20261126">
 <script>try{var t=localStorage.getItem('docs-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261125" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다.">
+<body data-base="../../../" data-area="ko/developers/" data-index="../../../assets/docs-ko.json?v=20261126" data-copy="복사" data-copied="복사함" data-selected="선택함" data-hint="도구, 설정, 궁금한 것을 입력하세요." data-none="찾은 내용이 없습니다." data-failed="검색을 불러오지 못했습니다." data-enlarge="크게 보기">
 <a class="skip" href="#main">본문으로</a>
 <header class="bar"><div class="bar-in">
 <button class="icon burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
@@ -37,21 +37,35 @@
 <p class="crumb"><a href="../../../ko/developers/">개발자</a><span aria-hidden="true">/</span><span>연결</span></p>
 <h1>에이전트 연결</h1>
 <p class="lede">Claude Code, Codex, 다른 MCP 클라이언트에 로컬 MCP 서버를 더합니다.</p>
-<div class="meta"><span>2026년 11월 25일 고침</span><span>Branchlane 2.3</span></div>
+<div class="meta"><span>2026년 11월 26일 고침</span><span>Branchlane 2.3</span></div>
 <div class="text">
 <h2 id="add">서버 더하기<a class="anchor" href="#add" aria-label="#서버 더하기">#</a></h2>
 <p>설정 &gt; 에이전트에서 <strong>에이전트 연결 허용</strong>을 켜고 내 에이전트 줄을 복사합니다. 포트와 토큰이 이미 들어 있습니다. Branchlane은 이 파일들을 대신 쓰지 않습니다.</p>
-<div class="tabs"><div class="tablist" role="tablist"><button type="button" role="tab" id="t1-0" aria-controls="p1-0" data-tab="Claude Code" aria-selected="true">Claude Code</button><button type="button" role="tab" id="t1-1" aria-controls="p1-1" data-tab="Codex" aria-selected="false">Codex</button><button type="button" role="tab" id="t1-2" aria-controls="p1-2" data-tab="다른 MCP 클라이언트" aria-selected="false">다른 MCP 클라이언트</button></div><div class="panel" role="tabpanel" id="p1-0" aria-labelledby="t1-0"><p>터미널에서 한 번 실행합니다.</p>
+<div class="tabs"><div class="tablist" role="tablist"><button type="button" role="tab" id="t1-0" aria-controls="p1-0" data-tab="Claude Code" aria-selected="true">Claude Code</button><button type="button" role="tab" id="t1-1" aria-controls="p1-1" data-tab="Codex" aria-selected="false">Codex</button><button type="button" role="tab" id="t1-2" aria-controls="p1-2" data-tab="다른 MCP 클라이언트" aria-selected="false">다른 MCP 클라이언트</button></div><div class="panel" role="tabpanel" id="p1-0" aria-labelledby="t1-0"><p>터미널에서 한 번 실행하고, 연결됐는지 확인합니다.</p>
 <div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">claude</span> mcp add <span class="k">--transport</span> http branchlane \
   http://127.0.0.1:47120/mcp \
-  <span class="k">--header</span> <span class="s">"Authorization: Bearer &lt;token&gt;"</span></code></pre></div></div><div class="panel" role="tabpanel" id="p1-1" aria-labelledby="t1-1" hidden><p><code>~/.codex/config.toml</code>에 더합니다.</p>
+  <span class="k">--header</span> <span class="s">"Authorization: Bearer &lt;token&gt;"</span>
+
+<span class="w">claude</span> mcp list</code></pre></div></div><div class="panel" role="tabpanel" id="p1-1" aria-labelledby="t1-1" hidden><p><code>~/.codex/config.toml</code>에 더합니다.</p>
 <div class="code"><div class="code-head"><span>~/.codex/config.toml</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">[mcp_servers.branchlane]</span>
 <span class="k">url</span> = <span class="s">"http://127.0.0.1:47120/mcp"</span>
-<span class="k">http_headers</span> = { <span class="k">Authorization</span> = <span class="s">"Bearer &lt;token&gt;"</span> }</code></pre></div></div><div class="panel" role="tabpanel" id="p1-2" aria-labelledby="t1-2" hidden><p>Streamable HTTP 전송으로 <code>http://127.0.0.1:47120/mcp</code>에 <code>Authorization: Bearer &lt;token&gt;</code> 헤더를 붙여 연결합니다. 포트는 설정에서 바꿀 수 있습니다.</p></div></div>
+<span class="k">http_headers</span> = { <span class="k">Authorization</span> = <span class="s">"Bearer &lt;token&gt;"</span> }</code></pre></div></div><div class="panel" role="tabpanel" id="p1-2" aria-labelledby="t1-2" hidden><p>Streamable HTTP 전송으로 <code>http://127.0.0.1:47120/mcp</code>에 <code>Authorization: Bearer &lt;token&gt;</code> 헤더를 붙여 연결합니다. 포트는 설정에서 바꿀 수 있습니다.</p>
+<div class="code"><div class="code-head"><span>mcp.json</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{
+  <span class="k">"mcpServers"</span>: {
+    <span class="k">"branchlane"</span>: {
+      <span class="k">"type"</span>: <span class="s">"http"</span>,
+      <span class="k">"url"</span>: <span class="s">"http://127.0.0.1:47120/mcp"</span>,
+      <span class="k">"headers"</span>: { <span class="k">"Authorization"</span>: <span class="s">"Bearer &lt;token&gt;"</span> }
+    }
+  }
+}</code></pre></div>
+<p>설정 파일 모양은 클라이언트마다 조금씩 다릅니다. 주소와 헤더만 맞으면 됩니다.</p></div></div>
 
 <h2 id="try">직접 불러 보기<a class="anchor" href="#try" aria-label="#직접 불러 보기">#</a></h2>
-<p>세션을 시작합니다.</p>
-<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">curl</span> <span class="k">-s</span> http://127.0.0.1:47120/mcp \
+<p>토큰을 환경 변수에 넣고 세션을 시작합니다.</p>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">export</span> BRANCHLANE_TOKEN=<span class="s">"설정에서 복사한 토큰"</span>
+
+<span class="w">curl</span> <span class="k">-s</span> http://127.0.0.1:47120/mcp \
   <span class="k">-H</span> <span class="s">"Authorization: Bearer $BRANCHLANE_TOKEN"</span> \
   <span class="k">-H</span> <span class="s">"Content-Type: application/json"</span> \
   <span class="k">-d</span> <span class="s">'{
@@ -62,7 +76,17 @@
     "clientInfo": { "name": "my-tool", "version": "1.0" }
   }
 }'</span></code></pre></div>
-<p>도구를 부릅니다.</p>
+<div class="code"><div class="code-head"><span>응답</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{
+  <span class="k">"jsonrpc"</span>: <span class="s">"2.0"</span>,
+  <span class="k">"id"</span>: <span class="n">1</span>,
+  <span class="k">"result"</span>: {
+    <span class="k">"protocolVersion"</span>: <span class="s">"2025-06-18"</span>,
+    <span class="k">"capabilities"</span>: { <span class="k">"tools"</span>: { <span class="k">"listChanged"</span>: <span class="w">false</span> } },
+    <span class="k">"serverInfo"</span>: { <span class="k">"name"</span>: <span class="s">"branchlane"</span>, <span class="k">"version"</span>: <span class="s">"1"</span> },
+    <span class="k">"instructions"</span>: <span class="s">"Branchlane coordinates parallel agents in this repository. Start each task with lane_begin and work in the worktree it returns. …"</span>
+  }
+}</code></pre></div>
+<p>도구를 부릅니다. <code>path</code>는 Branchlane에서 연 저장소여야 합니다.</p>
 <div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">curl</span> <span class="k">-s</span> http://127.0.0.1:47120/mcp \
   <span class="k">-H</span> <span class="s">"Authorization: Bearer $BRANCHLANE_TOKEN"</span> \
   <span class="k">-H</span> <span class="s">"Content-Type: application/json"</span> \
@@ -81,14 +105,25 @@
 
 <h2 id="result">결과 읽기<a class="anchor" href="#result" aria-label="#결과 읽기">#</a></h2>
 <p>모든 도구는 결과를 텍스트 항목 안의 JSON 문자열로 돌려줍니다.</p>
-<div class="code"><div class="code-head"><span>JSON</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{
+<div class="code"><div class="code-head"><span>응답</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{
   <span class="k">"jsonrpc"</span>: <span class="s">"2.0"</span>,
   <span class="k">"id"</span>: <span class="n">2</span>,
   <span class="k">"result"</span>: {
-    <span class="k">"content"</span>: [{ <span class="k">"type"</span>: <span class="s">"text"</span>, <span class="k">"text"</span>: <span class="s">"{\n  \"branch\" : \"lane/retry-sync-with-backoff-a7f4\",\n  \"lane_id\" : \"a7f460dc\", ... }"</span> }],
+    <span class="k">"content"</span>: [{ <span class="k">"type"</span>: <span class="s">"text"</span>, <span class="k">"text"</span>: <span class="s">"{\n  \"branch\" : \"lane/retry-sync-with-backoff-a7f4\",\n  \"cloned\" : [],\n  \"lane_id\" : \"a7f460dc\", ... }"</span> }],
     <span class="k">"isError"</span>: <span class="w">false</span>
   }
 }</code></pre></div>
+<p><code>jq</code>로 안쪽 JSON을 풀면 이렇게 보입니다.</p>
+<div class="code"><div class="code-head"><span>터미널</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code><span class="w">curl</span> <span class="k">-s</span> … | jq <span class="s">'.result.content[0].text | fromjson'</span></code></pre></div>
+<div class="code"><div class="code-head"><span>lane_begin 결과</span><button class="copy" type="button">복사</button></div><pre tabindex="0"><code>{
+  <span class="k">"branch"</span>: <span class="s">"lane/retry-sync-with-backoff-a7f4"</span>,
+  <span class="k">"cloned"</span>: [],
+  <span class="k">"lane_id"</span>: <span class="s">"a7f460dc"</span>,
+  <span class="k">"next"</span>: <span class="s">"Work only inside `worktree`. Commit there as you like; Branchlane snapshots uncommitted work too."</span>,
+  <span class="k">"target"</span>: <span class="s">"refs/heads/main"</span>,
+  <span class="k">"worktree"</span>: <span class="s">"/Users/me/src/app/.branchlane/lanes/a7f460dc"</span>
+}</code></pre></div>
+<p>도구가 실패하면 HTTP는 그대로 200이고 <code>isError</code>가 <code>true</code>이며, 텍스트에 이유가 들어 있습니다.</p>
 </div>
 <nav class="next" aria-label="이전, 다음"><a class="back" href="../../../ko/developers/"><small>이전</small><b>Branchlane 위에 만들기</b></a><a class="fwd" href="../../../ko/developers/lanes/"><small>다음</small><b>Lane 흐름과 상태</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/ko/developers-connect.html">이 페이지 고치기</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">지원</a><a href="../../../privacy/">개인정보 처리방침</a><a href="../../../ko/">제품 소개</a><p>Apple, App Store, Mac은 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다.</p></footer>
@@ -96,6 +131,6 @@
 <aside class="outline"><p>이 페이지에서</p><ul><li><a href="#add">서버 더하기</a></li><li><a href="#try">직접 불러 보기</a></li><li><a href="#result">결과 읽기</a></li></ul></aside>
 </div>
 <dialog aria-label="문서 검색"><input type="search" placeholder="문서 검색" aria-label="문서 검색" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">도구, 설정, 궁금한 것을 입력하세요.</li></ul></dialog>
-<script src="../../../assets/docs.js?v=20261125"></script>
+<script src="../../../assets/docs.js?v=20261126"></script>
 </body>
 </html>
