@@ -49,6 +49,10 @@
 
 <h2 id="branches">Branches<a class="anchor" href="#branches" aria-label="#Branches">#</a></h2>
 <p>New Branch is <kbd>⌘B</kbd> and Switch Branch is <kbd>⇧⌘B</kbd>. In the graph, drag one branch onto another to merge or rebase it, or right-click a branch for every action. Fetch is <kbd>⇧⌘F</kbd>, Pull <kbd>⇧⌘L</kbd> and Push <kbd>⇧⌘K</kbd>.</p>
+<h3 id="cleanup">Clean up merged branches<a class="anchor" href="#cleanup" aria-label="#Clean up merged branches">#</a></h3>
+<p>In the Local section's menu, or the command palette, choose Clean Up Merged Branches. Branchlane lists branches whose work is already in the default branch, merged, rebased or squashed, and branches whose upstream was deleted on the remote, such as after a pull request was merged. The checked out branch, branches open in another worktree, lane branches and long-lived ones such as main and develop are left out. Tick the ones to delete; Undo brings them back.</p>
+<h3 id="worktrees">Worktrees<a class="anchor" href="#worktrees" aria-label="#Worktrees">#</a></h3>
+<p>Open another branch in a folder of its own from the Worktrees section, or right-click a branch and choose Create Worktree. Each worktree opens in its own tab.</p>
 <h2 id="merge-commit-messages">Merge commit messages<a class="anchor" href="#merge-commit-messages" aria-label="#Merge commit messages">#</a></h2>
 <p>A merge commit is named after the branch, as in <code>Merge branch 'develop' into feature</code>. Settings &gt; Git &amp; SSH &gt; Merge can show the full ref (<code>refs/heads/develop</code>) or the commit hash instead.</p>
 <h2 id="undo">Undo<a class="anchor" href="#undo" aria-label="#Undo">#</a></h2>
@@ -56,6 +60,8 @@
 <h2 id="stashes-tags-and-history">Stashes, tags and history<a class="anchor" href="#stashes-tags-and-history" aria-label="#Stashes, tags and history">#</a></h2>
 <p>Stash Changes is <kbd>⌥⌘S</kbd> and Pop Latest Stash <kbd>⇧⌥⌘S</kbd>. Select a file and press <kbd>⇧⌘H</kbd> for its history, or open blame from a diff.</p>
 
+<h2 id="safety">Safety<a class="anchor" href="#safety" aria-label="#Safety">#</a></h2>
+<p>When a folder's own Git settings or hooks would run programs or change where Git connects, Branchlane lists them and waits for your yes before it uses the repository, and asks again when they change. Before a commit or push it looks for keys, tokens and passwords and shows the lines it found. Commits and tags can be signed with a key in ssh-agent from Settings &gt; Git &amp; SSH, and each commit shows its signature state.</p>
 <h2 id="git">In Git terms<a class="anchor" href="#git" aria-label="#In Git terms">#</a></h2>
 <p>If you know the command line, this is roughly what each action does. The Git console (<kbd>⇧⌘C</kbd>) runs Git commands directly too.</p>
 <div class="table-wrap"><table>
@@ -74,7 +80,7 @@
 <nav class="next" aria-label="Previous, Next"><a class="back" href="../../guide/"><small>Previous</small><b>Get started</b></a><a class="fwd" href="../../guide/pro/"><small>Next</small><b>Pro tools</b></a></nav>
 <footer class="foot"><a href="https://github.com/bbdyno/Branchlane-Page/edit/main/_docs/en/guide-everyday.html">Edit this page</a><a href="https://github.com/bbdyno/Branchlane-Page/issues">Support</a><a href="../../privacy/">Privacy Policy</a><a href="../../">Product</a><p>Apple, App Store and Mac are trademarks of Apple Inc., registered in the U.S. and other countries and regions.</p></footer>
 </article></main>
-<aside class="outline"><p>On this page</p><ul><li><a href="#stage-and-commit">Stage and commit</a></li><li class="sub"><a href="#lines">Stage single lines</a></li><li><a href="#branches">Branches</a></li><li><a href="#merge-commit-messages">Merge commit messages</a></li><li><a href="#undo">Undo</a></li><li><a href="#stashes-tags-and-history">Stashes, tags and history</a></li><li><a href="#git">In Git terms</a></li></ul></aside>
+<aside class="outline"><p>On this page</p><ul><li><a href="#stage-and-commit">Stage and commit</a></li><li class="sub"><a href="#lines">Stage single lines</a></li><li><a href="#branches">Branches</a></li><li class="sub"><a href="#cleanup">Clean up merged branches</a></li><li class="sub"><a href="#worktrees">Worktrees</a></li><li><a href="#merge-commit-messages">Merge commit messages</a></li><li><a href="#undo">Undo</a></li><li><a href="#stashes-tags-and-history">Stashes, tags and history</a></li><li><a href="#safety">Safety</a></li><li><a href="#git">In Git terms</a></li></ul></aside>
 </div>
 <dialog aria-label="Search docs"><input type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false"><ul class="hits"><li class="none">Type a tool, a setting or a question.</li></ul></dialog>
 <script src="../../assets/docs.js?v=20261126"></script>

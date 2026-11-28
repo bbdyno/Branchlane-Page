@@ -40,10 +40,14 @@ PAGES = [
     ("developers", "extend", "developers-extend", "build", ("Extend Branchlane", "Bring your own model server, or an MCP server for the assistant."), ("Branchlane 확장", "내 모델 서버나 비서용 MCP 서버를 연결합니다.")),
     ("developers", "support", "developers-support", "build", ("Questions and requests", "Ask, or request an integration."), ("질문과 요청", "질문하거나 연동을 요청합니다.")),
     ("notes", "", "notes-index", "notes", None, ("기술 노트", "Branchlane을 만들며 내린 결정과 겪은 제약을 기록합니다.")),
+    ("notes", "merged-and-stacked-branches", "notes-merged-and-stacked-branches", "notes", None, ("스쿼시로 병합된 브랜치를 알아보는 법, 쌓은 브랜치를 다시 쌓는 법", "patch-id로 리베이스·스쿼시 병합을 찾고, --fork-point로 자기 커밋만 다시 쌓는 Branchlane 2.4의 설계입니다.")),
+    ("notes", "git-status-without-locks", "notes-git-status-without-locks", "notes", None, ("잠금 없이 읽는 git status가 클론 직후 3~10배 느렸던 이유", "GIT_OPTIONAL_LOCKS=0으로 읽으면 인덱스가 새로 고쳐지지 않는 문제를 커밋 20만 개 저장소로 재고 고친 기록입니다.")),
     ("notes", "making-branchlane", "notes-making-branchlane", "notes", None, ("계정도 서버도 없는 Mac Git 클라이언트", "Branchlane을 만들며 정한 원칙, App Sandbox와 씨름한 이야기, 에이전트 Lane의 설계입니다.")),
 ]
 AREAS = {"guide": ("Guide", "가이드"), "developers": ("Developers", "개발자"), "notes": (None, "기술 노트")}
-META = {"notes/making-branchlane": ("2026년 11월 23일", "https://bbdyno.github.io/posts/branchlane-mac-git-client/")}
+META = {"notes/making-branchlane": ("2026년 11월 23일", "https://bbdyno.github.io/posts/branchlane-mac-git-client/"),
+        "notes/git-status-without-locks": ("2026년 11월 28일", "https://bbdyno.github.io/posts/git-status-without-locks/"),
+        "notes/merged-and-stacked-branches": ("2026년 11월 28일", "https://bbdyno.github.io/posts/merged-and-stacked-branches/")}
 # Headings of the pages these docs were until November 2026.
 MOVED = {
     "guide": {"start": "", "everyday": "everyday/", "pro": "pro/", "lanes": "lanes/", "shortcuts": "shortcuts/", "trouble": "troubleshooting/", "help": "support/"},

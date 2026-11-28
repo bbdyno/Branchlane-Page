@@ -5,6 +5,9 @@
 <shot src="rebase" alt="Interactive rebase: a list of commits, each set to pick, reword, squash or drop, and the Start Rebase button">A plan that folds 12 commits into 8. The result is at the top and the keys are at the bottom</shot>
 <p>Keys are faster in the list: <kbd>P</kbd> pick, <kbd>R</kbd> reword, <kbd>S</kbd> squash, <kbd>D</kbd> drop, and <kbd>⌥↑</kbd> <kbd>⌥↓</kbd> to move a commit.</p>
 
+<h2 id="stacks">Stacked branches</h2>
+<p>Right-click a branch and choose New Branch Stacked on it. Work on the new branch as usual. When the branch below is amended or rebased, right-click it and choose Restack: every branch stacked above moves onto its parent with only its own commits. Each move is an ordinary rebase that Undo takes back. If one stops on a conflict, settle it, finish the rebase and choose Restack again; branches already up to date are skipped. Remove from Stack takes a branch out.</p>
+
 <h2 id="conflicts">Conflict editor</h2>
 <p>When a merge, rebase or cherry-pick stops, open a conflicted file. Both sides sit side by side at the top, and the result is below. Conflict warnings show collisions before you merge.</p>
 <shot src="conflict" alt="The conflict editor: the current branch and the incoming branch side by side, the result and its conflict markers below" pins="16,15.5 55,15.5 55,70 29,53.7"></shot>
@@ -24,7 +27,7 @@ curl -s http://localhost:11434/v1/models</code></pre>
 
 <h2 id="more">More Pro tools</h2>
 <ul>
-  <li><strong>Worktrees, compare, Git Flow and patches</strong> are in the left panel and the right-click menus.</li>
-  <li><strong>Pull requests and issues:</strong> add a GitHub or GitLab token in Settings &gt; Integrations. It stays in your Keychain and talks to the host directly.</li>
+  <li><strong>Compare, Git Flow and patches</strong> are in the left panel and the right-click menus.</li>
+  <li><strong>Pull requests and issues:</strong> add a GitHub, GitLab or Bitbucket token in Settings &gt; Integrations. For Bitbucket Cloud, enter an Atlassian API token as <code>email:token</code>, or a repository or workspace access token on its own. It stays in your Keychain and talks to the host directly.</li>
   <li><strong>Themes:</strong> themes beyond White and Black are Pro. You can preview every theme in Settings &gt; Themes on the free plan.</li>
 </ul>

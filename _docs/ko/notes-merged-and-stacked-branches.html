@@ -1,0 +1,59 @@
+<p>Mac용 Git 클라이언트 <a href="{root}ko/">Branchlane</a> 2.4에 두 기능을 넣었습니다. 이미 병합된 브랜치를 찾아 정리하는 기능(무료)과, 브랜치 위에 브랜치를 쌓고 한 번에 다시 쌓는 기능(Pro)입니다. 둘 다 Git이 이미 가진 명령을 어떻게 조합하느냐의 문제였습니다.</p>
+<h2>이미 병합된 브랜치를 찾기</h2>
+<p>풀 리퀘스트를 몇 달 쓰다 보면 로컬 브랜치가 수십 개 쌓입니다. 지워도 되는 브랜치를 Git에게 물으면 보통 이렇게 합니다.</p>
+<pre data-lang="bash"><code>git branch --merged main</code></pre>
+<p>이 명령은 브랜치 끝 커밋이 main의 조상인지만 봅니다. 병합 커밋이나 fast-forward로 들어간 브랜치는 찾지만, 요즘 호스팅 서비스에서 흔한 두 방식은 놓칩니다.</p>
+<ul>
+<li><strong>리베이스 병합:</strong> 커밋이 같은 내용, 다른 해시로 main에 들어갑니다.</li>
+<li><strong>스쿼시 병합:</strong> 브랜치의 커밋 여러 개가 main에 커밋 하나로 들어갑니다.</li>
+</ul>
+<h3>리베이스 병합: git cherry</h3>
+<p><code>git cherry main feature</code>는 feature에만 있는 커밋마다 main에 같은 변경이 있는지 patch-id로 비교합니다. patch-id는 diff에서 줄 번호와 공백을 뺀 지문이라, 해시가 달라도 같은 변경이면 같은 값이 나옵니다. 출력이 모두 <code>-</code>로 시작하면 브랜치의 모든 커밋이 이미 main에 있다는 뜻입니다.</p>
+<pre data-lang="bash"><code>git cherry main feature
+# - 3f2a1c...   ← 같은 변경이 main에 있음
+# - 9b8e7d...</code></pre>
+<h3>스쿼시 병합: 브랜치 전체의 patch-id</h3>
+<p>스쿼시 병합은 커밋 하나에 브랜치 전체의 변경이 들어 있습니다. 그래서 브랜치가 갈라진 지점부터 끝까지의 diff를 하나로 보고, 그 patch-id를 main 쪽 커밋들의 patch-id와 비교합니다.</p>
+<pre data-lang="bash"><code>base=$(git merge-base main feature)
+git diff --no-renames --full-index &quot;$base&quot; feature | git patch-id --stable
+git log -p --no-merges --no-renames --full-index main --since=&lt;갈라진 날짜&gt; | git patch-id --stable</code></pre>
+<p>앞 명령이 낸 지문이 뒤 목록에 있으면 스쿼시로 들어간 것입니다. 두 diff는 같은 옵션으로 만들어야 합니다. 저장소 설정에 따라 이름 바꾸기 감지나 외부 diff 프로그램이 끼어들면 지문이 달라지기 때문입니다. main 쪽 커밋은 가장 오래된 갈라진 지점 이후만 읽어서, 커밋이 수십만 개인 저장소에서도 몇 번의 명령으로 끝납니다.</p>
+<p>스쿼시하면서 충돌을 손으로 풀었거나 다른 변경을 같이 넣었다면 지문이 달라져 찾지 못합니다. 이런 브랜치는 지우지 않는 쪽이 안전하므로 그대로 둡니다.</p>
+<h3>오탐 막기</h3>
+<p>몇 가지는 일부러 뺍니다.</p>
+<ul>
+<li><strong>방금 만든 브랜치:</strong> main에서 만들고 아직 커밋하지 않은 브랜치는 <code>--merged</code>에 걸립니다. main이 앞으로 나가도 마찬가지입니다. 브랜치의 reflog에 "만들었다"는 기록만 있으면 새 작업으로 봅니다.</li>
+<li><strong>체크아웃한 브랜치, 다른 worktree에서 열린 브랜치, 에이전트 Lane의 브랜치.</strong></li>
+<li><strong>main, master, develop처럼 오래 가는 브랜치.</strong></li>
+</ul>
+<p>여기에 원격에서 지워진 브랜치를 더합니다. 풀 리퀘스트를 병합하면서 원격 브랜치를 지우는 저장소가 많아서, fetch 뒤 upstream이 <code>[gone]</code>인 브랜치도 정리할 후보입니다.</p>
+<pre data-lang="bash"><code>git for-each-ref --format=&#39;%(refname:short) %(upstream:track)&#39; refs/heads
+# feature/login [gone]</code></pre>
+<p>기준은 원격의 기본 브랜치(<code>origin/main</code>)입니다. 호스트에서 병합된 풀 리퀘스트도 fetch만 하면 찾을 수 있습니다. 지운 브랜치는 Branchlane의 실행 취소로 되돌릴 수 있습니다.</p>
+<h2>쌓은 브랜치를 다시 쌓기</h2>
+<p>큰 변경을 리뷰하기 좋게 나누면 브랜치가 층층이 쌓입니다. <code>api</code> 위에 <code>ui</code>, 그 위에 <code>docs</code> 같은 식입니다. 리뷰를 받아 아래 브랜치 <code>api</code>를 고치면(amend나 interactive rebase), 위 브랜치들은 고치기 전의 <code>api</code> 커밋을 품은 채 남습니다.</p>
+<h3>부모를 기억하기</h3>
+<p>Branchlane은 부모를 브랜치 설정에 적습니다.</p>
+<pre data-lang="bash"><code>git config branch.ui.branchlaneParent api
+git config branch.docs.branchlaneParent ui</code></pre>
+<p><code>branch.&lt;이름&gt;.*</code> 아래에 두면 <code>git branch -m</code>으로 이름을 바꿀 때 Git이 설정도 같이 옮기고, 브랜치를 지우면 같이 지웁니다. 저장소 안의 평범한 Git 설정이라 앱을 지워도 문제가 없습니다.</p>
+<h3>자기 커밋만 옮기기</h3>
+<p><code>ui</code>를 고쳐진 <code>api</code> 위로 옮길 때 <code>git rebase api</code>를 그냥 쓰면, 고치기 전 <code>api</code> 커밋까지 다시 적용하려다 충돌이 나거나 같은 변경이 두 번 들어갑니다. 옮길 것은 <code>ui</code>에만 있는 커밋입니다. <code>--fork-point</code>는 부모 브랜치의 reflog를 보고, 고치기 전에 <code>ui</code>가 갈라져 나온 지점을 찾아 줍니다.</p>
+<pre data-lang="bash"><code>git switch ui
+point=$(git merge-base --fork-point api HEAD || git merge-base api HEAD)
+git rebase --onto api &quot;$point&quot;</code></pre>
+<p>다시 쌓기는 이 일을 아래에서 위로, 부모가 자식보다 먼저 오게 반복합니다. 이미 부모 위에 있는 브랜치는 건너뜁니다. 그래서 중간에 충돌로 멈추면 풀고 리베이스를 마친 뒤 다시 쌓기를 한 번 더 고르면, 멈춘 곳부터 이어집니다.</p>
+<h3>--update-refs를 쓰지 않은 이유</h3>
+<p>Git 2.38부터 <code>git rebase --update-refs</code>가 리베이스하면서 중간 브랜치들도 함께 옮겨 줍니다. 쓰지 않은 이유는 실행 취소입니다. Branchlane의 실행 취소는 브랜치 하나의 전과 후를 Git 안에 기록합니다. 한 번의 리베이스가 여러 브랜치를 옮기면, 실행 취소 한 번으로 모두 되돌릴 방법이 없습니다. 브랜치마다 평범한 리베이스 한 번씩으로 나누면, 단계마다 실행 취소가 됩니다.</p>
+<h2>그 밖의 2.4 소식</h2>
+<ul>
+<li>worktree가 무료가 되었습니다.</li>
+<li>내 토큰으로 Bitbucket Cloud의 풀 리퀘스트와 이슈를 봅니다.</li>
+<li>저장소 설정이나 훅이 프로그램을 실행하려 하면 쓰기 전에 묻고, 커밋과 푸시 전에 키와 비밀번호를 찾습니다.</li>
+<li>클론 직후 상태 읽기가 3~10배 빨라졌습니다. 이 이야기는 <a href="{root}ko/notes/git-status-without-locks/">따로 썼습니다</a>.</li>
+</ul>
+<p>계정도 서버도 없이, Mac에 있는 git을 그대로 부르는 앱입니다.</p>
+<ul>
+<li>Mac App Store: <a href="https://apps.apple.com/app/id6785129372">https://apps.apple.com/app/id6785129372</a></li>
+<li>소개 페이지: <a href="{root}ko/">https://bbdyno.github.io/Branchlane-Page/ko/</a></li>
+</ul>
