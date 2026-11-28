@@ -8,6 +8,10 @@
 
 <h2>Branches</h2>
 <p>New Branch is <kbd>⌘B</kbd> and Switch Branch is <kbd>⇧⌘B</kbd>. In the graph, drag one branch onto another to merge or rebase it, or right-click a branch for every action. Fetch is <kbd>⇧⌘F</kbd>, Pull <kbd>⇧⌘L</kbd> and Push <kbd>⇧⌘K</kbd>.</p>
+<h3 id="cleanup">Clean up merged branches</h3>
+<p>In the Local section's menu, or the command palette, choose Clean Up Merged Branches. Branchlane lists branches whose work is already in the default branch, merged, rebased or squashed, and branches whose upstream was deleted on the remote, such as after a pull request was merged. The checked out branch, branches open in another worktree, lane branches and long-lived ones such as main and develop are left out. Tick the ones to delete; Undo brings them back.</p>
+<h3 id="worktrees">Worktrees</h3>
+<p>Open another branch in a folder of its own from the Worktrees section, or right-click a branch and choose Create Worktree. Each worktree opens in its own tab.</p>
 <h2>Merge commit messages</h2>
 <p>A merge commit is named after the branch, as in <code>Merge branch 'develop' into feature</code>. Settings &gt; Git &amp; SSH &gt; Merge can show the full ref (<code>refs/heads/develop</code>) or the commit hash instead.</p>
 <h2>Undo</h2>
@@ -15,6 +19,8 @@
 <h2>Stashes, tags and history</h2>
 <p>Stash Changes is <kbd>⌥⌘S</kbd> and Pop Latest Stash <kbd>⇧⌥⌘S</kbd>. Select a file and press <kbd>⇧⌘H</kbd> for its history, or open blame from a diff.</p>
 
+<h2 id="safety">Safety</h2>
+<p>When a folder's own Git settings or hooks would run programs or change where Git connects, Branchlane lists them and waits for your yes before it uses the repository, and asks again when they change. Before a commit or push it looks for keys, tokens and passwords and shows the lines it found. Commits and tags can be signed with a key in ssh-agent from Settings &gt; Git &amp; SSH, and each commit shows its signature state.</p>
 <h2 id="git">In Git terms</h2>
 <p>If you know the command line, this is roughly what each action does. The Git console (<kbd>⇧⌘C</kbd>) runs Git commands directly too.</p>
 <div class="table-wrap"><table>
