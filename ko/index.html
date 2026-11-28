@@ -69,7 +69,7 @@
         "name": "GitHub, GitLab, Bitbucket과 함께 쓸 수 있나요?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "SSH나 HTTPS로 연결하는 모든 Git 원격 저장소와 함께 쓸 수 있습니다. GitHub, GitLab, Bitbucket, 직접 운영하는 서버도 됩니다. HTTPS 토큰은 macOS 키체인에 저장합니다. Pro에서 내 토큰을 넣으면 GitHub, GitLab, Bitbucket Cloud의 풀 리퀘스트와 이슈도 보고 열 수 있습니다."
+          "text": "SSH나 HTTPS로 연결하는 모든 Git 원격 저장소와 함께 쓸 수 있습니다. GitHub, GitLab, Bitbucket, 직접 운영하는 서버도 됩니다. HTTPS 토큰은 macOS 키체인에 저장합니다. Pro에서 내 토큰을 넣으면 GitHub, GitLab, Bitbucket Cloud의 풀 리퀘스트와 GitHub, GitLab의 이슈도 보고 열 수 있습니다."
         }
       },
       {
@@ -378,7 +378,7 @@
             <article class="card pro rv wide" style="--s:12">
               <div class="viz">
                 <ul class="pro-list">
-                  <li>풀 리퀘스트와 이슈<span>내 토큰으로 쓰는 GitHub, GitLab, Bitbucket</span></li>
+                  <li>풀 리퀘스트와 이슈<span>GitHub, GitLab과 Bitbucket 풀 리퀘스트</span></li>
                   <li>비교<span>두 브랜치 또는 커밋</span></li>
                   <li>쌓은 브랜치<span>위에 쌓인 브랜치를 한 번에 다시 쌓기</span></li>
                   <li>Git Flow<span>안내에 따라 시작하고 마무리</span></li>
@@ -436,7 +436,7 @@
             <li style="--c:var(--blue)"><span class="ref free">무료</span><h3>워크트리 무료</h3><p>Pro 없이 여러 워크트리를 나란히 엽니다.</p></li>
             <li style="--c:var(--teal)"><span class="ref free">무료</span><h3>믿을 수 있는 저장소</h3><p>폴더의 Git 설정이나 훅이 프로그램을 실행하거나 접속 경로를 바꾸면, 쓰기 전에 보여 주고 기다립니다. 커밋과 푸시 전에 키와 비밀번호를 찾습니다.</p></li>
             <li style="--c:var(--green)"><span class="ref free">무료</span><h3>서명한 커밋</h3><p>ssh-agent의 키로 커밋과 태그에 서명하고, 커밋마다 서명 상태를 보여 줍니다.</p></li>
-            <li style="--c:var(--amber)"><span class="ref pro">Pro</span><h3>Bitbucket Cloud</h3><p>내 토큰으로 Bitbucket의 풀 리퀘스트와 이슈, 검토와 빌드 상태를 봅니다. 중간에 Branchlane 서버는 없습니다.</p></li>
+            <li style="--c:var(--amber)"><span class="ref pro">Pro</span><h3>Bitbucket Cloud</h3><p>내 토큰으로 Bitbucket의 풀 리퀘스트와 검토, 빌드 상태를 봅니다. 중간에 Branchlane 서버는 없습니다.</p></li>
             <li style="--c:var(--violet)"><span class="ref pro">Pro</span><h3>충돌을 줄마다, 또는 한꺼번에</h3><p>충돌 편집기에서 줄마다 고르고, 판단이 필요 없는 부분은 여러 파일을 한꺼번에 풀고, 연결한 에이전트에게 넘길 수도 있습니다.</p></li>
             <li style="--c:var(--blue)"><span class="ref pro">Pro</span><h3>에이전트를 나란히</h3><p>같은 일을 여러 에이전트에게 맡기고 가장 나은 결과를 고릅니다. 클릭 한 번으로 Lane 폴더에서 터미널을 열고 에이전트를 시작합니다.</p></li>
             <li style="--c:var(--teal)"><span class="ref free">무료</span><h3>큰 저장소에서 더 빠르게</h3><p>커밋 20만 개 저장소에서 첫 그래프가 약 0.25초 안에 나오고, 클론이나 큰 체크아웃 뒤 상태 읽기가 전보다 3~10배 빨라졌습니다.</p></li>
@@ -497,7 +497,7 @@
           <div class="faq rv">
             <details open><summary>Branchlane은 무료 Git 클라이언트인가요?</summary><p>네. 일상적인 Git은 기간 제한 없이 무료입니다. 커밋 그래프, 파일·헝크·줄 단위 스테이징, 커밋, 브랜치, 병합, 일반 리베이스, 스태시, 태그, fetch·pull·push, 실행 취소, 파일 기록, blame, 워크트리, 병합된 브랜치 정리를 저장소 탭 3개까지 쓸 수 있습니다. Pro는 선택 구독입니다.</p></details>
             <details><summary>어떤 Mac에서 쓸 수 있나요?</summary><p>Branchlane은 SwiftUI로 만든 macOS 네이티브 앱이고, macOS 14 Sonoma 이상의 Apple 실리콘 Mac과 Intel Mac에서 동작합니다. Mac에 이미 있는 Xcode Command Line Tools의 Git을 씁니다.</p></details>
-            <details><summary>GitHub, GitLab, Bitbucket과 함께 쓸 수 있나요?</summary><p>SSH나 HTTPS로 연결하는 모든 Git 원격 저장소와 함께 쓸 수 있습니다. GitHub, GitLab, Bitbucket, 직접 운영하는 서버도 됩니다. HTTPS 토큰은 macOS 키체인에 저장합니다. Pro에서 내 토큰을 넣으면 GitHub, GitLab, Bitbucket Cloud의 풀 리퀘스트와 이슈도 보고 열 수 있습니다.</p></details>
+            <details><summary>GitHub, GitLab, Bitbucket과 함께 쓸 수 있나요?</summary><p>SSH나 HTTPS로 연결하는 모든 Git 원격 저장소와 함께 쓸 수 있습니다. GitHub, GitLab, Bitbucket, 직접 운영하는 서버도 됩니다. HTTPS 토큰은 macOS 키체인에 저장합니다. Pro에서 내 토큰을 넣으면 GitHub, GitLab, Bitbucket Cloud의 풀 리퀘스트와 GitHub, GitLab의 이슈도 보고 열 수 있습니다.</p></details>
             <details><summary>다른 Git GUI와 무엇이 다른가요?</summary><p>계정이나 로그인이 필요 없고 Branchlane 서버도 없어서 저장소와 기록이 Mac 밖으로 나가지 않습니다. 체크아웃, 커밋, 리셋, 버리기, 리베이스까지 되돌리는 실행 취소, CRLF와 UTF-8이 아닌 파일도 그대로 지키는 줄 단위 스테이징, 한 번에 다시 쌓는 쌓은 브랜치, AI 코딩 에이전트의 작업을 검토하는 에이전트 Lane이 있습니다.</p></details>
             <details><summary>Claude Code나 Codex가 바꾼 내용을 검토할 수 있나요?</summary><p>네, Pro에서 됩니다. 에이전트 Lane은 코딩 에이전트마다 브랜치와 worktree를 따로 줍니다. 바뀐 내용을 검토하고, 파일이나 헝크를 빼고, 이유를 적어 돌려보내고, 받아들인 Lane을 대기열에서 차례로 통합합니다. 에이전트는 이 Mac의 프로그램만 접속할 수 있는 서버로 연결합니다.</p></details>
             <details><summary>Branchlane이 내 코드를 올리나요?</summary><p>아니요. 저장소 데이터는 사용자가 요청할 때만, 고른 곳으로만 나갑니다. 내가 정한 Git 원격, 내 토큰을 넣은 GitHub, GitLab, Bitbucket, 내가 설정한 AI 제공자입니다. AI 기능은 내 로컬 모델, API 키, Apple 온디바이스 모델을 설정하기 전에는 꺼져 있습니다.</p></details>

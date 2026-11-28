@@ -69,7 +69,7 @@
         "name": "Does it work with GitHub, GitLab and Bitbucket?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Branchlane works with any Git remote over SSH or HTTPS, including GitHub, GitLab, Bitbucket and self-hosted servers. HTTPS tokens are kept in the macOS Keychain. With Pro and your own token, you can also browse and open pull requests and issues on GitHub, GitLab and Bitbucket Cloud."
+          "text": "Branchlane works with any Git remote over SSH or HTTPS, including GitHub, GitLab, Bitbucket and self-hosted servers. HTTPS tokens are kept in the macOS Keychain. With Pro and your own token, you can also browse and open pull requests on GitHub, GitLab and Bitbucket Cloud, and issues on GitHub and GitLab."
         }
       },
       {
@@ -378,7 +378,7 @@
             <article class="card pro rv wide" style="--s:12">
               <div class="viz">
                 <ul class="pro-list">
-                  <li>Pull requests and issues<span>GitHub, GitLab and Bitbucket, with your own token</span></li>
+                  <li>Pull requests and issues<span>GitHub and GitLab, plus Bitbucket pull requests</span></li>
                   <li>Compare<span>Any two branches or commits</span></li>
                   <li>Stacked branches<span>Restack every branch above in one step</span></li>
                   <li>Git Flow<span>Guided start and finish</span></li>
@@ -436,7 +436,7 @@
             <li style="--c:var(--blue)"><span class="ref free">Free</span><h3>Worktrees are free</h3><p>Open several checkouts side by side without Pro.</p></li>
             <li style="--c:var(--teal)"><span class="ref free">Free</span><h3>Repositories you can trust</h3><p>When a folder's own Git settings or hooks would run programs or change where Git connects, Branchlane lists them and waits for you. Keys and passwords are found before a commit or push.</p></li>
             <li style="--c:var(--green)"><span class="ref free">Free</span><h3>Signed commits</h3><p>Sign commits and tags with a key in ssh-agent, and see the signature state of every commit.</p></li>
-            <li style="--c:var(--amber)"><span class="ref pro">Pro</span><h3>Bitbucket Cloud</h3><p>Pull requests and issues on Bitbucket, with review and build state, using your own token. No Branchlane server in between.</p></li>
+            <li style="--c:var(--amber)"><span class="ref pro">Pro</span><h3>Bitbucket Cloud</h3><p>Pull requests on Bitbucket, with review and build state, using your own token. No Branchlane server in between.</p></li>
             <li style="--c:var(--violet)"><span class="ref pro">Pro</span><h3>Conflicts, line by line or all at once</h3><p>Tick lines in the conflict editor, settle what needs no judgement across files at once, or hand the conflicts to a connected agent.</p></li>
             <li style="--c:var(--blue)"><span class="ref pro">Pro</span><h3>Agents, side by side</h3><p>Give one task to several agents and keep the best result. Start an agent in its lane's folder from Terminal in one click.</p></li>
             <li style="--c:var(--teal)"><span class="ref free">Free</span><h3>Faster in large repositories</h3><p>On a 200,000-commit clone the first graph appears in about a quarter of a second, and status after a clone or a big checkout is 3 to 10 times faster than before.</p></li>
@@ -497,7 +497,7 @@
           <div class="faq rv">
             <details open><summary>Is Branchlane a free Git client for Mac?</summary><p>Yes. Everyday Git is free with no time limit: the commit graph, staging by file, hunk or line, commits, branches, merges, plain rebase, stashes, tags, fetch, pull and push, undo, file history and blame, worktrees and merged branch cleanup, with up to 3 repository tabs. Pro is an optional subscription.</p></details>
             <details><summary>Which Macs does it run on?</summary><p>Branchlane is a native macOS app built with SwiftUI for macOS 14 Sonoma or later, on Apple silicon and Intel Macs. It uses the Git from Xcode Command Line Tools that is already on your Mac.</p></details>
-            <details><summary>Does it work with GitHub, GitLab and Bitbucket?</summary><p>Branchlane works with any Git remote over SSH or HTTPS, including GitHub, GitLab, Bitbucket and self-hosted servers. HTTPS tokens are kept in the macOS Keychain. With Pro and your own token, you can also browse and open pull requests and issues on GitHub, GitLab and Bitbucket Cloud.</p></details>
+            <details><summary>Does it work with GitHub, GitLab and Bitbucket?</summary><p>Branchlane works with any Git remote over SSH or HTTPS, including GitHub, GitLab, Bitbucket and self-hosted servers. HTTPS tokens are kept in the macOS Keychain. With Pro and your own token, you can also browse and open pull requests on GitHub, GitLab and Bitbucket Cloud, and issues on GitHub and GitLab.</p></details>
             <details><summary>How is it different from other Git GUIs?</summary><p>Branchlane needs no account or sign-in and has no Branchlane server, so your repositories and history stay on your Mac. It adds undo for checkout, commit, reset, discard and rebase, line-level staging that keeps CRLF and non-UTF-8 files intact, stacked branches that restack in one step, and agent lanes for reviewing work from AI coding agents.</p></details>
             <details><summary>Can I review what Claude Code or Codex changed?</summary><p>Yes, with Pro. Agent lanes give each coding agent its own branch and worktree. You review the changes, leave out files or hunks, send a lane back with your reasons, and integrate accepted lanes in a queue. Agents connect through a server that only programs on your Mac can reach.</p></details>
             <details><summary>Does Branchlane upload my code?</summary><p>No. Repository data leaves your Mac only when you ask: to a Git remote you chose, to GitHub, GitLab or Bitbucket with your own token, or to the AI provider you set up. AI features are off until you configure your own local model, API key or Apple's on-device model.</p></details>
